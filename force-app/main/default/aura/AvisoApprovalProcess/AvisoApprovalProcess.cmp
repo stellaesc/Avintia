@@ -1,0 +1,25 @@
+<aura:component controller="AvisoApprovalProcessController" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+  <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="nombreAprobador" type="String"/>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <force:recordData aura:id="record"
+             recordId="{!v.recordId}"
+             targetFields="{!v.record}"
+             fields="Id, Pendiente_de_aprobacion_de_tarifario__c" 
+             />
+    
+    <aura:if isTrue="{! v.record.Pendiente_de_aprobacion_de_tarifario__c}">
+        <div class="slds-card slds-has-cushion flexipageRichText ">
+            <p class="caja">
+                <span class="estiloTexto">
+                    Hay un proceso de aprobación de tarifario activo para esta promoción. El aprobador actual es {!v.nombreAprobador}.
+                </span>
+            </p>
+        </div>
+	</aura:if>
+    
+    
+
+
+</aura:component>

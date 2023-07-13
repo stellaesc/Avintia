@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <description>Comprobar si el valor de la promoción de la factura devuelta es nulo.</description>
+        <name>Decision_PromocionNula</name>
+        <label>Decision_Promocion Nula?</label>
+        <locationX>182</locationX>
+        <locationY>695</locationY>
+        <defaultConnector>
+            <targetReference>Update_FacturaDevuelta_Sociedad</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>PromocionNula_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Promocion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_FacturaDevuelta_Promocion</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <description>Flujo Triggered del objeto Factura Devuelta que se lanza al crear un registro.</description>
+    <formulas>
+        <description>Formula que devuelve el nuevo estado de la factura en función del importe pendiente.</description>
+        <name>For_EstadoFactura</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.Importe_pendiente__c} &gt; 0, &quot;Impagada&quot;, TEXT({!$Record.Factura__r.Estado_de_la_factura__c}))</expression>
+    </formulas>
+    <formulas>
+        <description>Formula que devuelve el nuevo estado de la factura devuelta en función del importe pendiente.</description>
+        <name>For_EstadoFacturaDevuelta</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.Importe_pendiente__c}&gt;0, &quot;OP&quot;, TEXT({!$Record.Estado__c}))</expression>
+    </formulas>
+    <formulas>
+        <description>Formula que contiene el Subject de la tarea creada</description>
+        <name>For_TaskSubject</name>
+        <dataType>String</dataType>
+        <expression>&apos;Gestionar factura devuelta &apos; &amp;  {!$Record.Numero_de_factura__c}</expression>
+    </formulas>
+    <interviewLabel>Factura Devuelta_After Insert {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Factura Devuelta_Triggered_After Insert</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Crear nueva tarea.</description>
+        <name>Create_Task</name>
+        <label>Create_Task</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <connector>
+            <targetReference>Update_FacturaDevuelta_Estado</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.Factura__r.Oportunidad__r.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Open</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>For_TaskSubject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordUpdates>
+        <description>Actualizar el estado de la factura relacionada.</description>
+        <name>Update_Factura</name>
+        <label>Update_Factura</label>
+        <locationX>182</locationX>
+        <locationY>575</locationY>
+        <connector>
+            <targetReference>Decision_PromocionNula</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Estado_de_la_factura__c</field>
+            <value>
+                <elementReference>For_EstadoFactura</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Factura__r</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el estado de la Factura Devuelta</description>
+        <name>Update_FacturaDevuelta_Estado</name>
+        <label>Update_FacturaDevuelta_Estado</label>
+        <locationX>182</locationX>
+        <locationY>455</locationY>
+        <connector>
+            <targetReference>Update_Factura</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Estado__c</field>
+            <value>
+                <elementReference>For_EstadoFacturaDevuelta</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el valor del campo Promocion con la promocion de la oportunidad relacionada.</description>
+        <name>Update_FacturaDevuelta_Promocion</name>
+        <label>Update_FacturaDevuelta_Promocion</label>
+        <locationX>50</locationX>
+        <locationY>815</locationY>
+        <connector>
+            <targetReference>Update_FacturaDevuelta_Sociedad</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Promocion__c</field>
+            <value>
+                <elementReference>$Record.Factura__r.Oportunidad__r.Promocion__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar la Sociedad de la FacturaDevueta</description>
+        <name>Update_FacturaDevuelta_Sociedad</name>
+        <label>Update_FacturaDevuelta_Sociedad</label>
+        <locationX>182</locationX>
+        <locationY>1031</locationY>
+        <inputAssignments>
+            <field>Sociedad__c</field>
+            <value>
+                <elementReference>$Record.Promocion__r.Socio_Empresa_Promotora__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <startElementReference>Create_Task</startElementReference>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,17 @@
+.THIS .divMensajeConfirmacion{
+    
+    text-align: center;
+}
+.THIS .anchoBoton{
+    
+    width: 100%;
+}
+.THIS .titulo{
+    margin-bottom: 2%;
+}
+
+.THIS .selectedButton {
+    background-color: blue; 
+    color:white;
+    width: 100%;
+}

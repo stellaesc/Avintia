@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <description>Verificar si las fechas de ponderación y la ponderación no son nulas y que el registro es nuevo</description>
+        <name>Decision_FechasPonderacionNoNulas</name>
+        <label>Decision_Fechas y Ponderacion No Nulas</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>FechasPonderacionNoNulas_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>For_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Fecha_Inicio_Ponderacion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Fecha_Fin_Ponderacion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Ponderacion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SubFlow_ActualizarPonderacion</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <description>Flujo del Objeto &apos;Ponderación Ritmo de Ventas&apos; que se lanza al crear o editar el registro.
+20/04 MSC: PB &quot;PB_Ponderación Ritmo Ventas&quot;.</description>
+    <formulas>
+        <description>Formula que devuelva verdadero si el registro es nuevo.</description>
+        <name>For_IsNew</name>
+        <dataType>Boolean</dataType>
+        <expression>ISNEW()</expression>
+    </formulas>
+    <interviewLabel>Ponderación Ritmo de Ventas_Triggered_AfterInsertUpdate {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Ponderación Ritmo de Ventas_Triggered_After Insert Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>Decision_FechasPonderacionNoNulas</startElementReference>
+    <status>Active</status>
+    <subflows>
+        <description>Ejecutar el SubFlow de Actualizar Ponderación</description>
+        <name>SubFlow_ActualizarPonderacion</name>
+        <label>SubFlow_Actualizar Ponderacion</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <flowName>ActualizarPonderacion</flowName>
+        <inputAssignments>
+            <name>fechaFinPonderacion</name>
+            <value>
+                <elementReference>$Record.Fecha_Fin_Ponderacion__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>fechaInicioPonderacion</name>
+            <value>
+                <elementReference>$Record.Fecha_Inicio_Ponderacion__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>ponderacion</name>
+            <value>
+                <elementReference>$Record.Ponderacion__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>promocionId</name>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

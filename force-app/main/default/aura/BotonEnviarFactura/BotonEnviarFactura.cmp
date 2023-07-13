@@ -1,0 +1,199 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="BotonEnviarFacturaControllerApex"> 
+     
+    <aura:attribute name="isOpenPDF" type="Boolean" default="false"/>
+    <aura:attribute name="isOpen" type="Boolean" default="false"/>
+    <aura:attribute name="record" type="Factura__c"/>
+    <aura:attribute name="ReenviarEmail" type="Boolean" default="false"/>
+    <aura:attribute name="message" description="mensage que se muestra en la pantalla auxiliar" type="String" />
+    <aura:attribute name="type" description="Tipo del mensage de la pantalla auxiliar, puede ser error/warning/info/success" type="String" />
+    <aura:attribute name="dominio" type="String"/>
+    <aura:attribute name="CongaSolUrl" type="String"/>
+    <aura:handler name="init" value="{!this}" action= "{!c.doInit}"/>  
+    <aura:attribute name="isConfirmacionOpen" type="boolean" default="false"/>
+    
+
+   <force:recordData aura:id="record"
+             recordId="{!v.recordId}"
+             targetFields="{!v.record}"
+             fields="Id, Estado_de_la_factura__c"
+             />
+    
+    <div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+            
+        <b><h1 style="text-align: left" class="slds-text-heading--small titulo">Emitir factura</h1></b>
+        
+        <br/>
+        
+               <table style="width: 100%">
+                    <tr>
+                        <td style="width: 100%; text-align: center; padding-top: 3%">
+                             <lightning:button class="anchoBoton" variant="neutral" label="Emitir factura" onclick="{!c.openModelPDF}"/>
+                        </td>
+                    </tr>
+                   <aura:if isTrue="{!v.record.Estado_de_la_factura__c == 'Volcada a Oracle'}">
+                    <tr>
+                        <td style="width: 100%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Anular" onclick="{!c.openModelConfirmacion}"/>
+                        </td>
+                    </tr>
+                    </aura:if>
+              </table>       
+    </div> 
+
+        <aura:if isTrue="{!v.isOpenPDF}">
+        
+
+         <!--###### MODAL BOX Start######--> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                
+                <div class="slds-modal__container" style="width: 80%; min-width: 70%">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModelPDF }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Emitir factura</h2>
+                        
+                    </header>
+                    
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        
+                       <iframe src="{!v.dominio + 'VF_Documento_factura?id=' + v.recordId}" width="100%" height="500px;" frameBorder="0"/>
+                        
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                        
+
+                        <lightning:button variant="neutral" 
+                                          label="Cancelar"
+                                          title="Cancelar"
+                                          onclick="{! c.closeModelPDF }"/>
+                        
+                        
+                        <lightning:button variant="brand" 
+                                          label="Emitir abono"
+                                          title="Emitir"
+                                          onclick="{! c.EmitirFactura }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+
+    
+    <!-- Mensaje de exito o error-->
+    <aura:if isTrue="{!v.isOpen}">
+        
+
+         <!--###### MODAL BOX Start######--> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Emitir factura</h2>
+                        
+                    </header>
+                    
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        
+ 
+                        <div class="{!'slds-box slds-theme–alert-texture slds-theme--' + v.type}">
+            
+                            <lightning:icon iconName="{! 'utility:'+ v.type }" size="medium"
+                                                   alternativeText="{!v.type}" Class="iconContainer"/>&nbsp;
+                                
+                            <span class="slds-text-body–regular">
+                                <aura:unescapedHtml value="{!v.message}"/>
+                            </span>
+                        </div>
+                        
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                        
+                        <lightning:button variant="brand" 
+                                          label="Visualizar factura"
+                                          title="Visualizar factura"
+                                          onclick="{! c.openModelPDF }"/>
+                        
+                        <aura:if isTrue="{!v.ReenviarEmail}">
+
+                            <lightning:button variant="neutral" 
+                                              label="reenviar email"
+                                              title="reenviar email"
+                                              onclick="{! c.reenviarEmail }"/>
+                        </aura:if>
+                        
+                        <lightning:button variant="brand" 
+                                          label="Aceptar"
+                                          title="Aceptar"
+                                          onclick="{! c.closeModel }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+       <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+    
+    <!-- Ventana modal con mensaje de confirmacion-->
+    <aura:if isTrue="{!v.isConfirmacionOpen}">
+            
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModelConfirmacion }"
+                                              alternativeText="cerrar"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Anular factura</h2>
+                    </header>
+                    
+          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            
+                        <div class="divMensajeConfirmacion">
+              				 <p> ¿Desea anular la factura? </p>
+              			</div>
+              </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <!-- Botón cancelar -->
+                    <footer class="slds-modal__footer">
+                        
+                        <lightning:button variant="neutral" 
+                                              label="Cancelar"
+                                              title="Cancelar"
+                                              onclick="{! c.closeModelConfirmacion }"/>
+
+                        <lightning:button variant="brand" 
+                                          label="Continuar"
+                                          title="Continuar"
+                                          onclick="{! c.generarFactura }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+            
+            
+        </aura:if>  
+    <!-- fin ventana modal con mensaje de confirmacion -->
+    
+    
+
+</aura:component>

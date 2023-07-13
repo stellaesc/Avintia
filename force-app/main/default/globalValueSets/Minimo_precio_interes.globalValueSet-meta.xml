@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Menos de 100K</fullName>
+        <default>false</default>
+        <label>Menos de 100K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 100K y 199K</fullName>
+        <default>false</default>
+        <label>Entre 100K y 199K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 200K y 249K</fullName>
+        <default>false</default>
+        <label>Entre 200K y 249K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 250K y 299K</fullName>
+        <default>false</default>
+        <label>Entre 250K y 299K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 300K y 349K</fullName>
+        <default>false</default>
+        <label>Entre 300K y 349K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 350K y 399K</fullName>
+        <default>false</default>
+        <label>Entre 350K y 399K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 400K y 449K</fullName>
+        <default>false</default>
+        <label>Entre 400K y 449K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 450K y 499K</fullName>
+        <default>false</default>
+        <label>Entre 450K y 499K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 500K y 549K</fullName>
+        <default>false</default>
+        <label>Entre 500K y 549K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 550K y 599K</fullName>
+        <default>false</default>
+        <label>Entre 550K y 599K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 600K y 649K</fullName>
+        <default>false</default>
+        <label>Entre 600K y 649K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 650K y 699K</fullName>
+        <default>false</default>
+        <label>Entre 650K y 699K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 700K y 749K</fullName>
+        <default>false</default>
+        <label>Entre 700K y 749K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 750K y 799K</fullName>
+        <default>false</default>
+        <label>Entre 750K y 799K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 800K y 849K</fullName>
+        <default>false</default>
+        <label>Entre 800K y 849K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 850K y 899K</fullName>
+        <default>false</default>
+        <label>Entre 850K y 899K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 900K y 949K</fullName>
+        <default>false</default>
+        <label>Entre 900K y 949K</label>
+    </customValue>
+    <customValue>
+        <fullName>Entre 950K y 999K</fullName>
+        <default>false</default>
+        <label>Entre 950K y 999K</label>
+    </customValue>
+    <customValue>
+        <fullName>Mas de 1.000K</fullName>
+        <default>false</default>
+        <label>Más de 1.000K</label>
+    </customValue>
+    <customValue>
+        <fullName>Sin limite</fullName>
+        <default>false</default>
+        <label>Sin límite</label>
+    </customValue>
+    <customValue>
+        <fullName>360.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>360.000</label>
+    </customValue>
+    <customValue>
+        <fullName>300.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>300.000</label>
+    </customValue>
+    <customValue>
+        <fullName>270.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>270.000</label>
+    </customValue>
+    <customValue>
+        <fullName>240.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>240.000</label>
+    </customValue>
+    <customValue>
+        <fullName>210.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>210.000</label>
+    </customValue>
+    <customValue>
+        <fullName>180.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>180.000</label>
+    </customValue>
+    <customValue>
+        <fullName>150.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>150.000</label>
+    </customValue>
+    <customValue>
+        <fullName>120.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>120.000</label>
+    </customValue>
+    <customValue>
+        <fullName>90.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>90.000</label>
+    </customValue>
+    <customValue>
+        <fullName>60.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>60.000</label>
+    </customValue>
+    <customValue>
+        <fullName>0</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>0</label>
+    </customValue>
+    <customValue>
+        <fullName>420.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>420.000</label>
+    </customValue>
+    <customValue>
+        <fullName>480.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>480.000</label>
+    </customValue>
+    <customValue>
+        <fullName>600.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>600.000</label>
+    </customValue>
+    <customValue>
+        <fullName>1 millon</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>1 millón</label>
+    </customValue>
+    <customValue>
+        <fullName>2 millones</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>2 millones</label>
+    </customValue>
+    <customValue>
+        <fullName>3 millones</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>3 millones</label>
+    </customValue>
+    <masterLabel>Mínimo precio interés</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>IVA</fullName>
+        <default>true</default>
+        <label>IVA</label>
+    </customValue>
+    <customValue>
+        <fullName>IGI</fullName>
+        <default>false</default>
+        <label>IGI</label>
+    </customValue>
+    <masterLabel>Tipo de impuesto</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

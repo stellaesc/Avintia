@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <description>Evalúa si la línea de oportunidad tiene el campo &quot;Descripción&quot; relleno o no.</description>
+        <name>Decision_TieneONoDescripcion</name>
+        <label>Decision_TieneONoDescripcion</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>NoTieneDescripcion</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Description</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Description</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_OpportunityProduct_Descripcion</targetReference>
+            </connector>
+            <label>No Tiene Descripcion</label>
+        </rules>
+    </decisions>
+    <description>Flujo que actualiza el campo descripción al crearse una nueva línea de oportunidad. Si el campo &quot;Descripción&quot; no viene relleno, automáticamente se rellenará con el nombre del producto</description>
+    <interviewLabel>OpportunityProduct_Triggered_AfterInsertActualizaCampo {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>OpportunityProduct_Triggered_AfterInsertActualizaCampo</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Se actualiza el campo descripción con el nombre del Producto.</description>
+        <name>Update_OpportunityProduct_Descripcion</name>
+        <label>Update_OpportunityProduct_Descripcion</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>$Record.Product2.Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <startElementReference>Decision_TieneONoDescripcion</startElementReference>
+    <status>Active</status>
+</Flow>

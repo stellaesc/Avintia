@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Account Layout</layout>
+        <sections>
+            <label></label>
+            <section>Datos PBC</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos generales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Facturación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Fiscal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Social</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Contacto Principal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del registro</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Comercializadora layout</layout>
+        <sections>
+            <label></label>
+            <section>Datos generales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Fiscal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Social</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio de Facturación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Contacto Principal</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Constructora layout</layout>
+        <sections>
+            <label></label>
+            <section>Datos generales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Fiscal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Social</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio de Facturación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Contacto Principal</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos PBC</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos generales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Personal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio de Facturación/ Fiscal</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sociedad Cooperativa layout</layout>
+        <sections>
+            <label></label>
+            <section>Datos generales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Fiscal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Social</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio de Facturación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Contacto principal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Registro</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sociedad layout</layout>
+        <sections>
+            <label></label>
+            <section>Datos generales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Fiscal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio Social</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio de Facturación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Contacto Principal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Registro</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>Cambiar_Tipo_de_Registro</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>Child_Account</name>
+    </quickActions>
+    <recordTypes>
+        <label></label>
+        <name>Comercializadora</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Constructora</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Cuenta</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Sociedad</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Sociedad_Cooperativa</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>CheckFirmadoParaAceptoAvintia</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Comprobacion_campos_RBA</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>FormatoNIF_CIF</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Pedir_Direccion_Fiscal</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Rellenar_Direccion_Fact_si_Check_F</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Rellenar_Direccion_extranjera</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Rellenar_Localidad_extranjera</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Rellenar_direccion_principal</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Rellenar_idioma</name>
+    </validationRules>
+    <webLinks>
+        <label></label>
+        <name>ComposerSPProposalAccount</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>Mass_Delete_Records</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>SendDocuSignAccount</name>
+    </webLinks>
+</CustomObjectTranslation>

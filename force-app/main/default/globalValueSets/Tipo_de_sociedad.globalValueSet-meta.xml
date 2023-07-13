@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>TS01</fullName>
+        <default>false</default>
+        <label>A. Sociedades anónimas</label>
+    </customValue>
+    <customValue>
+        <fullName>TS02</fullName>
+        <default>false</default>
+        <label>B. Sociedades de responsabilidad limitada</label>
+    </customValue>
+    <customValue>
+        <fullName>TS03</fullName>
+        <default>false</default>
+        <label>C. Sociedades colectivas</label>
+    </customValue>
+    <customValue>
+        <fullName>TS04</fullName>
+        <default>false</default>
+        <label>D. Sociedades comanditarias</label>
+    </customValue>
+    <customValue>
+        <fullName>TS05</fullName>
+        <default>false</default>
+        <label>E. Comunidades de bienes, herencias yacentes y demás entidades carentes de personalidad jurídica no incluidas expresamente en otras claves</label>
+    </customValue>
+    <customValue>
+        <fullName>TS06</fullName>
+        <default>false</default>
+        <label>F. Sociedades cooperativas</label>
+    </customValue>
+    <customValue>
+        <fullName>TS07</fullName>
+        <default>false</default>
+        <label>G. Asociaciones</label>
+    </customValue>
+    <customValue>
+        <fullName>TS08</fullName>
+        <default>false</default>
+        <label>H. Comunidades de propietarios en régimen de propiedad horizontal</label>
+    </customValue>
+    <customValue>
+        <fullName>TS09</fullName>
+        <default>false</default>
+        <label>J. Sociedades civiles</label>
+    </customValue>
+    <customValue>
+        <fullName>TS10</fullName>
+        <default>false</default>
+        <label>P. Corporaciones Locales</label>
+    </customValue>
+    <customValue>
+        <fullName>TS11</fullName>
+        <default>false</default>
+        <label>Q. Organismos públicos</label>
+    </customValue>
+    <customValue>
+        <fullName>TS12</fullName>
+        <default>false</default>
+        <label>R. Congregaciones e instituciones religiosas</label>
+    </customValue>
+    <customValue>
+        <fullName>TS13</fullName>
+        <default>false</default>
+        <label>S. Órganos de la Administración del Estado y de las Comunidades Autónomas</label>
+    </customValue>
+    <customValue>
+        <fullName>TS14</fullName>
+        <default>false</default>
+        <label>U. Uniones Temporales de Empresas</label>
+    </customValue>
+    <customValue>
+        <fullName>TS15</fullName>
+        <default>false</default>
+        <label>V. Otros tipos no definidos en el resto de claves registradas en España</label>
+    </customValue>
+    <customValue>
+        <fullName>TS16</fullName>
+        <default>false</default>
+        <label>N. Entidades extranjeras registradas en España</label>
+    </customValue>
+    <customValue>
+        <fullName>TS17</fullName>
+        <default>false</default>
+        <label>W. Establecimientos permanentes de entidades no residentes en territorio español.</label>
+    </customValue>
+    <customValue>
+        <fullName>TS18</fullName>
+        <default>false</default>
+        <label>Otras Entidades europeas registradas en España</label>
+    </customValue>
+    <customValue>
+        <fullName>TS19</fullName>
+        <default>false</default>
+        <label>Otras Entidades europeas NO registradas en España</label>
+    </customValue>
+    <customValue>
+        <fullName>TS20</fullName>
+        <default>false</default>
+        <label>Entidades Financieras</label>
+    </customValue>
+    <masterLabel>Tipo de sociedad</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

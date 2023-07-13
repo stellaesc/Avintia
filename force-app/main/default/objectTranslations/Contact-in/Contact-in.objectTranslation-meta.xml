@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Contact Layout</layout>
+        <sections>
+            <label></label>
+            <section>Datos generales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Domicilio personal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Escritura del representante</section>
+        </sections>
+    </layouts>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>CheckFirmadoParaAceptoAvintia</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>FormatoNIF_CIF</name>
+    </validationRules>
+    <webLinks>
+        <label></label>
+        <name>ComposerSPProposal</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>Conga_Composer_Composer_SP_Client_Letter</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>Conga_Composer_Composer_SP_Client_Letter_27Jan2022_03_56_23_PM</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>Mass_Delete_Records</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>SendDocuSignContact</name>
+    </webLinks>
+</CustomObjectTranslation>

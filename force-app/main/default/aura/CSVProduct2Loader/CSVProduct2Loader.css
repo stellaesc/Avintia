@@ -1,0 +1,25 @@
+.THIS .file-title {
+    margin-top : 5px;
+}
+
+.THIS .titulo {
+    width:100%; 
+    text-align: center;
+}
+
+.THIS .error {
+    color : red;
+    font-weight : bold;
+}
+
+.THIS .anchoBoton {
+    width : 100%;
+}
+
+.THIS .slds-file-selector__dropzone {
+	width : 100%;
+}
+
+.THIS .slds-file-selector_files {
+    width : 100%;
+}

@@ -1,0 +1,59 @@
+.THIS .slds-table th, 
+.THIS .slds-table td{
+    white-space: normal;
+}
+
+.THIS .divMensajeConfirmacion{
+    
+    text-align: center;
+}
+.THIS .anchoBoton{
+    
+    width: 100%;
+}
+.THIS .titulo{
+    margin-bottom: 2%;
+}
+
+
+.THIS.slds-form-element__label{
+    padding-right: 0px;
+    display:none;
+}
+
+.THIS .slds-datepicker.td.span.slds-day{
+    display:none;
+}
+
+.THIS .contenedorIconoBorrar{
+    background-color:rgb(194, 57, 52);
+    border-color: rgb(194, 57, 52);
+    color: rgb(255, 255, 255);
+}
+
+.THIS .contenedorIconoBorrar:hover {
+	background-color: rgb(166, 26, 20);
+    border-color: rgb(166, 26, 20);
+    color: rgb(255, 255, 255);
+} 
+
+
+.THIS .contenedorIconoAnadir{
+    background-color:rgb(75, 202, 129);
+    background-color:rgb(75, 202, 129);
+    color: black;
+}
+
+.THIS .contenedorIconoAnadir:hover {
+	background-color: rgb(4, 132, 75);
+    border-color: rgb(4, 132, 75);
+    color: rgb(255, 255, 255);
+}
+
+/*
+.THIS .field{
+  padding: 5px;
+  border: 1px solid red;
+  border-radius: 2px;
+}
+*/

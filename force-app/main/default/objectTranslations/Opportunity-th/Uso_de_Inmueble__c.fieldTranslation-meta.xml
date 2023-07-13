@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label></label>
+    <name>Uso_de_Inmueble__c</name>
+    <picklistValues>
+        <masterLabel>1ª Residencia (Inversión)</masterLabel>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>1ª Residencia (Primer acceso)</masterLabel>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>1ª Residencia (Reposición)</masterLabel>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>2ª Residencia (Inversión)</masterLabel>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>2ª Residencia (Uso propio)</masterLabel>
+        <translation></translation>
+    </picklistValues>
+</CustomFieldTranslation>

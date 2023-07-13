@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <choices>
+        <name>Si</name>
+        <choiceText>Si</choiceText>
+        <dataType>Boolean</dataType>
+        <value>
+            <booleanValue>true</booleanValue>
+        </value>
+    </choices>
+    <interviewLabel>VolverDocMarketing {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>VolverDocMarketing</label>
+    <processType>Flow</processType>
+    <recordUpdates>
+        <name>PasarDocMarketing</name>
+        <label>PasarDocMarketing</label>
+        <locationX>387</locationX>
+        <locationY>152</locationY>
+        <filters>
+            <field>Estado__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Apoboar comercilaización</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Estado__c</field>
+            <value>
+                <stringValue>Documentación marketing</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Promocion__c</object>
+    </recordUpdates>
+    <screens>
+        <name>Confirmacion</name>
+        <label>Confirmación</label>
+        <locationX>196</locationX>
+        <locationY>150</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>PasarDocMarketing</targetReference>
+        </connector>
+        <fields>
+            <name>pregunta</name>
+            <fieldText>El estado de la promoción pasará a Configuración técnica, ¿desea continuar?</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Confirmacion</startElementReference>
+    <status>Draft</status>
+</Flow>

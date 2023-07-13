@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Enviar una notificación de Contrato compraventa firmado.</description>
+        <name>Action_Notificar_ContratoCompraventafirmado</name>
+        <label>Action_Notificar Contrato Compraventa firmado</label>
+        <locationX>50</locationX>
+        <locationY>3278</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_CustomNotificacionType_04.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>Var_RecipientIdContratoCompraventaFirmado</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>For_NotifTitleFirmaCompraventaContrato</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>Templ_NotifBodyFirmaCompraventaContrato</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>Var_OportunidadId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Enviar una notificación de Contrato reserva firmado.</description>
+        <name>Action_Notificar_ContratoReservafirmado</name>
+        <label>Action_Notificacar Contrato Reserva firmado</label>
+        <locationX>94</locationX>
+        <locationY>2246</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>Decision_ContratoCompraventaFirmado</targetReference>
+        </connector>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_CustomNotificacionType_03.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>Var_RecipientIdsContratoReservaFirmado</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>For_NotifTitleFirmaReservaContrato</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>Templ_NotifBodyFirmaReservaContrato</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>Var_OportunidadId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Enviar una notificación de oportunidad contratada pendiente de firma.</description>
+        <name>Action_Notificar_OportunidadContratada</name>
+        <label>Action_Notificar Oportunidad contratada</label>
+        <locationX>248</locationX>
+        <locationY>1298</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>Decision_ContratoReservaFirmado</targetReference>
+        </connector>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_CustomNotificacionType_02.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>Var_RecipientIdEtapaContratada</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>For_NotifTitleEtapaContratada</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>Templ_NotifBodyEtapaContratada</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>Var_OportunidadId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Enviar una notificación de oportunidad reservada pendiente de firma.</description>
+        <name>Action_Notificar_OportunidadReservada</name>
+        <label>Action_Notificar Oportunidad Reservada</label>
+        <locationX>248</locationX>
+        <locationY>674</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>Decision_EtapaContrato</targetReference>
+        </connector>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_CustomNotificacionType_01.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>Var_RecipientIdEtapaReservada</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>For_NotifTitleEtapaReservada</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>Templ_NotifBodyEtapaReservada</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>Var_OportunidadId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Enviar Email Alert avisando de que el contrato compraventa de la oportunidad ha sido firmado.</description>
+        <name>EmailAlert_AvisofirmacontratoCompraventa</name>
+        <label>EmailAlert_Aviso firma contrato Compraventa</label>
+        <locationX>182</locationX>
+        <locationY>2738</locationY>
+        <actionName>Opportunity.Aviso_Firma_Contrato_Compraventa</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Decision_OportunidadNoNueva</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Var_OportunidadId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Enviar Email Alert de que el Contrato Reserva ha sido firmado.</description>
+        <name>EmailAlert_AvisoFirmaContratoReserva</name>
+        <label>EmailAlert_Aviso Firma Contrato Reserva</label>
+        <locationX>226</locationX>
+        <locationY>1706</locationY>
+        <actionName>Opportunity.Aviso_Firma_Contrato_Reserva</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Decision_OportunidadNoEsNueva</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Var_OportunidadId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <assignments>
+        <description>Añadir el id del grupo NotificacionFirmaContratos2 a la lista de receptores de la notificación.</description>
+        <name>Assign_AddRecipientIdCompraventa</name>
+        <label>Assign_AddRecipientIdCompraventa</label>
+        <locationX>50</locationX>
+        <locationY>3170</locationY>
+        <assignmentItems>
+            <assignToReference>Var_RecipientIdContratoCompraventaFirmado</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Group_Compraventa.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Action_Notificar_ContratoCompraventafirmado</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Añadir el id del grupo Promocion_Reservada_Alert a la lista de receptores de la notificación.</description>
+        <name>Assign_AddRecipientIdContratada</name>
+        <label>Assign_AddRecipientIdContratada</label>
+        <locationX>248</locationX>
+        <locationY>1190</locationY>
+        <assignmentItems>
+            <assignToReference>Var_RecipientIdEtapaContratada</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Group_PromocionReservada_02.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Action_Notificar_OportunidadContratada</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Añadir el id del usuario del grupo Notificaciones_firma_contratos a la lista de receptores de la notificación.</description>
+        <name>Assign_AddRecipientIdReserva</name>
+        <label>Assign_AddRecipientIdReserva</label>
+        <locationX>94</locationX>
+        <locationY>2138</locationY>
+        <assignmentItems>
+            <assignToReference>Var_RecipientIdsContratoReservaFirmado</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Group_Reserva.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Action_Notificar_ContratoReservafirmado</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Añadir el id del grupo Promocion_Reservada_Alert a la lista de receptores de la notificación.</description>
+        <name>Assign_AddRecipientIdReservada</name>
+        <label>Assign_AddRecipientIdReservada</label>
+        <locationX>248</locationX>
+        <locationY>566</locationY>
+        <assignmentItems>
+            <assignToReference>Var_RecipientIdEtapaReservada</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Group_PromocionReservada_01.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Action_Notificar_OportunidadReservada</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Comprobar si el contrato compraventa ha sido firmado.</description>
+        <name>Decision_ContratoCompraventaFirmado</name>
+        <label>Decision_Contrato Compraventa firmado</label>
+        <locationX>380</locationX>
+        <locationY>2522</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>ContratoCompraventaFirmado_Si</name>
+            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_opportunity.Contrato_Compraventa_firmado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_opportunity.Contrato_Compraventa_firmado__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Var_PriorContratoCompraventaFirmado</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Var_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Opotunidad_EmailPlanificacionResponsable01</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si el contrato de reserva ha sido firmado.</description>
+        <name>Decision_ContratoReservaFirmado</name>
+        <label>Decision_Contrato Reserva Firmado</label>
+        <locationX>380</locationX>
+        <locationY>1490</locationY>
+        <defaultConnector>
+            <targetReference>Decision_ContratoCompraventaFirmado</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>ContratoReservaFirmado_Si</name>
+            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_opportunity.Contrato_Reserva_firmado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_opportunity.Contrato_Reserva_firmado__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Var_PriorContratoReservaFirmado</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Var_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_opotunidad_EmailPlanificacionResponsable02</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si la oportunidad pasa a estar en la etapa de contrato.</description>
+        <name>Decision_EtapaContrato</name>
+        <label>Decision_EtapaContrato</label>
+        <locationX>380</locationX>
+        <locationY>866</locationY>
+        <defaultConnector>
+            <targetReference>Decision_ContratoReservaFirmado</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>EtapaContrato_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_opportunity.StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Contrato</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_opportunity.Promocion__r.Alertas__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_opportunity.AUX_Etapa_Contrato__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_opportunity.AUX_Etapa_Contrato__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Var_PriorAuxEtapaContrato</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Var_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_CustomNotificacionType_02</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si la oportunidad pasa a estar en la etapa de reserva.</description>
+        <name>Decision_EtapaReservada</name>
+        <label>Decision_EtapaReservada</label>
+        <locationX>380</locationX>
+        <locationY>242</locationY>
+        <defaultConnector>
+            <targetReference>Decision_EtapaContrato</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>EtapaReservada_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_opportunity.StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reserva</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_opportunity.Promocion__r.Alertas__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_opportunity.AUX_Etapa_Reserva__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_opportunity.AUX_Etapa_Reserva__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Var_PriorAuxEtapaReserva</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Var_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_CustomNotificacionType_01</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si la oportunidad es nueva o no.</description>
+        <name>Decision_OportunidadNoEsNueva</name>
+        <label>Decision_Oportunidad No Es Nueva</label>
+        <locationX>226</locationX>
+        <locationY>1814</locationY>
+        <defaultConnector>
+            <targetReference>Decision_ContratoCompraventaFirmado</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OportunidadNoEsNueva_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Var_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_CustomNotificacionType_03</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si la oportunidad es nueva o no.</description>
+        <name>Decision_OportunidadNoNueva</name>
+        <label>Decision_Oportunidad No es Nueva</label>
+        <locationX>182</locationX>
+        <locationY>2846</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OportunidadNoNueva_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Var_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_CustomNotificacionType_04</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <description>Flujo para notificar a los usuarios sobre el estado de las firmas de la oportunidad y enviar emails.</description>
+    <formulas>
+        <description>Formula que devuelve el email del jefe de planificación si este existe.</description>
+        <name>For_EmailJefePlanificacion</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!Get_opportunity.Promocion__r.Planificacion__c}), &apos; &apos;, {!Get_opportunity.Promocion__r.Planificacion__r.Email})</expression>
+    </formulas>
+    <formulas>
+        <description>Formula que devuelve el email del responsable comercial si este existe.</description>
+        <name>For_EmailResponsableComercial</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!Get_opportunity.Promocion__r.Responsable_Comercial__c}), &apos; &apos;, {!Get_opportunity.Promocion__r.Responsable_Comercial__r.Email})</expression>
+    </formulas>
+    <formulas>
+        <description>Formula que almacena el titulo de la notificación de oportunidad pendiente de firma de contrato.</description>
+        <name>For_NotifTitleEtapaContratada</name>
+        <dataType>String</dataType>
+        <expression>&apos;Inmueble pendiente de firma de contrato: &apos; &amp; {!Get_opportunity.Name}</expression>
+    </formulas>
+    <formulas>
+        <description>Formula que almacena el titulo de la notificación de oportunidad reservada.</description>
+        <name>For_NotifTitleEtapaReservada</name>
+        <dataType>String</dataType>
+        <expression>&apos;Inmueble pendiente de firma de reserva: &apos; &amp; {!Get_opportunity.Name}</expression>
+    </formulas>
+    <formulas>
+        <description>Formula que contiene el titulo de la notificación del contrato compraventa firmado.</description>
+        <name>For_NotifTitleFirmaCompraventaContrato</name>
+        <dataType>String</dataType>
+        <expression>&apos;Firma de Contrato Compraventa en la oportunidad &apos; &amp; {!Get_opportunity.Name}</expression>
+    </formulas>
+    <formulas>
+        <description>Formula que contiene el titulo de la notificación de contrato reserva firmado.</description>
+        <name>For_NotifTitleFirmaReservaContrato</name>
+        <dataType>String</dataType>
+        <expression>&apos;Firma de Contrato Reserva en la oportunidad &apos; &amp; {!Get_opportunity.Name}</expression>
+    </formulas>
+    <interviewLabel>Notificar el estado de firmas de la oportunidad {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Notifica el estado de firmas de la oportunidad</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Obtener el tipo de Custom Notificación que se usa para enviar las notificaciones.</description>
+        <name>Get_CustomNotificacionType_01</name>
+        <label>Get_Custom Notificacion Type</label>
+        <locationX>248</locationX>
+        <locationY>350</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Group_PromocionReservada_01</targetReference>
+        </connector>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Firma_contrato</stringValue>
+            </value>
+        </filters>
+        <object>CustomNotificationType</object>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener el tipo de Custom Notificación que se usa para enviar las notificaciones.</description>
+        <name>Get_CustomNotificacionType_02</name>
+        <label>Get_Custom Notificacion Type</label>
+        <locationX>248</locationX>
+        <locationY>974</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Group_PromocionReservada_02</targetReference>
+        </connector>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Firma_contrato</stringValue>
+            </value>
+        </filters>
+        <object>CustomNotificationType</object>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener el tipo de Custom Notificación que se usa para enviar las notificaciones.</description>
+        <name>Get_CustomNotificacionType_03</name>
+        <label>Get_Custom Notificacion Type</label>
+        <locationX>94</locationX>
+        <locationY>1922</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Group_Reserva</targetReference>
+        </connector>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Firma_contrato</stringValue>
+            </value>
+        </filters>
+        <object>CustomNotificationType</object>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener el tipo de Custom Notificación que se usa para enviar las notificaciones.</description>
+        <name>Get_CustomNotificacionType_04</name>
+        <label>Get_Custom Notificacion Type</label>
+        <locationX>50</locationX>
+        <locationY>2954</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Group_Compraventa</targetReference>
+        </connector>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Firma_contrato</stringValue>
+            </value>
+        </filters>
+        <object>CustomNotificationType</object>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener el grupo que recibirá la notificación de contrato Compraventa firmado.</description>
+        <name>Get_Group_Compraventa</name>
+        <label>Get_Group_Compraventa</label>
+        <locationX>50</locationX>
+        <locationY>3062</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_AddRecipientIdCompraventa</targetReference>
+        </connector>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NotificacionFirmaContratos2</stringValue>
+            </value>
+        </filters>
+        <object>Group</object>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener el grupo que recibirá la notificación de promoción reservada.</description>
+        <name>Get_Group_PromocionReservada_01</name>
+        <label>Get_Group_Promocion Reservada</label>
+        <locationX>248</locationX>
+        <locationY>458</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_AddRecipientIdReservada</targetReference>
+        </connector>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Promocion_Reservada_Alert</stringValue>
+            </value>
+        </filters>
+        <object>Group</object>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener el grupo que recibirá la notificación de promoción contratada.</description>
+        <name>Get_Group_PromocionReservada_02</name>
+        <label>Get_Group_Promocion Reservada</label>
+        <locationX>248</locationX>
+        <locationY>1082</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_AddRecipientIdContratada</targetReference>
+        </connector>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Promocion_Reservada_Alert</stringValue>
+            </value>
+        </filters>
+        <object>Group</object>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener el grupo que recibirá la notificación de contrato reserva firmado.</description>
+        <name>Get_Group_Reserva</name>
+        <label>Get_Group_Reserva</label>
+        <locationX>94</locationX>
+        <locationY>2030</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_AddRecipientIdReserva</targetReference>
+        </connector>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Notificaciones_firma_contratos</stringValue>
+            </value>
+        </filters>
+        <object>Group</object>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener la oportunidad.</description>
+        <name>Get_opportunity</name>
+        <label>Get_opportunity</label>
+        <locationX>380</locationX>
+        <locationY>134</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_EtapaReservada</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Var_OportunidadId</elementReference>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+    </recordLookups>
+    <recordUpdates>
+        <description>Actualizar la oportunidad añadiendo el Email del jefe planificación y responsable comercial.</description>
+        <name>Update_Opotunidad_EmailPlanificacionResponsable01</name>
+        <label>Update_Opotunidad_Email Planificacion y Responsable</label>
+        <locationX>182</locationX>
+        <locationY>2630</locationY>
+        <connector>
+            <targetReference>EmailAlert_AvisofirmacontratoCompraventa</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Var_OportunidadId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Email_Jefe_Planificacion__c</field>
+            <value>
+                <elementReference>For_EmailJefePlanificacion</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Email_responsable_comercial__c</field>
+            <value>
+                <elementReference>For_EmailResponsableComercial</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar la oportunidad añadiendo el Email del jefe planificación y responsable comercial.</description>
+        <name>Update_opotunidad_EmailPlanificacionResponsable02</name>
+        <label>Update_opotunidad_Email Planificacion y Responsable</label>
+        <locationX>226</locationX>
+        <locationY>1598</locationY>
+        <connector>
+            <targetReference>EmailAlert_AvisoFirmaContratoReserva</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Var_OportunidadId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Email_Jefe_Planificacion__c</field>
+            <value>
+                <elementReference>For_EmailJefePlanificacion</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Email_responsable_comercial__c</field>
+            <value>
+                <elementReference>For_EmailResponsableComercial</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <startElementReference>Get_opportunity</startElementReference>
+    <status>Active</status>
+    <textTemplates>
+        <description>Plantilla que contiene el mensaje de la notificación de oportunidad contratada pendiente de firma.</description>
+        <name>Templ_NotifBodyEtapaContratada</name>
+        <text>El inmueble {!Get_opportunity.Description} de la oportunidad {!Get_opportunity.Name} de la promoción {!Get_opportunity.Promocion__r.Name} se encuentra pendiente de firma del contrato de compraventa.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Plantilla que contiene el mensaje de la notificación de oportunidad en reserva.</description>
+        <name>Templ_NotifBodyEtapaReservada</name>
+        <text>El inmueble {!Get_opportunity.Description} de la oportunidad {!Get_opportunity.Name} de la promoción {!Get_opportunity.Promocion__r.Name} se encuentra pendiente de firma del contrato de reserva.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Plantilla que contiene el mensaje de la notificación de del contrato compraventa firmado</description>
+        <name>Templ_NotifBodyFirmaCompraventaContrato</name>
+        <text>Se ha realizado la firma del Contrato Compraventa en la oportunidad {!Get_opportunity.Name} de la promoción {!Get_opportunity.Promocion__r.Name}.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>plantilla de texto que contiene el mensaje de la notificación de contrato reserva firmado.</description>
+        <name>Templ_NotifBodyFirmaReservaContrato</name>
+        <text>Se ha realizado la firma del Contrato Reserva en la oportunidad {!Get_opportunity.Name} de la promoción {!Get_opportunity.Promocion__r.Name}.</text>
+    </textTemplates>
+    <variables>
+        <description>Variable de entrada que contiene verdadero si la oportunidad es nueva.</description>
+        <name>Var_IsNew</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable de entrada que contiene el Id de la oportunidad.</description>
+        <name>Var_OportunidadId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable de entrada que contiene el valor anterior del campo Oportunidad Contrato.</description>
+        <name>Var_PriorAuxEtapaContrato</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable de entrada que contiene el valor del campo Oportunidad Reservada.</description>
+        <name>Var_PriorAuxEtapaReserva</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable de entrada que contiene el valor anterior del campo Contrato Compraventa firmado de la oportunidad</description>
+        <name>Var_PriorContratoCompraventaFirmado</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable de entrada que contiene el valor anterior del campo Contrato_Reserva_firmado__c</description>
+        <name>Var_PriorContratoReservaFirmado</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que almacena los Ids de los usuarios que recibirán la notificación de contrato compraventa firmado</description>
+        <name>Var_RecipientIdContratoCompraventaFirmado</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que contiene los Ids de los usuarios que recibirán la notificación de oportunidad en contrato pendiente de firma.</description>
+        <name>Var_RecipientIdEtapaContratada</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que contiene el Id de los usuarios que recibirán la notificación de oportunidad reservada pendiente de firma.</description>
+        <name>Var_RecipientIdEtapaReservada</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que contiene los Ids de los usuarios que recibirán la notificación de contrato reserva firmado</description>
+        <name>Var_RecipientIdsContratoReservaFirmado</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

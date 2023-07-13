@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Comunidad_aut_noma</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Comunidad autónoma</shortDescription>
+        <value>Comunidad autónoma</value>
+    </labels>
+    <labels>
+        <fullName>EmailNumFacturaMsg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailNumFacturaMsg</shortDescription>
+        <value>malvarez@avintiainmobiliaria.com;iroldan@avintiainmobiliaria.com</value>
+    </labels>
+    <labels>
+        <fullName>System_Administrator_Technical</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>System Administrator Technical</shortDescription>
+        <value>Admin LCS</value>
+    </labels>
+</CustomLabels>
