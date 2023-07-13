@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Alta promoción</fullName>
+        <default>false</default>
+        <label>Alta promoción</label>
+    </customValue>
+    <customValue>
+        <fullName>Configuración técnica</fullName>
+        <default>false</default>
+        <label>Configuración técnica</label>
+    </customValue>
+    <customValue>
+        <fullName>Configuración comercial</fullName>
+        <default>false</default>
+        <label>Configuración comercial</label>
+    </customValue>
+    <customValue>
+        <fullName>Documentación marketing</fullName>
+        <default>false</default>
+        <label>Documentación marketing</label>
+    </customValue>
+    <customValue>
+        <fullName>Aprobar comercializacion</fullName>
+        <default>false</default>
+        <label>Aprobar comercialización</label>
+    </customValue>
+    <customValue>
+        <fullName>Ejecución del proyecto</fullName>
+        <default>false</default>
+        <label>Ejecución del proyecto</label>
+    </customValue>
+    <customValue>
+        <fullName>Sin Iniciar</fullName>
+        <default>false</default>
+        <label>Sin Iniciar</label>
+    </customValue>
+    <customValue>
+        <fullName>Pre_Reservas</fullName>
+        <default>false</default>
+        <label>Pre-Reservas</label>
+    </customValue>
+    <customValue>
+        <fullName>Reservas</fullName>
+        <default>false</default>
+        <label>Reservas</label>
+    </customValue>
+    <customValue>
+        <fullName>Compra_Venta</fullName>
+        <default>false</default>
+        <label>Compra-Venta</label>
+    </customValue>
+    <customValue>
+        <fullName>100% Vendida</fullName>
+        <default>false</default>
+        <label>100% Vendida</label>
+    </customValue>
+    <customValue>
+        <fullName>Escriturada</fullName>
+        <default>false</default>
+        <label>Escriturada</label>
+    </customValue>
+    <customValue>
+        <fullName>Proyecto desestimado</fullName>
+        <default>false</default>
+        <label>Proyecto desestimado</label>
+    </customValue>
+    <masterLabel>Estados de promoción</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

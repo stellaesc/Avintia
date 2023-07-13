@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>0</fullName>
+        <default>false</default>
+        <label>No está en lista (SCR)</label>
+    </customValue>
+    <customValue>
+        <fullName>1</fullName>
+        <default>false</default>
+        <label>Sancionado (SCR)</label>
+    </customValue>
+    <customValue>
+        <fullName>2</fullName>
+        <default>false</default>
+        <label>PEP (SCR)</label>
+    </customValue>
+    <customValue>
+        <fullName>3</fullName>
+        <default>false</default>
+        <label>Otras listas (SCR)</label>
+    </customValue>
+    <customValue>
+        <fullName>60</fullName>
+        <default>false</default>
+        <label>Error general en la búsqueda</label>
+    </customValue>
+    <customValue>
+        <fullName>61</fullName>
+        <default>false</default>
+        <label>Error de configuración de la búsqueda</label>
+    </customValue>
+    <customValue>
+        <fullName>62</fullName>
+        <default>false</default>
+        <label>Máximo número de búsquedas alcanzado</label>
+    </customValue>
+    <customValue>
+        <fullName>63</fullName>
+        <default>false</default>
+        <label>Base de datos de sancionados vacía</label>
+    </customValue>
+    <customValue>
+        <fullName>64</fullName>
+        <default>false</default>
+        <label>Nombre de búsqueda obligatorio</label>
+    </customValue>
+    <customValue>
+        <fullName>65</fullName>
+        <default>false</default>
+        <label>Campo de búsqueda obligatorio</label>
+    </customValue>
+    <customValue>
+        <fullName>77</fullName>
+        <default>false</default>
+        <label>Cliente no válido</label>
+    </customValue>
+    <customValue>
+        <fullName>78</fullName>
+        <default>false</default>
+        <label>Cliente no encontrado</label>
+    </customValue>
+    <customValue>
+        <fullName>79</fullName>
+        <default>false</default>
+        <label>Customer/Empresa no encontrado/a</label>
+    </customValue>
+    <customValue>
+        <fullName>80</fullName>
+        <default>false</default>
+        <label>Formato Nombre erróneo</label>
+    </customValue>
+    <customValue>
+        <fullName>81</fullName>
+        <default>false</default>
+        <label>Formato Apellidos erróneo</label>
+    </customValue>
+    <customValue>
+        <fullName>82</fullName>
+        <default>false</default>
+        <label>Formato identificador erróneo</label>
+    </customValue>
+    <customValue>
+        <fullName>83</fullName>
+        <default>false</default>
+        <label>Formato tipo identificador erróneo</label>
+    </customValue>
+    <customValue>
+        <fullName>84</fullName>
+        <default>false</default>
+        <label>Formato fecha erróneo</label>
+    </customValue>
+    <customValue>
+        <fullName>85</fullName>
+        <default>false</default>
+        <label>Fecha incorrecta</label>
+    </customValue>
+    <customValue>
+        <fullName>86</fullName>
+        <default>false</default>
+        <label>Formato ISO país erróneo</label>
+    </customValue>
+    <customValue>
+        <fullName>87</fullName>
+        <default>false</default>
+        <label>ISO país no existe</label>
+    </customValue>
+    <customValue>
+        <fullName>88</fullName>
+        <default>false</default>
+        <label>Formato Código interno erróneo</label>
+    </customValue>
+    <customValue>
+        <fullName>89</fullName>
+        <default>false</default>
+        <label>Otros errores de formato</label>
+    </customValue>
+    <customValue>
+        <fullName>90</fullName>
+        <default>false</default>
+        <label>Error conexión base datos</label>
+    </customValue>
+    <customValue>
+        <fullName>91</fullName>
+        <default>false</default>
+        <label>Error lectura escritura fichero</label>
+    </customValue>
+    <customValue>
+        <fullName>92</fullName>
+        <default>false</default>
+        <label>Error en mensaje XML</label>
+    </customValue>
+    <customValue>
+        <fullName>93</fullName>
+        <default>false</default>
+        <label>Error de usuario</label>
+    </customValue>
+    <customValue>
+        <fullName>94</fullName>
+        <default>false</default>
+        <label>Error de memoria</label>
+    </customValue>
+    <customValue>
+        <fullName>95</fullName>
+        <default>false</default>
+        <label>Error de ejecución</label>
+    </customValue>
+    <customValue>
+        <fullName>99</fullName>
+        <default>false</default>
+        <label>Otros errores</label>
+    </customValue>
+    <masterLabel>Respuesta Alta PBC</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

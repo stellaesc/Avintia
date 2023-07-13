@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Lanzamos el proceso de aprobación Tarifario</description>
+        <name>Ac_Aprobacion_Tarifario_SH</name>
+        <label>Ac_Aprobacion Tarifario SH</label>
+        <locationX>578</locationX>
+        <locationY>758</locationY>
+        <actionName>submit</actionName>
+        <actionType>submit</actionType>
+        <inputParameters>
+            <name>comment</name>
+            <value>
+                <elementReference>Comentarios</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>processDefinitionNameOrId</name>
+            <value>
+                <stringValue>Tarifario_SOLDIT_HOMES2</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>objectId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Lanzamos el proceso de aprobación Tarifario</description>
+        <name>Acc_Aprobacion_tarifario_ADI</name>
+        <label>Ac_Aprobacion tarifario ADI</label>
+        <locationX>314</locationX>
+        <locationY>758</locationY>
+        <actionName>submit</actionName>
+        <actionType>submit</actionType>
+        <inputParameters>
+            <name>comment</name>
+            <value>
+                <elementReference>Comentarios</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>processDefinitionNameOrId</name>
+            <value>
+                <stringValue>Tarifario_ADI</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>objectId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <decisions>
+        <name>Dec_Tipo_Aprobacion_Tarifario</name>
+        <label>Dec Tipo Aprobación Tarifario</label>
+        <locationX>446</locationX>
+        <locationY>638</locationY>
+        <defaultConnector>
+            <targetReference>Ac_Aprobacion_Tarifario_SH</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Aprobación Tarifario SOLDIT HOMES</defaultConnectorLabel>
+        <rules>
+            <name>Aprobacion_Tarifario_ADI</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Obtener_Datos_Promocion.Comercializa__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>ADI</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Acc_Aprobacion_tarifario_ADI</targetReference>
+            </connector>
+            <label>Aprobación Tarifario ADI</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Decisión para estudiar si la promoción está pendiente de aprobación de tarifario</description>
+        <name>En_aprobacion</name>
+        <label>En aprobacion</label>
+        <locationX>248</locationX>
+        <locationY>278</locationY>
+        <defaultConnector>
+            <targetReference>Obtener_comentarios_aprobacion</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Pendiente</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>PdteAprobacionTarifario</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Accion_no_permitida</targetReference>
+            </connector>
+            <label>Pendiente</label>
+        </rules>
+    </decisions>
+    <description>Flow que lanza el proceso de aprobación de tarifario tanto para ADI como para SOLDIT HOMES</description>
+    <interviewLabel>Proceso de aprobacion de tarifario {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Proceso de aprobacion de tarifario</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <description>Obtenemos los campos necesarios de la promoción para estudiar los casos en los que nos encontremos</description>
+        <name>Obtener_Datos_Promocion</name>
+        <label>Obtener Datos Promocion</label>
+        <locationX>248</locationX>
+        <locationY>158</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>En_aprobacion</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <object>Promocion__c</object>
+    </recordLookups>
+    <screens>
+        <description>Pantalla para mostrar el mensaje de que no se puede lanzar la aprobación</description>
+        <name>Accion_no_permitida</name>
+        <label>Accion no permitida</label>
+        <locationX>50</locationX>
+        <locationY>398</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>AccionDenegada</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;No es posible lanzar un nuevo proceso de aprobación del tarifario. Actualmente y&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;a existe un proceso en curso.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Obtener_comentarios_aprobacion</name>
+        <label>Obtener comentarios aprobacion</label>
+        <locationX>446</locationX>
+        <locationY>398</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Actualizar_precios_inmuebles</targetReference>
+        </connector>
+        <fields>
+            <name>Comentarios</name>
+            <fieldText>Comentarios</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Obtener_Datos_Promocion</startElementReference>
+    <status>Active</status>
+    <subflows>
+        <description>Actualiza el precio de los inmuebles</description>
+        <name>Actualizar_precios_inmuebles</name>
+        <label>Actualizar precios inmuebles</label>
+        <locationX>446</locationX>
+        <locationY>518</locationY>
+        <connector>
+            <targetReference>Dec_Tipo_Aprobacion_Tarifario</targetReference>
+        </connector>
+        <flowName>Roll_up_Precios_inmuebles</flowName>
+        <inputAssignments>
+            <name>idPromocion</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <description>Indica si la promoción se encuentra actualmente pendiente de aprobación de tarifario</description>
+        <name>PdteAprobacionTarifario</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Id de la promoción sobre la que vamos a trabajar</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

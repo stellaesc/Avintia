@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Caseta</fullName>
+        <default>false</default>
+        <label>Caseta</label>
+    </customValue>
+    <customValue>
+        <fullName>Idealista</fullName>
+        <default>false</default>
+        <label>Idealista</label>
+    </customValue>
+    <customValue>
+        <fullName>Fotocasa</fullName>
+        <default>false</default>
+        <label>Fotocasa</label>
+    </customValue>
+    <customValue>
+        <fullName>Web corporativa</fullName>
+        <default>false</default>
+        <label>Web corporativa</label>
+    </customValue>
+    <customValue>
+        <fullName>Otros</fullName>
+        <default>false</default>
+        <label>Otros</label>
+    </customValue>
+    <customValue>
+        <fullName>Habitaclia</fullName>
+        <default>false</default>
+        <label>Habitaclia</label>
+    </customValue>
+    <customValue>
+        <fullName>Globaliza</fullName>
+        <default>false</default>
+        <label>Globaliza</label>
+    </customValue>
+    <customValue>
+        <fullName>Housage</fullName>
+        <default>false</default>
+        <label>Housage</label>
+    </customValue>
+    <masterLabel>Medio de procedencia</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

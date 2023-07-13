@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Lead Layout</layout>
+        <sections>
+            <label></label>
+            <section>ACTIVIDAD COMERCIAL</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>DATOS DE CONTACTO</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>INFORMACIÓN DE CANDIDATO</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>INFORMACIÓN DE DIRECCIÓN</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>INTERESES</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Lead Layout Admin</layout>
+        <sections>
+            <label></label>
+            <section>ACTIVIDAD COMERCIAL</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>DATOS DE CONTACTO</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>INFORMACIÓN DE CANDIDATO</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>INFORMACIÓN DE DIRECCIÓN</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>INTERESES</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>Ficha_Cliente</name>
+    </quickActions>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>CheckFirmadoParaAceptoAvintia</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Comprobacion_campos_RBA</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Descripcion_motivo_descarte_otros</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Fecha_Visita_Obligatoria</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Motivo_de_descarte_al_descartar_lead</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Movil_obligatorio_si_viene_de_caseta</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Nacionalidad_obligatoria_al_convertir</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>PreventDashesSpacesSlashesInMobilePhone</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>PreventDashesSpacesSlashesInPhone</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Promocion_obligatoria_al_convertir</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Situacionlaboral_oblgatoria_al_convertir</name>
+    </validationRules>
+    <webLinks>
+        <label></label>
+        <name>Composer_SP_Proposal</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>Deca1h5w00000ByJ63AAF</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>Mass_Delete_Records</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>PRUEBAConvert</name>
+    </webLinks>
+    <workflowTasks>
+        <description></description>
+        <name>Contactar_con_el_lead</name>
+        <subject></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description></description>
+        <name>Visita</name>
+        <subject></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

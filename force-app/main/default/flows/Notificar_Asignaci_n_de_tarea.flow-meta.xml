@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Notificacion_de_Asignar_tareas</name>
+        <label>Task.Notificacion_de_Asignar_tareas</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <actionName>Task.Notificacion_de_Asignar_tareas</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <description>Migrated from the: Notificar Asignación de tarea workflow rule
+Workflow rule description: &quot;</description>
+    <label>Notificar Asignación de tarea</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>Notificacion_de_Asignar_tareas</startElementReference>
+    <status>Obsolete</status>
+</Flow>

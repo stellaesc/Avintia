@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <description>Comprobar si la tarea de Alta promoción se ha completado.</description>
+        <name>Decision_AltaPromocionCompletada</name>
+        <label>Decision_Alta promoción completada</label>
+        <locationX>578</locationX>
+        <locationY>923</locationY>
+        <defaultConnector>
+            <targetReference>Decision_ConfiguracionTecnicaCompletada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>AltaPromocionCompletada_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Promocion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.Fase__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Anteproyecto</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.Estado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Alta promoción</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.TAREASCOMPLETADASPRUEBA__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Alta promoción</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Promocion_ConfiguracionTecnica</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si la tarea de Configuración comercial se ha completado.</description>
+        <name>Decision_ConfiguracionComercialCompletada</name>
+        <label>Decision_Configuración comercial completada</label>
+        <locationX>578</locationX>
+        <locationY>1523</locationY>
+        <defaultConnector>
+            <targetReference>Decision_DocumentacionMarketingCompletada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>ConfiguracionComercialCompletada_Si</name>
+            <conditionLogic>1 AND 2 AND 3 AND 4 AND 5 AND (6 OR 7)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Promocion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.Fase__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Proyecto</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.Estado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Configuración comercial</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.TAREASCOMPLETADASPRUEBA__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Ajuste del tarifario</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.TAREASCOMPLETADASPRUEBA__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Ajuste del ritmo de ventas</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Promocion_DocumentacionMarketing</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si la tarea de Configuración técnica se ha completado.</description>
+        <name>Decision_ConfiguracionTecnicaCompletada</name>
+        <label>Decision_Configuración técnica completada</label>
+        <locationX>578</locationX>
+        <locationY>1223</locationY>
+        <defaultConnector>
+            <targetReference>Decision_ConfiguracionComercialCompletada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>ConfiguracionTecnicaCompletada_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Promocion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.Fase__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Proyecto</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.Estado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Configuración técnica</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.TAREASCOMPLETADASPRUEBA__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Carga de tipo de inmuebles</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.TAREASCOMPLETADASPRUEBA__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Carga de inmuebles</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Promocion_ConfiguracionComercial</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si la tarea de Documentación marketing se ha completado.</description>
+        <name>Decision_DocumentacionMarketingCompletada</name>
+        <label>Decision_Documentación marketing completada</label>
+        <locationX>578</locationX>
+        <locationY>1823</locationY>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>DocumentacionMarketingCompletada_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Promocion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.Fase__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Proyecto</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.Estado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Documentación marketing</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Subject</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Validación de documentación marketing</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__r.TAREASCOMPLETADASPRUEBA__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Carga de documentación marketing</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Promocion_AprobarComercializacion</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar el estado y el resultado de contacto de la tarea.</description>
+        <name>Decision_EstadoResultadoTarea</name>
+        <label>Decision_Estado resultado tarea</label>
+        <locationX>578</locationX>
+        <locationY>623</locationY>
+        <defaultConnector>
+            <targetReference>Decision_AltaPromocionCompletada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>EstadoResultadoTarea_CompletadaNoInteresa</name>
+            <conditionLogic>1 AND 3 AND 4 AND (2 OR 5)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Subject</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Contactar con el lead</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Resultado_contacto__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>No interesado</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Subject</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Visita</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Tarea_Descartado</targetReference>
+            </connector>
+            <label>Completada y no interesa</label>
+        </rules>
+        <rules>
+            <name>EstadoResultadoTarea_ContactoVolverContactar</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Resultado_contacto__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Volver a contactarle</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Subject</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Contactar con el lead</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Subflow_ContarTareasContactarLead</targetReference>
+            </connector>
+            <label>Contacto_volver a contactar</label>
+        </rules>
+        <rules>
+            <name>EstadoResultadoTarea_VisitaVolverContactar</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Resultado_contacto__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Volver a contactarle</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Subject</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Visita</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Subflow_ContarCrearTareaParaFijarVisita</targetReference>
+            </connector>
+            <label>Visita_volver a contactar</label>
+        </rules>
+        <rules>
+            <name>EstadoResultadoTarea_CompletadaInfoLead</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Resultado_contacto__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completada su información</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Subject</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Contactar con el lead</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Tarea_ClientePotencial</targetReference>
+            </connector>
+            <label>Completada info lead</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si la tarea ha sido completada y tiene promoción</description>
+        <name>Decision_TareaCompletada</name>
+        <label>Decision_Tarea completada</label>
+        <locationX>578</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>Decision_EstadoResultadoTarea</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>TareaCompletada_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.WhatId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Promocion_TareasCompletadas</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <description>Flujo del Objeto &apos;Tarea&apos; que se lanza al crear o editar el registro.
+19/06 MSC: PBs &quot;PB_PromocionCambiarEstados&quot; y &quot;PB_PromocionTareasCompletadas&quot;</description>
+    <formulas>
+        <description>Formula que contiene un espacio</description>
+        <name>For_CadenaVaciaEspacio</name>
+        <dataType>String</dataType>
+        <expression>&apos; &apos;</expression>
+    </formulas>
+    <formulas>
+        <description>Formula que contiene el valor del campo &apos;TAREASCOMPLETADASPRUEBA&apos; de la promoción</description>
+        <name>For_TAREASCOMPLETADASPRUEBAText</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Promocion__r.TAREASCOMPLETADASPRUEBA__c} &amp; &apos; &apos; &amp; {!$Record.Subject}</expression>
+    </formulas>
+    <interviewLabel>Promocion_Triggered_After Insert Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Tarea_Triggered_After Insert Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Actualizar el estado de la promoción a &apos;Aprobar comercialización&apos;</description>
+        <name>Update_Promocion_AprobarComercializacion</name>
+        <label>Update_Promocion_Aprobar comercialización</label>
+        <locationX>446</locationX>
+        <locationY>1931</locationY>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Estado__c</field>
+            <value>
+                <stringValue>Aprobar comercializacion</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAREASCOMPLETADASPRUEBA__c</field>
+            <value>
+                <elementReference>For_CadenaVaciaEspacio</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Promocion__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el estado de la promoción a &apos;Configuración comercial&apos;</description>
+        <name>Update_Promocion_ConfiguracionComercial</name>
+        <label>Update_Promocion_Configuración comercial</label>
+        <locationX>446</locationX>
+        <locationY>1331</locationY>
+        <connector>
+            <targetReference>Decision_ConfiguracionComercialCompletada</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Estado__c</field>
+            <value>
+                <stringValue>Configuración comercial</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAREASCOMPLETADASPRUEBA__c</field>
+            <value>
+                <elementReference>For_CadenaVaciaEspacio</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Promocion__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el estado de la promoción a &apos;Configuración técnica&apos;</description>
+        <name>Update_Promocion_ConfiguracionTecnica</name>
+        <label>Update_Promocion_Configuración técnica</label>
+        <locationX>446</locationX>
+        <locationY>1031</locationY>
+        <connector>
+            <targetReference>Decision_ConfiguracionTecnicaCompletada</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Estado__c</field>
+            <value>
+                <stringValue>Configuración técnica</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Fase__c</field>
+            <value>
+                <stringValue>Proyecto</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Promocion__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el estado de la promoción a &apos;Documentación marketing&apos;</description>
+        <name>Update_Promocion_DocumentacionMarketing</name>
+        <label>Update_Promocion_Documentación marketing</label>
+        <locationX>446</locationX>
+        <locationY>1631</locationY>
+        <connector>
+            <targetReference>Decision_DocumentacionMarketingCompletada</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Estado__c</field>
+            <value>
+                <stringValue>Documentación marketing</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAREASCOMPLETADASPRUEBA__c</field>
+            <value>
+                <elementReference>For_CadenaVaciaEspacio</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Promocion__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el campo de la promoción &apos;TAREASCOMPLETADASPRUEBA&apos;</description>
+        <name>Update_Promocion_TareasCompletadas</name>
+        <label>Update_Promocion_TareasCompletadas</label>
+        <locationX>446</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>Decision_EstadoResultadoTarea</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>TAREASCOMPLETADASPRUEBA__c</field>
+            <value>
+                <elementReference>For_TAREASCOMPLETADASPRUEBAText</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Promocion__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el estado del Lead a Cliente potencial.</description>
+        <name>Update_Tarea_ClientePotencial</name>
+        <label>Update_Tarea_Cliente potencial</label>
+        <locationX>842</locationX>
+        <locationY>731</locationY>
+        <connector>
+            <targetReference>Decision_AltaPromocionCompletada</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.WhoId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Cliente Potencial</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el estado del Lead a descartado.</description>
+        <name>Update_Tarea_Descartado</name>
+        <label>Update_Tarea_Descartado</label>
+        <locationX>50</locationX>
+        <locationY>731</locationY>
+        <connector>
+            <targetReference>Decision_AltaPromocionCompletada</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.WhoId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Motivo_de_descarte__c</field>
+            <value>
+                <elementReference>$Record.Motivo_de_descarte__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Descartado</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <startElementReference>Decision_TareaCompletada</startElementReference>
+    <status>Active</status>
+    <subflows>
+        <description>Iniciar el subflujo &quot;Contar y crear tarea para fijar visita&quot; para crear nueva tarea Visita.</description>
+        <name>Subflow_ContarCrearTareaParaFijarVisita</name>
+        <label>Subflow_Contar y crear tarea para fijar visita</label>
+        <locationX>578</locationX>
+        <locationY>731</locationY>
+        <connector>
+            <targetReference>Decision_AltaPromocionCompletada</targetReference>
+        </connector>
+        <flowName>Contar_y_crear_tarea_para_fijar_visita</flowName>
+        <inputAssignments>
+            <name>IdLead</name>
+            <value>
+                <elementReference>$Record.WhoId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <description>Iniciar el subflujo de &quot;Contar Tareas de Contactar Lead&quot; para crear nueva tarea hasta N</description>
+        <name>Subflow_ContarTareasContactarLead</name>
+        <label>Subflow_Contar Tareas de Contactar Lead</label>
+        <locationX>314</locationX>
+        <locationY>731</locationY>
+        <connector>
+            <targetReference>Decision_AltaPromocionCompletada</targetReference>
+        </connector>
+        <flowName>Contar_Tareas_de_Contactar_Lead</flowName>
+        <inputAssignments>
+            <name>IdLead</name>
+            <value>
+                <elementReference>$Record.WhoId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

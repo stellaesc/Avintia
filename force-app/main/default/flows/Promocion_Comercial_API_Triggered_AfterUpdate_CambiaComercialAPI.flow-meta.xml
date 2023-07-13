@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <description>Evalúa que los campos estén rellenos para que no genere error a la hora de entrar en el flujo.</description>
+        <name>Decision_CamposRellenos</name>
+        <label>Decision_CamposRellenos</label>
+        <locationX>380</locationX>
+        <locationY>455</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>CamposRellenos</name>
+            <conditionLogic>(1 OR 2) AND (3 OR 4)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Promocion__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Promocion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Comercial_API__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Comercial_API__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Subflow_CrearPermisos</targetReference>
+            </connector>
+            <label>Campos Rellenos</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprueba que los campos que necesita el flujo para acceder van rellenos para no generar un error no controlado.</description>
+        <name>Decision_CamposRellenosSegundoFlow</name>
+        <label>Decision_CamposRellenosSegundoFlow</label>
+        <locationX>182</locationX>
+        <locationY>695</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Campos_Rellenos</name>
+            <conditionLogic>(1 OR 2) AND (3 OR 4)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Id</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Comercial_API__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Comercial_API__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Subflow_ActualizaOwnerLead</targetReference>
+            </connector>
+            <label>Campos Rellenos</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Evalúa si el campo Comercial API ha cambiado.</description>
+        <name>Decision_ComercialAPI</name>
+        <label>Decision_ComercialAPI</label>
+        <locationX>611</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>HaCambiado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Comercial_API__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Comercial_API__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Decision_CamposRellenos</targetReference>
+            </connector>
+            <label>Ha Cambiado</label>
+        </rules>
+    </decisions>
+    <description>Si al actualizar el registro existe comercial API llamará al subflujo &quot;crear permisos&quot; y &quot;Actualizar Owner de Lead&quot;.</description>
+    <interviewLabel>_Promocion_Comercial_API_Triggered_AfterUpdate_CambiaComercial {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Promocion_Comercial_API_Triggered_AfterUpdate_CambiaComercialAPI</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>Decision_ComercialAPI</startElementReference>
+    <status>Active</status>
+    <subflows>
+        <description>Llama al flujo &quot;Actualiza Owner de los leads&quot;.</description>
+        <name>Subflow_ActualizaOwnerLead</name>
+        <label>Subflow_ActualizaOwnerLead</label>
+        <locationX>50</locationX>
+        <locationY>815</locationY>
+        <flowName>Actualiza_Owner_de_los_leads</flowName>
+        <inputAssignments>
+            <name>API_anterior</name>
+            <value>
+                <elementReference>$Record__Prior.Comercial_API__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <description>Llama a flujo &quot;Crear Permisos&quot;</description>
+        <name>Subflow_CrearPermisos</name>
+        <label>Subflow_CrearPermisos</label>
+        <locationX>182</locationX>
+        <locationY>575</locationY>
+        <connector>
+            <targetReference>Decision_CamposRellenosSegundoFlow</targetReference>
+        </connector>
+        <flowName>Crear_permisos</flowName>
+        <inputAssignments>
+            <name>IdObjeto</name>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>UserID</name>
+            <value>
+                <elementReference>$Record.Comercial_API__c</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

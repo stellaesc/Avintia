@@ -1,0 +1,266 @@
+<aura:component 
+                controller	="BotonReservaController" 
+                implements	="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" 
+                access		="global" >
+
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit2}"/>
+    <aura:handler name="init" value="{!this}" action= "{!c.doInit3}"/>
+
+    <aura:attribute name="record" 				type="Opportunity"/>
+
+    <aura:attribute name="booleanProductos"		type="Boolean" default="false"/>
+    <aura:attribute name="isConfirmacionOpen"	type="boolean" default="false"/>
+    <aura:attribute name="isMessageOpen"		type="boolean" default="false"/>
+    <aura:attribute name="isOpen"				type="Boolean" default="false"/>
+    <aura:attribute name="isOpenPDF"			type="Boolean" default="false"/>
+    
+    <aura:attribute name="dominio"				type="String"/>
+    <aura:attribute name="idioma"				type="String" default="Castellano"/>
+    <aura:attribute name="idFactura"			type="String"/>
+    <aura:attribute name="message" 				type="String" description="mensage que se muestra en la pantalla auxiliar"/>
+    <aura:attribute name="nombreFichero"		type="String"/>
+    <aura:attribute name="plantilla"			type="String"/>
+    <aura:attribute name="url"					type="String"/>
+    <aura:attribute name="type" 				type="String" description="Tipo del mensage de la pantalla auxiliar, puede ser error/warning/info/success"/>
+    <aura:attribute name="tipoInmueble"			type="String"/>
+    <aura:attribute name="tipoVivienda"			type="String"/>
+    <aura:attribute name="CongaSolName"			type="String"/>
+
+    <force:recordData 
+    aura:id			="record"
+    recordId		="{!v.recordId}"
+    targetFields	="{!v.record}"
+    fields			="	Id, 
+                        StageName,
+                        Tipo_de_Reserva__c,
+                        Mostrar_Resolucion_Reserva__c,
+                        Mostrar_Resolucion_Compraventa__c,
+                        Promocion__r.Contratos_MultiIdioma__c, 
+                      	Promocion__r.Plantilla_cancelacion_compraventa__c,
+                        Promocion__r.Plantilla_cancelacion_reserva__c,
+                        Promocion__r.Plantilla_contrato_CV_No_Vivienda__c,
+                        Promocion__r.Plantilla_de_adenda__c, 
+                        Promocion__r.Plantilla_de_contrato_de_compraventa__c,
+                        Promocion__r.Plantilla_de_contrato_de_reserva__c,
+                        Promocion__r.Plantilla_de_pre_reserva__c,
+                        Promocion__r.Plantilla_de_contrato_de_compraventa_VPT__c,
+                        Promocion__r.Plantilla_de_contrato_de_compraventa_VPO__c,
+                        Promocion__r.Plantilla_de_escrituracion__c" />
+
+    <!-- >>>>>>>>>>>>>>>>>> LINIA DE BOTONES MULTIIDIOMA   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <aura:if isTrue="{!v.record.Promocion__r.Contratos_MultiIdioma__c == true}">
+	    <div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+		<b><h1 style="text-align: left" class="slds-text-heading--small titulo">Seleccionar Idioma Documentos</h1></b>
+            <table style="width: 100%"> 
+                <tr>
+                    <aura:if isTrue="{!v.idioma == 'Castellano'}">
+                        <td style="width: 30%; text-align: center; padding-top: 3%">
+                            <lightning:button class="selectedButton" variant="neutral" label="Castellano" onclick="{!c.setIdiomaCastellano}"/>
+                        </td>
+                        <td style="width: 30%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Ingles" onclick="{!c.setIdiomaIngles}"/>
+                        </td>
+                        <td style="width: 30%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Aleman" onclick="{!c.setIdiomaAleman}"/>
+                        </td>
+                    </aura:if>
+                    <aura:if isTrue="{!v.idioma == 'Ingles'}">
+                        <td style="width: 30%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Castellano" onclick="{!c.setIdiomaCastellano}"/>
+                        </td>
+                        <td style="width: 30%; text-align: center; padding-top: 3%">
+                            <lightning:button class="selectedButton" variant="neutral" label="Ingles" onclick="{!c.setIdiomaIngles}"/>
+                        </td>
+                        <td style="width: 30%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Aleman" onclick="{!c.setIdiomaAleman}"/>
+                        </td>
+                    </aura:if>
+                    <aura:if isTrue="{!v.idioma == 'Aleman'}">
+                        <td style="width: 30%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Castellano" onclick="{!c.setIdiomaCastellano}"/>
+                        </td>
+                        <td style="width: 30%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Ingles" onclick="{!c.setIdiomaIngles}"/>
+                        </td>
+                        <td style="width: 30%; text-align: center; padding-top: 3%">
+                            <lightning:button class="selectedButton" variant="neutral" label="Aleman" onclick="{!c.setIdiomaAleman}"/>
+                        </td>
+                    </aura:if>
+                </tr>
+            </table>
+		</div>
+    </aura:if>
+    <!-- >>>>>>>>>>>>>>>>>> RESERVA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <aura:if isTrue="{!and(and(v.record.StageName == 'Reserva', v.tipoInmueble != null), v.tipoInmueble != '') }">
+        <div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+             <b><h1 style="text-align: left" class="slds-text-heading--small titulo">Generador de documentos</h1></b>
+            <table style="width: 100%">
+                <aura:if isTrue="{!v.record.Tipo_de_Reserva__c == 'Reserva sin IVA'}">
+                    <tr>
+                        <td style="width: 100%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Abono deposito" onclick="{!c.openModelConfirmacion}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Contrato Reserva" onclick="{! c.openModelPDF }"/> 
+                        </td>
+                    </tr>
+                </aura:if>
+                <aura:if isTrue="{!v.record.Tipo_de_Reserva__c == 'Reserva con IVA'}">
+                    <tr>
+                        <td style="width: 100%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Contrato Reserva" onclick="{! c.openModelPDF }"/> 
+                        </td>
+                    </tr>
+                </aura:if>
+                <tr>
+                    <td style="width: 100%; text-align: center; padding-top: 3%">
+                        <lightning:button class="anchoBoton" variant="neutral" label="Borrador Compraventa" onclick="{! c.openModelPDF2 }"/> 
+                    </td>
+                </tr>
+            </table>            
+        </div>
+    </aura:if>
+    <!-- >>>>>>>>>>>>>>>>>> CONTRATO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <aura:if isTrue="{!and(and(v.record.StageName == 'Contrato', v.tipoInmueble != null), v.tipoInmueble != '') }">
+    	<div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">                        
+        	<b><h1 style="text-align: left" class="slds-text-heading--small titulo">Generador de documentos</h1></b>
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 100%; text-align: center; padding-top: 3%">
+                        <lightning:button class="anchoBoton" variant="neutral" label="Contrato Compraventa" onclick="{!c.openModelPDF}"/>
+                    </td>
+                </tr>
+            </table>                     
+     	</div>    
+    </aura:if>
+    <!-- >>>>>>>>>>>>>>>>>> ESCRITURACION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <aura:if isTrue="{!and(and(v.record.StageName == 'Escrituración', v.tipoInmueble != null), v.tipoInmueble != '') }">
+        <div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">                            
+            <b><h1 style="text-align: left" class="slds-text-heading--small titulo">Generador de documentos</h1></b>                        
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 100%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Escrituración" onclick="{! c.openModelPDF }"/> 
+                    </td>
+                </tr>
+            </table>                            
+        </div>    
+    </aura:if>   
+    <!-- >>>>>>>>>>>>>>>>>> CANCELADA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <aura:if isTrue="{!v.record.StageName == 'Cancelada'}">
+        <div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">                
+            <b><h1 style="text-align: left" class="slds-text-heading--small titulo">Generador de documentos</h1></b>            
+            <table style="width: 100%">
+                <aura:if isTrue="{!v.record.Mostrar_Resolucion_Reserva__c}">
+                    <tr>
+                        <td style="width: 100%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Resolución Reserva" onclick="{!c.openModelPDF}"/>
+                        </td>
+                    </tr>
+                </aura:if>
+                <aura:if isTrue="{!v.record.Mostrar_Resolucion_Compraventa__c}">
+                    <tr>
+                        <td style="width: 100%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Resolución Compraventa" onclick="{!c.openModelPDF}"/>
+                        </td>
+                    </tr>
+                </aura:if>
+            </table>
+        </div> 
+    </aura:if>
+    <!-- >>>>>>>>>>>>>>>>>>>   MODAL 1   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <aura:if isTrue="{!v.isConfirmacionOpen}">	
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModelConfirmacion }" alternativeText="cerrar" variant="bare-inverse" class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Generar abono de deposito</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="divMensajeConfirmacion">
+                         <p> ¿Desea crear una factura con el abono del depósito? </p>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral"	label="Cancelar"	title="Cancelar"	onclick="{! c.closeModelConfirmacion }"/>
+                    <lightning:button variant="brand"	label="Continuar"	title="Continuar"	onclick="{! c.generarFactura }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+     <!-- >>>>>>>>>>>>>>>>>>>   MODAL 2   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+     <aura:if isTrue="{!v.isMessageOpen}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" class="slds-modal__close" onclick="{! c.closeModelDeposito }" alternativeText="cerrar" variant="bare-inverse" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Generar abono de deposito</h2>
+                </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <div class="{!'slds-box slds-theme–alert-texture slds-theme--' + v.type}">
+                    <lightning:icon iconName="{! 'utility:'+ v.type }" size="medium" alternativeText="{!v.type}" Class="iconContainer"/>&nbsp;
+                        <span class="slds-text-body–regular">
+                        <aura:unescapedHtml value="{!v.message}"/>
+                    </span>
+                </div>
+            </div>
+                <footer class="slds-modal__footer">
+                    <aura:if isTrue="{!and((v.idFactura != null), (v.idFactura != ''))}">
+                        <lightning:button variant="neutral" label="Ver factura" title="Ver factura" onclick="{! c.verFactura }"/>
+                    </aura:if>
+                    <lightning:button variant="brand" label="Aceptar" title="Aceptar" onclick="{! c.closeModelDeposito }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <!-- >>>>>>>>>>>>>>>>>>>   MODAL 3   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <aura:if isTrue="{!v.isOpen}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Informe</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="{!'slds-box slds-theme–alert-texture slds-theme--' + v.type}">
+                        <lightning:icon iconName="{! 'utility:'+ v.type }" size="medium" alternativeText="{!v.type}" Class="iconContainer"/>&nbsp;
+                        <span class="slds-text-body–regular">
+                            <aura:unescapedHtml value="{!v.message}"/>
+                        </span>
+                    </div>                    
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="brand" label="Aceptar" title="Aceptar" onclick="{! c.closeModel }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <!-- >>>>>>>>>>>>>>>>>>>   MODAL 4   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <aura:if isTrue="{!v.isOpenPDF}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="width: 80%; min-width: 70%">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModelPDF }" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Informe</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <iframe src="{!v.url + v.recordId }" width="100%" height="500px;" frameBorder="0"/>                
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral"	label="Cancelar"	title="Cancelar"	onclick="{! c.closeModelPDF }"/>
+                    <lightning:button variant="brand"	label="Guardar"		title="Guardar"		onclick="{! c.GenerarContrato}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
+</aura:component>

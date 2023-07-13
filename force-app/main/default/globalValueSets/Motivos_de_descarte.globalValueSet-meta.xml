@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Duplicado</fullName>
+        <default>false</default>
+        <label>Duplicado</label>
+    </customValue>
+    <customValue>
+        <fullName>Fecha de entrega</fullName>
+        <default>false</default>
+        <label>Fecha de entrega</label>
+    </customValue>
+    <customValue>
+        <fullName>Imposible contactar</fullName>
+        <default>false</default>
+        <label>Imposible contactar</label>
+    </customValue>
+    <customValue>
+        <fullName>Motivos personales</fullName>
+        <default>false</default>
+        <label>Motivos personales</label>
+    </customValue>
+    <customValue>
+        <fullName>No interesado real</fullName>
+        <default>false</default>
+        <label>No interesado real</label>
+    </customValue>
+    <customValue>
+        <fullName>Precio</fullName>
+        <default>false</default>
+        <label>Precio</label>
+    </customValue>
+    <customValue>
+        <fullName>Promoción Vendida</fullName>
+        <default>false</default>
+        <label>Promoción Vendida</label>
+    </customValue>
+    <customValue>
+        <fullName>Proyecto</fullName>
+        <default>false</default>
+        <label>Proyecto</label>
+    </customValue>
+    <customValue>
+        <fullName>Ubicación</fullName>
+        <default>false</default>
+        <label>Ubicación</label>
+    </customValue>
+    <customValue>
+        <fullName>Ya ha comprado</fullName>
+        <default>false</default>
+        <label>Ya ha comprado</label>
+    </customValue>
+    <customValue>
+        <fullName>Otros</fullName>
+        <default>false</default>
+        <label>Otros</label>
+    </customValue>
+    <customValue>
+        <fullName>NS/ NC</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>NS/ NC</label>
+    </customValue>
+    <customValue>
+        <fullName>Competencia</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Competencia</label>
+    </customValue>
+    <customValue>
+        <fullName>Tamaño</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Tamaño</label>
+    </customValue>
+    <customValue>
+        <fullName>Tipología</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Tipología</label>
+    </customValue>
+    <customValue>
+        <fullName>Fecha Entrega</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Fecha Entrega</label>
+    </customValue>
+    <customValue>
+        <fullName>Financiación</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Financiación</label>
+    </customValue>
+    <customValue>
+        <fullName>Sin contacto +60 días</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Sin contacto +60 días</label>
+    </customValue>
+    <masterLabel>Motivos de descarte</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

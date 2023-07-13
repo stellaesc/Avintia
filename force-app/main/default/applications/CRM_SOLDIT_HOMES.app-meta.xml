@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>DDS_SH</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Factura_Record_Page1</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>Factura__c</pageOrSobjectType>
+    </actionOverrides>
+    <brand>
+        <headerColor>#144E81</headerColor>
+        <logo>Logo_BN_1</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>CRM SOLDIT HOMES</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Lead</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>Promocion__c</tabs>
+    <tabs>Tipo_de_inmueble__c</tabs>
+    <tabs>standard-Product2</tabs>
+    <tabs>Ritmo_ventas__c</tabs>
+    <tabs>standard-Opportunity</tabs>
+    <tabs>Pais__c</tabs>
+    <tabs>Comunidad_Autonoma__c</tabs>
+    <tabs>Provincia__c</tabs>
+    <tabs>Municipio__c</tabs>
+    <tabs>Hitos_de_Promocion__c</tabs>
+    <tabs>Factura__c</tabs>
+    <tabs>Castillete</tabs>
+    <tabs>Log__c</tabs>
+    <tabs>Plan_de_pagos__c</tabs>
+    <tabs>Cobro__c</tabs>
+    <tabs>Linea_de_factura__c</tabs>
+    <tabs>DocumentCategory__c</tabs>
+    <tabs>Factura_devuelta__c</tabs>
+    <tabs>VentasSemanales__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>CRM_SOLDIT_HOMES_UtilityBar</utilityBar>
+</CustomApplication>

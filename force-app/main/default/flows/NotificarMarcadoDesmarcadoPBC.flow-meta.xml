@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Enviar Email Alert del desmarcado PBC.</description>
+        <name>EmailAlert_AlertaDesmarcadoPBC</name>
+        <label>EmailAlert_Alerta Desmarcado PBC</label>
+        <locationX>490</locationX>
+        <locationY>350</locationY>
+        <actionName>Opportunity.Alert_Desmarcado_Check_PBC</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Var_OpportunityId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Enviar Email Alert del Marcado de PBC</description>
+        <name>EmailAlert_AlertaMarcadoPBC</name>
+        <label>EmailAlert_Alerta Marcado PBC</label>
+        <locationX>182</locationX>
+        <locationY>350</locationY>
+        <actionName>Opportunity.Alert_Marcado_Check_PBC</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Decision_EstadoMarcado</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Var_OpportunityId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Enviar Email Alert del Marcado PBC Reserva.</description>
+        <name>EmailAlert_MarcadoPBCReserva</name>
+        <label>EmailAlert_Marcado PBC Reserva</label>
+        <locationX>50</locationX>
+        <locationY>566</locationY>
+        <actionName>Opportunity.Alert_Marcado_Check_PBC_Reserva</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Var_OpportunityId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <decisions>
+        <description>comprobar si el estado de la oportunidad es Reserva o Reserva Pdte. Cobro.</description>
+        <name>Decision_EstadoMarcado</name>
+        <label>Decision_Estado Oportunidad</label>
+        <locationX>182</locationX>
+        <locationY>458</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>EstadoMarcado_Reserva</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Var_StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reserva</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>EmailAlert_MarcadoPBCReserva</targetReference>
+            </connector>
+            <label>Reserva</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si el campo Verificando PBC ha sido marcado o desmarcado.</description>
+        <name>Decision_EstadoPBC</name>
+        <label>Decision_Estado PBC</label>
+        <locationX>468</locationX>
+        <locationY>134</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>EstadoPBC_Marcado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Var_VerificandoPBC</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Var_VerificandoPBC</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Var_PriorVerificandoPBC</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Oportunidad_EmailResponsableComercial_01</targetReference>
+            </connector>
+            <label>Marcado</label>
+        </rules>
+        <rules>
+            <name>EstadoPBC_Desmarcado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Var_VerificandoPBC</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Var_VerificandoPBC</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Var_PriorVerificandoPBC</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Oportunidad_EmailResponsableComercial_02</targetReference>
+            </connector>
+            <label>Desmarcado</label>
+        </rules>
+    </decisions>
+    <description>Flujo para notificar por email cuando la oportunidad está siendo o ha sido evaluada.</description>
+    <interviewLabel>NotificarMarcacionPBC {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Notificar Marcado/Desmarcado PBC</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Actualizar la oportunidad añadiendo el Email del Responsable Comercial.</description>
+        <name>Update_Oportunidad_EmailResponsableComercial_01</name>
+        <label>Update_Oportunidad_Email Responsable Comercial</label>
+        <locationX>182</locationX>
+        <locationY>242</locationY>
+        <connector>
+            <targetReference>EmailAlert_AlertaMarcadoPBC</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Var_OpportunityId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Email_responsable_comercial__c</field>
+            <value>
+                <elementReference>Var_EmailResponsableComercial</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar la oportunidad añadiendo el Email del Responsable Comercial.</description>
+        <name>Update_Oportunidad_EmailResponsableComercial_02</name>
+        <label>Update_Oportunidad_Email Responsable Comercial</label>
+        <locationX>490</locationX>
+        <locationY>242</locationY>
+        <connector>
+            <targetReference>EmailAlert_AlertaDesmarcadoPBC</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Var_OpportunityId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Email_responsable_comercial__c</field>
+            <value>
+                <elementReference>Var_EmailResponsableComercial</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <startElementReference>Decision_EstadoPBC</startElementReference>
+    <status>Active</status>
+    <variables>
+        <description>Variable que contiene el Email del responsable comercial de la promoción.</description>
+        <name>Var_EmailResponsableComercial</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que contiene el Id de la oportunidad.</description>
+        <name>Var_OpportunityId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que contiene el valor anterior del campo Verificando_PBC__c de la oportunidad.</description>
+        <name>Var_PriorVerificandoPBC</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que contiene el estado de la oportunidad.</description>
+        <name>Var_StageName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que contiene el valor del campo Verificando_PBC__c de la oportunidad.</description>
+        <name>Var_VerificandoPBC</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

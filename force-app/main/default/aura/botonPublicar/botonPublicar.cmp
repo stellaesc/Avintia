@@ -1,0 +1,54 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" controller="PublicacionPortales" access="global"  >
+<lightning:notificationsLibrary aura:id="notifLib"/> 
+
+<!-- Se recupera estado de la promoción -->    
+   <aura:attribute name="record" type="Promocion__c"/>
+   <aura:attribute name="isCargando" type="Boolean" default="false" />
+   <aura:attribute name="prof" type="Profile"/>
+   
+         	 <force:recordData aura:id="record"
+             recordId="{!v.recordId}"
+             targetFields="{!v.record}"
+             fields="Id,WebAvinita__c,PruebaPublicada__c,Fotocasa__c"
+             recordUpdated="{!c.doInit}" 
+             />
+    
+    <div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+        <table style="width: 100%">
+        	<tr>
+            	<th colspan="3" >Publicación en portales</th>
+            </tr>
+            <aura:if isTrue="{!v.prof.Name == 'PMO' || v.prof.Name == 'System Administrator' || v.prof.Name == 'Administrador del sistema' || v.prof.Name == 'Comercial'}">
+                <tr>
+                    <td style="width:20%; text-align: center; padding-top: 3%">Idealista</td>
+                    <td style="text-align: center; padding-top: 3%" colspan="3">
+                        <lightning:button class="anchoBoton" variant="neutral" label="Publicar" onclick="{!c.publicarIdealista}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding-top: 3%">Fotocasa</td>
+                    <td style="text-align: center; padding-top: 3%" colspan="3">
+                        <lightning:button class="anchoBoton" variant="neutral" label="Publicar" onclick="{!c.publicarFotocasa}"/>
+                    </td>
+                </tr>
+            </aura:if>            
+            <aura:if isTrue="{!v.prof.Name != 'Comercial API'}">
+                <tr>
+                    <td style="width: 20%; text-align: center; padding-top: 3%" >Web Avintia</td>
+                    <td style="width: 38%; text-align: center; padding-top: 3%">
+                        <lightning:button class="anchoBoton2" variant="neutral" label="Publicar prueba" onclick="{!c.publicarWeb}"/>
+                    </td>
+                    <td style="width: 38%; text-align: center; padding-top: 3%">
+                        <lightning:button aura:id="disablebuttonid" class="anchoBoton2" variant="neutral" label="Publicar" onclick="{!c.publicarWebProduccion}" />
+                    </td>
+                </tr>
+            </aura:if>
+            <aura:if isTrue="{!v.isCargando}">
+                <div class="exampleHolder">
+                    <lightning:spinner alternativeText="Loading" size="large" />
+                </div>
+         	</aura:if>
+        </table>
+    </div>
+    	
+</aura:component>

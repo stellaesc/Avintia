@@ -1,0 +1,28 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" controller="GenerarNumeroFactura" access="global">
+<lightning:notificationsLibrary aura:id="notifLib"/>
+    
+    <!-- Attributes -->
+   <aura:attribute name="isCargando" type="Boolean" default="false" />
+    
+    <!-- Component -->
+   	<div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+        <table style="width: 100%">
+            <tr>
+            	<th colspan="3">Generar Número Factura</th>
+            </tr>
+            <aura:if isTrue="{!v.isCargando}">
+                <div class="exampleHolder">
+                    <lightning:spinner alternativeText="Loading" size="small" />
+                </div>
+                <aura:set attribute="else">
+                    <tr>
+                        <td style="text-align: left; padding-top: 1%; padding-left: 1%">Generar Número</td>
+                        <td style="text-align: left; padding-top: 1%; padding-left: 1%">
+                            <lightning:button class="anchoBoton2" variant="neutral" label="Ejecutar" onclick="{!c.button}"/>
+                        </td>
+                    </tr>
+                </aura:set>
+         	</aura:if>
+        </table>
+    </div>
+</aura:component>

@@ -1,0 +1,146 @@
+<aura:component controller="PantallaSubidaFicherosController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    
+    <aura:attribute name="objInfo" type="ContentVersion" default="{sobjectType : 'ContentVersion'}" />
+    
+    <aura:attribute name="TipoSeleccionado" type="String" default="" />
+    <aura:attribute name="NombreArchivo" type="string" default=""/>
+    <aura:attribute name="Posicion" type="Integer" default=""/>
+    <aura:attribute name="descripcion" type="String" default=""/>
+    <aura:attribute name="CategoriaSeleccionada" type="String" default="" />
+    <aura:attribute name="SubcategoriaSeleccionada" type="String" default="" />
+    
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="isOpenSpinner" type="boolean" default="false"/>
+    <aura:attribute name="isMessageOpen" type="boolean" default="false"/>
+    <aura:attribute name="isImageCarrusel" type="boolean" default="false"/>
+    
+    <aura:attribute name="message" description="mensage que se muestra en la pantalla auxiliar" type="String" />
+    <aura:attribute name="type" description="Tipo del mensage de la pantalla auxiliar, puede ser error/warning/info/success" type="String" />
+    
+<!-- PickList dinamica ******************************************************************************* -->
+    <aura:attribute name="categories" type="object" description="" />
+<!-- Fin PickList dinamica ********************************************************************************** -->  
+    
+    <div class="ContenedorBotonInicial">
+        <lightning:button variant="brand"
+                              label="Subir archivo"
+                              title="subir archivo"
+                              onclick="{! c.openModel }" />
+    </div>
+    
+     <div class="slds-m-around_xx-large">
+        
+        <aura:if isTrue="{!v.isOpen}">
+            
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="cerrar"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Subir archivo</h2>
+                    </header>
+                    
+          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              
+ <!-- Mensaje -->
+              
+              <aura:if isTrue="{!v.isMessageOpen}">
+                        <div class="{!'slds-box slds-theme–alert-texture slds-theme--' + v.type}">
+            
+                            <lightning:icon iconName="{! 'utility:'+ v.type }" size="medium"
+                                                   alternativeText="{!v.type}" Class="iconContainer"/>&nbsp;
+                                
+                            <span class="slds-text-body–regular">
+                                <aura:unescapedHtml value="{!v.message}"/>
+                            </span>
+                        </div>
+              </aura:if>
+  <!-- FIN Mensaje -->                     
+              
+                 <div class="botonSubir">
+               <lightning:input aura:id="fileId" type="file" name="file" label="Buscar archivo" multiple="false"/>
+                    <!--<lightning:fileUpload aura:id="fileId" 
+                                          label="Buscar archivo" 
+                                          multiple="false" 
+                                          accept=".pdf, .png, .jpg, .jpeg, .gif, .doc, .docx"
+                                          recordId="{!v.recordId}"
+                    />-->
+               </div>
+             <br/>
+              
+             <!-- Nombre del archivo -->
+                <ui:inputText  label="Nombre del archivo" class="field" value="{!v.NombreArchivo}" updateOn="click" />
+                
+              <!-- Lista de selección del tipo de archivo -->
+               <div class="slds-form-element">
+                  <label class="slds-form-element__label" for="select-01">Tipo</label>
+                  <div class="slds-select_container">
+                     <ui:inputSelect  aura:id="inputTipo" class="slds-select"  change="{!c.onPicklistChange}" required="true"/>
+                  </div>
+               </div>
+              
+              <!-- Posicion -->
+              <aura:if isTrue="{!v.isImageCarrusel}">
+                   <ui:inputText  label="Posicion" class="field" value="{!v.Posicion}" updateOn="keyUp" />
+               </aura:if>
+              
+<!-- PickList dinamica ***************************************************************************************************** -->                      
+
+    <aura:iteration items="{!v.categories}" var="category">
+        <div class="slds-form-element">
+            <lightning:select name="{!'controllerFld_' + category.level}" 
+                            value="{!category.value}" 
+                            label="{!category.label}"
+                            onchange="{!c.getDependentCategories}"
+                            disabled="{!category.disabled}">
+                <aura:iteration items="{!category.options}" var="opt">
+                    <option value="{!opt.value}">{!opt.text}</option>
+                </aura:iteration>
+            </lightning:select>
+        </div>
+    </aura:iteration>
+            
+<!-- FIN PickList dinamica ***************************************************************************************************** -->
+
+              
+<!-- definir tamaño máximo -->             
+              	<lightning:textarea name="textAreaDescripcion" required="false" value="{!v.descripcion}" 
+                                    placeholder="Añade una descripción" 
+                                    label="Descripción" 
+                                    maxlength="255"  />
+  
+               <!--Spinner-->
+              <aura:if isTrue="{!v.isOpenSpinner}">
+                <div >Subiendo... 
+                    <img src="/auraFW/resources/aura/images/spinner.gif" class="spinner-img" alt="Loading"/>'
+                </div>
+        	</aura:if>
+              <!-- FIN Spinner --> 
+              
+  
+          </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <!-- Botón cancelar -->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" 
+                                          label="Cancelar"
+                                          title="Cancelar"
+                                          onclick="{! c.closeModel }"/>
+
+                        <!-- Botón de subir archivo -->
+                		<button class="slds-button slds-button_brand" onclick="{!c.doSave}">Subir archivo</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+            
+            
+        </aura:if>
+    </div>
+</aura:component>

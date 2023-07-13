@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <description>Para cuentas que sean Person Account</description>
+        <name>Decision_NombreClienteParticipante</name>
+        <label>Decision_NombreClienteParticipante</label>
+        <locationX>314</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>EsCuentaPersona</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Nombre cliente</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Cliente__r.IsPersonAccount</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ParacuentasqueseanPersonAccount</targetReference>
+            </connector>
+            <label>Es Cuenta Persona</label>
+        </rules>
+        <rules>
+            <name>NoCuentaPersona</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Nombre cliente</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Cliente__r.IsPersonAccount</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NombreParticipanteCompraCliente</targetReference>
+            </connector>
+            <label>No es Cuenta Persona</label>
+        </rules>
+    </decisions>
+    <description>Cuando se inserta un nuevo participante se modificará si es necesario el Nombre del Nombre de Participante de la compra</description>
+    <formulas>
+        <description>Concatena el nombre y el apellido del cliente</description>
+        <name>ConcatenaNombreApellidoCliente</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Cliente__r.FirstName} + &apos; &apos; + {!$Record.Cliente__r.LastName}</expression>
+    </formulas>
+    <interviewLabel>Participante {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Participante_Triggered_AfterInsertCambiarNombre</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>ParacuentasqueseanPersonAccount</name>
+        <label>Update_NombreParticipanteCompra</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>ConcatenaNombreApellidoCliente</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualiza registro con el campo Name del Cliente</description>
+        <name>Update_NombreParticipanteCompraCliente</name>
+        <label>Update_NombreParticipanteCompraCliente</label>
+        <locationX>314</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>$Record.Cliente__r.Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <startElementReference>Decision_NombreClienteParticipante</startElementReference>
+    <status>Active</status>
+</Flow>

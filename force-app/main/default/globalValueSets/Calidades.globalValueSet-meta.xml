@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Solados</fullName>
+        <default>false</default>
+        <label>Solados</label>
+    </customValue>
+    <customValue>
+        <fullName>Alicatados</fullName>
+        <default>false</default>
+        <label>Alicatados</label>
+    </customValue>
+    <masterLabel>Calidades</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

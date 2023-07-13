@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>SL001</fullName>
+        <default>false</default>
+        <label>Trabajador por cuenta ajena</label>
+    </customValue>
+    <customValue>
+        <fullName>SL002</fullName>
+        <default>false</default>
+        <label>Trabajador por cuenta propia</label>
+    </customValue>
+    <customValue>
+        <fullName>SL003</fullName>
+        <default>false</default>
+        <label>Labores del Hogar</label>
+    </customValue>
+    <customValue>
+        <fullName>SL004</fullName>
+        <default>false</default>
+        <label>Desempleado</label>
+    </customValue>
+    <customValue>
+        <fullName>SL005</fullName>
+        <default>false</default>
+        <label>Rentista</label>
+    </customValue>
+    <customValue>
+        <fullName>SL006</fullName>
+        <default>false</default>
+        <label>Pensionista</label>
+    </customValue>
+    <customValue>
+        <fullName>SL007</fullName>
+        <default>false</default>
+        <label>Sin actividad</label>
+    </customValue>
+    <customValue>
+        <fullName>SL008</fullName>
+        <default>false</default>
+        <label>Funcionario o similar</label>
+    </customValue>
+    <customValue>
+        <fullName>SL009</fullName>
+        <default>true</default>
+        <label>Otros</label>
+    </customValue>
+    <masterLabel>Situación laboral</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

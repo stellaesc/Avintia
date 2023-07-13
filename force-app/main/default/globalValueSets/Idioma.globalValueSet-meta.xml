@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>ES: Español</fullName>
+        <default>false</default>
+        <label>ES: Español</label>
+    </customValue>
+    <customValue>
+        <fullName>EN: Inglés</fullName>
+        <default>false</default>
+        <label>EN: Inglés</label>
+    </customValue>
+    <customValue>
+        <fullName>DE: alemán</fullName>
+        <default>false</default>
+        <label>DE: alemán</label>
+    </customValue>
+    <customValue>
+        <fullName>FR: francés</fullName>
+        <default>false</default>
+        <label>FR: francés</label>
+    </customValue>
+    <customValue>
+        <fullName>CAT: Catalán</fullName>
+        <default>false</default>
+        <label>CAT: Catalán</label>
+    </customValue>
+    <customValue>
+        <fullName>IT: italiano</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>IT: italiano</label>
+    </customValue>
+    <customValue>
+        <fullName>RU: ruso</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>RU: ruso</label>
+    </customValue>
+    <customValue>
+        <fullName>CS: checo</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CS: checo</label>
+    </customValue>
+    <customValue>
+        <fullName>PT: portugués</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>PT: portugués</label>
+    </customValue>
+    <customValue>
+        <fullName>DA: danés</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DA: danés</label>
+    </customValue>
+    <customValue>
+        <fullName>SV: sueco</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SV: sueco</label>
+    </customValue>
+    <masterLabel>Idioma</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
