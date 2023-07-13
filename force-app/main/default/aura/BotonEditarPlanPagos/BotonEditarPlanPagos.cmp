@@ -1,0 +1,308 @@
+<aura:component controller="BotonEditarPlanPagosController" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    <aura:attribute name="record" type="Opportunity" />
+    <aura:attribute name="facturasCuotaList" type="List" />
+    <!--<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>-->
+    <aura:attribute name="facturasCuotaExtraList" type="List" />
+    <!--<aura:handler name="init" value="{!this}" action="{!c.doInit2}"/>-->
+	<aura:attribute name="facturasBorradasList" type="List" />
+	<aura:attribute name="facturasCreadasList" type="List" />
+    
+    <aura:attribute name="tamanoFacturasCuotaList" type="Integer" />
+    <aura:attribute name="tamanoFacturasCuotaExtraList" type="Integer" />
+    
+    <!-- Atributos para calcular importe pendiente y descuadre De las Cuotas normales -->
+    <aura:attribute name="pendienteCobroFijo" type="Decimal" />
+	<aura:attribute name="pendienteCobro" type="Decimal" />
+    <aura:attribute name="descuadre" type="Decimal" />
+    
+    <!-- Atributos para calcular importe pendiente y descuadre De las Cuotas Extra -->
+    <aura:attribute name="pendienteCobroFijoExtra" type="Decimal" />
+	<aura:attribute name="pendienteCobroExtra" type="Decimal" />
+    <aura:attribute name="descuadreExtra" type="Decimal" />
+    
+    <!-- Variables necesarias para mostrar el modal con el documento -->
+    <aura:attribute name="isOpenPDF" type="Boolean" default="false"/>
+    <aura:attribute name="isOpen" type="Boolean" default="false"/>
+    <aura:attribute name="url" type="String"/>    
+
+    <force:recordData aura:id="record"
+             recordId="{!v.recordId}"
+             targetFields="{!v.record}"
+             fields="Id, StageName, Tipo_de_Reserva__c, Importe_plan_de_pagos_real__c" 
+             />
+
+<!-- BOTÓN PLAN DE PAGOS -->
+    <aura:if isTrue="{!v.record.StageName == 'Plan de pagos'}">
+    	<div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+                        
+        	<b><h1 style="text-align: left" class="slds-text-heading--small titulo">Generador de documentos</h1></b>
+
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 100%; text-align: center; padding-top: 3%">
+                            <lightning:button class="anchoBoton" variant="neutral" label="Editar Plan de Pagos" onclick="{! c.openModelPDF }"/>
+                        </td>
+                    </tr>
+                </table>              
+     	</div>    
+    </aura:if>
+
+<!-- MODAL PARA EDITAR PLAN DE PAGOS -->
+    <aura:if isTrue="{!v.isOpenPDF}"> 
+    
+    <div role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                
+                <div class="slds-modal__container" style="width: 50%; min-width: 40%;">
+                    
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModelPDF }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        
+                    	<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Plan de pagos</h2>    
+                    </header>
+                    
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" >
+                    
+                        <div style="margin-left: 5%;">
+                        CUOTAS:
+                    	</div>
+                        <div class="slds-p-around--medium" style="margin: 2%;">
+                            <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer">
+                                <thead>
+                                <tr class="slds-text-heading--label">
+                                    <th scope="col" width="30%"><div> </div></th>
+                                    <th scope="col" width="30%" style="text-align: center;"><div>Importe</div></th>
+                                    <th scope="col" width="30%" style="text-align: center;"><div>Fecha</div></th>
+                                    <th scope="col" width="5%"><div></div></th>
+                                    <th scope="col" width="5%"><div></div></th>
+                                </tr>
+                               </thead>
+                                <tbody>
+                               
+                               <aura:iteration items="{!v.facturasCuotaList}" var="facturaCuota" indexVar="contador">
+                                   <!-- filas NO editables -->
+                                   <aura:if isTrue="{!facturaCuota.Estado_de_la_factura__c != 'Pendiente de emisión'}">
+                                        <!--<tr id="{!facturaCuota.Fecha_de_emision__c}"> --> 
+                                        <tr id="{!contador}">
+                                          <td><div>Cuota {!contador + 1}</div></td>
+                                          <td><div style="text-align: right;">{!facturaCuota.Importe__c}€</div></td>
+                                          <td><div style="text-align: right;">{!facturaCuota.Fecha_de_emision__c}</div></td>
+                                          <td><div></div></td>
+                                          <td><div></div></td>
+                                        </tr>
+                                   </aura:if>
+                                    
+                                    <!-- filas editables -->
+                                    <aura:if isTrue="{!facturaCuota.Estado_de_la_factura__c == 'Pendiente de emisión'}">
+                                        <!--<tr id="{!facturaCuota.Fecha_de_emision__c}">-->
+                                        <tr id="{!contador}">
+                                          <td><div>Cuota {!contador + 1}</div></td>
+                                          <td><div style="text-align: right; margin: auto; padding:0px;">
+                                              
+                                              <ui:inputCurrency aura:id="{!'Importe'+contador}" class="field" value="{!facturaCuota.Importe__c}" change="{!c.recalcular}"/>
+                                              <!--<lightning:input class="field" label="a" variant="label-hidden" type="number" name="{!'Importe'+contador}" value="{!facturaCuota.Importe__c}" formatter="number" step="0.01" onchange="{!c.recalcular}" />-->
+                                              </div>
+                                          </td>
+                                          <td><div style="text-align: right; margin: auto;">
+                                              <!--<lightning:input type="date" name="input8" value=""  placeholder="AAAA-MM" max="2017-09" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2]))"  />-->
+                                              <!--<ui:inputDate aura:id="fechaCuota" class="field" value="" displayDatePicker="false" format="MM/YYYY" langLocale="es"/>-->
+                                              <!--<input type="text" name="input" placeholder="AAAA-MM" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2]))" title="Introduce la fecha con este formato AAAA-MM"/>-->
+                                              <!--<lightning:input class="field" type="Date" name="fechaCuota" value="{!facturaCuota.Fecha_de_emision__c}"  />-->
+                                              <!--<ui:inputDate aura:id="fechaCuota" class="field" value="{!facturaCuota.Fecha_de_emision__c}" displayDatePicker="false" format="MM/YYYY" change="{!c.validarFecha}"/>-->
+                                              <!--<input id="" placeholder="" class="slds-input" type="date" value="" data-date-format="MMMM YYYY" />-->
+                                              <ui:inputText aura:id="{!contador}" class="field" value="{!facturaCuota.Fecha_de_emision__c}" placeholder="MM/YYYY" change="{!c.validarFecha}" errors=""/>
+                                              </div>
+                                          </td>
+                                          <td><div >
+                                              <!--<lightning:icon iconName="action:new" size="xx-small" name="{!contador}" title="close" alternativeText="Borrar Cuota" onclick="{!c.borrarCuota}"  />-->
+                                                    <!--<lightning:button  iconName="action:close" variant="destructive" />-->
+                                              		<lightning:buttonIcon class="contenedorIconoBorrar" name="{!contador}" iconName="utility:close" title="close" alternativeText="Borrar cuota" onclick="{!c.borrarCuota}" />
+                                              <!--<lightning:icon iconName="action:close" size="xx-small" />--></div></td>
+                                          <td><div>
+                                              <!--{!contador + 1}
+                                              {!v.tamanoFacturasCuotaList}-->
+                                                <aura:if isTrue="{!contador + 1 == v.tamanoFacturasCuotaList}">
+                                                    <!--<button class="slds-button" onclick="{!c.moveItemUp}" style="background-color: #4CAF50;">
+    													<lightning:icon iconName="utility:close" size="x-small" alternativeText="Move this item up" />
+													</button>-->
+                                                    <lightning:buttonIcon class="contenedorIconoAnadir" name="botonCrearCuota" iconName="utility:add" title="close" alternativeText="Añadircuota" onclick="{!c.crearCuota}" />
+                                                    
+                                                    <!--<lightning:button iconName="action:new" class="slds-m-left_xx-small anchoBoton" name="botonCrearCuota" variant="success" onclick="{!c.crearCuota}"/>-->
+                                                </aura:if>
+                                                <aura:set attribute="else">
+                                                </aura:set>                                
+                                              <!--<lightning:icon iconName="action:new" size="xx-small" />-->
+                                              </div></td>
+                                        </tr>
+                                    </aura:if> 
+                                </aura:iteration>
+                                </tbody>                                
+                            </table> 
+                            <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer" style="margin-top:2%;"> 
+                                <tr>
+                                    <td scope="col" width="30%"><div>Pdte Cobro</div></td>
+                                    <td scope="col" width="30%"><div style="text-align: right;"><ui:outputNumber value="{!v.pendienteCobroFijo}" format=".00"/>€</div></td>
+                                    <td scope="col" width="30%"><div></div></td>
+                                    <td scope="col" width="5%"><div></div></td>
+                                    <td scope="col" width="5%"><div></div></td>
+                                </tr> 
+                                <tr>
+                                    <td scope="col" width="30%"><div>Descuadre</div></td>
+                                    <td scope="col" width="30%">
+                                    <aura:if isTrue="{!greaterthan(v.descuadre,0)}">
+                                    	<div style="text-align: right; color:green"><ui:outputNumber value="{!v.descuadre}" format=".00"/>€</div>
+                                    </aura:if>
+                                    <aura:if isTrue="{!equals(v.descuadre,0)}">
+                                    	<div style="text-align: right;"><ui:outputNumber value="{!v.descuadre}" format=".00"/>€</div>
+                                    </aura:if>
+                                    <aura:if isTrue="{!lessthan(v.descuadre,0)}">
+                                    	<div style="text-align: right; color:red"><ui:outputNumber value="{!v.descuadre}" format=".00"/>€</div>
+                                    </aura:if>                                        
+                                    </td>
+                                    <td scope="col" width="30%"><div></div></td>
+                                    <td scope="col" width="5%"><div></div></td>
+                                    <td scope="col" width="5%"><div></div></td>
+                                </tr>  
+                            </table>
+                            
+                            
+                            
+                            
+                        </div>
+  
+                    <aura:if isTrue="{!v.facturasCuotaExtraList.size > 0}">
+                   
+                    <div style="margin-left: 5%;">
+                        CUOTAS EXTRA:
+                    </div>                    
+                        
+					<div class="slds-p-around--medium" style="margin: 2%;">
+                    	<table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer">
+                        	<thead>
+                                <tr class="slds-text-heading--label">
+                                    <th width="30%"><div> </div></th>
+                                    <th width="30%"><div>Importe</div></th>
+                                    <th width="30%"><div>Fecha</div></th>
+                                    <th width="5%"><div></div></th>
+                                    <th width="5%"><div></div></th>
+                            	</tr>
+                            </thead>
+                            <tbody>
+                            <aura:iteration items="{!v.facturasCuotaExtraList}" var="facturaCuotaExtra" indexVar="contador">
+                                   <!-- filas NO editables -->
+                                   <aura:if isTrue="{!facturaCuotaExtra.Estado_de_la_factura__c != 'Pendiente de emisión'}">
+                                        <!--<tr id="{!facturaCuotaExtra.Fecha_de_emision__c}"> --> 
+                                        <tr id="{!contador}">
+                                          <td><div>Cuota Extra {!contador + 1}</div></td>
+                                          <td><div style="text-align: right;">{!facturaCuotaExtra.Importe__c}€</div></td>
+                                          <td><div style="text-align: right;">{!facturaCuotaExtra.Fecha_de_emision__c}</div></td>
+                                          <td><div></div></td>
+                                          <td><div></div></td>
+                                        </tr>
+                                   </aura:if>
+                                    
+                                    <!-- filas editables -->
+                                    <aura:if isTrue="{!facturaCuotaExtra.Estado_de_la_factura__c == 'Pendiente de emisión'}">
+                                        <!--<tr id="{!facturaCuotaExtra.Fecha_de_emision__c}">-->
+                                        <tr id="{!contador + 1000}">
+                                          <td><div>Cuota Extra {!contador + 1}</div></td>
+                                          <td><div style="text-align: right; margin: auto; padding:0px;">
+                                              <ui:inputCurrency aura:id="{!'Importe'+contador}" class="field" value="{!facturaCuotaExtra.Importe__c}" change="{!c.recalcularExtra}" />
+                                              <!--<lightning:input class="field" label="a" variant="label-hidden" type="number" name="{!'Importe'+contador}" value="{!facturaCuotaExtra.Importe__c}" formatter="currency" step="0.01" onchange="{!c.recalcular}" />-->
+                                              </div>
+                                          </td>
+                                          <td><div style="text-align: right; margin: auto;">
+                                              <!--<lightning:input class="field" type="Date" name="fechaCuota" value="{!facturaCuotaExtra.Fecha_de_emision__c}"  />-->
+                                              <!--<lightning:input type="text" name="input5" value="{!facturaCuotaExtra.Fecha_de_emision__c.getMonth + '/' + facturaCuotaExtra.Fecha_de_emision__c.year}" placeholder="mm/yyyy" />-->
+                                              <!--<lightning:input type="date" name="input5" label="Required date field" required="true" value="" placeholder="mm/yyyy" />-->
+                                              <!--<ui:inputDate aura:id="fechaCuota" class="field" value="{!facturaCuotaExtra.Fecha_de_emision__c}" displayDatePicker="false" format="mm/yyyy" onError="{!c.handleError}" change="{!c.validarFecha}"/>-->
+                                              <ui:inputText aura:id="{!contador}" class="field" value="{!facturaCuotaExtra.Fecha_de_emision__c}" placeholder="MM/YYYY" change="{!c.validarFecha}" errors=""/>
+                                              <!--<ui:inputDate aura:id="fechaCuota" class="field" value="{!facturaCuotaExtra.Fecha_de_emision__c}" displayDatePicker="false" format="MM/YYYY" />-->
+												</div>
+                                          </td>
+                                          <td><div>
+                                              		<lightning:buttonIcon class="contenedorIconoBorrar" name="{!contador+1000}" iconName="utility:close" title="close" alternativeText="Borrar cuota" onclick="{!c.borrarCuota}" />
+                                                    <!--<lightning:button class="slds-m-left_xx-small anchoBoton" name="{!contador+1000}" iconName="action:close" variant="destructive" onclick="{!c.borrarCuota}"/>-->
+                                              		<!--<lightning:icon iconName="action:close" size="xx-small" />--></div></td>
+                                          <td><div>
+                                                <aura:if isTrue="{!contador + 1 == v.tamanoFacturasCuotaExtraList}">
+                                                    <lightning:buttonIcon class="contenedorIconoAnadir" name="botonCrearCuotaExtra" iconName="utility:add" title="close" alternativeText="Añadircuota" onclick="{!c.crearCuota}" />
+                                                    <!--<lightning:button class="slds-m-left_xx-small anchoBoton" name="botonCrearCuotaExtra" iconName="action:new" variant="success" onclick="{!c.crearCuota}"/>-->
+                                                </aura:if>
+                                                <aura:set attribute="else">
+                                                </aura:set>                                
+                                              <!--<lightning:icon iconName="action:new" size="xx-small" />-->
+                                              </div></td>
+                                        </tr>
+                                    </aura:if> 
+                            </aura:iteration>
+                            </tbody>                           
+                        </table>
+                        <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer" style="margin-top:2%;"> 
+                                <tr>
+                                    <td scope="col" width="30%"><div>Pdte Cobro</div></td>
+                                    <td scope="col" width="30%"><div style="text-align: right;"><ui:outputNumber value="{!v.pendienteCobroFijoExtra}" format=".00"/>€</div></td>
+                                    <td scope="col" width="30%"><div></div></td>
+                                    <td scope="col" width="5%"><div></div></td>
+                                    <td scope="col" width="5%"><div></div></td>
+                                </tr> 
+                                <tr>
+                                    <td scope="col" width="30%"><div>Descuadre</div></td>
+                                    <td scope="col" width="30%">
+                                    <aura:if isTrue="{!greaterthan(v.descuadreExtra,0)}">
+                                    	<div style="text-align: right; color:green"><ui:outputNumber value="{!v.descuadreExtra}" format=".00"/>€</div>
+                                    </aura:if>
+                                    <aura:if isTrue="{!equals(v.descuadreExtra,0)}">
+                                    	<div style="text-align: right;"><ui:outputNumber value="{!v.descuadreExtra}" format=".00"/>€</div>
+                                    </aura:if>
+                                    <aura:if isTrue="{!lessthan(v.descuadreExtra,0)}">
+                                    	<div style="text-align: right; color:red"><ui:outputNumber value="{!v.descuadreExtra}" format=".00"/>€</div>
+                                    </aura:if>                                        
+                                    </td>
+                                    <td scope="col" width="30%"><div></div></td>
+                                    <td scope="col" width="5%"><div></div></td>
+                                    <td scope="col" width="5%"><div></div></td>
+                                </tr>  
+                       </table>
+                    </div> 
+                    </aura:if>
+                    
+                    </div>
+                     
+                    
+                    <footer class="slds-modal__footer">
+                        
+
+                        <lightning:button variant="brand" 
+                                          label="Cancelar"
+                                          title="Cancelar"
+                                          onclick="{! c.closeModelPDF }"
+                                         />
+                        
+                        <lightning:button variant="brand" 
+                                          label="Guardar"
+                                          title="Guardar"
+                                          name="Guardar"
+                                          onclick="{!c.guardarNuevoPlanPagos}"
+                                          />
+                        
+                        <lightning:button variant="brand" 
+                                          label="Solicitar Aprobación"
+                                          title="Solicitar Aprobación"
+                                          name="Solicitar"
+                                          onclick="{!c.guardarNuevoPlanPagos}"
+                                          />
+                    </footer>
+                    </div>
+            </div>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+       <!--###### MODAL BOX Part END Here ######-->
+        
+   </aura:if>
+       
+    
+</aura:component>

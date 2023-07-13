@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <description>Se asigna el valor true al campo ha firmado.</description>
+        <name>SignToTrue</name>
+        <label>Sign to True</label>
+        <locationX>50</locationX>
+        <locationY>575</locationY>
+        <assignmentItems>
+            <assignToReference>Get_RecordId.HaFirmado__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>UpdateSignLead</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Comprueba si anteriormente HelloSign__Latest_Action__c tenía el valor &quot;Awaiting Signature&quot; y ahora ha cambiado a &quot;Signature Completed&quot;.</description>
+        <name>Decision_SignatureCompleted</name>
+        <label>Decision_SignatureCompleted</label>
+        <locationX>182</locationX>
+        <locationY>455</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Decision_SignatureCompletedTrue</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.HelloSign__Latest_Action__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Awaiting Signature</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.HelloSign__Latest_Action__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Signature Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SignToTrue</targetReference>
+            </connector>
+            <label>Decision_SignatureCompletedTrue</label>
+        </rules>
+    </decisions>
+    <description>Cuando la solicitud de firma de HelloSign de &quot;Ficha de cliente&quot; pasa de estado &quot;Pendiente de firma&quot; a &quot;Firmado&quot; el campo Ha firmado se activa</description>
+    <interviewLabel>HelloSign__HelloSign_Signature_Request_Triggered_BeforeInsertActulaizaCampos {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>HelloSign__HelloSign_Signature_Request_Triggered_BeforeInsertActulaizaCampos</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Se obtiene el id de registro que se está actualizando.</description>
+        <name>Get_RecordId</name>
+        <label>Get_RecordId</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_SignatureCompleted</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.HelloSign__Lead__r.Id</elementReference>
+            </value>
+        </filters>
+        <object>Lead</object>
+    </recordLookups>
+    <recordUpdates>
+        <description>Actualiza campo ha firmado del lead</description>
+        <name>UpdateSignLead</name>
+        <label>Update Sign Lead</label>
+        <locationX>50</locationX>
+        <locationY>695</locationY>
+        <inputReference>Get_RecordId</inputReference>
+    </recordUpdates>
+    <startElementReference>Get_RecordId</startElementReference>
+    <status>Obsolete</status>
+</Flow>

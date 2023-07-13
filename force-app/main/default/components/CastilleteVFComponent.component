@@ -1,0 +1,671 @@
+<apex:component controller="showCastilleteController" allowDML="true">
+<apex:slds />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.js"></script> 
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">  
+        
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"/>
+	<script>
+      
+      
+    function goToUrl(valor){
+       window.open('/' + valor, '_blank');
+    }
+      
+    function reloadUrl(idPromocion, paginaNueva){
+        
+       var fixedPath = window.location.href.split('?')[0];
+       
+       if(document.getElementById('j_id0:j_id1:j_id2:frm:parcela') != null){
+           var parcela=document.getElementById('j_id0:j_id1:j_id2:frm:parcela').value;
+       }else{
+           var parcela='';
+       }
+
+       if(document.getElementById('j_id0:j_id1:j_id2:frm:bloque') != null){
+           var bloque=document.getElementById('j_id0:j_id1:j_id2:frm:bloque').value;
+       }else{
+           var bloque='';
+       }        
+        
+       if(document.getElementById('j_id0:j_id1:j_id2:frm:tipoInmueble') != null){
+           var tInmueble=document.getElementById('j_id0:j_id1:j_id2:frm:tipoInmueble').value;
+       }else{
+           var tInmueble='';
+       } 
+         
+       /*alert('parcela:::'+parcela);
+       alert('bloque:::'+bloque);
+       alert('tInmueble:::'+tInmueble);
+       alert('paginaNueva:::'+paginaNueva);*/
+       
+       window.location.href = fixedPath+'?tipoSel='+tInmueble+'&Id='+idPromocion+'&parcelaSel='+parcela+'&bloqueSel='+bloque+'&paginaNueva='+paginaNueva;
+       /*window.location.href = fixedPath+'?tipoSel=Trastero&Id='+idPromocion;*/
+
+       /*
+       window.location.href = fixedPath+'?tipoSel=Trastero&Id=a09n0000003BMZOAA4';
+       var url = window.location.href;    
+        url += '&tipoSel=Trastero'
+        window.location.href = url;
+        alert(url);
+        url.reload();*/
+    }
+ 
+    function bloqueaActivo(idbloque,idelemento,idModUsuario,idUsuario, estado, oportunidadProducto, inmuebleRelacionado){
+        if(idModUsuario != idUsuario && estado == 'Bloqueado temporalmente'){
+            alert('El inmueble está Bloqueado Temporalmente por otro usuario');
+        }
+        if(idModUsuario != idUsuario && estado == 'Bloqueado temporalmente' && oportunidadProducto!=null){
+            alert('Este inmueble pertenece a una oportunidad en curso');
+        }
+        
+        idSeleccionado = idelemento;
+        console.log("entra en bloqueActivo: "+idbloque + ', oportunidad: ' + oportunidadProducto);
+        if(($("#"+idelemento).hasClass('type-0') || $("#"+idelemento).hasClass('type-10')) && inmuebleRelacionado==''){
+            cambiaEstado(idbloque,idelemento,idModUsuario,idUsuario, estado);
+        	AF_bloqueaActivo(idbloque);
+        }
+    }
+    
+    //Para los productos moviles, modificamos que sea con un solo tap
+    function bloqueaActivoTap(idbloque,idelemento,idModUsuario,idUsuario, estado, oportunidadProducto){
+       var agent = navigator.platform.toLowerCase(); //Sacamos la plataforma
+       if(agent == 'iphone' || agent == 'ipad' || agent.indexOf('android') > -1){
+            bloqueaActivo(idbloque,idelemento,idModUsuario,idUsuario, estado, oportunidadProducto)
+        }
+    }
+
+    /* idbloque: es el id de salesforce del inmueble seleccionado*/
+    /* idelemento: es el id del li en la visualforce*/
+    function cambiaEstado(idbloque,idelemento,idModUsuario,idUsuario,estado){
+        //alert('idModUsuario:::'+idModUsuario);
+        //alert('idUsuario:::'+idUsuario);
+
+        //JNM 29/07/2019: El id que forma en este controler es diferente, cambiamos la variable activos para que coja ese id
+        //var activos = document.getElementById('j_id0:frm:idactivosseleccionados').value;
+        var activos = document.getElementById('j_id0:j_id1:j_id2:frm:idactivosseleccionados').value;
+        
+        console.log("entra cambiaEstado: "+activos);
+        if($("#"+idelemento).hasClass('type-0')){ 
+            if ($(".type-10")[0] && $(".type-10")[0].id === idelemento) {
+              $("#"+idelemento).removeClass('type-10');
+              $("#"+idelemento).addClass('type-0');
+            }else{
+              $(".type-10").addClass('type-0');
+              $(".type-10").removeClass('type-10');
+              $("#"+idelemento).removeClass('type-0');
+              $("#"+idelemento).addClass('type-10');
+            }
+            
+            if(activos != "")
+                activos = activos +",";
+            activos = activos +idbloque;
+        }else{
+            activos=activos.replace(idbloque+",","");
+            activos=activos.replace(","+idbloque,"");
+            activos=activos.replace(idbloque,"");
+            
+            $("#"+idelemento).removeClass('type-10');
+            $("#"+idelemento).addClass('type-0');
+            
+        }
+        
+        console.log("sale cambiaEstado: "+activos);
+        //JNM 29/07/2019: El id que forma en este controler es diferente, cambiamos la variable activos para que coja ese id
+        //document.getElementById('j_id0:frm:idactivosseleccionados').value=activos;
+        document.getElementById('j_id0:j_id1:j_id2:frm:idactivosseleccionados').value=activos;
+
+    }
+    
+
+     // Funcion que hace que la sección de Seleccionar cliente se mantenga abierta después de un action (ya que hasta ahora se estaba recargando la página)
+     $(function() {
+         var dni = document.getElementById('searchstring') ? document.getElementById('searchstring').value : '';
+         if(dni !== null && dni !== '' && dni !== undefined){
+             alert('dni: ' + dni);
+             mostrarEsconderSeccion('divCuenta');
+         }
+         console.log('sessionStorage: ' + sessionStorage.getItem('search'));
+         if( sessionStorage.getItem('search')){
+            mostrarEsconderSeccion('divCuenta');
+         }
+         
+    }); 
+      
+    // Id es el div que se quiere mostrar u ocultar
+    // Se utiliza sessionStorage para guardar un valor en Search y que al recargar la página tras el action de los botones, no se cierre la sección
+    function mostrarEsconderSeccion(Id) {
+                var x = document.getElementById(Id);
+                if (x.style.display === "none") {
+                    x.style.display = "";
+                } else {
+                    x.style.display = "none";
+                }
+        
+                sessionStorage.removeItem('search');
+
+            }      
+
+      // Función auxiliar que se encarga de guardar el valor true en la variable search tras hacer click sobre el botón Buscar Cliente.
+      // Esto permite que al recargarse la página, como search es true el css de la sección Seleccionar cliente no se muestra con los valores iniciales
+      // de ocultar, sino con los valores de mostrar el contenido.
+      function auxSeccionAbierta(){
+          sessionStorage.setItem('search', true);
+      }
+      
+      
+      function validacionCrearOportunidad(accId){
+          alert(accId);
+          //JNM 29/07/2019: El id que forma en este controler es diferente, cambiamos la variable activos para que coja ese id
+          var activos = document.getElementById('j_id0:frm:idactivosseleccionados').value;
+          //var activos = document.getElementById('j_id0:j_id1:j_id2:frm:idactivosseleccionados').value;
+          alert(activos);
+          if(accId == null){
+            
+            alert('Falta seleccionar una cuenta');}
+          if(activos == null){
+            
+            alert('Falta seleccionar un inmueble');}
+          
+      }
+      
+      function abrirInmueble(inmuebleId){
+          window.open('https://grupoavintia--despro.lightning.force.com/'+inmuebleId, '_blank');
+    }
+           
+    //Javascript para el efecto del castillete de dejar más clarito el color que no sea el seleccionado
+    $(function(){
+        $('li[class^="type-"]').mouseover(function(){
+          var currentClass = $(this).attr('class').split(' ')[0];
+          if(currentClass != 'empty'){
+              $('.main > li').addClass('deactivate');
+            $('.' + currentClass).removeClass('deactivate');
+          }
+        });
+        
+        $('.main > li').mouseout(function(){
+          var currentClass = $(this).attr('class').split(' ')[0];
+            $('.main > li').removeClass('deactivate');
+        }); 
+     
+    });    
+
+</script>
+
+<style>
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+    
+/* CSS nuevo para el castillete  */    
+
+* { box-sizing: border-box; padding:0; margin:0; }
+
+body {
+  background:linear-gradient(#dbeaf8, #dbeaf8);
+  color:#222;
+    padding: 20px;
+  font-family:"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+}
+
+.wrapper {
+  /*width:1050px;*/
+  margin:30px auto;
+  position:relative;
+} 
+
+/*.main {
+   display:inline-flex; 
+    } */   
+
+    
+.main:after {
+    clear:both;
+  content:"";
+  display:table;
+}
+
+    
+.main li {
+  width:70px;
+  height:70px;
+  border:1px outset rgba(0,0,0,0.3);
+  border-radius: 3px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.4);
+  position:relative;
+  font-size:7.5px;
+  float:left;
+  padding:0 2px;
+  margin:3px;
+  cursor:pointer;
+  padding-top:5px;
+  overflow:hidden;
+  transition:all .2s ease-in;
+  text-align: center;
+
+}
+   
+        
+span{
+  display:block;
+  line-height:1;
+  font-size:7.5px;
+  padding-top:3px;
+  margin:3px;
+}    
+
+.main .empty {
+    border:none; 
+  box-shadow:none;
+  cursor:default;
+}
+
+.deactivate {
+  opacity:0.5;
+  -webkit-filter:grayscale(70%);
+  filter:grayscale(70%);
+}
+
+      
+.main li:before,
+.main li:after {
+    content:attr(data-pos);
+  position:absolute;
+  top:3px;
+  left:3px;
+  color:black;
+  font-size:8px;
+  line-height:1;
+}
+
+.main li:after {
+  content:attr(data-nb);
+  left:auto;
+  right:3px;
+}
+    
+.main li:hover {
+    transform:scale(2);
+  z-index:100;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  
+} 
+
+.main .empty:hover {
+    box-shadow:none;
+  transform:none;
+    
+.    
+}
+
+<!-- Colores de las casillas del castillete -->  
+<!-- Libre -->
+li.type-0 {background-color: {!$Setup.Colores_Estado_Castillete__c.Libre__c}; color:white;}
+<!-- Apalabrado -->
+li.type-1 {background-color: {!$Setup.Colores_Estado_Castillete__c.Apalabrado__c}; color:black;  }  
+<!-- Asociado -->
+li.type-2 {background-color: {!$Setup.Colores_Estado_Castillete__c.Asociado__c}; color:black; } 
+<!-- Bloqueado Temporalmente -->
+li.type-3 {background-color: {!$Setup.Colores_Estado_Castillete__c.Bloqueado_Temporalmente__c}; color:#e2e2e2;} 
+<!-- Reservado / Bloqueado -->    
+li.type-4 {background-color: {!$Setup.Colores_Estado_Castillete__c.Reservado__c}; color:black; } 
+<!-- Cancelado --> 
+li.type-5 {background-color: {!$Setup.Colores_Estado_Castillete__c.Cancelado__c}; color:black;}  
+<!-- Canje --> 
+li.type-6 {background-color: {!$Setup.Colores_Estado_Castillete__c.Canje__c}; color:black; }  
+<!-- Entregado / Escriturado -->
+li.type-7 {background-color: {!$Setup.Colores_Estado_Castillete__c.Escriturado__c}; color:#e2e2e2;}
+<!-- Permuta -->
+li.type-8 {background-color: {!$Setup.Colores_Estado_Castillete__c.Permuta__c}; color:black; }
+<!-- Apartado -->
+li.type-9 {background-color: {!$Setup.Colores_Estado_Castillete__c.Apartado__c}; color:black;}    
+li.type-10 {background-color: {!$Setup.Colores_Estado_Castillete__c.Bloqueado_Temporalmente__c} ; border:3px outset #202021; color:#e2e2e2;}
+li.type-11 {background-color: {!$Setup.Colores_Estado_Castillete__c.Bloqueado_Temporalmente__c} ; border:3px outset #202021; color:#e2e2e2;} 
+
+    /*
+.main .pisos{
+    height: 28px; vertical-align: bottom;padding: 10px 0px 0px 0px;  width: 40px; font-size:12px;
+}
+    */
+    
+.main .puertas{
+    font-size:12px;
+}
+    
+.bloqueBuscarCuenta{
+    visibility: hidden;
+}    
+    
+</style>
+
+    <apex:form id="frm">
+    <apex:pageMessages />
+            <apex:inputHidden value="{!activosSeleccionados}" id="idactivosseleccionados"/>
+            <apex:actionFunction action="{!bloqueaActivo}" name="AF_bloqueaActivo" reRender="">
+                <apex:param name="bloqueid" value="" />
+                
+            </apex:actionFunction>
+ 
+   <apex:pageBlock rendered="{!IF(idSel == null || paginaNueva == 'true' ,True, False)}">         
+            <apex:selectList value="{!promSel}" size="1" >
+                <apex:selectOption itemvalue="<Seleccione Promoción>"/>
+                <apex:selectOptions value="{!prom}"/> 
+                <apex:actionSupport event="onchange" action="{!loadCastillete}"/> 
+              <!-- <apex:outputlink value="window.location.href='/apex/showCastillete?Id=a00n0000003nWxSAAU&paginaNueva=true">click here to refresh</apex:outputlink> -->
+              
+             </apex:selectList><p/>
+    </apex:pageBlock>  
+        
+<apex:outputPanel style="font-size: .8125rem;" rendered="{!parcela.size > 0}">
+<div style = "margin-bottom: 3%">
+       Selecciona la parcela:
+
+        <!--<apex:selectList id="countries" value="{!tipoSel}" size="1" required="true" onchange = "window.location.reload() ;">-->
+        <apex:selectList id="parcela" value="{!parcelaSel}" size="1" required="true" onchange="reloadUrl('{!idSel}','{!paginaNueva}')" >
+          <apex:selectOptions id="opcionesParcela" value="{!parcela}"/>
+         <!--<apex:actionSupport event="onchange" reRender="blockprinc"/> -->
+        </apex:selectList>       
+</div>
+</apex:outputPanel>
+
+<apex:outputPanel style="font-size: .8125rem;" rendered="{!bloque.size > 0}">       
+<div style = "margin-bottom: 3%" >
+    Selecciona el bloque:
+        <!--<apex:selectList id="countries" value="{!tipoSel}" size="1" required="true" onchange = "window.location.reload() ;">-->
+        <apex:selectList id="bloque" value="{!bloqueSel}" size="1" onchange="reloadUrl('{!idSel}','{!paginaNueva}')" >
+          <apex:selectOptions id="opcionesBloque" value="{!bloque}"/>
+         <!--<apex:actionSupport event="onchange" reRender="blockprinc"/> -->
+        </apex:selectList>       
+</div>
+</apex:outputPanel>
+    
+<div style = "margin-bottom: 3%">
+       Selecciona el tipo de inmueble:
+
+        <!--<apex:selectList id="countries" value="{!tipoSel}" size="1" required="true" onchange = "window.location.reload() ;">-->
+        <apex:selectList id="tipoInmueble" value="{!tipoSel}" size="1" required="true" onchange="reloadUrl('{!idSel}','{!paginaNueva}')">
+          <apex:selectOptions id="opcionesTipo" value="{!tipoInmueble}"/>
+         <!--<apex:actionSupport event="onchange" reRender="blockprinc"/> -->
+        </apex:selectList>    
+    
+    <!--
+        <apex:selectList id="tipoInmueble" value="{!tipoSel}" size="1" required="true">
+          <apex:selectOptions id="opcionesTipo" value="{!tipoInmueble}"/> 
+          <apex:actionSupport event="onchange" oncomplete="reloadUrl('{!tipoSel}','{!promSel}')"/>
+        </apex:selectList>   -->
+
+   
+</div>        
+
+<div>
+    <apex:pageblock id="Leyenda">            
+               <apex:outputText ><B>LEYENDA</B> <BR/></apex:outputText> 
+               <ul style="list-style:none;">    
+                                                 
+                         <apex:repeat value="{!estadosUV}" var="estadoley">
+                             
+                            <apex:variable var="claseEstado" value="type-0" rendered="{!IF(estadoley = 'Libre' ,True, False)}"  />
+                            <apex:variable var="claseEstado" value="type-1" rendered="{!IF(estadoley = 'Pre-Reservado' ,True, False)}"  />
+                            <apex:variable var="claseEstado" value="type-2" rendered="{!IF(estadoley = 'Asociado' ,True, False)}"  />
+                            <apex:variable var="claseEstado" value="type-3" rendered="{!IF(estadoley = 'Bloqueado temporalmente' ,True, False)}"  />
+                            <apex:variable var="claseEstado" value="type-4" rendered="{!IF(estadoley = 'Reservado' ,True, False)}"  />
+                            <apex:variable var="claseEstado" value="type-5" rendered="{!IF(estadoley = 'Cancelado' ,True, False)}"  />
+                            <apex:variable var="claseEstado" value="type-6" rendered="{!IF(estadoley = 'Canje' ,True, False)}"  />
+                            <apex:variable var="claseEstado" value="type-7" rendered="{!IF(estadoley = 'Escriturado' ,True, False)}"  />
+                            <apex:variable var="claseEstado" value="type-8" rendered="{!IF(estadoley = 'Permuta' ,True, False)}"  /> 
+                            <apex:variable var="claseEstado" value="type-9" rendered="{!IF(estadoley = 'Apartado' ,True, False)}"  />
+                            <apex:variable var="claseEstado" value="type-10" rendered="{!IF(estadoley = 'Reserva en gestión' ,True, False)}"  />
+                              <li class="{!SUBSTITUTE(claseEstado, ' ', '')}" style="border-radius: 3px; display: inline-block; height: 12px;width: 12px; opacity: 1;"/>
+                              <li style="display: inline-block;margin-left:0px; padding-left:5px;">{!estadoley} </li>
+                            
+                        </apex:repeat>      
+               </ul> 
+    </apex:pageblock>             
+</div>
+
+
+<apex:pageblock id="blockprinc" mode="maindetail">                    
+<div style = "margin:1%;">
+            
+<!-- Bloque para dibujar el castillete --> 
+
+         <table cellpadding="0" cellspacing="0" border="0">
+             <tr>
+
+            <!-- Comienza el bucle para cada portal-->
+            <!-- portalSel es una lista de nombres de portales -->
+             <apex:repeat value="{!portalSel}" var="portal">
+              <td style = "vertical-align: bottom; margin-right: 10px">
+
+                    <!-- linea es un contador que sirve para pintar el fondo de cada fila del castillete de un color -->
+                    <apex:variable value="{!0}" var="linea"/>   
+                    <div class="wrapper">
+                  
+                    <!-- Comienza el bucle para cada piso-->
+                    <!-- lpisosPorPortal es un map que relaciona el nombre del portal con una lista de los numeros de los pisos de ese portal -->
+                   
+                        <apex:repeat value="{!lpisosPorPortal[portal]}" var="piso">
+                         <apex:variable value="{!MOD(linea,2)}" var="resLinea"/> 
+                         <apex:variable value="{!IF(resLinea!=0,'Azure', 'Beige')}" var="clase"/> 
+                         <apex:variable value="{!lpisosPorPortal[portal]}" var="listaPisos"/>
+    
+                         <ul class="main" style = "display: flex; flex-wrap: nowrap;flex-direction: row;">
+                         <!-- <ul style="list-style:none;margin:0px 0px 0px 0px;padding:0; background-color: {!clase};"> -->
+                            <!-- pintamos las valores de las plantas (plantas) -->
+                            <apex:outputText rendered="{!AND(piso == 1000, listaPisos.size > 1)}">               <li class="empty pisos" style = "font-size:10px; text-align: center;"><B>Ático</B></li></apex:outputText>
+                            <apex:outputText rendered="{!AND(piso == 0, listaPisos.size > 1) }" >                  <li class="empty pisos" style = "font-size:10px; text-align: center;"><B>Bajo</B> </li></apex:outputText>
+                            <apex:outputText rendered="{!AND(!AND(piso == 1000, piso ==0),listaPisos.size > 1)}" >  <li class="empty pisos" style = "font-size:10px; text-align: center;"><B>{!piso}</B></li></apex:outputText>
+        
+                            
+                            <apex:variable value="{!linea + 1}" var="linea"/>   
+                            
+                            <!-- index es un contador que sirve para recorrer la lista de productos de un portal y piso concreto !mapmapproductos[portal][piso][index] -->
+                            <apex:variable var="index" value="{!0}" />
+                            
+                            <!-- Comienza el bucle para cada puerta-->
+                            <!-- lpuertasPorPortal es un map que relaciona el nombre del portal con una lista de los nombres de las puertas de ese portal-->
+                             
+                             <apex:repeat value="{!lpuertasPorPortal[portal]}" var="puerta">
+                                 
+                                 <!-- La variable a contiene la concatenacion de piso + puerta-->
+                                 <apex:variable value=" {!piso}{!puerta}" var="a"/>
+                                
+                                 <!-- mapplantaspisos es un mapa que relaciona el portal con una String formada por las concatenaciones de piso + puerta de las viviendas de dicho portal-->
+                                 <!-- Este outputText es el que muestra los cuadrados que representan las viviendas   --> 
+                                 <apex:outputText rendered="{!IF(CONTAINS(mapplantaspisos[portal],a),True, False)}">
+                                
+                                     <!-- La variable estado contiene el estado de la vivienda -->
+                                     <apex:variable value="{!mapmapproductos[portal][piso][index].estado__c}" var="estado"/> 
+                                     <apex:variable value="{!mapmapproductos[portal][piso][index].UltimoModificadorEstado__c}" var="ultimoModificadorEstado"/> 
+                                     <apex:variable value="{!mapmapproductos[portal][piso][index].Inmueble_asociado__c}" var="inmuebleAsociado"/>
+                                     <apex:variable value="{!mapmapproductos[portal][piso][index].Oportunidad__c}" var="oportunidad"/>
+                                     <apex:variable value="{!LEFT($User.Id,15)}" var="usuarioActual"/> 
+                                     
+                                     <!-- Empieza la estructura del castillete -->
+                                     
+                                            <apex:variable var="claseEstado" value="type-0" rendered="{!IF(estado = 'Libre' ,True, False)}"  />
+                                            <apex:variable var="claseEstado" value="type-1" rendered="{!IF(estado = 'Apalabrado' ,True, False)}"  />
+                                            <apex:variable var="claseEstado" value="type-2" rendered="{!IF(estado = 'Asociado' ,True, False)}"  />
+                                            <apex:variable var="claseEstado" value="type-3" rendered="{!AND(IF(estado = 'Bloqueado temporalmente',True, False),!IF(CONTAINS(ultimoModificadorEstado, usuarioActual),True, False))}"  />
+                                            <apex:variable var="claseEstado" value="type-4" rendered="{!IF(estado = 'Bloqueado' ,True, False)}"  />
+                                            <apex:variable var="claseEstado" value="type-5" rendered="{!IF(estado = 'Cancelado' ,True, False)}"  />
+                                            <apex:variable var="claseEstado" value="type-6" rendered="{!IF(estado = 'Canje' ,True, False)}"  />
+                                            <apex:variable var="claseEstado" value="type-7" rendered="{!IF(estado = 'Entregado' ,True, False)}"  />
+                                            <apex:variable var="claseEstado" value="type-8" rendered="{!IF(estado = 'Permuta' ,True, False)}"  />
+                                            <apex:variable var="claseEstado" value="type-9" rendered="{!IF(estado = 'Apartado' ,True, False)}"  />
+                                            <apex:variable var="claseEstado" value="type-10" rendered="{!AND(IF(estado = 'Bloqueado temporalmente',True, False),IF(CONTAINS(ultimoModificadorEstado, usuarioActual),True, False),IF(oportunidad = null, True, False))}"  />
+                                            <apex:variable var="claseEstado" value="type-11" rendered="{!AND(IF(estado = 'Bloqueado temporalmente',True, False),IF(CONTAINS(ultimoModificadorEstado, usuarioActual),True, False),!IF(oportunidad = null, True, False))}"  />  
+                                            <!--<apex:variable var="claseEstado" value="type-9" rendered="{!!IF(inmuebleAsociado = null ,True, False)}"  />-->
+                                            
+                                            <!-- JNM 12/07/2019 Añadimos evento para los dispositivos móviles.
+                                            Dentro de la función, comprobaremos si es un dispositivo móvil y bloqueamos el inmueble. -->
+                                            <li id="{!portal}{!piso}{!index}" data-pos="" data-nb="" class="{!claseEstado}"
+                                            ondblclick="bloqueaActivo('{!mapmapproductos[portal][piso][index].id}','{!portal}{!piso}{!index}',
+                                                        '{!mapmapproductos[portal][piso][index].UltimoModificadorEstado__c}', '{!LEFT($User.Id,15)}',
+                                                        '{!mapmapproductos[portal][piso][index].estado__c}', '{!mapmapproductos[portal][piso][index].Oportunidad__c}',
+                                                        '{!mapmapproductos[portal][piso][index].Inmueble_asociado__c}')"
+                                                onclick="bloqueaActivoTap('{!mapmapproductos[portal][piso][index].id}','{!portal}{!piso}{!index}',
+                                                            '{!mapmapproductos[portal][piso][index].UltimoModificadorEstado__c}', '{!LEFT($User.Id,15)}',
+                                                            '{!mapmapproductos[portal][piso][index].estado__c}', '{!mapmapproductos[portal][piso][index].Oportunidad__c}')">
+                                                <!--
+                                                <apex:outputLink value="/{!mapmapproductos[portal][piso][index].id}_blank">
+                                                    <B> {!mapmapproductos[portal][piso][index].name} </B>
+                                                </apex:outputLink> 
+                                                <apex:outputLink value="https://grupoavintia--despro.lightning.force.com/{!mapmapproductos[portal][piso][index].id}" target="_blank">
+                                                    <B> {!mapmapproductos[portal][piso][index].name} </B>
+                                                </apex:outputLink>-->
+                                               
+                                                <apex:outputLink onclick="abrirInmueble('{!mapmapproductos[portal][piso][index].id}')">
+                                                    <B> {!mapmapproductos[portal][piso][index].name} </B>
+                                                </apex:outputLink> 
+                                                
+                                                <span>Tipo: {!mapmapproductos[portal][piso][index].Tipo_de_inmueble__r.Name}</span>
+                                                <span>Sup: {!mapmapproductos[portal][piso][index].Superficie_Util_m2__c} m<sup>2</sup></span>
+                                                <span>Precio: {!mapmapproductos[portal][piso][index].Precio__c} € </span>
+                                            </li>
+                                                        
+                                    <apex:variable var="index" value="{!index + 1}" rendered="{!IF(CONTAINS(mapplantaspisos[portal],a) ,True, False)}"  />        
+                                </apex:outputText>                 
+                                    
+                                <apex:outputText rendered="{!!IF(CONTAINS(mapplantaspisos[portal],a),True, False)}">
+                                           <li class="empty"></li> 
+                                </apex:outputText>                 
+                            
+                  <!-- Termina el bucle para cada puerta-->            
+                  </apex:repeat>
+                  <!-- Dibujamos un cuadrado vacio para que haya espacio entre los edificios -->           
+                  
+                  </ul>
+            <!-- Termina el bucle para cada piso-->
+            </apex:repeat> 
+                        
+            </div>
+    
+             <!-- pintamos las letras de las puertas -->
+                
+                <ul class="main"> 
+                    <!-- Dibujamos un cuadrado vacio antes de las letras -->
+                    <apex:outputText >   <li class = "empty"></li></apex:outputText> 
+                    
+                             
+                    <apex:repeat value="{!lpuertasPorPortal[portal]}" var="puerta">
+                        <apex:outputText >  <li class = "empty puertas" style = "font-size:10px;"><B>{!puerta}</B></li></apex:outputText>                 
+                    </apex:repeat>  
+                </ul>        
+                </td>
+             
+             <!-- Termina el bucle para cada portal-->
+             </apex:repeat>
+             </tr>
+        </table>
+    </div> 
+    </apex:pageblock>
+    
+
+        <div style="position: absolute; right:3%;" >
+            <apex:outputPanel rendered="{!and(IF(presupuesto != null ,False, True), IF(paginaNueva != 'true' ,True, False), IF(idSel != null ,True, False))}"> 
+                <button type="button" style="font-size: .75rem;" class="slds-button slds-button_neutral" onclick="mostrarEsconderSeccion('divCuenta');">Nueva Oportunidad</button>    
+            </apex:outputPanel>    
+        </div>
+
+
+        <div style = "position: absolute; right:3%;">
+             <apex:commandButton value="Añadir inmueble" action="{!insertarProdPresupuesto}" rendered="{!and(IF(presupuesto != null,True, False),or(IF(prodPresupuestoList == null,True, False), IF(prodPresupuestoList.size == 0,True, False)) )}"/>     
+        </div>       
+        
+
+<!-- Bloque para buscar la cuenta --> 
+
+    <div id="divCuenta" class = "" style = "margin-top: 15%; margin-bottom:5%; margin-right:1%; margin-left:1%; display:none;">   
+    <!--ondblclick="bloqueaActivo('{!mapmapproductos[portal][piso][index].id}','{!portal}{!piso}{!index}')"  -->     
+    <apex:pageblock id="InputCuenta" rendered="{!IF(presupuesto != null ,False, True)}"   >
+    
+        DNI/ CIF cliente:
+        <apex:pageblockSection id="section_estado">
+            <apex:pageBlockSectionItem >
+    
+            <apex:inputText id="searchstring" value="{!searchstring}" label="Input" />  
+            <!--<apex:actionSupport event="onchange" reRender = "maindetail"/> -->    
+             <apex:commandButton value="Buscar cliente" action="{!buscarCliente}" reRender="datos" />   
+            <!--<apex:commandButton value="Buscar cliente" action="{!buscarCliente}" onclick="auxSeccionAbierta()" /> 
+            <apex:commandButton value="Buscar cliente" action="{!buscarCliente}"/> -->
+            </apex:pageBlockSectionItem>
+
+        </apex:pageblockSection>
+    </apex:pageblock>
+       
+    <apex:pageblock id="datos" rendered="{!IF( presupuesto!= null ,False, True)}">
+    
+                <apex:pageBlockTable value="{!acc}" var="a" >  
+                    <apex:column headerValue="Cuenta" >  
+                        <input type="radio" name="accId" value="{!a.Id}" /> <apex:outputlink value="https://grupoavintia--despro.lightning.force.com/{!a.id}">{!a.Name}</apex:outputlink>
+                    </apex:column> 
+                    <apex:variable value="{!a.Email__c}" var="Email__c"/>
+                    <apex:column value="{!a.Email__c}" headerValue="Email" rendered="{!IF(Email__c != null,True, False)}"   /> 
+                    <apex:variable value="{!a.Movil_empresa__c}" var="Movil_empresa__c"/>
+                    <apex:column value="{!a.Movil_empresa__c}" headerValue="Teléfono" rendered="{!IF(Movil_empresa__c != null ,True, False)}" /> 
+                    <apex:variable value="{!a.PersonEmail}" var="PersonEmail"/>
+                    <apex:column value="{!a.PersonEmail}" headerValue="Email" rendered="{!IF(PersonEmail != null ,True, False)}" /> 
+                    <apex:variable value="{!a.PersonMobilePhone}" var="PersonMobilePhone"/>
+                    <apex:column value="{!a.PersonMobilePhone}" headerValue="Teléfono" rendered="{!IF(PersonMobilePhone != null ,True, False)}" /> 
+                </apex:pageBlockTable>         
+        </apex:pageblock>
+        
+       
+        <apex:pageblock rendered="{!IF(acc.size = 0 && searchstring != null ,True, False)}">
+        No existen clientes con el DNI introducido.
+        </apex:pageblock>
+
+       
+    <div style="position: absolute; right: 20px; padding: 10 px" >
+        <apex:commandButton action="{!insertarOportunidad}" value="Crear Oportunidad" id="theButton" rendered="{!and(IF(presupuesto != null ,False, True),IF(idSel != null ,True, False))}"/>        
+    </div> 
+
+    
+        
+    </div>
+        <!-- </apex:pageblock> -->
+                                         
+             
+<!-- Bloque para dibujar los botones de Cancelar y Crear Oportunidad -->  
+   
+     <!-- </apex:pageblock>    
+    
+<apex:pageBlock id="block1">
+    <apex:pageBlockSection id="section1" columns="2" collapsible="true" title="Title">
+    </apex:pageBlockSection>
+    <font color="#FF0000"><script>
+        twistSection(document.getElementById('{!$Component.block1.section1}').getElementsByTagName('img')[0])
+    </script></font>
+</apex:pageBlock> -->
+        
+        
+    </apex:form>
+    
+</html> 
+</apex:component>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Avenida</fullName>
+        <default>false</default>
+        <label>Avenida</label>
+    </customValue>
+    <customValue>
+        <fullName>Calle</fullName>
+        <default>false</default>
+        <label>Calle</label>
+    </customValue>
+    <customValue>
+        <fullName>Glorieta</fullName>
+        <default>false</default>
+        <label>Glorieta</label>
+    </customValue>
+    <customValue>
+        <fullName>Plaza</fullName>
+        <default>false</default>
+        <label>Plaza</label>
+    </customValue>
+    <customValue>
+        <fullName>Bulevar</fullName>
+        <default>false</default>
+        <label>Bulevar</label>
+    </customValue>
+    <customValue>
+        <fullName>Paseo</fullName>
+        <default>false</default>
+        <label>Paseo</label>
+    </customValue>
+    <customValue>
+        <fullName>Camino</fullName>
+        <default>false</default>
+        <label>Camino</label>
+    </customValue>
+    <customValue>
+        <fullName>Carretera</fullName>
+        <default>false</default>
+        <label>Carretera</label>
+    </customValue>
+    <masterLabel>Tipo de vía</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

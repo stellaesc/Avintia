@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Factura</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Facturas</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Formato Factura</layout>
+        <sections>
+            <label></label>
+            <section>Plan de pagos (Cuotas)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Proforma</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Factura Comercial</layout>
+        <sections>
+            <label></label>
+            <section>Plan de pagos (Cuotas)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Proforma</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Factura general</layout>
+        <sections>
+            <label></label>
+            <section>Plan de pagos (Cuotas)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Proforma</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Factura general Solo Lectura</layout>
+        <sections>
+            <label></label>
+            <section>Plan de pagos (Cuotas)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Proforma</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>CambiarDescripcionFactura</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>CamposBloqueados</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>EnvioOracle</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>EstadoFactura</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>ImporteDistintoImporteLineas</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Imposibilitar_Cambio_Num_o_Secuencial</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>ProformaNoEnvioOracle</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>UltimaModificacionAdministrador</name>
+    </validationRules>
+    <webLinks>
+        <label></label>
+        <name>Mass_Delete_Records</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>PRUEBAPDFFACTURA</name>
+    </webLinks>
+</CustomObjectTranslation>

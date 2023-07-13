@@ -1,0 +1,55 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" controller="PublicacionBabonlab" access="global"  >
+<lightning:notificationsLibrary aura:id="notifLib"/> 
+    
+    <!-- Se recupera estado de la promoción -->    
+   <aura:attribute name="record" type="Promocion__c"/>
+   <aura:attribute name="isCargando" type="Boolean" default="false" />
+    
+     <force:recordData aura:id="record"
+             recordId="{!v.recordId}"
+             targetFields="{!v.record}"
+             fields="Id, IdPromocionBabonlab__c,PublicacionViviendasBaboonlab__c"
+             recordUpdated="{!c.doInit}"
+		/>
+
+	<div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+        
+        <table style="width: 100%">
+        	<tr>
+            	<th colspan="3" >Publicación en Baboonlab</th>
+            </tr>
+            <tr >
+            	<td style="width:20%; text-align: center; padding-top: 3%">Envío Promocion</td>
+                <td style="text-align: center; padding-top: 3%" colspan="3">
+                	<lightning:button aura:id="disablebuttonid1" class="anchoBoton" variant="neutral" label="Publicar" onclick="{!c.enviarPromocionBabonLab}" />
+                </td>
+            </tr>
+            <tr>
+            	<td style="text-align: center; padding-top: 3%">Actualización Promoción</td>
+                <td style="text-align: center; padding-top: 3%" colspan="3">
+                	<lightning:button aura:id="disablebuttonid2" class="anchoBoton" variant="neutral" label="Publicar" onclick="{!c.enviarModificacionPromocionBabonLab}" disabled="true"/>
+                </td>
+            </tr>
+            <tr >
+            	<td style="width:20%; text-align: center; padding-top: 3%">Envío Viviendas</td>
+                <td style="text-align: center; padding-top: 3%" colspan="3">
+                	<lightning:button aura:id="disablebuttonid4" class="anchoBoton" variant="neutral" label="Publicar" onclick="{!c.enviarAltaViviendasBabonLab}"  />
+                </td>
+            </tr>
+             <tr>
+            	<td style="text-align: center; padding-top: 3%">Actualización Viviendas</td>
+                <td style="text-align: center; padding-top: 3%" colspan="3">
+                	<lightning:button aura:id="disablebuttonid3" class="anchoBoton" variant="neutral" label="Publicar" onclick="{!c.enviarActualizacionViviendasBabonLab}" disabled="true"/>
+                </td>
+            </tr>
+            
+            <aura:if isTrue="{!v.isCargando}">
+             <div class="exampleHolder">
+        		<lightning:spinner alternativeText="Loading" size="large" />
+    		</div>
+         	</aura:if>
+         </table>
+        
+    
+    </div>
+</aura:component>

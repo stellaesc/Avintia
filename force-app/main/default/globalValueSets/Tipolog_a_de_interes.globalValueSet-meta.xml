@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Piso</fullName>
+        <default>false</default>
+        <label>Piso</label>
+    </customValue>
+    <customValue>
+        <fullName>Apartamento</fullName>
+        <default>false</default>
+        <label>Apartamento</label>
+    </customValue>
+    <customValue>
+        <fullName>Estudio</fullName>
+        <default>false</default>
+        <label>Estudio</label>
+    </customValue>
+    <customValue>
+        <fullName>Planta Baja</fullName>
+        <default>false</default>
+        <label>Planta Baja</label>
+    </customValue>
+    <customValue>
+        <fullName>Dúplex</fullName>
+        <default>false</default>
+        <label>Dúplex</label>
+    </customValue>
+    <customValue>
+        <fullName>Loft</fullName>
+        <default>false</default>
+        <label>Loft</label>
+    </customValue>
+    <customValue>
+        <fullName>Chalet</fullName>
+        <default>false</default>
+        <label>Chalet</label>
+    </customValue>
+    <customValue>
+        <fullName>Casa adosada</fullName>
+        <default>false</default>
+        <label>Casa adosada</label>
+    </customValue>
+    <customValue>
+        <fullName>Finca rústica</fullName>
+        <default>false</default>
+        <label>Finca rústica</label>
+    </customValue>
+    <customValue>
+        <fullName>Ático</fullName>
+        <default>false</default>
+        <label>Ático</label>
+    </customValue>
+    <customValue>
+        <fullName>Garaje</fullName>
+        <default>false</default>
+        <label>Garaje</label>
+    </customValue>
+    <customValue>
+        <fullName>Trastero</fullName>
+        <default>false</default>
+        <label>Trastero</label>
+    </customValue>
+    <customValue>
+        <fullName>Local</fullName>
+        <default>false</default>
+        <label>Local</label>
+    </customValue>
+    <customValue>
+        <fullName>Aticos</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Aticos</label>
+    </customValue>
+    <customValue>
+        <fullName>Bajos</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Bajos</label>
+    </customValue>
+    <customValue>
+        <fullName>etc</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>etc</label>
+    </customValue>
+    <masterLabel>Tipología de interés</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Piscina</fullName>
+        <default>false</default>
+        <label>Piscina</label>
+    </customValue>
+    <customValue>
+        <fullName>Mar</fullName>
+        <default>false</default>
+        <label>Mar</label>
+    </customValue>
+    <customValue>
+        <fullName>Jardines</fullName>
+        <default>false</default>
+        <label>Jardines</label>
+    </customValue>
+    <masterLabel>Vistas del inmueble</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

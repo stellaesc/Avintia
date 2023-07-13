@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Libre</fullName>
+        <default>false</default>
+        <label>Libre</label>
+    </customValue>
+    <customValue>
+        <fullName>VPO</fullName>
+        <default>false</default>
+        <label>VPO</label>
+    </customValue>
+    <customValue>
+        <fullName>VPT</fullName>
+        <default>false</default>
+        <label>VPT</label>
+    </customValue>
+    <customValue>
+        <fullName>Cooperativa</fullName>
+        <default>false</default>
+        <label>Cooperativa</label>
+    </customValue>
+    <masterLabel>Tipos de vivienda</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

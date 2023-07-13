@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Enviar un correo electrónico avisando del cambio de los valores de los portales</description>
+        <name>Action_EmailAlert</name>
+        <label>Action_Email Alert</label>
+        <locationX>116</locationX>
+        <locationY>455</locationY>
+        <actionName>Product2.Checks_Producto_Cambiado</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Decision_EstadoCambio</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <decisions>
+        <description>Comprobar si la Tarifa V0 es nula, precio no es nulo y el tipo de inmueble no es &apos;Mejoras&apos;.</description>
+        <name>Decision_ActualizarTarifaV0</name>
+        <label>Decision_Actualizar Tarifa V0</label>
+        <locationX>446</locationX>
+        <locationY>1463</locationY>
+        <defaultConnector>
+            <targetReference>Decision_TipoCambioONuevo</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>ActualizarTarifaV0_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Precio__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Tarifa_V0__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Tipo_de_inmueble__r.Tipo__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Mejoras</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Producto_InicializarV0</targetReference>
+            </connector>
+            <label>Si</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si el campo Precio del producto ha cambiado.</description>
+        <name>Decision_CambioPrecio</name>
+        <label>Decision_Cambio Precio</label>
+        <locationX>446</locationX>
+        <locationY>1127</locationY>
+        <defaultConnector>
+            <targetReference>Decision_ActualizarTarifaV0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>CambioPrecio_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Precio__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_ProductPriceHistory</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Verificar si algún Check de los portales portal del producto ha cambiado.</description>
+        <name>Decision_ChecksPortalesCambiados</name>
+        <label>Decision_Checks Portales Cambiados</label>
+        <locationX>248</locationX>
+        <locationY>335</locationY>
+        <defaultConnector>
+            <targetReference>Decision_EstadoCambio</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>ChecksPortalesCambiados_Si</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.WebAvinita__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Fotocasa__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Idealista__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Action_EmailAlert</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si el estado del producto ha cambiado.</description>
+        <name>Decision_EstadoCambio</name>
+        <label>Decision_Estado Cambio</label>
+        <locationX>248</locationX>
+        <locationY>671</locationY>
+        <defaultConnector>
+            <targetReference>Decision_LimpiaOportunidad</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>EstadoCambio_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Estado__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Producto_UltimoModifcador</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si el campo &apos;Limpia oportunidad&apos; ha cambiado a verdadero.</description>
+        <name>Decision_LimpiaOportunidad</name>
+        <label>Decision_Limpia Oportunidad</label>
+        <locationX>248</locationX>
+        <locationY>1007</locationY>
+        <defaultConnector>
+            <targetReference>Decision_CambioPrecio</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>LimpiaOportunidad_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Limpiar_oportunidad__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Limpiar_oportunidad__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Producto_LimpiarCampoOportunidad</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si el tipo del inmueble ha cambiado o si el registro es nuevo.</description>
+        <name>Decision_TipoCambioONuevo</name>
+        <label>Decision_Tipo Cambio O Nuevo</label>
+        <locationX>446</locationX>
+        <locationY>1799</locationY>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>TipoCambioONuevo_Si</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Tipo_de_inmueble__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Estado__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>For_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SubFlow_RollUpInmuebles</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <description>Flujo del Objeto &apos;Producto&apos; que se lanza al crear o editar el registro.
+20/04 MSC: WorkFlows &quot;	Check Portales Cambiados&quot;, &quot;Ultimo modificador de estado&quot; y PB &quot;Roll Up Inmueble&quot;</description>
+    <formulas>
+        <description>Formula que devuelve verdadero si el registro es nuevo.</description>
+        <name>For_IsNew</name>
+        <dataType>Boolean</dataType>
+        <expression>ISNEW()</expression>
+    </formulas>
+    <interviewLabel>Producto_Triggered_AfterInsertUpdate {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Producto_Triggered_After Insert Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Crear un registro del Product Price History para almacenar el nuevo y antiguo precio del producto.</description>
+        <name>Create_ProductPriceHistory</name>
+        <label>Create_Product Price History</label>
+        <locationX>314</locationX>
+        <locationY>1247</locationY>
+        <connector>
+            <targetReference>Decision_ActualizarTarifaV0</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Nuevo_precio__c</field>
+            <value>
+                <elementReference>$Record.Precio__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Precio_anterior__c</field>
+            <value>
+                <elementReference>$Record__Prior.Precio__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Product__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Product_Price_History__c</object>
+    </recordCreates>
+    <recordUpdates>
+        <description>Actualizar e producto inicializando la Tarifa V0 con el valor del precio.</description>
+        <name>Update_Producto_InicializarV0</name>
+        <label>Update_Producto_Inicializar V0</label>
+        <locationX>314</locationX>
+        <locationY>1583</locationY>
+        <connector>
+            <targetReference>Decision_TipoCambioONuevo</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Tarifa_V0__c</field>
+            <value>
+                <elementReference>$Record.Precio__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Limpiar el campo &apos;Oportunidad&apos; del producto.</description>
+        <name>Update_Producto_LimpiarCampoOportunidad</name>
+        <label>Update_Producto_Limpiar Campo Oportunidad</label>
+        <locationX>50</locationX>
+        <locationY>1127</locationY>
+        <inputAssignments>
+            <field>Limpiar_oportunidad__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Oportunidad__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el valor del campo &apos;UltimoModificadorEstado&apos; con el id del actual usuario.</description>
+        <name>Update_Producto_UltimoModifcador</name>
+        <label>Update_Producto_Ultimo Modifcador</label>
+        <locationX>116</locationX>
+        <locationY>791</locationY>
+        <connector>
+            <targetReference>Decision_LimpiaOportunidad</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>UltimoModificadorEstado__c</field>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <startElementReference>Decision_ChecksPortalesCambiados</startElementReference>
+    <status>Active</status>
+    <subflows>
+        <description>Ejecutar el Sublujo &apos;Roll up Inmuebles&apos; para actualizar superficies y conteo en promoción.</description>
+        <name>SubFlow_RollUpInmuebles</name>
+        <label>SubFlow_Roll up Inmuebles</label>
+        <locationX>314</locationX>
+        <locationY>1919</locationY>
+        <flowName>Roll_up_Inmuebles</flowName>
+        <inputAssignments>
+            <name>idPromocion</name>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

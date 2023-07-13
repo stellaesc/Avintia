@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalyticSnapshot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <groupColumn>Account.Promociones1__r$Name</groupColumn>
+    <mappings>
+        <sourceField>RowCount</sourceField>
+        <sourceType>summary</sourceType>
+        <targetField>VentasSemanales__c.CuentasSemana__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>Account.Promociones1__r$Name</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>VentasSemanales__c.Promocion__c</targetField>
+    </mappings>
+    <name>Cuentas semana por Promoción</name>
+    <runningUser>malvarmalvarez@avintiainmobiliaria.comez@avintiainmobiliaria.com</runningUser>
+    <sourceReport>InformesSnapshot/Cuentas_semana_para_colas_ITu</sourceReport>
+    <targetObject>VentasSemanales__c</targetObject>
+</AnalyticSnapshot>

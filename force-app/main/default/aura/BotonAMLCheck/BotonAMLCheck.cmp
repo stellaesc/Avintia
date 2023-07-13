@@ -1,0 +1,23 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global"  controller="AmlCheckHelper"> 
+   <!-- Se recupera estado de la promoción -->    
+   <aura:attribute name="record" type="Account"/>
+   <aura:attribute name="profile" type="String"/>
+   <aura:attribute name="oldAccounts" type="List" />
+
+   <!--<aura:handler name="init" value="{!this}" action="{!c.doInit}" />-->
+    
+   <force:recordData aura:id="record"
+             recordId="{!v.recordId}"
+             targetFields="{!v.record}"
+             fields="Id, EnviadoAmlCheck__c"
+             /> 
+    <div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+        <h1 class="slds-text-heading--small titulo">Integración AML CHECK</h1> 
+        <aura:if isTrue="{!v.profile == 'System Administrator'}">
+            <lightning:button class="anchoBoton" variant="neutral" label="Alta histórico de clientes" onclick="{!c.sendAmlCheckAllOld}"/> 
+        </aura:if>
+        <aura:if isTrue="{!v.record.EnviadoAmlCheck__c == False}"> 
+            <lightning:button class="anchoBoton" variant="neutral" label="Alta cliente" onclick="{!c.sendAmlCheck}"/> 
+        </aura:if>
+    </div>
+</aura:component>

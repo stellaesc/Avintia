@@ -1,0 +1,94 @@
+<aura:component controller = "SelectMejoraQuoteController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="record" type="Quote"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="mejoras" type="List"/>
+    <aura:attribute name="isOpen" type="Boolean"/>
+    
+    <force:recordData aura:id="record"
+             recordId="{!v.recordId}"
+             targetFields="{!v.record}"
+             fields="Id, IsSyncing" 
+             />
+    
+    <aura:if isTrue="{!not(empty(v.mejoras))}">
+        <div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 100%; text-align: center; padding-top: 3%">
+                        <lightning:button class="anchoBoton" variant="neutral" label="Añadir mejoras" onclick="{!c.openModal}"/> 
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isOpen}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModal }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Gestión de Mejoras</h2>                   
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>                            
+                            <tr class="slds-line-height_reset">
+                                <th>
+                                    
+                                </th> 
+                                <th>
+                                    NOMBRE
+                                </th>
+                                <th>
+                                    PRECIO
+                                </th>
+                                <th>
+                                    DESCRIPCIÓN
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>   
+                            <aura:iteration items="{!v.mejoras}" var="mejora">
+                                <tr class="slds-hint-parent">
+                                    <td>
+                                        <ui:inputCheckbox value="{!mejora.check}"/>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate">
+                                            <ui:outputURL value="{!'/' + mejora.ident}" label="{!mejora.Name}" target="_blank"/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate">
+                                            <ui:outputText value="{!mejora.Precio}"/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate">
+                                            <ui:outputText value="{!mejora.Descripcion}"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>      
+                    </table>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                          label="Cancelar"
+                                          title="Cancelar"
+                                          onclick="{! c.closeModal }"/>
+                    <button class="slds-button slds-button_brand" onclick="{! c.save }">Guardar</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

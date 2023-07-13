@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p&gt;&lt;strong style=&quot;color: rgb(59, 72, 189); font-size: 20px;&quot;&gt;PRINCIPALES INFORMES DE LAS PROMOCIONES&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://grupoavintia.lightning.force.com/lightning/r/Dashboard/01Z5w000001X3mdEAC/view?queryScope=userFolders&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255); color: rgb(81, 68, 160); font-size: 16px;&quot;&gt;A. Panel de Situación Comercial&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://grupoavintia.lightning.force.com/lightning/r/Dashboard/01Z5w000001X3miEAC/view?queryScope=userFolders&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255); color: rgb(81, 68, 160); font-size: 16px;&quot;&gt;B. Panel de Perfil de Cliente&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://grupoavintia.lightning.force.com/lightning/r/Dashboard/01Z5w000001X4BFEA0/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255); color: rgb(81, 68, 160); font-size: 16px;&quot;&gt;C. Panel de Demanda e Intereses&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://grupoavintia.lightning.force.com/lightning/r/Dashboard/01Z5w000001X58MEAS/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255); color: rgb(81, 68, 160); font-size: 16px;&quot;&gt;D. Panel de detalle de Mirador de Rorrejón&lt;/a&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+        </componentInstances>
+        <name>top</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <name>bottomLeft</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <name>bottomRight</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p&gt;&lt;strong style=&quot;color: rgb(192, 73, 73); font-size: 18px;&quot;&gt;PROMOCIÓN - CASTILLETE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://grupoavintia.lightning.force.com/lightning/r/Promocion__c/a0F5w00000akawtEAA/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255); color: rgb(192, 73, 73); font-size: 16px;&quot;&gt;A. Resumen_AURA PLAZA&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://grupoavintia.lightning.force.com/lightning/r/Promocion__c/a0F5w00000YjmwYEAR/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255); color: rgb(192, 73, 73); font-size: 16px;&quot;&gt;B. Resumen RESIDENCIAL IZARA&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://grupoavintia.lightning.force.com/lightning/r/Promocion__c/a0F5w00000Yl4hIEAR/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255); color: rgb(192, 73, 73); font-size: 16px;&quot;&gt;C. Resumen MIRADOR DE TORREJÓN&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://grupoavintia.lightning.force.com/lightning/r/Promocion__c/a0F5w00000c2aglEAA/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255); color: rgb(192, 73, 73); font-size: 16px;&quot;&gt;D. Resumen VERA COLMENAR&lt;/a&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+        </componentInstances>
+        <name>sidebar</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>Home Page SH</masterLabel>
+    <template>
+        <name>home:desktopTemplate</name>
+    </template>
+    <type>HomePage</type>
+</FlexiPage>

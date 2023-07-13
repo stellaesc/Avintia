@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Anteproyecto</fullName>
+        <default>false</default>
+        <label>Anteproyecto</label>
+    </customValue>
+    <customValue>
+        <fullName>Proyecto</fullName>
+        <default>false</default>
+        <label>Proyecto</label>
+    </customValue>
+    <customValue>
+        <fullName>Comercialización</fullName>
+        <default>false</default>
+        <label>Comercialización</label>
+    </customValue>
+    <customValue>
+        <fullName>Ejecución del proyecto</fullName>
+        <default>false</default>
+        <label>Ejecución del proyecto</label>
+    </customValue>
+    <customValue>
+        <fullName>Escrituración</fullName>
+        <default>false</default>
+        <label>Escrituración</label>
+    </customValue>
+    <masterLabel>Fases de promoción</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

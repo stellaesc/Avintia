@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>NIF</fullName>
+        <default>false</default>
+        <label>NIF</label>
+    </customValue>
+    <customValue>
+        <fullName>CIF</fullName>
+        <default>false</default>
+        <label>CIF</label>
+    </customValue>
+    <customValue>
+        <fullName>Pasaporte</fullName>
+        <default>false</default>
+        <label>Pasaporte</label>
+    </customValue>
+    <customValue>
+        <fullName>NIE</fullName>
+        <default>false</default>
+        <label>NIE</label>
+    </customValue>
+    <customValue>
+        <fullName>Nº Contribuyente</fullName>
+        <default>false</default>
+        <label>Nº Contribuyente</label>
+    </customValue>
+    <customValue>
+        <fullName>Otros</fullName>
+        <default>false</default>
+        <label>Otros</label>
+    </customValue>
+    <masterLabel>Tipo de documento</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

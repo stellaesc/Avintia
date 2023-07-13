@@ -1,0 +1,26 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" controller="Tarifario_Aprobado_AvisoPubl" access="global">
+    
+    <aura:attribute name="record" type="Task"/>
+    <aura:attribute name="isCargando" type="Boolean" default="false" />
+    
+    <force:recordData aura:id="record"
+             recordId="{!v.recordId}"
+             targetFields="{!v.record}"
+             fields="Id, IsRecordatorioActivo__c, NumRecordatorio__c, NextRecordatorio__c" 
+             />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <div class= "tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" style="width: 100%; text-align: center">
+        <table style="width: 100%">
+            <tr>
+                <td style="text-align: center; padding-top: 3%" colspan="3">
+                    <lightning:button class="anchoBoton" variant="neutral" label="Publicar" onclick="{!c.publicarWeb}"/>
+                </td>
+            </tr>
+            <tr>
+            	<td style="text-align: center; padding-top: 3%" colspan="3">
+                    <lightning:button class="anchoBoton" aura:id="disablebuttonid" variant="neutral" label="Crear Recordatorio" onclick="{!c.creaRecordat}"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</aura:component>

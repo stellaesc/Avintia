@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>RESERVAS</fullName>
+        <default>false</default>
+        <label>RESERVAS</label>
+    </customValue>
+    <customValue>
+        <fullName>DEPOSITOS</fullName>
+        <default>false</default>
+        <label>DEPOSITOS</label>
+    </customValue>
+    <customValue>
+        <fullName>FACTURA DE VENTA</fullName>
+        <default>false</default>
+        <label>FACTURA DE VENTA</label>
+    </customValue>
+    <customValue>
+        <fullName>ENTREGAS A CUENTA</fullName>
+        <default>false</default>
+        <label>ENTREGAS A CUENTA</label>
+    </customValue>
+    <customValue>
+        <fullName>FACTURA RECTIFICATIVA</fullName>
+        <default>false</default>
+        <label>FACTURA RECTIFICATIVA</label>
+    </customValue>
+    <customValue>
+        <fullName>RECIBO DEVUELTO</fullName>
+        <default>false</default>
+        <label>RECIBO DEVUELTO</label>
+    </customValue>
+    <customValue>
+        <fullName>RECIBODEVUELTO</fullName>
+        <default>false</default>
+        <label>RECIBODEVUELTO</label>
+    </customValue>
+    <customValue>
+        <fullName>MEJORAS</fullName>
+        <default>false</default>
+        <label>MEJORAS</label>
+    </customValue>
+    <customValue>
+        <fullName>APORTACIONES CAPITAL</fullName>
+        <default>false</default>
+        <label>APORTACIONES CAPITAL</label>
+    </customValue>
+    <customValue>
+        <fullName>OTRAS VENTAS</fullName>
+        <default>false</default>
+        <label>OTRAS VENTAS</label>
+    </customValue>
+    <masterLabel>Tipo de Factura</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

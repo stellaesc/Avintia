@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Se llama al proceso de aprobación Aprobar_Nuevo_plan_de_pagos_3</description>
+        <name>EnviarAProcesoAprobacion</name>
+        <label>Enviar a Proceso de Aprobación</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <actionName>submit</actionName>
+        <actionType>submit</actionType>
+        <inputParameters>
+            <name>processDefinitionNameOrId</name>
+            <value>
+                <stringValue>Aprobar_Nuevo_plan_de_pagos_3</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>objectId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>submitterId</name>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <decisions>
+        <description>Evalúa el estado del plan de pago.</description>
+        <name>Decision_EstadoPlanPago</name>
+        <label>Decision_Estado Plan de Pago</label>
+        <locationX>446</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Estado_PendienteAprobacion</name>
+            <conditionLogic>1 AND ( 2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Estado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Pdte de Aprobación</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Estado__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>EnviarAProcesoAprobacion</targetReference>
+            </connector>
+            <label>Pdte de Aprobación</label>
+        </rules>
+        <rules>
+            <name>Estado_Activo</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Estado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Activo</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Estado__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Facturas_Activar</targetReference>
+            </connector>
+            <label>Activo</label>
+        </rules>
+        <rules>
+            <name>Estado_Inactivo</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Estado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Inactivo</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Estado__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Facturas_Inactivar</targetReference>
+            </connector>
+            <label>Inactivo</label>
+        </rules>
+    </decisions>
+    <description>Flujo del Objeto &apos;Plan de Pago&apos; que se lanza al crear o editar el registro.</description>
+    <formulas>
+        <description>Variable que devuelve True si el registro es nuevo.</description>
+        <name>IsNew</name>
+        <dataType>Boolean</dataType>
+        <expression>ISNEW()</expression>
+    </formulas>
+    <interviewLabel>Plan_de_Pago_Triggered_BeforeInsertUpdate_ActualizaCampos {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Plan de Pago_Triggered_After Insert Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Actualizar las facturas del plan de pago que estén en pendiente de emisión.</description>
+        <name>Update_Facturas_Activar</name>
+        <label>Update_Facturas_Activar</label>
+        <locationX>314</locationX>
+        <locationY>455</locationY>
+        <connector>
+            <targetReference>Subflow_InactivarPlanPagosVersionAnterior</targetReference>
+        </connector>
+        <filters>
+            <field>Estado_de_la_factura__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Pendiente de emisión</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Enviar_Factura_Oracle__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Estado_plan_de_pagos__c</field>
+            <value>
+                <stringValue>Activo</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Facturas__r</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar las facturas del plan de pago que estén en Pdte. envío a Oracle.</description>
+        <name>Update_Facturas_Inactivar</name>
+        <label>Update_Facturas_Inactivar</label>
+        <locationX>578</locationX>
+        <locationY>455</locationY>
+        <filters>
+            <field>Estado_de_la_factura__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Pendiente de emisión</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Enviar_Factura_Oracle__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Estado_de_la_factura__c</field>
+            <value>
+                <stringValue>Cancelada</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Estado_plan_de_pagos__c</field>
+            <value>
+                <stringValue>Inactivo</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Facturas__r</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el plan de pago poniendo el campo &apos;Enviar Facturas Oracle&apos; a verdadero.</description>
+        <name>Update_PlanDePagos</name>
+        <label>Update_Plan de Pagos</label>
+        <locationX>314</locationX>
+        <locationY>695</locationY>
+        <inputAssignments>
+            <field>EnviarFacturasOracle__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <startElementReference>Decision_EstadoPlanPago</startElementReference>
+    <status>Active</status>
+    <subflows>
+        <description>llamar al subflujo Inactivar Plan Pagos Versión Anterior.</description>
+        <name>Subflow_InactivarPlanPagosVersionAnterior</name>
+        <label>Subflow_Inactivar Plan Pagos Versión Anterior</label>
+        <locationX>314</locationX>
+        <locationY>575</locationY>
+        <connector>
+            <targetReference>Update_PlanDePagos</targetReference>
+        </connector>
+        <flowName>Inactivar_Plan_Pagos_Version_Anterior</flowName>
+        <inputAssignments>
+            <name>IdPlandePagosActivoVersionActual</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>
