@@ -1,0 +1,375 @@
+<apex:page controller="Ficha_Forma_pago_Controller" renderAs="PDF">
+    
+    <body>
+        
+		<div class="logos" style="margin-bottom: 2%">
+		<table>
+            <tr width="100%">
+                <td width="100%">
+					<apex:image url="{!$Resource.LogoAvintia}"/>
+                </td>
+                <td width="33.3%">
+                    <apex:outputPanel rendered = "{!cv.size > 0}">
+                        <apex:image value="{!urlLogoPromocion}" width="140" height="80"/>
+                    </apex:outputPanel>
+                </td>
+                <!--<td width="33.3%"><div style="font-size: 13px;" align="center">DOCUMENTO DE ARRAS PERSONA FÍSICA</div></td>
+                <td width="33.3%"><div align="right"><apex:image value="{!$Resource.LogoAedas}" width="90" height="46"/></div></td>-->
+            </tr>
+        </table>
+        </div>
+        
+		<div class="logos" style="margin-bottom: 2%">
+            Fecha {!DAY(TODAY())} /  {!MONTH(TODAY())} / {!YEAR(TODAY())}
+        </div>        
+        
+        <div class="CuadroVerde" style="border: 8px solid #16A085; margin-bottom: 2%">
+            
+            <table style="width: 100%;; margin: 1%">
+                <tr>
+                    <td style="width: 30%">Promoción</td>
+                    <td style="color: #16A085">{!promocion.name}</td>
+                </tr>
+                <tr>
+                     <td style="width: 30%">Nº viviendas</td>
+                    <td>{!promocion.N_Viviendas_totales_promocion__c}</td>
+                </tr>
+                <tr>
+                     <td style="width: 30%">Régimen</td>
+                    <td>{!cadenaTiposVivienda}</td>
+                </tr>
+                <tr>
+                     <td style="width: 30%">Localización</td>
+                    <td>{!promocion.Tipo_via__c } {!promocion.Nombre_via__c } {!promocion.N_Via__c}</td> 
+                </tr>
+                <tr>
+                    <td style="width: 30%">Promotor</td>
+                    <td>{!promocion.Socio_Empresa_Promotora__r.Name}</td>
+                </tr>
+                <tr>
+                     <td style="width: 30%">Comercializa</td>
+                    <td>{!promocion.Socio_Empresa_Comercializadora__r.Name}</td>
+                </tr>
+            </table>
+    
+        </div>
+        
+        <div class="CuadroAzul" style="border-top: 8px solid #154360; border-bottom: 8px solid #154360; margin-bottom: 2%">
+            
+            <table style="width: 100%; margin: 1%">
+                <tr>
+                    <td style="width: 30; padding-bottom: 8px"><b>Portal</b></td>
+                    <td> {!inmueble.Portal__c}</td>
+                </tr>
+                <tr>
+                    <td style="width: 30; padding-bottom: 8px"><b>Planta</b></td>
+                    <td> {!inmueble.Piso__c}</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%; ; padding-bottom: 8px"><b>Letra</b></td>
+                    <td> {!inmueble.Letra_N_Puerta__c}</td>
+                </tr>
+               <apex:outputPanel rendered="{!and(listGarajes.size > 0, listTrasteros.size == 0)}">
+                   <table style="width: 100%; margin: 1%">
+                        <tr>
+                            <td style="width: 25%;"><b>Garaje</b></td>
+                            <td>
+                                 <apex:repeat value="{!listGarajes}" var="garaje">
+                                    {!garaje.name}
+                                 </apex:repeat> 
+                            </td>
+                        </tr>
+                    </table>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!and(listGarajes.size == 0, listTrasteros.size > 0)}">
+                        <table style="width: 100%; margin: 1%">
+                            <tr>
+                                <td style="width: 25%;"><b>Trastero</b></td>
+                                <td>
+                                     <apex:repeat value="{!listTrasteros}" var="trastero">
+                                        {!trastero.name}
+                                     </apex:repeat> 
+                                </td>
+                            </tr>
+                        </table>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!and(listGarajes.size > 0, listTrasteros.size > 0)}">
+                        <table style="width: 100%; margin: 1%">
+                            <tr>
+                                <td style="width: 25%;"><b>Garaje y trastero</b></td>
+                                <td>
+                                     <apex:repeat value="{!listGarajes}" var="garaje">
+                                        {!garaje.name}
+                                     </apex:repeat> 
+                                     <apex:repeat value="{!listTrasteros}" var="trastero">
+                                         / {!trastero.name}
+                                     </apex:repeat> 
+                                </td>
+                            </tr>
+                        </table>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!promocion.Mostrar_Fecha_de_Escritura__c}"> 
+                    <table style="width: 100%; margin: 1%">
+                        <tr>
+                            <td style="width: 30; padding-bottom: 8px"><b>Fecha de entrega estimada: </b>
+                                {!promocion.Semestre_de_escrituracion__c} {!year(promocion.Inicio_de_escrituraciones__c)}
+                            </td>
+                        </tr>
+                    </table>
+                    </apex:outputPanel>
+            </table>
+           
+
+
+                
+                
+            
+            
+        </div>
+        
+        <div class="Reserva" style="margin-bottom: 2%; padding-left: 3%">
+            
+            <p ><b>RESERVA</b></p> <br/>
+            
+            <p style="display: inline; border: 1px; border-style: solid; padding: 8px; margin-left: 5%">
+                {!StrOpporReserva} €
+            </p>
+            <apex:outputPanel rendered="{!quote.Opportunity.Tipo_de_Reserva__c == 'Reserva con IVA'}">
+                <p style="display: inline">
+                    &nbsp;+ IVA &nbsp; <b>{!StrOpporPorcIVA}%</b>
+                </p>
+                <p style="display: inline; border: 1px; border-style: solid; padding: 8px">
+                    &nbsp;{!StrOpporReservaIVA}€
+                </p>
+            </apex:outputPanel>
+
+            <p>EL PAGO MEDIANTE TRANSFERENCIA O INGRESO EN CUENTA. </p>
+            <p style="display: inline">Nº CUENTA: </p>
+            <p style="display: inline">
+                <apex:outputPanel rendered="{!promocion.Cuenta_Activa_1__c}">
+                    {!promocion.Numero_de_cuenta_bancaria_1__c}
+                </apex:outputPanel>
+            </p>
+            <p style="display: inline">
+                <apex:outputPanel rendered="{!promocion.Cuenta_Activa_2__c}">
+                    {!promocion.Numero_de_cuenta_bancaria_2__c}
+                </apex:outputPanel>
+            </p>
+            <p>TITULAR: 
+                <apex:outputPanel rendered="{!promocion.Cuenta_Activa_1__c}">
+                    {!promocion.Titularidad_de_la_cuenta1__c}
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!promocion.Cuenta_Activa_2__c}">
+                    {!promocion.Titularidad_de_la_cuenta2__c}
+                </apex:outputPanel>
+            </p>
+            <p>CONCEPTO: {!promocion.Codigo_de_la_promocion__c} {!inmueble.N_Vivienda_Garaje_Trastero_Local__c} {!quote.Opportunity.Account.N_Documento__c}</p>
+            <p>
+                <apex:outputPanel rendered="{!quote.Opportunity.Tipo_de_Reserva__c == 'Reserva con IVA'}" >
+                    LA CANTIDAD ENTREGADA EN RESERVA SE DEDUCIRA DE LA  FIRMA DE CONTRATO                 
+                </apex:outputPanel>
+            </p>  
+        </div>
+        
+        <div class="datosReserva" style="border-top: 1px solid blue; border-bottom: 1px solid blue; margin-bottom: 2%">
+            
+            <table style="width: 97%; margin: 3%">
+                <tr>
+                    <td style="width:30%"></td>
+                    <td style="color: #16A085">Base</td>
+                    <td style="color: #16A085">Iva {!StrOpporPorcIVA}%</td>
+                    <td style="color: #16A085">Total</td>
+                </tr>
+                <tr>
+                    <td style="width:30%"><b><apex:outputText rendered="{!inmueble.Tipo_de_inmueble__r.Tipo__c == 'Vivienda'}" >PRECIO VIVIENDA</apex:outputText>
+                                             <apex:outputText rendered="{!inmueble.Tipo_de_inmueble__r.Tipo__c == 'Local'}" >PRECIO LOCAL</apex:outputText></b></td>
+                    <td>{!StrInmueblePrecio}</td>
+                    <td>{!StrInmueblePrecioIVA}</td>
+                    <td>{!StrInmueblePrecioTotal}</td>
+                </tr>
+                <!--IF-->
+                
+                <apex:outputPanel rendered="{!listGarajes.size > 0}">
+                    <table style="width: 97%; margin-right: 3%; margin-left: 3%">
+                        
+                        <apex:repeat value="{!MapGarajes}" var="garaje">
+                            <tr>
+                                <td style="width:30%"><b>PRECIO GARAJE</b></td>
+                                <td>{!MapGarajes[garaje][0]}</td>
+                                <td>{!MapGarajes[garaje][1]}</td>
+                                <td>{!MapGarajes[garaje][2]}</td>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!listTrasteros.size > 0}" >
+                <table style="width: 97%; margin-right: 3%; margin-left: 3%">
+                <apex:repeat value="{!MapTrasteros}" var="trastero">
+                <tr>
+                    <td style="width:30%"><b>PRECIO TRASTERO</b></td>
+                    <td>{!MapTrasteros[trastero][0]}</td>
+                    <td>{!MapTrasteros[trastero][1]}</td>
+                    <td>{!MapTrasteros[trastero][2]}</td>
+                </tr>
+                </apex:repeat> 
+                </table>
+                </apex:outputPanel>                
+            </table>
+            
+        </div>
+        
+        <div class="formaDePago" style="margin-bottom: 2%; text-align: center">
+            
+             <p><b>FORMA DE PAGO</b></p>
+            
+        </div>    
+        <div class="contrato" style="border-bottom: 1px solid blue">
+            <table style="width: 97%; margin: 3%; margin-bottom: 1%">
+                <tr>
+                    <td style="width:30%"></td>
+                    <td>BASE</td>
+                    <td>Iva {!StrOpporPorcIVA}%</td>
+                    <td>Total</td>
+                </tr>
+                <tr>
+                    <td style="width:30%">CONTRATO</td>
+                    <td>{!StrImporteContrato}</td>
+                    <td>{!StrImporteContratoIVA}</td>
+                    <td>{!StrImporteContratoTotal}</td>                    
+                </tr>
+            </table>
+        </div>
+        
+        <div class="cuotas" style="border-bottom: 1px solid blue">
+            <table style="width: 97%; margin: 3%; margin-bottom: 1%">
+                <tr>
+                    <td style="width:30%"></td>
+                    <td>BASE</td>
+                    <td>Iva {!StrOpporPorcIVA}%</td>
+                    <td>Total</td>
+                </tr>
+                <tr>
+                    <td style="width:30%"> {!quote.Opportunity.N_Cuotas__c} CUOTAS MENSUALES</td>
+                    <td>{!StrCuotasMensuales}</td>                    
+                    <td>{!StrCuotasMensualesIVA}</td>
+                    <td>{!StrCuotasMensualesTotal}</td>
+                </tr>
+            </table>
+        </div>
+        
+        <apex:outputPanel rendered="{!and(!(quote.Opportunity.Numero_Cuotas_Extra__c == null), !(quote.Opportunity.Numero_Cuotas_Extra__c == 0))}">
+        <div class="cuotasExtra" style="border-bottom: 1px solid blue">
+            <table style="width: 97%; margin: 3%; margin-bottom: 1%">
+                <tr>
+                    <td style="width:30%"></td>
+                    <td>BASE</td>
+                    <td>Iva {!StrOpporPorcIVA}%</td>
+                    <td>Total</td>
+                </tr>
+                <tr>
+                    <td style="width:30%">{!quote.Opportunity.Numero_Cuotas_Extra__c} CUOTAS EXTRA</td>
+                    <td>{!StrImporteCoutaExtra}</td>
+                    <td>{!StrImporteCoutaExtraIVA}</td>
+                    <td>{!StrImporteCoutaExtraTotal}</td>
+                </tr>
+            </table>
+        </div>        
+        </apex:outputPanel>
+
+        
+         <div class="entregaLlaves" style="border-bottom: 1px solid blue">
+            <table style="width: 97%; margin: 3%; margin-bottom: 1%">
+                <tr>
+                    <td style="width:30%"></td>
+                    <td>BASE</td>
+                    <td>Iva {!StrOpporPorcIVA}%</td>
+                    <td>Total</td>
+                </tr>
+                <tr>
+                   <td style="width:30%">ENTREGA DE LLAVES</td>
+                    <td>{!StrImporteEscritura}</td>
+                    <td>{!StrImporteEscrituraIVA}</td>
+                    <td>{!StrImporteEscrituraTotal}</td>  
+                </tr>
+            </table>
+        </div>
+        
+         <div class="PBC" style="border-bottom: 1px solid blue; padding-top: 2%; margin-left: 2%">
+            <p style="margin: 0px; color: grey">PBC</p>
+             <p style="margin: 0px">
+                 AVINTIA DESARROLLOS INMOBILIARIOS, S.L. declara que es sujeto obligado de conformidad con la Ley 10/2010,
+                 de 28 de abril de Prevención del Blanqueo de Capitales y de la Financiación del Terrorismo y su normativa de
+                 desarrollo, debiendo cumplir, entre otros requisitos, los deberes de diligencia debida que la normativa exige,
+                 como el de recabar de sus clientes su documentación identificativa, así como información suficiente para conocer
+                 la naturaleza de su actividad profesional o empresarial, y sin la cual, la futura operación de compraventa 
+                 no podrá realizarse. 
+             </p>
+        </div>
+        
+        <div class="LOPD" style="padding-top: 2%; margin-left: 2%">
+            <p style="margin: 0px; color: grey">LOPD</p>
+             <p style="margin: 0px;">
+				<br/>
+				De conformidad con la normativa de protección de datos, la información facilitada será tratada por {!promocion.Socio_Empresa_Promotora__r.Name}, S.L. con la finalidad de gestionar la 
+                reserva de la vivienda. La negativa a facilitar los mismos supondrá la imposibilidad de dar trámite a la misma.
+                <br/>
+				Sus datos podrán ser conservados en tanto sean necesarios para la gestión de la citada reserva y, en su caso, hasta el cumplimiento de los plazos legalmente establecidos. 
+				<br/>
+                <br/>
+				{!promocion.Socio_Empresa_Promotora__r.Name}, S.L. podrá comunicar esta información a las diferentes empresas del AVINTIA DESARROLLOS INMOBILIARIOS, S.L. y GRUPO AVINTIA, S.L. 
+                con la finalidad de ejecutar la presente reserva, así como para la gestión y administración de la misma. 
+                <br/>
+                <br/>
+                <b>
+                Si lo desea expresamente marcando la siguiente casilla, le informamos 
+                que sus datos personales podrán ser tratados con la finalidad de realizarle envíos de información de carácter comercial a través de medios electrónicos, o en cualquier otro formato, 
+                sobre productos y servicios ofrecidos por AVINTIA DESARROLLOS INMOBILIARIOS S.L. [__].
+                </b>
+				<br/>
+				<br/>
+				Para más información sobre nuestra política de Protección de Datos, por favor, puede consultar nuestra página web (<a href="www.grupoavintia.com">www.grupoavintia.com</a>).
+				De acuerdo con la normativa vigente sobre protección de datos, el abajo firmante podrá ejercer sus derechos mediante el envío de una comunicación a la siguiente 
+                 C/ Emisora, 20 (28224 – Pozuelo de Alarcón), Madrid, o por email a la siguiente dirección: dpo@grupoavintia.com. Para más información al respecto, podrás dirigirte 
+                a la web de la Agencia Española de Protección de Datos (<a href="www.aepd.es">www.aepd.es</a>) como Entidad Supervisora.
+             </p>
+        </div>
+        
+        <div class="datosContacto" style="margin-bottom: 5%">
+            <table style="margin-left: 40%">
+                <tr>
+                    <td> Contacto:</td>
+                    <td> {!promocion.Socio_Empresa_Comercializadora__r.Name}</td>
+                </tr>
+                <tr>
+                    <td> Direccion:</td>
+                    <td> {!promocion.Direccion_punto_venta_comercializadora__c} </td>
+                </tr>
+                <tr>
+                    <td> Teléfono:</td>
+                    <td> {!promocion.Telefono_promocion_comercializadora__c}</td>
+                </tr>
+                <tr>
+                    <td> E-mail:</td>
+                    <td> {!promocion.Email_promocion_comercializadora__c}</td>
+                </tr>
+            </table>
+            
+        </div>
+        
+        <div class="piePagina" style="margin-left: 3%">
+            <p style="margin-bottom: 0px">
+                Este documento es de carácter informativo y carece de valor contractual. El precio y los inmuebles están sujetos a vigencia de tarifa y disponibilidad de stock. El precio indicado tiene una validez de 24 horas desde la fecha del presente documento y queda sujeto a disponibilidad.
+            </p>
+        </div>
+        
+        <p style="margin-top: 0px; text-decoration: none">
+                <a href="https://avintiainmobiliaria.com">avintiainmobiliaria.com</a>
+            </p>
+        
+                            
+        
+   </body>
+    
+</apex:page>

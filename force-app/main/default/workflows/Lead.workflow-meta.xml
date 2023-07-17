@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Enviar_email_bienvenida</fullName>
+        <description>Enviar email bienvenida</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>info@soldithomes.es</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Bienvenida_a_los_lead</template>
+    </alerts>
+    <rules>
+        <fullName>Email al crear un lead</fullName>
+        <actions>
+            <name>Enviar_email_bienvenida</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Lead.Email</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Contactar_con_el_lead</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Contacte con el Lead para conseguir una información más completa:
+- Datos personales (Tipo de documento, Nº de documento, nacionalidad...)
+- Motivo de compra
+- Disponibilidad horaria
+- Tipología de interés, etc.</description>
+        <dueDateOffset>3</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Lead.CreatedDate</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>Contactar con el lead</subject>
+    </tasks>
+    <tasks>
+        <fullName>Visita</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Fije una visita con el cliente potencial</description>
+        <dueDateOffset>5</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>Visita</subject>
+    </tasks>
+</Workflow>

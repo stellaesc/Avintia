@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comercializa__c</fullName>
+    <description>Campo picklist que distingue entre ADI y SOLDIT HOMES</description>
+    <externalId>false</externalId>
+    <label>Comercializa</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ADI</fullName>
+                <default>false</default>
+                <label>ADI</label>
+            </value>
+            <value>
+                <fullName>SOLDIT HOMES</fullName>
+                <default>false</default>
+                <label>SOLDIT HOMES</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

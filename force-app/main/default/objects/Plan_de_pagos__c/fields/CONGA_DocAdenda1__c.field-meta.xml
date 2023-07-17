@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_DocAdenda1__c</fullName>
+    <externalId>false</externalId>
+    <formula>&quot;A)	La cantidad de &quot; +
+IF(ISBLANK(TEXT(Oportunidad__r.Pago_Reserva_p__c)) , &quot;________&quot; ,TEXT((1 - Oportunidad__r.Pago_Reserva_p__c/ 100) * Oportunidad__r.Reserva__c)) +
+&quot;EUROS, más I.V.A., que hacen un total de &quot; +
+IF(ISBLANK(TEXT(Oportunidad__r.Reserva__c)) , &quot;________&quot; , TEXT(Oportunidad__r.Reserva__c)) +
+&quot; €, que la parte compradora entregó con anterioridad al presente contrato en concepto de reserva. Se adjunta como ANEXO I copia del documento justificativo de pago del importe entregado en concepto de reserva.&quot;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_DocAdenda1</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

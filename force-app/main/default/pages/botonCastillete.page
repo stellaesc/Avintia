@@ -1,0 +1,19 @@
+<apex:page id="pg" standardController="Promocion__c">
+<apex:slds />
+<script>
+function OpenPage(Id){
+
+        console.log('entramos');
+        var boton = 'True';
+        var win=window.open('https://grupoavintia--despro.lightning.force.com/apex/showCastillete?id='+Id+'&boton='+boton,'_blank','centerscreen, top=600,left=600,height=570,width=520,scrollbars=yes,status=yes' );
+        win.focus();
+    
+}
+</script>
+<apex:form >
+    <!--<apex:variable var="Id" value="{!Promocion__c.Id}"/> -->
+           <!-- <apex:commandButton value="Ampliar Castillete" onclick="OpenPage('google'); return false;"/> -->
+    <button class="slds-button slds-button_neutral" style="position: absolute; right: 0;" onclick="OpenPage('{!Promocion__c.Id}'); return false;"> Ampliar Castillete </button>
+
+</apex:form>
+</apex:page>

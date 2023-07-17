@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pago_o_Cuota__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipología de pago</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Proforma</fullName>
+                <default>false</default>
+                <label>Proforma</label>
+            </value>
+            <value>
+                <fullName>Cuota</fullName>
+                <default>false</default>
+                <label>Cuota</label>
+            </value>
+            <value>
+                <fullName>Cuota Extra</fullName>
+                <default>false</default>
+                <label>Cuota Extra</label>
+            </value>
+            <value>
+                <fullName>Abono</fullName>
+                <default>false</default>
+                <label>Abono</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

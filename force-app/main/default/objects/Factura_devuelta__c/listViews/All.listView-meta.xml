@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Estado__c</columns>
+    <columns>Importe_original__c</columns>
+    <columns>Importe_pendiente__c</columns>
+    <columns>Promocion__c</columns>
+    <columns>Sociedad__c</columns>
+    <columns>Tipo_de_factura__c</columns>
+    <columns>Factura__c</columns>
+    <columns>Fecha_factura__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Cliente__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Estado__c</field>
+        <operation>equals</operation>
+        <value>OP</value>
+    </filters>
+    <label>All</label>
+</ListView>

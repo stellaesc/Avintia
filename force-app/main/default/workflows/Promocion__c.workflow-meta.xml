@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Aviso_Aprobacion_Tarifario_Finalizada</fullName>
+        <description>Aviso Aprobacion Tarifario Finalizada</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>jperez@grupoavintia.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>rcampos@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Comercial__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Last_Submitter__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Aprobacion_Tarifario_Finalizada</template>
+    </alerts>
+    <alerts>
+        <fullName>Aviso_aprobar_comercialziacion</fullName>
+        <description>Aviso de proceso de aprobación para aprobar comercialización</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>dser@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>info@soldithomes.es</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Plantilla_aprobar_comercializacion</template>
+    </alerts>
+    <alerts>
+        <fullName>Aviso_final_aprobada_comercializacion</fullName>
+        <description>Aviso final aprobada comercialización</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>fscandella@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>jrubio@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>rgarcia@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>info@soldithomes.es</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Salida_a_comercializacion</template>
+    </alerts>
+    <alerts>
+        <fullName>Aviso_final_rechazada</fullName>
+        <description>Aviso final rechazada</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>fscandella@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>jrubio@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>rgarcia@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>info@soldithomes.es</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Rechazada_Salida_a_comercializaci_n</template>
+    </alerts>
+    <alerts>
+        <fullName>Notificacion_cambio_de_hitos_en_promocion</fullName>
+        <description>Notificacion cambio de hitos en promocion</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Planificacion__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Notify_Hitos</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Aprobar_tarifario_true</fullName>
+        <field>Aprobar_tarifario__c</field>
+        <literalValue>1</literalValue>
+        <name>Aprobar tarifario true</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>BORRAR</fullName>
+        <field>Estado__c</field>
+        <literalValue>Configuración técnica</literalValue>
+        <name>BORRAR</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CambiaEstadoDM</fullName>
+        <field>Estado__c</field>
+        <literalValue>Documentación marketing</literalValue>
+        <name>CambiaEstadoDM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cambiar_a_Comercializacion</fullName>
+        <description>Si se aprueba la comercialización se pasa a la fase Comercialización</description>
+        <field>Fase__c</field>
+        <literalValue>Comercialización</literalValue>
+        <name>Cambiar a Comercialización</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cambiar_estado_comercialziacion</fullName>
+        <description>Cambiar el estado a comercialziación</description>
+        <field>Estado__c</field>
+        <literalValue>Sin Iniciar</literalValue>
+        <name>Cambiar estado comercialización</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cambiar_estado_configuracion_tecnica</fullName>
+        <description>Si se rechaza la comercialziación se vuelve al estado configuración técnica</description>
+        <field>Estado__c</field>
+        <literalValue>Configuración técnica</literalValue>
+        <name>Cambiar estado a configuración técnica</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Desmarcar_pdte_aprobacion_tarifario</fullName>
+        <field>Pendiente_de_aprobacion_de_tarifario__c</field>
+        <literalValue>0</literalValue>
+        <name>Desmarcar pdte aprobacion tarifario</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Desmarcar_pdte_aprobacion_tarifario_reje</fullName>
+        <field>Pendiente_de_aprobacion_de_tarifario__c</field>
+        <literalValue>0</literalValue>
+        <name>Desmarcar pdte aprobacion tarifario_reje</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Marcar_pdte_aprobacion_tarifario</fullName>
+        <field>Pendiente_de_aprobacion_de_tarifario__c</field>
+        <literalValue>1</literalValue>
+        <name>Marcar pdte aprobacion tarifario</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>borra_campo_auxiliar</fullName>
+        <field>TAREASCOMPLETADASPRUEBA__c</field>
+        <formula>&apos;&apos;</formula>
+        <name>borra campo auxiliar</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+</Workflow>

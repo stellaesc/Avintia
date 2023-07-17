@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Oportunidad__c</fullName>
+    <externalId>false</externalId>
+    <label>Oportunidad</label>
+    <referenceTo>Opportunity</referenceTo>
+    <relationshipLabel>Plan de pagos</relationshipLabel>
+    <relationshipName>Plan_de_pagos</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

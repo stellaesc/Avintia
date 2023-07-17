@@ -1,0 +1,3 @@
+{
+  "id_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhdmludGlhIiwiYXV0aCI6IlJPTEVfUkVTVCIsImV4cCI6MTU2ODAyMzY3MH0.Bx-aueV368Pe4to6dqqYxllzUsZf6UyZsSpvGpGsqTRyMfFfTqPr4Kf_Q_e5N-F70_9RXkW7F1efmv7Jsl_Z-w"
+}

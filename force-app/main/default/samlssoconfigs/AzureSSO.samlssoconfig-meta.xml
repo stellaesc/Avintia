@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SamlSsoConfig xmlns="http://soap.sforce.com/2006/04/metadata">
+    <identityLocation>SubjectNameId</identityLocation>
+    <identityMapping>Username</identityMapping>
+    <issuer>https://sts.windows.net/785a77cc-15b7-4047-b267-58d7718526a4/</issuer>
+    <loginUrl>https://login.microsoftonline.com/785a77cc-15b7-4047-b267-58d7718526a4/saml2</loginUrl>
+    <name>AzureSSO</name>
+    <oauthTokenEndpoint>https://grupoavintia.my.salesforce.com/services/oauth2/token?so=00Df20000019ZCs</oauthTokenEndpoint>
+    <redirectBinding>true</redirectBinding>
+    <requestSignatureMethod>1</requestSignatureMethod>
+    <requestSigningCertId>0P1f2000000PZDg</requestSigningCertId>
+    <salesforceLoginUrl>https://grupoavintia.my.salesforce.com?so=00Df20000019ZCs</salesforceLoginUrl>
+    <samlEntityId>https://grupoavintia.my.salesforce.com</samlEntityId>
+    <samlVersion>SAML2_0</samlVersion>
+    <userProvisioning>false</userProvisioning>
+    <validationCert>MIIC8DCCAdigAwIBAgIQOK+0763bhKpDEkWHyXndOTANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQDEylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZpY2F0ZTAeFw0xOTAzMjQwODE0NDhaFw0yMjAzMjQwODE0NDhaMDQxMjAwBgNVBAMTKU1pY3Jvc29mdCBBenVyZSBGZWRlcmF0ZWQgU1NPIENlcnRpZmljYXRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqTGTbUUCpaPeqb8ER2Oy2GtNJyEWyLvIBwafYfdzBVIVSFHlmqgQM4gVYcCtN9ILpE5Es6mqS33kD+kSUGyez5FvN+O7Vgcfs/nkIB334hJkuZCaC8uPOBE7cgeEho1V1FFQ9KMHdTpNtVKs+L3MumH8ZalXuuDUD0h07ZsVF/8rY2dsyX1jDIUn8UWePuDM4oozuO6PgEcOSQHut4tJW5AMjmBZZTxFMuOmUU8f1YiHZBn3RCTDcY7QCZ1KUcUofoimoT7vWVa9BzxoexF++buhoYZIHUH8FHfj87VK8iFRnKVmgt9hkEGqVY8cdjVmFVHRUMjS9a/iF0h4h2pwnQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAvJO/iGihj2wumf5KaGrJ0aVGDudNxL/9uGx917fyB5PDYy3QoY59gZAYxhLW9WxBOyhD5lE1vRquQ1+K4XSMY4s3RCJFPQw5LjKXLsSIDleweqpjmtnQRhX2a183WaPgqZIJyoRCPQWsBH+tjdp8bCuTIQGZlME4bvDmt4glqz2lLqN0nik451HO2z9CaQDkxYwZhd5v73F/J3/dhkMZo7sl/36z8SzBB6UAI/3ODg8MB+iPiBawMI/9/4skEjYuhxvWmwr9QbJLUyE2dlSSF8BzYmavKZ6MwWLYzeYK3pmOniPEVHBNE45EoqKwz3C8cNWs+/eLttyRK9S69lG7T</validationCert>
+</SamlSsoConfig>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EstadoFactura</fullName>
+    <active>false</active>
+    <description>El estado de la factura no puede ser cambiado manualmente.</description>
+    <errorConditionFormula>AND(ISCHANGED(Estado_de_la_factura__c),
+$User.ProfileId != &apos;00ef2000001aiAs&apos;)</errorConditionFormula>
+    <errorMessage>Solo los administradores pueden cambiar el estado de la factura.</errorMessage>
+</ValidationRule>

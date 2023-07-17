@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ImporteDistintoImporteLineas</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISNEW()),
+ISCHANGED( Importe__c ),
+Importe__c &lt;&gt; ImporteLineas__c
+)</errorConditionFormula>
+    <errorDisplayField>Importe__c</errorDisplayField>
+    <errorMessage>El importe introducido no corresponde con la suma de importes de las líneas de factura. Debe adaptar los importes.</errorMessage>
+</ValidationRule>

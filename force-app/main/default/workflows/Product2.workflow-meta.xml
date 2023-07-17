@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>AlertaEmailInmueblePublicadoNoLibre</fullName>
+        <description>Alerta de Email cuando un inmueble publicado deja de estar libre</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>malvarmalvarez@avintiainmobiliaria.comez@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>info@soldithomes.es</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/AlertaEmailPublicadoVendido</template>
+    </alerts>
+    <alerts>
+        <fullName>Checks_Producto_Cambiado</fullName>
+        <description>Checks Producto Cambiado</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>dser@avintiainmobiliaria.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>info@soldithomes.es</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Alerta_Check_Portal_Product</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>ActualizarUltimoModificadorEstado</fullName>
+        <field>UltimoModificadorEstado__c</field>
+        <formula>$User.Id</formula>
+        <name>ActualizarUltimoModificadorEstado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Liberar_Oportunidad_Inmueble</fullName>
+        <field>Limpiar_oportunidad__c</field>
+        <literalValue>1</literalValue>
+        <name>Liberar Oportunidad Inmueble</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Liberar_inmueble</fullName>
+        <field>Estado__c</field>
+        <literalValue>Libre</literalValue>
+        <name>Liberar inmueble</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Check Portales Cambiados</fullName>
+        <actions>
+            <name>Checks_Producto_Cambiado</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <formula>ISCHANGED(WebAvinita__c)  || ISCHANGED(Fotocasa__c)  || ISCHANGED(Idealista__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Desbloquear Inmueble si pasa 1 hora</fullName>
+        <active>true</active>
+        <formula>AND( ISPICKVAL(Estado__c, &apos;Bloqueado temporalmente&apos;),         ISBLANK(Oportunidad__c) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Liberar_inmueble</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Desbloquear Inmueble si pasan 24 horas</fullName>
+        <active>false</active>
+        <description>Desbloquea Inmueble si promocion es Gijon100 y pasan 24 horas desde la Reserva</description>
+        <formula>AND(  				ISPICKVAL(Estado__c, &apos;Apalabrado&apos;), 				Promocion__r.Name = &apos;GIJON100&apos; )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Liberar_Oportunidad_Inmueble</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Liberar_inmueble</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Desbloquear Inmueble si pasan 48 horas</fullName>
+        <active>false</active>
+        <description>Desbloquea Inmueble si pasan 48 horas</description>
+        <formula>AND(  				ISPICKVAL(Estado__c, &apos;Apalabrado&apos;), 				Promocion__r.Name &lt;&gt; &apos;GIJON100&apos; )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Liberar_Oportunidad_Inmueble</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Liberar_inmueble</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Ultimo modificador de estado</fullName>
+        <actions>
+            <name>ActualizarUltimoModificadorEstado</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>ISCHANGED(Estado__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

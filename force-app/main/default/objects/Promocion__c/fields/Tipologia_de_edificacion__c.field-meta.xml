@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipologia_de_edificacion__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipología de edificación</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Unifamiliar aislado</fullName>
+                <default>false</default>
+                <label>Unifamiliar aislado</label>
+            </value>
+            <value>
+                <fullName>Unifamiliar pareado</fullName>
+                <default>false</default>
+                <label>Unifamiliar pareado</label>
+            </value>
+            <value>
+                <fullName>Unifamiliar adosado</fullName>
+                <default>false</default>
+                <label>Unifamiliar adosado</label>
+            </value>
+            <value>
+                <fullName>Plurifamiliar aislado</fullName>
+                <default>false</default>
+                <label>Plurifamiliar aislado</label>
+            </value>
+            <value>
+                <fullName>Plurifamiliar medianeras</fullName>
+                <default>false</default>
+                <label>Plurifamiliar medianeras</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

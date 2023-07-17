@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vendedor__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Vendedor al que aplica el registro</description>
+    <externalId>false</externalId>
+    <label>Vendedor</label>
+    <referenceTo>Vendedor__c</referenceTo>
+    <relationshipLabel>Detalles comisión</relationshipLabel>
+    <relationshipName>DetallesComision</relationshipName>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

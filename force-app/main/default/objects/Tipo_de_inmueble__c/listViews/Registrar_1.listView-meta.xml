@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Registrar_1</fullName>
+    <columns>NAME</columns>
+    <columns>sup_Salon__c</columns>
+    <columns>sup_Cocina__c</columns>
+    <columns>sup_Hall__c</columns>
+    <columns>sup_Distribuidor__c</columns>
+    <columns>sup_Dormitorio_1__c</columns>
+    <columns>sup_Dormitorio_2__c</columns>
+    <columns>sup_Dormitorio_3__c</columns>
+    <columns>sup_Dormitorio_4__c</columns>
+    <columns>sup_Armario_tecnico__c</columns>
+    <columns>sup_Bano_1__c</columns>
+    <columns>sup_Bano_2__c</columns>
+    <columns>sup_Aseo__c</columns>
+    <columns>sup_Tendedero__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Tipo__c</field>
+        <operation>equals</operation>
+        <value>Vivienda</value>
+    </filters>
+    <filters>
+        <field>Promocion__c</field>
+        <operation>equals</operation>
+        <value>GIJON100</value>
+    </filters>
+    <label>Registrar superficies estancias</label>
+</ListView>

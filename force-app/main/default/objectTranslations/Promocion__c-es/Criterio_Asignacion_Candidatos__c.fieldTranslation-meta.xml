@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label></label>
+    <name>Criterio_Asignacion_Candidatos__c</name>
+    <picklistValues>
+        <masterLabel>Igualdad de Candidatos Asignados</masterLabel>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Mayor Número de Convertidos</masterLabel>
+        <translation></translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Plan de pago</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Plan de pagos</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Plan de pago Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>No_Activar_Nuevo_plan_pagos_sin_Aprobac</name>
+    </validationRules>
+</CustomObjectTranslation>

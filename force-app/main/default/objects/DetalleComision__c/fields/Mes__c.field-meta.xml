@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mes__c</fullName>
+    <description>Mes en el que se da la comisión</description>
+    <externalId>false</externalId>
+    <label>Mes</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Meses</valueSetName>
+    </valueSet>
+</CustomField>
