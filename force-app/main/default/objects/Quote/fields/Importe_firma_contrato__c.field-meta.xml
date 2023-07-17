@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Importe_firma_contrato__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( ISPICKVAL( Opportunity.Tipo_de_Reserva__c, &quot;Reserva con IVA&quot; ), (Opportunity.Pago_Contrato_al_contado__c * TotalPrice) - Opportunity.Reserva__c  ,  
+
+IF ( ISPICKVAL( Opportunity.Tipo_de_Reserva__c, &quot;Reserva sin IVA&quot; ), Opportunity.Pago_Contrato_al_contado__c * TotalPrice ,
+null ))</formula>
+    <label>Importe firma contrato</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

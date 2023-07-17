@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Medio_de_procedencia__c</fullName>
+    <externalId>false</externalId>
+    <label>Medio de procedencia</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Idealista</fullName>
+                <default>false</default>
+                <label>Idealista</label>
+            </value>
+            <value>
+                <fullName>Caseta</fullName>
+                <default>false</default>
+                <label>Caseta</label>
+            </value>
+            <value>
+                <fullName>Fotocasa</fullName>
+                <default>false</default>
+                <label>Fotocasa</label>
+            </value>
+            <value>
+                <fullName>Web Corporativa</fullName>
+                <default>false</default>
+                <label>Web Corporativa</label>
+            </value>
+            <value>
+                <fullName>Otros</fullName>
+                <default>false</default>
+                <label>Otros</label>
+            </value>
+            <value>
+                <fullName>SIMA 2019</fullName>
+                <default>false</default>
+                <label>SIMA 2019</label>
+            </value>
+            <value>
+                <fullName>Globaliza</fullName>
+                <default>false</default>
+                <label>Globaliza</label>
+            </value>
+            <value>
+                <fullName>Housage</fullName>
+                <default>false</default>
+                <label>Housage</label>
+            </value>
+            <value>
+                <fullName>Habitaclia</fullName>
+                <default>false</default>
+                <label>Habitaclia</label>
+            </value>
+            <value>
+                <fullName>PUNTO DE VENTA</fullName>
+                <default>false</default>
+                <label>PUNTO DE VENTA</label>
+            </value>
+            <value>
+                <fullName>API</fullName>
+                <default>false</default>
+                <label>API</label>
+            </value>
+            <value>
+                <fullName>PUBLICIDAD EXTERIOR (CIRCUITO DE VALLA+BUS+BUZONEO)</fullName>
+                <default>false</default>
+                <label>PUBLICIDAD EXTERIOR (CIRCUITO DE VALLA+BUS+BUZONEO)</label>
+            </value>
+            <value>
+                <fullName>PORTALES INMOBILIARIOS</fullName>
+                <default>false</default>
+                <label>PORTALES INMOBILIARIOS</label>
+            </value>
+            <value>
+                <fullName>WEB AVINTIA INMOBILIARIA</fullName>
+                <default>false</default>
+                <label>WEB AVINTIA INMOBILIARIA</label>
+            </value>
+            <value>
+                <fullName>ONLINE (RRSS+ADWORDS+PROGRAMATICA)</fullName>
+                <default>false</default>
+                <label>ONLINE (RRSS+ADWORDS+PROGRAMATICA)</label>
+            </value>
+            <value>
+                <fullName>ACCIONES ESPECIALES (TORNEO GOLF +SIMA+CENTRO COMERCIAL+FLYER)</fullName>
+                <default>false</default>
+                <label>ACCIONES ESPECIALES (TORNEO GOLF +SIMA+CENTRO COMERCIAL+FLYER)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

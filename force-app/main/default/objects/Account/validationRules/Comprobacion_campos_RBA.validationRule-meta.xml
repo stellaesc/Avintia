@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comprobacion_campos_RBA</fullName>
+    <active>false</active>
+    <description>Comprueba si se ha rellenado al menos uno de los campos necesarios para el cálculo de RBA de AML.</description>
+    <errorConditionFormula>AND(
+  OR(
+    RecordType.DeveloperName = &apos;PersonAccount&apos;,
+    RecordType.DeveloperName = &apos;Cuenta&apos;
+  ),
+  ISBLANK(CNAE__c),
+  ISPICKVAL(Situacion_laboral__c, &apos;&apos;),
+  ISBLANK(CNO__c)
+)</errorConditionFormula>
+    <errorMessage>Para realizar el cálculo de RBA en AML es necesario completar alguno de los siguientes campos: CNAE, CNO, Situación laboral.</errorMessage>
+</ValidationRule>

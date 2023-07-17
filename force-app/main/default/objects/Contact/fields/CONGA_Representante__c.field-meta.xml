@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_Representante__c</fullName>
+    <externalId>false</externalId>
+    <formula>&quot;Actúa en representación de la sociedad Don &quot; +  IF(ISBLANK(FirstName), &quot;________&quot;, FirstName)  +
+&quot; con &quot; + IF(ISBLANK(TEXT(Tipo_de_documento__c)), &quot;________&quot;, TEXT(Tipo_de_documento__c)) + &apos; &apos; + IF(ISBLANK(N_Documento__c), &quot;________&quot;, N_Documento__c) +
+&quot; en su condición de &quot; + IF(ISBLANK(Condicion__c), &quot;________&quot;,Condicion__c)  +
+&quot; conforme a escritura otorgada por el notario de &quot; + IF(ISBLANK(Lugar_de_notaria__c), &quot;________&quot;,Lugar_de_notaria__c)  +
+&quot; Don&quot; + IF(ISBLANK(Nombre_notario__c), &quot;________&quot;,Nombre_notario__c)  + 
+&quot;, en fecha &quot; + IF(ISBLANK(Fecha_de_Escritura__c), &quot;________ de ________ de ________ &quot;, TEXT(DAY(Fecha_de_Escritura__c)) +  &quot; de &quot; + TEXT(MONTH(Fecha_de_Escritura__c)) + &quot; de &quot; + TEXT(YEAR(Fecha_de_Escritura__c)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_Representante</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

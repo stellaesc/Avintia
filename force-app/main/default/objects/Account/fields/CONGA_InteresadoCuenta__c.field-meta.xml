@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_InteresadoCuenta__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(Name), &quot;________&quot;, Name)   + &quot;, con CIF número &quot; +
+	IF(ISBLANK(N_Documento__c), &quot;________&quot;, N_Documento__c) + &quot;, con domicilio social en &quot; +
+	IF(ISBLANK(TEXT(DP_Tipo_de_vIa__c)), &quot;________&quot;, TEXT(DP_Tipo_de_vIa__c))  + &quot; &quot; +
+	IF(ISBLANK(DP_Nombre_via__c), &quot;________&quot;, DP_Nombre_via__c) +
+	&quot;, número &quot; + IF(ISBLANK( NumeroViaText__c ), &quot;________&quot;, NumeroViaText__c) +
+	&quot; CP &quot; + IF(ISBLANK(DP_Codigo_postal__c), &quot;________&quot;, DP_Codigo_postal__c)  +
+	&quot;, e inscrita en el Registro Mercantil de &quot; + IF(ISBLANK(Lugar_del_registro__c), &quot;________&quot;, Lugar_del_registro__c) +
+	&quot; al tomo &quot; + IF(ISBLANK(Tomo__c), &quot;________&quot;, Tomo__c) + &quot;, sección &quot; + 
+	IF(ISBLANK(Seccion__c), &quot;________&quot;, Seccion__c) + &quot;, folio &quot; +
+	IF(ISBLANK(Folio__c), &quot;________&quot;, Folio__c) + &quot; hoja número &quot; + IF(ISBLANK(N_Hoja__c), &quot;________&quot;, N_Hoja__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_InteresadoCuenta</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

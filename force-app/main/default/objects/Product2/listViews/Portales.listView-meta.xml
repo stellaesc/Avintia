@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Portales</fullName>
+    <columns>PRODUCT2.NAME</columns>
+    <columns>Inmueble_asociado__c</columns>
+    <columns>N_habitaciones__c</columns>
+    <columns>WebAvinita__c</columns>
+    <columns>Precio__c</columns>
+    <columns>Estado__c</columns>
+    <columns>Bloque__c</columns>
+    <columns>Escalera__c</columns>
+    <columns>Letra_N_Puerta__c</columns>
+    <columns>Piso__c</columns>
+    <columns>Planta__c</columns>
+    <columns>Portal__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PRODUCT2.RECORD_TYPE</field>
+        <operation>equals</operation>
+        <value>Product2.Inmueble</value>
+    </filters>
+    <filters>
+        <field>WebAvinita__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Publicación web</label>
+    <sharedTo>
+        <role>Subdirector</role>
+    </sharedTo>
+</ListView>

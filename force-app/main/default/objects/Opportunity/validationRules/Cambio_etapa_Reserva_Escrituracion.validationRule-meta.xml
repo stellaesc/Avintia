@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cambio_etapa_Reserva_Escrituracion</fullName>
+    <active>true</active>
+    <description>No permitir el cambio a la etapa Reserva o Escrituración si los participantes no tienen relleno el campo estado civil y en el caso de ser casado el campo régimen</description>
+    <errorConditionFormula>AND(  ISCHANGED(StageName ), 
+       OR(ISPICKVAL(StageName, &apos;Reserva&apos;),
+          ISPICKVAL(StageName, &apos;Contrato&apos;),
+          ISPICKVAL(StageName, &apos;Plan de pagos&apos;),
+          ISPICKVAL(StageName, &apos;Escrituración&apos;)), 
+       InformacionParticipante__c = false,
+        $User.Username !=&apos;integracion@grupoavintia.com.pro&apos;
+)</errorConditionFormula>
+    <errorMessage>El Estado Civil del participante debe estar completo. En el caso de que sea &quot;Casado&quot; también se debe completar el Régimen.</errorMessage>
+</ValidationRule>

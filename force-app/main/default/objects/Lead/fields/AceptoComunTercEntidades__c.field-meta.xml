@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AceptoComunTercEntidades__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Campo que verifica la aceptación del uso de sus datos con terceras entidades.</description>
+    <externalId>false</externalId>
+    <label>Acepta Comunicación terceras entidades</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

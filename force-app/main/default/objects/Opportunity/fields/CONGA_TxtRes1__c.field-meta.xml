@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_TxtRes1__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(OR(ISPICKVAL(Tipo_de_Reserva__c, &apos;Reserva sin IVA&apos;), ISPICKVAL(Tipo_de_Reserva__c, &apos;Reserva con IVA&apos;)),&apos;Todos los recibos serán domiciliados en la cuenta designada por la parte compradora que en este acto acepta que se le giren; siendo la cuenta referida la siguiente C.C.: &apos; + IF(ISBLANK(Cuenta_Bancaria_de_mandato__c), &apos; _________ &apos; , Cuenta_Bancaria_de_mandato__c) + &apos;.&apos;,&apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_TxtRes1</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

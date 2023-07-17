@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Campos_obligatorios_Cliente_Empresa</fullName>
+    <active>true</active>
+    <description>Obliga a informar determinados campos desde la etapa Pre-Reserva de la oportunidad</description>
+    <errorConditionFormula>AND (     Account.RecordType.Name = &quot;Cliente Empresa&quot;, 
+
+               NOT ( ISPICKVAL( StageName , &quot;Presupuesto&quot;)), 
+
+                   OR( ISBLANK( TEXT(  Account.Tipo_de_documento__c )),  
+                           ISBLANK(  Account.N_Documento__c  ),  
+                           ISBLANK( TEXT( Account.AccountSource )),  
+                           ISBLANK(  TEXT( Account.Estado_comercial__c )), 
+                           ISBLANK(   Account.Nacionalidad__c  ),  
+                           ISBLANK(  TEXT(  Account.Tipo_de_sociedad__c )),
+                           ISBLANK(  Account.DP_Pais__c   )),
+
+        AND ($User.Username !=&apos;integracion@grupoavintia.com.pro.leadclic&apos;,$User.Username !=&apos;b2bmaintegration@00d0r0000008janeaq.ext&apos;)
+           
+       
+)</errorConditionFormula>
+    <errorMessage>Los siguientes campos de Cuenta deben estar informados: Tipo de documento, Nº Documento, Agregador origen Leads, Estado comercial, Nacionalidad, Tipo de sociedad, País_1,</errorMessage>
+</ValidationRule>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Detalles_productos</fullName>
+    <columns>WebAvinita__c</columns>
+    <columns>Inmueble_asociado__c</columns>
+    <columns>PRODUCT2.NAME</columns>
+    <columns>Precio_Comercial__c</columns>
+    <columns>N_Vivienda_Garaje_Trastero_Local__c</columns>
+    <columns>Piso__c</columns>
+    <columns>Bloque__c</columns>
+    <columns>Portal__c</columns>
+    <columns>Tipologia_Vivienda_Garaje_Trastero_Local__c</columns>
+    <columns>Tipo_de_inmueble__c</columns>
+    <columns>Estado__c</columns>
+    <columns>N_habitaciones__c</columns>
+    <columns>Superficie_Util_m2__c</columns>
+    <columns>Precio__c</columns>
+    <columns>Planta__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PRODUCT2.RECORD_TYPE</field>
+        <operation>equals</operation>
+        <value>Product2.Inmueble</value>
+    </filters>
+    <filters>
+        <field>PRODUCT2.NAME</field>
+        <operation>contains</operation>
+        <value>eltarter</value>
+    </filters>
+    <filters>
+        <field>Tipologia_Vivienda_Garaje_Trastero_Local__c</field>
+        <operation>equals</operation>
+        <value>vivienda</value>
+    </filters>
+    <label>Detalles productos</label>
+</ListView>

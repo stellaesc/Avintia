@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disponibilidad_horaria__c</fullName>
+    <externalId>false</externalId>
+    <label>Disponibilidad horaria</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Mañanas</fullName>
+                <default>false</default>
+                <label>Mañanas</label>
+            </value>
+            <value>
+                <fullName>Tardes</fullName>
+                <default>false</default>
+                <label>Tardes</label>
+            </value>
+            <value>
+                <fullName>Noches</fullName>
+                <default>false</default>
+                <label>Noches</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

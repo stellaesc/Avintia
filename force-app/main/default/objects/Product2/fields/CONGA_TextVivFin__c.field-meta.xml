@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_TextVivFin__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Tipologia_Vivienda_Garaje_Trastero_Local__c = &apos;Vivienda&apos;, &apos;comprador de la vivienda sita en &apos; + IF(OR(ISBLANK(Tipo_de_via__c),ISNULL(Tipo_de_via__c)),&apos; __________ &apos;,Tipo_de_via__c) + &apos; &apos; + IF(OR(ISBLANK(Nombre_Via__c),ISNULL(Nombre_Via__c)),&apos; __________ &apos;,Nombre_Via__c) + &apos; num. &apos; + IF(OR(ISBLANK(N_Via__c),ISNULL(N_Via__c)),&apos; __________ &apos;,TEXT(N_Via__c)) + &apos; de &apos; + 
+IF(OR(ISBLANK(Localidad__c),ISNULL(Localidad__c)),&apos; __________ &apos;,Localidad__c) + &apos;,&apos;, &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_TextVivFin</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

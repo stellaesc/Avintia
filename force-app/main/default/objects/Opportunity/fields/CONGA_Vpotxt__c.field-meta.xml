@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_Vpotxt__c</fullName>
+    <externalId>false</externalId>
+    <formula>&quot;El Precio convenido será satisfecho del siguiente modo:&quot; +
+&quot;A) La cantidad de &quot; +  TEXT(CONGA_Amount_Pago_contrato__c) +
+&quot;€,  más I.V.A., que hacen un total de &quot; +  TEXT(CONGA_Amount_Pago_contrato_IVA__c) +
+&quot;€  que la parte compradora  entrega en este acto  mediante cheque bancario/transferencia a la cuenta de la vendedora,&quot; +
+&quot; que se acepta salvo buen fin, y cuya fotocopia se adjunta.&quot; + 
+&quot;B) La cantidad de &quot; + TEXT(Importe_plan_de_pagos_real__c) + 
+&quot;€, más I.V.A. (lo que supone un total de &quot; + TEXT(Importe_plan_de_pagos_real__c * (Porcentaje_IVA__c * 0.01)) + 
+&quot;€ , se pagará en &quot; +  TEXT(N_Cuotas__c) + 
+&quot;más I.V.A. cada uno durante la construcción, con vencimiento mensual y sucesivos, a partir del&quot; +  TEXT(Fecha_de_primera_cuota__c) +
+IF(ISBLANK(TEXT(Numero_Cuotas_Extra__c)),&quot;&quot;,&quot;; y la cantidad de&quot; + TEXT((Numero_Cuotas_Extra__c * Importe_Cuota_Extra__c)) +
+&quot;€, más I.V.A. (lo que supone un total de &quot; + TEXT((Numero_Cuotas_Extra__c * Importe_Cuota_Extra__c) * (Porcentaje_IVA__c * 0.01)) +
+&quot;se pagará en &quot; +  TEXT(Numero_Cuotas_Extra__c) + &quot; plazos de &quot; +  TEXT(Importe_Cuota_Extra__c) + &quot; € más I.V.A. cada uno.&quot;) +
+&quot; Se adjunta como ANEXO II calendario de pagos. &quot; +  
+&quot;Todos los recibos serán domiciliados en la cuenta designada por la parte compradora que en este acto acepta&quot; + 
+&quot; que se le giren; siendo la cuenta referida la siguiente C.C.:&quot; +  Cuenta_Bancaria_de_mandato__c + 
+&quot;C) La cantidad de &quot; +   TEXT(Importe_escritura__c) + &quot;€,  más I.V.A., que se abonarán al otorgamiento de la escritura&quot; + 
+&quot;pública de compraventa, sin perjuicio de una eventual subrogación, por el importe total o parcial pendiente,&quot; +
+&quot;en el préstamo hipotecario.&quot;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_Vpotxt</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

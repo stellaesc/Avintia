@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Firma_Reserva_si_Fin_Comercializacion</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISCHANGED(Contrato_Reserva_firmado__c),
+Contrato_Reserva_firmado__c = true,
+Promocion__r.Fin_comercializacion_prevista__c &lt;  TODAY() 
+)</errorConditionFormula>
+    <errorMessage>La promoción está fuera de plazo de comercialización. Compruebe el campo Fin comercialización prevista de la promoción.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedir_Resultado_si_tarea_Contac_completa</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+
+ OR(Subject = &quot;Contactar con el lead&quot;,
+    Subject = &quot;Visita&quot;),
+
+ ISBLANK(TEXT(Resultado_contacto__c)),
+ ISPICKVAL(Status, &quot;Completed&quot;)
+
+
+)</errorConditionFormula>
+    <errorDisplayField>Resultado_contacto__c</errorDisplayField>
+    <errorMessage>Por favor, seleccione seleccione un &quot;Resultado tras contactar&quot;</errorMessage>
+</ValidationRule>

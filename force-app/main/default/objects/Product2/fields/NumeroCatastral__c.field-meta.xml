@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NumeroCatastral__c</fullName>
+    <description>Referencia Catastral para la ficha de escrituración Conga</description>
+    <externalId>false</externalId>
+    <formula>BLANKVALUE(NFINCADH__c, Promocion__r.Referencia_catastral__c)</formula>
+    <label>Número Catastral</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

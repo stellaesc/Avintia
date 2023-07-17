@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Descripcion_motivo_de_descarte__c</fullName>
+    <description>Campo para escribir comentarios cuando el motivo de descarte es Otros</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Descripción del motivo de descarte &quot;Otros&quot;</inlineHelpText>
+    <label>Descripcion motivo de descarte</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>TextArea</type>
+</CustomField>

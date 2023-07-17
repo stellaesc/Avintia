@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PromocionInactiva__c</fullName>
+    <externalId>false</externalId>
+    <formula>Promocion__r.PromocionInactiva__c</formula>
+    <label>Promoción inactiva</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
