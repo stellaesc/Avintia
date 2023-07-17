@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ImpoteTotal__c</fullName>
+    <description>Importe total comisiones: hitos, bonus y extras</description>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK( ImporteBonus__c ), 
+IF( ISBLANK(PorcentajeBonus__c ),  ImporteTotalComisionFija__c + ImporteComisionExtra__c ,  ImporteTotalComisionFija__c +( ImporteTotalComisionFija__c * PorcentajeBonus__c ) +  ImporteComisionExtra__c ), ImporteTotalComisionFija__c + ImporteBonus__c + ImporteComisionExtra__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Importe TOTAL</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

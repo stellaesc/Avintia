@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Imposibilitar_Cambio_Num_o_Secuencial</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(AND(!ISNEW(), ISCHANGED(Numero_de_factura__c ), !ISCHANGED(SecuencialFactura__c)),
+				AND(!ISNEW(), !ISCHANGED(Numero_de_factura__c ), ISCHANGED(SecuencialFactura__c))
+			)</errorConditionFormula>
+    <errorMessage>No se puede modificar el número de factura sin modificar el secuencial de factura, ni el secuencial de factura sin modificar el número.
+Debe terminar en el mismo número.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bloqueo_Cuadro_Superficie</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISNEW()),
+    NOT(ISCHANGED(Bloqueado__c)),
+    Bloqueado__c
+)</errorConditionFormula>
+    <errorMessage>Aún no se puede rellenar el cuadro de superficies.</errorMessage>
+</ValidationRule>

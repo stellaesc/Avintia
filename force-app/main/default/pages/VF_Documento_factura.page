@@ -1,0 +1,214 @@
+<apex:page controller="Documento_factura_controller" renderAs="PDF">
+
+    <header>
+    </header>
+
+    <body style="font-family: serif; font-style: italic; font-weight: 400;">
+
+        <div id="encabezado" style="line-height: 0; margin-top: 5%; margin-bottom: 8%; text-transform: uppercase;">
+            <p style="display: inline"> 
+                {!sociedad.name} &nbsp; &nbsp; &nbsp; &nbsp;
+            </p>
+            <p style="display: inline" > 
+                {!sociedad.Tipo_de_documento__c} 
+                {!sociedad.N_Documento__c} 
+            </p>
+            <p> 
+                {!sociedad.DF_Tipo_de_via__c}&nbsp; 
+                {!sociedad.DF_Nombre_via__c}, &nbsp;
+                Nº
+                {!sociedad.DF_N_via__c} </p>
+            <p > 
+                {!sociedad.Phone}
+            </p>
+            <p > 
+                {!sociedad.DF_Codigo_postal__c}  -  {!NombreLocalidad} 
+                ({!sociedad.DF_Provincia__c})
+            </p>
+        </div>
+
+        <div style="margin-bottom: 5%">
+            <table border="1" style="border-top: none; border-collapse: collapse; margin: 0" cellpadding="7" >
+                <apex:repeat value="{!listaClientes}" var="cliente">
+                    <tr >
+                        <td style="width: 400px" align="left">
+                            <p style="display: inline; padding-top: 5%; padding-left: 3%; padding-right: 3%">
+                                <b> {!cliente.PersonTitle} &nbsp; {!cliente.name} </b>
+                            </p>
+                        </td>
+                        <td style="width: 250px" align="left">
+                            <p style="display: inline; padding-top: 5%; padding-left: 10%; margin-bottom: 250px">
+                            	<apex:outputText value="{!MapaParticipantesOpp[cliente]}"/ >
+                            </p>
+                        </td>
+                        <td style="width: 250px" align="left">
+                            <p style="display: inline; padding-top: 5%; padding-left: 10%; margin-bottom: 250px">
+                                <b>{!cliente.Tipo_de_documento__c} &nbsp; {!cliente.N_Documento__c} </b>
+                            </p>
+                        </td>
+                        <td style="width: 700px" align="left">
+                            <p style="display: inline; padding-top: 5%; padding-left: 10%; margin-bottom: 250px">
+                                {!cliente.DF_Tipo_de_via__c}&nbsp;
+                                {!cliente.DF_Nombre_via__c},&nbsp;
+                                Nº
+                                {!cliente.DF_N_via__c}
+                                {!IF(cliente.DF_N_piso__c != null, " Piso ", "")} 
+                                    {!cliente.DF_N_piso__c}
+                                {!IF(cliente.DF_Puerta__c != null, " Pta ", "")} 
+                                    {!cliente.DF_Puerta__c}
+                                {!IF(cliente.DF_Escalera__c != null, " Esl ", "")}
+                                    {!cliente.DF_Escalera__c}
+                            </p>
+                            <p style="text-transform: uppercase; margin-bottom: 7%">
+                                {!cliente.DF_Codigo_postal__c}&nbsp;
+                                {!cliente.DF_Provincia__c}&nbsp;&nbsp;-&nbsp;&nbsp;
+                                {!cliente.DF_Pais__r.Name}
+                            </p>   
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </table>
+        </div>
+
+        <div style="margin-bottom: 5%">
+            <table border="1" style="border-top: none; border-collapse: collapse; margin: 0" cellpadding="7" >
+                <tr >
+                    <td style="width: 300px"> 
+                        <p style="display: inline; padding-top: 5%; padding-left: 3%; padding-right: 3%">
+                            <b> FACTURA {!factura.Numero_de_factura__c}</b>
+                        </p>
+                    </td>
+                    <td style="width: 600px">
+                        <p style="display: inline; padding-top: 5%; padding-left: 10%; margin-bottom: 250px">
+                            <b> POZUELO DE ALARCON, {!fechaCreacion}</b>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="divTabla2" style="margin-top: 8%; margin-bottom: 8%">
+            <div  style="border: 1px solid">
+                <table  style="border-collapse: collapse; margin: 0" cellpadding="6">
+                <tr>
+                    <td style="width: 600px; text-align: center; padding-bottom: 2%;">
+                        C O N C E P T O
+                    </td>
+                    <td style="width: 200px; text-align: center">
+                        I M P O R T E
+                    </td>
+                </tr>
+                </table>
+            </div>
+            <div style="border: 1px solid; height: 250px">
+                <table>
+                    <tr>
+                        <td style="width: 600px">
+                            <p style="margin-bottom: 0; margin-top: 0">
+                            <apex:outputText value="{0, date, dd/MM/yyyy}">
+                                <apex:param value="{!factura.Fecha_de_emision__c}" />
+                            </apex:outputText>
+                                {!factura.Descripcion__c} de la promoción {!factura.Oportunidad__r.Promocion__r.Name} 
+                            </p>
+                        </td>
+                    </tr>
+                    <apex:outputPanel rendered="{!and(lineasFacturaList.size = 1, not(isFacturaEscrituracion))}">
+                        <tr>
+                            <td style="width: 600px">
+                                <p style="margin-bottom: 7%; margin-top: 0; ">
+                                    Neto principal ..........
+                                </p>
+                            </td>
+                            <td style="width: 200px; text-align: right">
+                                {!StrFacturaImporte}
+                            </td>
+                        </tr>    
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!isFacturaEscrituracion}">
+                        <tr>
+                            <td>
+                                Total Venta
+                            </td>
+                            <td style="text-align: right;">
+                                {!TotalImporteEscr}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Entregas a Cta. Recibidas
+                            </td>
+                            <td style="text-align: right;">
+                                {!TotalCobradoImporteEscr}
+                            </td>
+                        </tr>
+                    </apex:outputPanel>
+                    <apex:repeat value="{!MapFacturas}" var="Factura">
+                        <tr>
+                            <td style="width: 600px">
+                                <apex:outputText value="{!MapFacturas[Factura][0]}" rendered="{!MapFacturas[Factura][0]}!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapFacturas[Factura][0]}=='#@#VACIO#@#'}" style="color:black;"/>
+                            </td>
+                            <td style="width: 200px; text-align: right">
+                                <apex:outputText value="{!MapFacturas[Factura][1]}" rendered="{!MapFacturas[Factura][1]}!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapFacturas[Factura][1]}=='#@#VACIO#@#'}" style="color:black;"/>
+                            </td>
+                        </tr>
+                    </apex:repeat> 
+                    <tr style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px;  margin-top: 30px;">
+                        <td style="margin: 0;">
+                            <p style="padding-left: 55px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;  margin-top: 30px;">
+                                BASE IMPONIBLE EUROS....
+                            </p>
+                        </td>
+                        <td style="text-align: right;">
+                            <p style="padding-left: 55px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;  margin-top: 30px;">
+                                {!StrFacturaImporte}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="margin: 0;">
+                        <td style="margin: 0;">
+                            <apex:outputText rendered="{! IF(factura.Codigo_Impuesto__c != null ,true,false) }">
+                                <p style="padding-left: 30px; margin: 0;">
+                                    {!StrCodigoImpuesto} I.V.A. s/{!StrFacturaImporte}
+                                </p> 
+                            </apex:outputText>
+                            <apex:outputText rendered="{! IF(factura.Codigo_Impuesto__c == null ,true,false) }">
+                                <p style="padding-left: 30px; margin: 0;">
+                                    sin IVA
+                                </p> 
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; margin: 0;">
+                                {!StrFacturaImporteIVA}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="divTotal" style="margin-left: 30%; margin-right: 3%">
+            <table border="1" style="border-collapse: collapse; margin: 0; cells">
+                <tr>
+                    <td valign="top" style="width: 300px; min-height: 35px; text-align: center ">
+                        <b> TOTAL FACTURA EUROS...... </b>
+                    </td>
+                    <td valign="top" style="width: 200px; text-align: right; min-height: 35px; padding-right: 10px"> 
+                        {!StrFacturaImporteConIVA}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="divPiePagina" style="width: 100%; border-top: solid; text-align: center; position:fixed; bottom:0; z-index:999999; font-size: 14px">
+            <p style="margin:0">
+                MADRID
+            </p>
+            <p style="margin:2px">
+                C.I.F.O. {!sociedad.N_Documento__c}
+            </p>
+        </div>
+
+    </body>
+
+</apex:page>

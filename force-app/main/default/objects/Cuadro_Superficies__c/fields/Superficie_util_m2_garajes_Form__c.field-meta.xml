@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Superficie_util_m2_garajes_Form__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( ABS(Promocion__r.Superficie_util_m2_garajes_calculada__c - Superficie_util_m2_garajes_Manu__c) = 0 ,
+IMAGE( $Setup.Gestion_de_imagenes__c.ImagenOK__c ,&quot;OK&quot;, 17, 17) ,
+
+IF ( ABS(Promocion__r.Superficie_util_m2_garajes_calculada__c - Superficie_util_m2_garajes_Manu__c) &lt; 1,
+IMAGE( $Setup.Gestion_de_imagenes__c.Warning__c , &quot;Warning&quot;, 17, 17) + &quot; El número calculado es &quot; + text ( Promocion__r.Superficie_util_m2_garajes_calculada__c ),
+
+IMAGE( $Setup.Gestion_de_imagenes__c.Imagen_ERROR__c, &quot;Incorrecto&quot;, 17, 17) + &quot; El número calculado es &quot; + text ( Promocion__r.Superficie_util_m2_garajes_calculada__c ))
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Superficie Útil m2 garajes Form</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

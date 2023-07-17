@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_InteresadoAdenda__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(Cliente__r.FirstName),&apos;________&apos;,Cliente__r.FirstName) + &apos; &apos; + IF(ISBLANK(Cliente__r.LastName),&apos;________&apos;,Cliente__r.LastName) +
+&quot; mayor de edad, con un porcentaje de participación de &quot; + 
+IF( ISBLANK(TEXT(Porcentaje_de_participacion__c)),&quot;________&quot; , TEXT(Porcentaje_de_participacion__c) ) + 
+&quot;% &quot; + IF( ISBLANK(TEXT(Cliente__r.Regimen__c)),&quot;________&quot; , TEXT(Cliente__r.Regimen__c)  ) +
+&quot; y con &quot; + IF( ISBLANK(TEXT(Cliente__r.Tipo_de_documento__c)),&quot;________&quot; , TEXT(Cliente__r.Tipo_de_documento__c)  ) + 
+&quot; número &quot; +  IF( ISBLANK(Cliente__r.N_Documento__c),&quot;________&quot; , Cliente__r.N_Documento__c  ) +
+&quot; con domicilio en &quot; + IF( Cliente__r.DP_Pais__r.Name = &quot;España&quot;  , 
+IF( ISBLANK(TEXT(Cliente__r.DP_Tipo_de_vIa__c)),&quot;________&quot; , TEXT(Cliente__r.DP_Tipo_de_vIa__c)  ) + &quot; &quot; + 
+IF( ISBLANK(Cliente__r.DP_Nombre_via__c),&quot;________&quot; , Cliente__r.DP_Nombre_via__c  ) + &quot; número &quot;  + 
+IF( ISBLANK(Cliente__r.NumeroViaText__c),&quot;________&quot; , Cliente__r.NumeroViaText__c  ) + &quot; CP &quot; +
+IF( ISBLANK(Cliente__r.DP_Codigo_postal__c),&quot;________&quot; , Cliente__r.DP_Codigo_postal__c  )   , 
+IF( ISBLANK(Cliente__r.Localidad_Extranjera_P__c),&quot;________&quot; , Cliente__r.Localidad_Extranjera_P__c )  )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_InteresadoAdenda</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -101,6 +101,24 @@
         <label>Sin límite</label>
     </customValue>
     <customValue>
+        <fullName>600.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>600.000</label>
+    </customValue>
+    <customValue>
+        <fullName>480.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>480.000</label>
+    </customValue>
+    <customValue>
+        <fullName>420.000</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>420.000</label>
+    </customValue>
+    <customValue>
         <fullName>360.000</fullName>
         <default>false</default>
         <isActive>false</isActive>
@@ -167,40 +185,22 @@
         <label>0</label>
     </customValue>
     <customValue>
-        <fullName>420.000</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>420.000</label>
-    </customValue>
-    <customValue>
-        <fullName>480.000</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>480.000</label>
-    </customValue>
-    <customValue>
-        <fullName>600.000</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>600.000</label>
-    </customValue>
-    <customValue>
         <fullName>1 millon</fullName>
         <default>false</default>
         <isActive>false</isActive>
         <label>1 millón</label>
     </customValue>
     <customValue>
-        <fullName>2 millones</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>2 millones</label>
-    </customValue>
-    <customValue>
         <fullName>3 millones</fullName>
         <default>false</default>
         <isActive>false</isActive>
         <label>3 millones</label>
+    </customValue>
+    <customValue>
+        <fullName>2 millones</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>2 millones</label>
     </customValue>
     <masterLabel>Mínimo precio interés</masterLabel>
     <sorted>false</sorted>

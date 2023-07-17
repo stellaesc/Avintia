@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ComisionPosventa__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>Porcentaje a aplicar en el cálculo de comisiones tras el cumplimiento de los objetivos</description>
+    <externalId>false</externalId>
+    <label>% comisión posventa tras cumplimiento</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

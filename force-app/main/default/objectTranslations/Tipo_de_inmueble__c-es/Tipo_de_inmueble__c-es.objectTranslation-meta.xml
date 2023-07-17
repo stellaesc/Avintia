@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Tipo de inmueble</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Tipo de inmueble</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Formato Tipo de inmueble</layout>
+        <sections>
+            <label></label>
+            <section>Configuración</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos generales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Plano</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Superficies</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Superficies por estancia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

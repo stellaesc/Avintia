@@ -1,0 +1,45 @@
+{
+    "odata.metadata": "https://avintia.sharepoint.com/sites/SF365TEST/_api/$metadata#SP.ListData.ContratosItems&$select=Id,Title,IdPromocion,TipoDocumento,Categoria,Subcategoria,FieldValuesAsText/FileRef",
+    "value": [
+        {
+            "odata.type": "SP.Data.ContratosItem",
+            "odata.id": "9b0143f6-681f-4eb0-94de-4d4820345e5e",
+            "odata.etag": "\"9\"",
+            "odata.editLink": "Web/Lists(guid'90318c36-dde2-44ed-b75d-7757bd136f94')/Items(17)",
+            "FieldValuesAsText@odata.navigationLinkUrl": "Web/Lists(guid'90318c36-dde2-44ed-b75d-7757bd136f94')/Items(17)/FieldValuesAsText",
+            "FieldValuesAsText": {
+                "odata.type": "SP.FieldStringValues",
+                "odata.id": "https://avintia.sharepoint.com/sites/SF365TEST/_api/Web/Lists(guid'90318c36-dde2-44ed-b75d-7757bd136f94')/Items(17)/FieldValuesAsText",
+                "odata.editLink": "Web/Lists(guid'90318c36-dde2-44ed-b75d-7757bd136f94')/Items(17)/FieldValuesAsText",
+                "FileRef": "/sites/SF365TEST/Contratos/Prueba Daniel/Documento2.docx"
+            },
+            "Id": 17,
+            "Title": "Documento2.docs",
+            "IdPromocion": "a00n0000003nWxSAAU",
+            "TipoDocumento": "Contrato",
+            "Categoria": "Categoría 3-4",
+            "Subcategoria": "Subcategoría 4",
+            "ID": 17
+        },
+        {
+            "odata.type": "SP.Data.ContratosItem",
+            "odata.id": "064ebfad-4341-46e8-adfc-4c9d3f805611",
+            "odata.etag": "\"5\"",
+            "odata.editLink": "Web/Lists(guid'90318c36-dde2-44ed-b75d-7757bd136f94')/Items(20)",
+            "FieldValuesAsText@odata.navigationLinkUrl": "Web/Lists(guid'90318c36-dde2-44ed-b75d-7757bd136f94')/Items(20)/FieldValuesAsText",
+            "FieldValuesAsText": {
+                "odata.type": "SP.FieldStringValues",
+                "odata.id": "https://avintia.sharepoint.com/sites/SF365TEST/_api/Web/Lists(guid'90318c36-dde2-44ed-b75d-7757bd136f94')/Items(20)/FieldValuesAsText",
+                "odata.editLink": "Web/Lists(guid'90318c36-dde2-44ed-b75d-7757bd136f94')/Items(20)/FieldValuesAsText",
+                "FileRef": "/sites/SF365TEST/Contratos/test.txt"
+            },
+            "Id": 20,
+            "Title": "test.txt",
+            "IdPromocion": "a00n0000003nWxSAAU",
+            "TipoDocumento": "Plano",
+            "Categoria": "Categoría 5-6",
+            "Subcategoria": "Subcategoría 6",
+            "ID": 20
+        }
+    ]
+}

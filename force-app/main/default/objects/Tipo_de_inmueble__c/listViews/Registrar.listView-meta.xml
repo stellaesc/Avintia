@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Registrar</fullName>
+    <columns>NAME</columns>
+    <columns>Superficie_Util_m2__c</columns>
+    <columns>Superficie_Terrazas_Cubiertas__c</columns>
+    <columns>SuperficieUtilCon100TerrCub__c</columns>
+    <columns>Superficie_Construida_m2__c</columns>
+    <columns>Superficie_Construida_total_con_ZZCC_m2__c</columns>
+    <columns>Superficie_Terrazas_Descubiertas__c</columns>
+    <columns>Superficie_Jardines__c</columns>
+    <columns>SupConstTotalZZCCZExtDescubierta__c</columns>
+    <columns>N_de_banos__c</columns>
+    <columns>N_de_habitaciones__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Tipo__c</field>
+        <operation>equals</operation>
+        <value>Vivienda</value>
+    </filters>
+    <filters>
+        <field>Promocion__c</field>
+        <operation>equals</operation>
+        <value>GIJON100</value>
+    </filters>
+    <label>Registrar superficies globales</label>
+</ListView>

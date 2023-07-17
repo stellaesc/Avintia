@@ -1,0 +1,692 @@
+<apex:page controller="Documento_reserva_controller" renderAs="PDF" applyBodyTag="false">
+
+    <head>
+        <style>
+            .parrafoJustificado{
+                text-align: justify;
+            }
+
+            .parrafoJustificadoTabla{
+                text-align: justify;
+                padding-left: 8px;
+                padding-right: 8px
+            }
+
+            .saltoPagina{
+                display:block;
+                page-break-before:always;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="encabezado">
+            <p style="text-align: center; text-decoration: underline" >
+                <b>Document de Reserva</b>
+                <br/>
+                <br/>
+            </p>
+        </div>
+        <div class="TablaPagina1">            
+            <table border="solid" width="90%" style="border-collapse: collapse; margin: auto" >
+                <tr>
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                            <b> Lloc i Data</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p style="padding-left: 8px">
+                            <apex:outputText value=" {!promotora.DF_localidad__r.name}" rendered="{!promotora.DF_localidad__r.name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_localidad__r.name==null}" style="color:red;"/>
+                            , a
+                            <apex:outputText value=" {!fechaCreacion}" rendered="{!fechaCreacion!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!fechaCreacion==null}" style="color:red;"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>                    
+                    <!-- Representante legal --> 
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                            <b> Promotora/ Propietari</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p class="parrafoJustificadoTabla">
+                            <apex:outputText value="{!promotora.name}" rendered="{!promotora.name!=null}"/>
+                            <apex:outputText value="__________ " rendered="{!promotora.name==null}" style="color:red;"/>
+                            , societat de nacionalitat andorrana, inscrita en el Registre de Societats 
+                            <apex:outputText value=" {!promotora.Lugar_del_registro__c}" rendered="{!promotora.Lugar_del_registro__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.Lugar_del_registro__c==null}" style="color:red;"/>
+                            el dia
+                            <apex:outputText value=" {!promotora.Fecha_de_Escritura__c}" rendered="{!promotora.Fecha_de_Escritura__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.Fecha_de_Escritura__c==null}" style="color:red;"/>
+                            , amb el número
+                            <apex:outputText value=" {!promotora.Tomo__c}" rendered="{!promotora.Tomo__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.Tomo__c==null}" style="color:red;"/>
+                            , secció 
+                            <apex:outputText value=" {!promotora.Seccion__c}" rendered="{!promotora.Seccion__c!=null}"/>
+                            <apex:outputText value=" " rendered="{!promotora.Seccion__c==null}" style="color:red;"/>
+                            , foli
+                            <apex:outputText value=" {!promotora.Folio__c}" rendered="{!promotora.Folio__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.Folio__c==null}" style="color:red;"/>
+                            , full número 
+                            <apex:outputText value=" {!promotora.N_Hoja__c}" rendered="{!promotora.N_Hoja__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.N_Hoja__c==null}" style="color:red;"/>
+                             i domiciliada a 
+                            <apex:outputText value=" {!promotora.DP_localidad__r.name}" rendered="{!promotora.DP_localidad__r.name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DP_localidad__r.name==null}" style="color:red;"/>
+                            (
+                            <apex:outputText value="{!promotora.DP_Provincia__c}" rendered="{!promotora.DP_Provincia__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DP_Provincia__c==null}" style="color:red;"/>
+                            ), 
+                            <apex:outputText value=" {!promotora.DP_Tipo_de_vIa__c}" rendered="{!promotora.DP_Tipo_de_vIa__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DP_Tipo_de_vIa__c==null}" style="color:red;"/>
+                            <apex:outputText value=" {!promotora.DP_Nombre_via__c}" rendered="{!promotora.DP_Nombre_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DP_Nombre_via__c==null}" style="color:red;"/>
+                            , número 
+                            <apex:outputText value=" {!promotora.DP_N_via__c}" rendered="{!promotora.DP_N_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DP_N_via__c==null}" style="color:red;"/>
+                            . Es troba representada en aquest acte pel senyor
+                            <apex:outputText value=" {!promocion.Contact__r.name}" rendered="{!promocion.Contact__r.name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Contact__r.name==null}" style="color:red;"/>
+                            , major d'edat, de nacionalitat  
+                            <apex:outputText value=" {!promocion.Contact__r.Pais__r.Name}" rendered="{!promocion.Contact__r.Pais__r.Name!=null}"/>
+                            i domicili professional a  
+                            <apex:outputText value=" {!promocion.Contact__r.Tipo_via__c}" rendered="{!promocion.Contact__r.Tipo_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Contact__r.Tipo_via__c==null}" style="color:red;"/>
+                            <apex:outputText value=" {!promocion.Contact__r.Nombre_via__c}" rendered="{!promocion.Contact__r.Nombre_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Contact__r.Nombre_via__c==null}" style="color:red;"/>
+                            nº
+                            <apex:outputText value=" {!promocion.Contact__r.Numero_via__c}" rendered="{!promocion.Contact__r.Numero_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Contact__r.Numero_via__c==null}" style="color:red;"/>
+                            ,
+                            <apex:outputText value=" {!promocion.Contact__r.Localidad__r.Name}" rendered="{!promocion.Contact__r.Localidad__r.Name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Contact__r.Localidad__r.Name==null}" style="color:red;"/ >
+                            amb
+                            <apex:outputText value=" {!promocion.Contact__r.Tipo_de_documento__c}" rendered="{!promocion.Contact__r.Tipo_de_documento__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Contact__r.Tipo_de_documento__c==null}" style="color:red;"/>
+                            nº
+                            <apex:outputText value=" {!promocion.Contact__r.N_Documento__c}" rendered="{!promocion.Contact__r.N_Documento__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Contact__r.N_Documento__c==null}" style="color:red;"/>
+                            . En endavant, la <b>“PROMOTORA”</b>.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                            <b> Actiu</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p style="padding-left: 8px">
+                            Les finques que conformen la promoció es desenvolupen en les parcel·les L'Abarset situades al carrer de l'Obac de Tarter, 
+                            Parròquia de Canillo AD100. En endavant, l' “<b>Actiu</b>”.
+                        </p>
+                    </td>
+                </tr>
+                <tr>                   
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                            <b> Títol</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p style="padding-left: 8px">
+							L’Actiu pertany a la Promotora, en virtut del Contracte de permuta de data 28 de gener de 2019 celebrat amb 
+                            l'entitat DRECERA, S.A.U. i del Contracte de Promesa de Permuta de data 17 de juny de 2019 celebrat amb la 
+                            Comunitat de Béns Germans Salvans Abetlla.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%"><p style="padding-left: 8px">
+                        <b> Interessat</b></p>
+                    </td>
+                    <td style="width: 80%">
+                        <p class="parrafoJustificadoTabla">
+                            <!-- si es cuenta personal -->
+                            <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'PersonAccount',  true, false)}"> 
+                                <apex:variable var="count" value="{!0}" />
+                                <apex:repeat value="{!Titulares}" var="Titular">
+                                    <apex:outputText value="{!IF (count > 0, ' ;y ', ' ')}"/>
+                                    Sr./Sra.
+                                    <apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.name==null}" style="color:red;"/>
+                                    , major d'edat, estat civil 
+                                    <apex:outputText value=" {!Titular.Estado_Civil__pc}" rendered="{!Titular.Estado_Civil__pc!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.Estado_Civil__pc==null}" style="color:red;"/>
+                                    de nacionalitat
+                                    <apex:outputText value=" {!Titular.Nacionalidad__pr.Name}" rendered="{!Titular.Nacionalidad__pr.Name!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.Nacionalidad__pr.Name==null}" style="color:red;"/>
+                                    , amb domicili a efectes de notificacions a  
+                                    <apex:outputText value=" {!Titular.DP_Tipo_de_vIa__c}" rendered="{!Titular.DP_Tipo_de_vIa__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.DP_Tipo_de_vIa__c==null}" style="color:red;"/>
+                                    <apex:outputText value=" {!Titular.DP_Nombre_via__c}" rendered="{!Titular.DP_Nombre_via__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.DP_Nombre_via__c==null}" style="color:red;"/>
+                                    , número 
+                                    <apex:outputText value=" {!Titular.DP_N_via__c}" rendered="{!Titular.DP_N_via__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.DP_N_via__c==null}" style="color:red;"/> 
+                                    i proveït de 
+                                    <apex:outputText value=" {!Titular.Tipo_de_documento__c}" rendered="{!Titular.Tipo_de_documento__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.Tipo_de_documento__c==null}" style="color:red;"/>
+                                    en vigor número
+                                    <apex:outputText value=" {!Titular.N_Documento__c}" rendered="{!Titular.N_Documento__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.N_Documento__c==null}" style="color:red;"/>
+                                    <apex:variable var="count" value="{!count + 1}" />
+                                </apex:repeat>
+                                . En endavant, l' <b>“Interessat”</b>.
+                            </apex:outputPanel>
+                            <!-- si es cuenta  -->
+                            <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'Cuenta',  true, false)}">
+                                <apex:variable var="count" value="{!0}" />
+                                <apex:repeat value="{!Titulares}" var="Titular">
+                                    <apex:outputText value="{!IF (count > 0, ' ;y ', ' ')}"/>
+                                    <apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.name==null}" style="color:red;"/>
+                                    , con CIF número 
+                                    <apex:outputText value=" {!Titular.N_Documento__c}" rendered="{!Titular.N_Documento__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.N_Documento__c==null}" style="color:red;"/>
+                                    , con domicilio social en 
+                                    <apex:outputText value=" {!Titular.DP_Tipo_de_vIa__c}" rendered="{!Titular.DP_Tipo_de_vIa__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.DP_Tipo_de_vIa__c==null}" style="color:red;"/>
+                                    <apex:outputText value=" {!Titular.DP_Nombre_via__c}" rendered="{!Titular.DP_Nombre_via__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.DP_Nombre_via__c==null}" style="color:red;"/>
+                                    , número 
+                                    <apex:outputText value=" {!Titular.DP_N_via__c}" rendered="{!Titular.DP_N_via__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.DP_N_via__c==null}" style="color:red;"/> 
+                                    CP 
+                                    <apex:outputText value=" {!Titular.DP_Codigo_postal__c}" rendered="{!Titular.DP_Codigo_postal__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.DP_Codigo_postal__c==null}" style="color:red;"/>
+                                    , e inscrita en el Registro Mercantil de 
+                                    <apex:outputText value=" {!Titular.Lugar_del_registro__c}" rendered="{!Titular.Lugar_del_registro__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.Lugar_del_registro__c==null}" style="color:red;"/>,
+                                    al tomo 
+                                    <apex:outputText value=" {!Titular.Tomo__c}" rendered="{!Titular.Tomo__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.Tomo__c==null}" style="color:red;"/>
+                                    , sección 
+                                    <apex:outputText value=" {!Titular.Seccion__c}" rendered="{!Titular.Seccion__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.Seccion__c==null}" style="color:red;"/>
+                                    , folio 
+                                    <apex:outputText value=" {!Titular.Folio__c}" rendered="{!Titular.Folio__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.Folio__c==null}" style="color:red;"/>, 
+                                    hoja número 
+                                    <apex:outputText value=" {!Titular.N_Hoja__c}" rendered="{!Titular.N_Hoja__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Titular.N_Hoja__c==null}" style="color:red;"/>
+                                    , (en adelante el “<b>Interesado</b>”). Actúa en representación de la sociedad Don 
+                                    <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].name}" rendered="{!mapRepresentantesLegales[Titular.id].name!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].name==null}" style="color:red;"/>,
+                                    con 
+                                    <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Tipo_de_documento__c}" rendered="{!mapRepresentantesLegales[Titular.id].Tipo_de_documento__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Tipo_de_documento__c==null}" style="color:red;"/>
+                                    <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].N_Documento__c}" rendered="{!mapRepresentantesLegales[Titular.id].N_Documento__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].N_Documento__c==null}" style="color:red;"/>,
+                                    en su condición de 
+                                    <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Condicion__c}" rendered="{!mapRepresentantesLegales[Titular.id].Condicion__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Condicion__c==null}" style="color:red;"/>
+                                    conforme a escritura otorgada por el notario de 
+                                    <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Lugar_de_notaria__c}" rendered="{!mapRepresentantesLegales[Titular.id].Lugar_de_notaria__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Lugar_de_notaria__c==null}" style="color:red;"/>
+                                    Don 
+                                    <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Nombre_notario__c}" rendered="{!mapRepresentantesLegales[Titular.id].Nombre_notario__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Nombre_notario__c==null}" style="color:red;"/>
+                                    , en fecha 
+                                    <apex:outputText value=" {!mapRepresentantesLegalesFecha[Titular.id]}" rendered="{!mapRepresentantesLegalesFecha[Titular.id]!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegalesFecha[Titular.id]==null}" style="color:red;"/>
+                                    con el nº de su protocolo 
+                                    <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Numero_de_protocolo__c}" rendered="{!mapRepresentantesLegales[Titular.id].Numero_de_protocolo__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Numero_de_protocolo__c==null}" style="color:red;"/>
+                                    <apex:variable var="count" value="{!count + 1}" />
+                                </apex:repeat>
+                            </apex:outputPanel>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                            <b> Promoció</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p class="parrafoJustificadoTabla">
+                            <b>
+                                <apex:outputText value=" {!promocion.name}" rendered="{!promocion.name!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!promocion.name==null}" style="color:red;"/>
+                            </b>
+                             . En endavant, la “<b>Promoció</b>”.
+                        </p>
+                        <p class="parrafoJustificadoTabla">
+                            Promoció residencial situada en les parcel·les amb número de referència 1P00237 i 1P01394 en comú de Canillo AD100, 
+                            (Principat d'Andorra) consistent en seixanta (60) habitatges en un edifici de 4 plantes plurifamiliar 
+                            i espai sota coberta, a construir sobre la base de el projecte bàsic elaborat per 
+                            <apex:outputText value=" {!promocion.Informacion_de_arquitectos_de_obra__c}" rendered="{!promocion.Informacion_de_arquitectos_de_obra__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Informacion_de_arquitectos_de_obra__c==null}" style="color:red;"/>
+                            . En endavant, el "<b>Projecte</b>".
+                        </p>                        
+                        <!-- p class="parrafoJustificadoTabla">
+                            Promoción residencial sita en 
+                            <apex:outputText value=" {!promocion.Tipo_via__c}" rendered="{!promocion.Tipo_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Tipo_via__c==null}" style="color:red;"/>
+                            <apex:outputText value=" {!promocion.Nombre_via__c}" rendered="{!promocion.Nombre_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Nombre_via__c==null}" style="color:red;"/>
+                            , número 
+                            <apex:outputText value=" {!promocion.N_Via__c}" rendered="{!promocion.N_Via__c!=null}"/>
+                            <apex:outputText value=" " rendered="{!promocion.N_Via__c==null}" style="color:red;"/>
+                            , consistente en 
+                            <apex:outputText value=" {!promocion.N_Viviendas_totales_promocion__c}" rendered="{!promocion.N_Viviendas_totales_promocion__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.N_Viviendas_totales_promocion__c==null}" style="color:red;"/>
+                            viviendas, a construir sobre la base del proyecto básico elaborado por 
+                            <apex:outputText value=" {!promocion.Informacion_de_arquitectos_de_obra__c}" rendered="{!promocion.Informacion_de_arquitectos_de_obra__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Informacion_de_arquitectos_de_obra__c==null}" style="color:red;"/>
+                            (en adelante el “<b>Proyecto</b>”).
+                        </p -->
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                            <b> Descripció</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p class="parrafoJustificadoTabla">                            
+                            Segons Projecte Bàsic presentat es troba situada en les parcel·les identificades amb la referència 
+                            cadastral nº 1P01394 i nº1P00237, i situades al carrer de l'Obac de Tarter, al Comú de Canillo AD100, 
+                            (Principat d'Andorra).
+                        </p>                        
+                        <apex:outputPanel >
+                            <p class="parrafoJustificadoTabla">
+                                Habitatge: 
+                                <apex:outputText value=" {!inmueble.name}" rendered="{!inmueble.name!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.name==null}" style="color:red;"/>
+                            </p>
+                            <p class="parrafoJustificadoTabla">
+                                Tipus :
+                                <apex:outputText value=" {!inmueble.Tipologia_de_vivienda__c}" rendered="{!inmueble.Tipologia_de_vivienda__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.Tipologia_de_vivienda__c==null}" style="color:red;"/>
+                            </p>
+                        </apex:outputPanel>                        
+                        
+                        <!-- apex:outputPanel rendered="{!IF(inmueble.Tipologia_de_vivienda__c != 'Chalet', true, false)}">                            
+                            <p class="parrafoJustificadoTabla">
+                            Nº 
+                            <apex:outputText value=" {!inmueble.N_Vivienda_Garaje_Trastero_Local__c}" rendered="{!inmueble.N_Vivienda_Garaje_Trastero_Local__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!inmueble.N_Vivienda_Garaje_Trastero_Local__c==null}" style="color:red;"/>
+                            </p>
+                            <apex:outputPanel rendered="{!IF(inmueble.Planta__c != null, true, false)}">
+                                <p class="parrafoJustificadoTabla">
+                                    Planta 
+                                    <apex:outputText value=" {!inmueble.Planta__c}" rendered="{!inmueble.Planta__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!inmueble.Planta__c==null}" style="color:red;"/>
+                                    letra 
+                                    <apex:outputText value=" {!inmueble.Letra_N_Puerta__c}" rendered="{!inmueble.Letra_N_Puerta__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!inmueble.Letra_N_Puerta__c==null}" style="color:red;"/>
+                                </p>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(trasteros != null, true, false)}">
+                                <p class="parrafoJustificadoTabla">
+                                    <apex:outputText value="{!IF(Contains(trasteros ,', '), 'Trasteros', 'Trastero')}"/>
+                                    <apex:outputText value=" {!trasteros}" rendered="{!trasteros!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!trasteros==null}" style="color:red;"/>
+                                </p>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(garajes != null, true, false)}">
+                                <p class="parrafoJustificadoTabla">
+                                    <apex:outputText value="{!IF(Contains(garajes ,', '), 'Garajes', 'Garaje')}"/>
+                                    <apex:outputText value=" {!garajes}" rendered="{!garajes!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!garajes==null}" style="color:red;"/>
+                                </p>
+                            </apex:outputPanel>
+                        </apex:outputPanel -->
+                        
+                        <p class="parrafoJustificadoTabla">
+                            . En endavant, la “<b>Finca</b>”.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                            <b> Dipòsit</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p class="parrafoJustificadoTabla">
+                            <b>
+                                <apex:outputText value=" {!StrOpporReserv}" rendered="{!StrOpporReserv!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!StrOpporReserv==null}" style="color:red;"/>
+                                .- €
+                            </b>
+                            . En endavant, el “<b>Dipòsit</b>”.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                                <b> Preu de la Compravenda</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p class="parrafoJustificadoTabla">
+                            <b>
+                                <apex:outputText value=" {!StrOpporAmount}" rendered="{!StrOpporAmount!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!StrOpporAmount==null}" style="color:red;"/>
+                                .- €
+                            </b> 
+                            més IGI. En endavant, el “<b>Preu</b>”.
+                            
+                            <!-- apex:outputPanel rendered="{!OR(precioGarajes > 0, precioTrasteros > 0)}" >
+                            Correspondiendo a la vivienda la cantidad de 
+                            <apex:outputText value=" {!StrInmueblePrecio}" rendered="{!StrInmueblePrecio!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!StrInmueblePrecio==null}" style="color:red;"/>
+                            € 
+                            <apex:repeat value="{!MapGarajes}" var="garaje">
+                                <apex:outputPanel rendered="{!MapGarajes[garaje][0] != null}">
+                                    y a la plaza de garaje cantidad de 
+                                    <apex:outputText value=" {!MapGarajes[garaje][0]}" rendered="{!MapGarajes[garaje][0]!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][0]==null}" style="color:red;"/>
+                                     €
+                                </apex:outputPanel>
+                            </apex:repeat>
+                            <apex:repeat value="{!MapTrasteros}" var="trastero">
+                                <apex:outputPanel rendered="{!MapTrasteros[trastero][0] != null}">
+                                y al trastero cantidad de 
+                                <apex:outputText value=" {!MapTrasteros[trastero][0]}" rendered="{!MapTrasteros[trastero][0]!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapTrasteros[trastero][0]==null}" style="color:red;"/>
+                                 €
+                                </apex:outputPanel>
+                            </apex:repeat>
+                            .
+                            </apex:outputPanel -->
+                            
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                            <b>Període de Reserva</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p class="parrafoJustificadoTabla">
+                            Des de la data d'avui fins als 60 dies següents a l'obtenció de la llicència d'obres 
+                            . En endavant, el “<b>Període de Reserva</b>”.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        <p style="padding-left: 8px">
+                            <b>Annexos</b>
+                        </p>
+                    </td>
+                    <td style="width: 80%">
+                        <p class="parrafoJustificadoTabla">
+							Annex I: Justificant acreditatiu de Dipòsit.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div class="encabezadoPag2">
+            <p style="text-align: center">
+                <b>CONDICIONS</b>
+            </p>
+        </div>
+        <div>
+            <ol style="list-style-type: upper-roman;">
+                <li>
+                    <p style="padding-left: 50px">
+                        <b>Reserva</b>
+                    </p>
+                    <p class="parrafoJustificado">
+                        Per la present el Promotor concedeix a l'Interessat un dret de reserva, consistent en què l'Interessat tindrà preferència 
+                        sobre qualsevol tercer per a contractar l'adquisició de la/s Finca/s durant el període de reserva i contra el pagament del 
+                        dipòsit (el <b>"Dipòsit"</b>),                     
+                    </p>
+                    <p class="parrafoJustificado">
+                        El present Document de reserva únicament confereix a l'Interessat un dret de preferència per a l'adquisició de la/les 
+                        Finca/ques; i, per tant, no atribueix a l'Interessat cap dret sobre la/les Finca/ques i, en cap cas, suposa la transmissió 
+                        de la propietat deque només es produirà amb l'atorgament de l'Escriptura de Compravenda.
+                    </p>
+                </li>
+                <li>
+                    <p style="padding-left: 50px">
+                        <b>Depòsit</b>
+                    </p>
+                    <p class="parrafoJustificado">
+                        L’Interessat lliurament en aquest acte a la Promotora transferència bancària realitzada al compte titularitat de la Promotora obert en l'entitat&nbsp;
+                        <apex:outputText value="{!IF(promocion.Cuenta_Activa_1__c == true, promocion.Entidad_Bancaria1__c, promocion.Entidad_Bancaria2__c)}"/>
+                        número&nbsp;
+                        <b>
+                        	<apex:outputText value="{!IF(promocion.Cuenta_Activa_1__c == true, promocion.Numero_de_cuenta_bancaria_1__c, promocion.Numero_de_cuenta_bancaria_2__c)}"/>
+                        </b>
+                        ,
+                        per import de 
+                        <b>
+                            <apex:outputText value=" {!StrOpporReserv}  " rendered="{!StrOpporReserv!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!StrOpporReserv==null}" style="color:red;"/>
+                        € 
+                        </b>
+                        en concepte de Reserva (el “<b>Dipòsit</b>”).
+                    </p>
+                    <p class="parrafoJustificado">
+                        S'adjunta a aquest Document de Reserva com a annex I justificant acreditatiu de la referida transferència bancària de l'import del Dipòsit.
+                    </p>
+                    <p class="parrafoJustificado">
+                        Es deixa expressa constància que aquest Dipòsit no constitueix pagament a compte del Preu de Compra; per això, serà restituït a l'Interessat 
+                        per part de la Promotora en el moment de la formalització del Contracte Privat de Compravenda de conformitat amb el que disposa la Condició III següent. 
+                    </p>
+                </li>                
+                <li>
+                    <p style="padding-left: 50px">
+                        <b>Termini</b>
+                    </p>
+                    <p class="parrafoJustificado">
+                        La Reserva es concedeix per tot el termini que hi des de la data d'avui i fins als 60 dies següents a l'obtenció de la llicència d'obres (el <b>"Període de Reserva"</b>), 
+                        data màxima en què les parts han de subscriure un contracte privat de compravenda de la/les Finca/ques pel Preu indicat.
+                    </p>
+                    <p class="parrafoJustificado">
+                        Vençut el termini exposat anteriorment (el Període de Reserva) sense que s'hagi formalitzat el corresponent Contracte de Compravenda, l'Interessat i el Promotor 
+                        podran acordar, expressament i per escrit, una pròrroga del Període de reserva que haurà d'estar subscrita per tots dos.
+                    </p>
+                    <p class="parrafoJustificado">
+                        No obstant l'anterior, i expirat el termini exposat anteriorment (el Període de reserva), sense que s'hagi prorrogat el mateix i sense que s'hagi formalitzat
+                        el corresponent Contracte de Compravenda qualsevol que fos la causa, la present Reserva quedarà automàticament resolta, sense més i sense necessitat d'ulterior 
+                        ratificació ni confirmació entre les parts; el Promotor procedirà a la devolució íntegra de la quantitat lliurada com Dipòsit en aquest; perdrà l'Interessat 
+                        els drets derivats de la mateixa; i quedarà/n la/s Finca/s a disposició el Promotor, sense dret de les parts a res més demanar o reclamar.
+                    </p>
+                    <p class="parrafoJustificado">
+                        L'Interessat coneix i accepta que el projecte podrà ser modificat per la Promotora per qüestions tècniques, administratives, jurídiques o comercials. 
+                        En el cas que la modificació afectés la/s Finca/s objecte d'aquest document de Reserva, de manera que no fos viable la seva execució, el present document 
+                        quedarà sense efecte, reintegrar les quantitats lliurades en aquest acte, sense dret de les parts a res més demanar o reclamar.
+                    </p>
+                </li>
+                <li>
+                    <p style="padding-left: 50px">
+                        <b>Prohibició d'Intermediaris</b>
+                    </p>
+                    <p class="parrafoJustificado">
+                        L'Interessat manifesta que actua en el seu propi nom i dret i mai com a intermediari de tercers, de manera que la compravenda del Immoble, no podrà tenir lloc
+                        a favor d'una persona o entitat diferent que la de l'Interessat, encara que sigui l'Interessat qui presenti a aquesta persona o entitat a la Promotora. Per tant, 
+                        es prohibeix a l'Interessat la cessió dels drets derivats de el present document de reserva a favor de tercers, llevat que compti amb l'autorització prèvia i 
+                        escrita per part de la Promotora.
+                    </p>
+                </li> 
+            </ol>
+            <ol style="list-style-type: none" >
+                <li>
+                    <p style="padding-left: 30px">
+                        VI. 
+                        <b>
+                            Notificacions
+                        </b>
+                    </p>
+                    <p class="parrafoJustificado">
+                        Totes les notificacions que s'hagin de d'intercanviar les parts d'acord amb aquest Document de Reserva es tindran per vàlidament realitzades quan es remetin 
+                        als domicilis esmentats a l'encapçalament per qualsevol mitjà que acrediti la seva recepció i contingut.tenido.
+                    </p>
+                    <p class="parrafoJustificado">
+                        Tota notificació enviada als domicilis esmentats a l'encapçalament s'entendrà correctament efectuada, excepte si el destinatari hagués prèviament notificat 
+                        a l'altra part un canvi de direcció amb, al menys, deu (10) dies hàbils d'antelació.
+                    </p>
+                </li>                
+                <li>
+                    <p style="padding-left: 30px">
+                        VII.
+                        <b>Jurisdicció i fur</b>
+                    </p>
+                    <p class="parrafoJustificado">
+                        El present document de reserva es regirà per la llei andorrana, amb expressa renúncia de les Parts al seu propi fur, si fos diferent, sotmetent-se per a la 
+                        resolució de qualsevol conflicte o controvèrsia en relació amb la interpretació i execució del mateix, als Jutjats d'Andorra competents.
+                    </p>
+                </li>
+                <li>
+                    <p style="padding-left: 30px">
+                        VIII.
+                        <b>Protecció Dades Personals</b>
+                    </p>
+                    <p class="parrafoJustificado">
+                        Les seves dades personals seran tractats per AVIDI PROMOCIONS INMOBILIÀRIES, S.L.U. com a responsable, amb domicili social en Calle Emisora, 20, 28224, 
+                        Pozuelo de Alarcón, Madrid, amb la finalitat d'executar el contracte actual, així com per a la gestió i administració d'aquest. Les seves dades seran 
+                        obligatòries per a aquesta finalitat, per la qual cosa la seva negativa a proporcionar-los impossibilitarà realitzar la reserva de l'habitatge objecte 
+                        d'aquest contracte.
+                    </p>
+                    <p class="parrafoJustificado">
+                        Igualment l'informem que aquestes dades seran comunicades a AVINTIA DESARROLLOS INMOBILIARIOS, S.L., amb domicili social en Calle Emisora, 20, 28224, 
+                        Pozuelo de Alarcón, Madrid com a empresa matriu amb la finalitat de gestionar les seves dades com a client i incorporar-los en els seus sistemes, 
+                        així com l'atenció i control de qualitat d'aquests, i informar-lo de novetats de productes i serveis d'empreses de AVINTIA DESARROLLOS INMOBILIARIOS, S.L. 
+                        Les seves dades seran obligatòries per a les esmentades finalitats, per la qual cosa la seva negativa a proporcionar-les impossibilita l'execució del contracte actual.
+                    </p>
+                    <p class="parrafoJustificado">
+                        Així mateix, AVINTIA DESARROLLOS INMOBILIARIOS, S.L. podrà informar-lo de novetats de productes i serveis, així com realitzar comunicacions comercials, 
+                        per la qual cosa les seves dades tindran caràcter de voluntari per a la meritada finalitat.
+                    </p>
+                    <p class="parrafoJustificado">
+                        Si ho desitja expressament marcant la següent casella, l'informem que les seves dades personals podran ser tractats amb la finalitat de realitzar-li 
+                        enviaments d'informació de caràcter comercial a través de mitjans electrònics, o en qualsevol altre format, sobre productes i serveis oferts per 
+                        AVINTIA DESARROLLOS INMOBILIARIOS S.L. [__].
+                    </p>
+                    <p class="parrafoJustificado">
+                        Així mateix, li comuniquem que les seves dades personals seran conservades durant la durada del contracte, i el temps necessari per a complir amb 
+                        les diferents obligacions legals que incumbeixen als responsables. D'altra banda, les seves dades podran ser comunicades a diferents Administracions 
+                        Públiques per a donar compliment a les obligacions (fiscals, administratives, legals…) dels responsables. 
+                    </p>
+                    <p class="parrafoJustificado">
+                        En qualsevol moment podrà exercir els seus drets, en els termes legalment previstos, dirigint una comunicació per escrit a 
+                        AVINTIA DESARROLLOS INMOBILIARIOS, S.L. a la següent adreça: C/Emisora, 20-Pozuelo de Alarcón-28224 Madrid, indicant en aquest: ADI – LOPD. 
+                        En aquesta comunicació haurà d'indicar el dret que vol exercir, les dades o conjunt de dades personals objecte de la seva reclamació i aportar el seu document d'identitat en vigor.
+                    </p>
+                    <p class="parrafoJustificado" style="display: inline">
+                        Per a qualsevol dubte o reclamació respecte al tractament de dades personals podrà contactar amb el nostre Delegat de Protecció de Dades, a través de l'adreça de correu electrònic: 
+                    </p>
+                    <p style="display: inline; text-decoration: underline; color: blue" class="parrafoJustificado">
+                        dpo@grupoavintia.com
+                    </p>
+                    <br/>
+                    <br/>
+                    <p class="parrafoJustificado" style="display: inline">
+                        Finalment, en el cas que consideri que l'exercici dels seus drets no ha estat degudament atès, tindrà dret a interposar una reclamació davant 
+                        l'Agència Andorrana de Protecció de Dades com a autoritat de control. Pot accedir a la informació dels seus drets i del supervisor en la matèria en:
+                    </p>
+                    <p style="display: inline; text-decoration: underline; color: blue">
+                        www.apda.ca
+                    </p>
+                    <br/>
+                    <br/>
+                </li>
+                <li>
+                    <p style="padding-left: 30px">
+                        IX.
+                        <b>Prevenció del Blanqueig de Capitals</b>
+                    </p>
+                    <p class="parrafoJustificado">
+                        De conformitat amb els establert en la Llei 14/2017, del 22 de juny, de prevenció i lluita contra el blanqueig de diners o valors i el finançament del terrorisme;
+                        així com, de conformitat amb les ordres, instruccions i directrius europees i/o normativa concordant i complementària, relatives totes elles, a les mesures de 
+                        prevenció del blanqueig de capitals (d'ara endavant, la “Normativa sobre Prevenció del Blanqueig”), l'Interessat, amb caràcter previ a la data d'atorgament de 
+                        l'escriptura pública de compravenda i, almenys, amb una antelació de 5 dies hàbils a l'atorgament d'aquesta, es compromet per la present a lliurar al Promotor, 
+                        i/o òrgans de control intern qualsevol informació i/o documentació que li sigui sol·licitada, incloent qualsevol actualització de la informació i/o documentació 
+                        lliurada al Venedor amb anterioritat a la signatura del contracte actual, a l'efecte de que el Promotor pugui complir amb totes i cadascuna de les obligacions que 
+                        li imposa la Normativa sobre Prevenció del Blanqueig; i, en particular, a títol d’exemple que no limitatiu l'Interessat s'obliga a lliurar la documentació que acrediti: 
+                        (i) l'origen lícit dels fons destinats al pagament del preu de la compravenda; (ii) la titularitat real de l'Interessat; (iii) i, que els mitjans de pagament del preu 
+                        de la compravenda procedeixen d'un compte bancari titularitat de l'Interessat (d'ara endavant la <b>“Obligació de Prevenció del Blanqueig”</b>).
+                    </p>
+                    <p class="parrafoJustificado">
+                        El Promotor manifesta expressament que és condició essencial per a l'atorgament del present Document de Reserva que l'Interessat es comprometi a complir l'Obligació 
+                        de Prevenció del Blanqueig descrita en el paràgraf anterior.
+                    </p>
+                    <p class="parrafoJustificado">
+                        L'Interessat, per la present, manifesta expressament que coneix i accepta que el compliment de l'Obligació de Prevenció del Blanqueig és una condició indispensable 
+                        o requisit previ i ineludible per a l'atorgament de l'Escriptura pública de Compravenda de la/s Finca/s i que, per tant, el Promotor estarà facultat per a resoldre 
+                        de ple dret el present Document de Reserva, quedant aquest nul i sense cap efecte si concorre qualsevol de les següents circumstàncies: (i) que l'Interessat no hagués 
+                        lliurat en termini al Promotor la documentació i/o informació necessària perquè aquest pugui efectuar la verificació de l'origen lícit dels fons destinats al pagament 
+                        del preu de la compravenda; (ii) que, segons el parer del Promotor la documentació i/o informació lliurada per l'Interessat resulti insuficient per a l'acreditació a 
+                        què es refereix el punt (i) anterior en atenció al que es disposa en la Normativa sobre Prevenció del Blanqueig; i/o (iii) que qualsevol dels titulars reals de l'Interessat 
+                        es trobi investigat i/o encausat en qualssevol causes judicials relacionades amb delictes econòmics. En cas de concórrer una o diverses de les circumstàncies a què es 
+                        refereixen els punts (i) a (iii) anteriors, El Promotor podrà resoldre unilateralment el contracte actual, quedant aquest nul i sense efecte i, en conseqüència, el Venedor 
+                        recuperarà la plena disponibilitat de la/s Finca/s i procedirà a restituir a l'Interessat/Comprador l'import íntegre que aquest últim hagués lliurat al Promotor, sense 
+                        dret de les Parts a res més demanar o reclamar per aquest o un altre concepte.                      
+                    </p>
+                    <p class="parrafoJustificado">  
+                        <b>I per deixar-ne constància</b>, i en prova de conformitat, signen les Parts per duplicat exemplar, encara que a un sol efecte el present document de reserva, 
+                        en la data i lloc indicats a l’encapçalament.
+                    </p>
+                    <p class="parrafoJustificado">
+                        En Madrid, a 
+                        <apex:outputText value=" {!fechaCreacion}" rendered="{!fechaCreacion!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!fechaCreacion==null}" style="color:red;"/>.
+                    </p>
+                </li>                
+            </ol>
+        </div>        
+        <div class="TablaFinal">
+            <table border="dashed" width="90%" style="border-collapse: collapse; margin: auto" >
+                <tr>
+                    <td style="width: 50%; border:dashed  2px #D5DBDB">
+                        <p style="padding-left: 8px">
+                            <b>El Promotor</b>
+                        </p>
+                    </td>
+                    <td style="width: 50%; border:dashed  2px #D5DBDB">
+                        <p style="padding-left: 8px">
+                            <b>L'interessat</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; vertical-align: top; border:dashed  2px #D5DBDB">
+                        <p style="padding-left: 8px">
+                            <b>
+                                <apex:outputText value="{!promotora.name}" rendered="{!promotora.name!=null}"/>
+                                <apex:outputText value="__________ " rendered="{!promotora.name==null}" style="color:red;"/>
+                            </b>
+                        </p>
+                        <p style="padding-left: 8px">
+                            D./Dña. 
+                            <apex:outputText value=" {!promocion.Contact__r.Name}" rendered="{!promocion.Contact__r.Name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Contact__r.Name==null}" style="color:red;"/>
+                        </p>
+                    </td>
+                    <td style="width: 50%; border:dashed  2px #D5DBDB"> 
+                        <apex:repeat value="{!Titulares}" var="Titular">
+                            <p style="padding-left: 8px; margin-bottom: 60px">
+                                D./Dña. 
+                                <apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.name==null}" style="color:red;"/>
+                            </p>
+                        </apex:repeat>
+                    </td>
+                </tr>
+            </table>
+        </div>        
+    </body>
+    
+</apex:page>

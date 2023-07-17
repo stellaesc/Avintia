@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ponderacion_objetivo_acumulado_importe__c</fullName>
+    <externalId>false</externalId>
+    <label>Ponderación objetivo acumulado importe</label>
+    <summarizedField>Ritmo_ventas__c.Ponderacion_objetivo_importe_ventas__c</summarizedField>
+    <summaryForeignKey>Ritmo_ventas__c.Promocion__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

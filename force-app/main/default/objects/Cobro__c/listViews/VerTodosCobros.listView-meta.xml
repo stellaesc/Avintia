@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VerTodosCobros</fullName>
+    <columns>NAME</columns>
+    <columns>Importe__c</columns>
+    <columns>Concepto__c</columns>
+    <columns>IBAN__c</columns>
+    <columns>Codigo_Banco__c</columns>
+    <columns>Factura__c</columns>
+    <columns>Cuenta_destino__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>Ver todos los cobros</label>
+</ListView>

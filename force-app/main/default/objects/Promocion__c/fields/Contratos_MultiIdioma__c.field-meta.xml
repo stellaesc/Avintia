@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contratos_MultiIdioma__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Seleccionar si los contratos de la promoción estarán disponibles en varios idiomas</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Activar si los contratos de la promoción están disponibles en varios idiomas</inlineHelpText>
+    <label>Contratos MultiIdioma?</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

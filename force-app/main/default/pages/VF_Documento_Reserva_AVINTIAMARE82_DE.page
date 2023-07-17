@@ -1,0 +1,1211 @@
+<apex:page controller="Contrato_compraventa_controller" renderAs="PDF" applyBodyTag="false">
+
+    <head>
+        <style> 
+
+            .pageBreak{page-break-before: always;} 
+
+            @page {
+            size: 21.0cm 29.7cm;
+            margin: 2.5cm; 
+            }
+            body,div,table,thead,tbody,tfoot,tr,th,td,p {font-family:"Calibri"; font-size:medium; border-collapse: collapse;}
+
+            .parrafoJustificado{
+
+            text-align: justify;
+
+            }
+
+            .tablaPlaPagos{
+            table, th, td {
+            border: 1px solid black;
+            }
+            }
+
+            .saltoDePagina{
+            display:block;
+            page-break-before:always;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <table border="solid" width="100%" style="border-collapse: collapse; margin: auto" cellpadding="10" >
+            <tr valign="top">
+                <td style="width:50%">
+					<div class="encabezado">
+						<p style="text-align: center; font-size: 20px" >
+							<b>
+								DOCUMENTO DE RESERVA DE VIVIENDA
+							</b>
+							<br/>
+							<br/>
+						</p>
+						<p style="text-align: center" >
+							<b>
+								En 
+								<apex:outputText value=" {!Promotora.DF_localidad__r.name}" rendered="{!Promotora.DF_localidad__r.name!=null}"/>
+								<apex:outputText value=" __________ " rendered="{!Promotora.DF_localidad__r.name==null}" style="color:red;"/>
+								, a 
+								<apex:outputText value=" {!fechaCreacion}" rendered="{!fechaCreacion!=null}"/>
+								<apex:outputText value=" __________ " rendered="{!fechaCreacion==null}" style="color:red;"/>
+							</b>
+							<br/>
+							<br/>
+						</p>
+					</div>
+                </td>
+                <td style="width:50%">
+					<div class="encabezado">
+						<p style="text-align: center; font-size: 20px" >
+							<b>
+								RESERVIERUNGSVERTRAG FÜR EINE WOHNUNG
+							</b>
+							<br/>
+							<br/>
+						</p>
+						<p style="text-align: center" >
+							<b>
+								In 
+								<apex:outputText value=" {!Promotora.DF_localidad__r.name}" rendered="{!Promotora.DF_localidad__r.name!=null}"/>
+								<apex:outputText value=" __________ " rendered="{!Promotora.DF_localidad__r.name==null}" style="color:red;"/>
+								, am 
+								<apex:outputText value=" {!fechaCreacion}" rendered="{!fechaCreacion!=null}"/>
+								<apex:outputText value=" __________ " rendered="{!fechaCreacion==null}" style="color:red;"/>
+							</b>
+							<br/>
+							<br/>
+						</p>
+					</div>
+                </td>
+            </tr>
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    DE UNA Y OTRA PARTE ( VERSION ESPAÑOL )  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <tr valign="top">
+                <td style="width:50%">
+                    <div class="divReunidos">
+                        <p>
+                            <b>
+                                DE UNA PARTE.-
+                            </b>
+                        </p>
+                        <p class="parrafoJustificado">
+                            Don/Dña. 
+                            <apex:outputText value=" {!Apoderado.name}" rendered="{!Apoderado.name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Apoderado.name==null}" style="color:red;"/>
+                            , mayor de edad, con 
+                            <apex:outputText value=" {!Apoderado.Tipo_de_documento__c}" rendered="{!Apoderado.Tipo_de_documento__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Apoderado.Tipo_de_documento__c==null}" style="color:red;"/> 
+                            num.
+                            <apex:outputText value=" {!Apoderado.N_Documento__c}" rendered="{!Apoderado.N_Documento__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Apoderado.N_Documento__c==null}" style="color:red;"/>
+                             y domicilio a efectos del presente contrato en  
+                            <apex:outputText value=" {!promotora.DF_Localidad__r.Name}" rendered="{!promotora.DF_Localidad__r.Name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Localidad__r.Name==null}" style="color:red;"/>
+                            ,
+                            <apex:outputText value=" {!promotora.DF_Tipo_de_via__c}" rendered="{!promotora.DF_Tipo_de_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Tipo_de_via__c==null}" style="color:red;"/>
+                            <apex:outputText value=" {!promotora.DF_Nombre_via__c}" rendered="{!promotora.DF_Nombre_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Nombre_via__c==null}" style="color:red;"/>
+                            , número 
+                            <apex:outputText value=" {!promotora.DF_N_via__c}" rendered="{!promotora.DF_N_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_N_via__c==null}" style="color:red;"/>
+                            (
+                            <apex:outputText value=" {!promotora.DF_Provincia__c}" rendered="{!promotora.DF_Provincia__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Provincia__c==null}" style="color:red;"/>
+                            ).
+                        </p>
+                        <p>
+                            <b>
+                                Y DE OTRA PARTE.-
+                            </b>
+                        </p>
+                        <p class="parrafoJustificado">
+                        <!-- >>>>>>>>>>>   AccountRecordType.Cuenta_personal__c >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                            <apex:outputPanel rendered="{!IF(cliente.recordTypeId == AccountRecordType.Cuenta_personal__c,  true, false)}">
+                                <apex:variable var="count" value="{!0}" />
+                                    <apex:repeat value="{!Titulares}" var="Titular">
+                                        <apex:outputText value="{!IF (count > 0, ' y; ', ' ')}"/>
+                                        Don/Dña. 
+                                        <apex:outputText value=" {!Titular.Cliente__r.name}" rendered="{!Titular.Cliente__r.name!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.name==null}" style="color:red;"/>
+                                        , mayor de edad, con 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Tipo_de_documento__c}" rendered="{!Titular.Cliente__r.Tipo_de_documento__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Tipo_de_documento__c==null}" style="color:red;"/>
+                                        num.
+                                        <apex:outputText value=" {!Titular.Cliente__r.N_Documento__c}" rendered="{!Titular.Cliente__r.N_Documento__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Documento__c==null}" style="color:red;"/>
+                                        , con domicilio en 
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Tipo_de_vIa__c}" rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c==null}" style="color:red;"/>
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Nombre_via__c}" rendered="{!Titular.Cliente__r.DP_Nombre_via__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Nombre_via__c==null}" style="color:red;"/>
+                                         -  
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_N_via__c}" rendered="{!Titular.Cliente__r.DP_N_via__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_N_via__c==null}" style="color:red;"/>
+                                        , C.P.  
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Codigo_postal__c}" rendered="{!Titular.Cliente__r.DP_Codigo_postal__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Codigo_postal__c==null}" style="color:red;"/> 
+                                        . Estado civil:
+                                        <apex:outputText value=" {!Titular.Cliente__r.Regimen__c}" rendered="{!Titular.Cliente__r.Regimen__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Regimen__c==null}" style="color:red;"/>
+                                        . 
+                                    </apex:repeat>
+                            </apex:outputPanel>
+                             <!-- >>>>>>>>>>>   AccountRecordType.Bussines_Account__c >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                            <apex:outputPanel rendered="{!IF(cliente.recordTypeId == AccountRecordType.Bussines_Account__c,  true, false)}">
+                                <apex:variable var="count" value="{!0}" />
+                                    <apex:repeat value="{!Titulares}" var="Titular">
+                                        <apex:outputText value="{!IF (count > 0, ' y ', ' ')}"/>
+                                        <apex:outputText value=" {!Titular.Cliente__r.name}" rendered="{!Titular.Cliente__r.name!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.name==null}" style="color:red;"/>
+                                        , con CIF número 
+                                        <apex:outputText value=" {!Titular.Cliente__r.N_Documento__c}" rendered="{!Titular.Cliente__r.N_Documento__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Documento__c==null}" style="color:red;"/>
+                                        , con domicilio social en 
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Tipo_de_vIa__c}" rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c==null}" style="color:red;"/>
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Nombre_via__c}" rendered="{!Titular.Cliente__r.DP_Nombre_via__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Nombre_via__c==null}" style="color:red;"/>
+                                        , número 
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_N_via__c}" rendered="{!Titular.Cliente__r.DP_N_via__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_N_via__c==null}" style="color:red;"/>
+                                        CP 
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Codigo_postal__c}" rendered="{!Titular.Cliente__r.DP_Codigo_postal__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Codigo_postal__c==null}" style="color:red;"/>
+                                        , e inscrita en el Registro Mercantil de 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Lugar_del_registro__c}" rendered="{!Titular.Cliente__r.Lugar_del_registro__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Lugar_del_registro__c==null}" style="color:red;"/>
+                                        , al tomo 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Tomo__c}" rendered="{!Titular.Cliente__r.Tomo__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Tomo__c==null}" style="color:red;"/>
+                                        , sección 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Seccion__c}" rendered="{!Titular.Cliente__r.Seccion__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Seccion__c==null}" style="color:red;"/>
+                                        , folio 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Folio__c}" rendered="{!Titular.Cliente__r.Folio__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Folio__c==null}" style="color:red;"/>
+                                        , hoja número 
+                                        <apex:outputText value=" {!Titular.Cliente__r.N_Hoja__c}" rendered="{!Titular.Cliente__r.N_Hoja__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Hoja__c==null}" style="color:red;"/>
+                                        . Actúa en representación de la sociedad Don 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].name}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].name!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].name==null}" style="color:red;"/>
+                                        , con 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Tipo_de_documento__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Tipo_de_documento__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Tipo_de_documento__c==null}" style="color:red;"/>
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].N_Documento__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].N_Documento__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].N_Documento__c==null}" style="color:red;"/>
+                                        , en su condición de 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Condicion__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Condicion__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Condicion__c==null}" style="color:red;"/>  
+                                        conforme a escritura otorgada por el notario de 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Lugar_de_notaria__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Lugar_de_notaria__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Lugar_de_notaria__c==null}" style="color:red;"/>
+                                        Don 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Nombre_notario__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Nombre_notario__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Nombre_notario__c==null}" style="color:red;"/>
+                                        , en fecha 
+                                        <apex:outputText value=" {!mapRepresentantesFechas[Titular.Cliente__r.id]}" rendered="{!mapRepresentantesFechas[Titular.Cliente__r.id]!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesFechas[Titular.Cliente__r.id]==null}" style="color:red;"/>
+                                        con el nº de su protocolo 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Numero_de_protocolo__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Numero_de_protocolo__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Numero_de_protocolo__c==null}" style="color:red;"/>
+                                        . 
+                                        <apex:variable var="count" value="{!count + 1}" />
+                                    </apex:repeat> 
+                            </apex:outputPanel>                            
+                        </p>
+                    </div>
+                    <div class="divIntervienen">
+                        <p style="text-align: center; letter-spacing: 2px;" >
+                            <b>
+                                INTERVIENEN
+                            </b>                            
+                            <br/>
+                            <br/>
+                        </p>
+                        <p class="parrafoJustificado">
+                            El primero como representante de la sociedad mercantil 
+                            <apex:outputText value=" {!promotora.name}" rendered="{!promotora.name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.name==null}" style="color:red;"/>
+                            , domiciliada en  
+                            <apex:outputText value=" {!promotora.DF_Localidad__r.Name}" rendered="{!promotora.DF_Localidad__r.Name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Localidad__r.Name==null}" style="color:red;"/>
+                                - 
+                            <apex:outputText value=" {!promotora.DF_Codigo_postal__c}" rendered="{!promotora.DF_Codigo_postal__c !=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Codigo_postal__c==null}" style="color:red;"/>
+                            (
+                            <apex:outputText value=" {!promotora.DF_Provincia__c}" rendered="{!promotora.DF_Provincia__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Provincia__c==null}" style="color:red;"/>
+                            ), 
+                            <apex:outputText value=" {!promotora.DF_Tipo_de_via__c}" rendered="{!promotora.DF_Tipo_de_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Tipo_de_via__c==null}" style="color:red;"/>
+                            <apex:outputText value=" {!promotora.DF_Nombre_via__c}" rendered="{!promotora.DF_Nombre_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Nombre_via__c==null}" style="color:red;"/>
+                                nº 
+                            <apex:outputText value=" {!promotora.DF_N_via__c}" rendered="{!promotora.DF_N_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_N_via__c==null}" style="color:red;"/>
+                            ; constituida mediante escritura autorizada por el notario de 
+                            <apex:outputText value=" {!Promotora.Lugar_del_registro__c}" rendered="{!Promotora.Lugar_del_registro__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Lugar_del_registro__c==null}" style="color:red;"/>
+                            , Don 
+                            <apex:outputText value=" {!Promotora.Nombre_del_notario__c}" rendered="{!Promotora.Nombre_del_notario__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Nombre_del_notario__c==null}" style="color:red;"/>
+                            , el día 
+                            <apex:outputText value=" {!fechaEscrituraPromotora}" rendered="{!fechaEscrituraPromotora!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!fechaEscrituraPromotora==null}" style="color:red;"/>
+                            , con el número 
+                            <apex:outputText value=" {!Promotora.Numero_de_protocolo__c}" rendered="{!Promotora.Numero_de_protocolo__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Numero_de_protocolo__c==null}" style="color:red;"/>
+                            de protocolo, e inscrita en el Registro Mercantil de 
+                            <apex:outputText value=" {!Promotora.Lugar_del_registro__c}" rendered="{!Promotora.Lugar_del_registro__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Lugar_del_registro__c==null}" style="color:red;"/>
+                            , al tomo 
+                            <apex:outputText value=" {!Promotora.Tomo__c}" rendered="{!Promotora.Tomo__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Tomo__c==null}" style="color:red;"/>
+                            , sección 
+                            <apex:outputText value=" {!Promotora.Seccion__c}" rendered="{!Promotora.Seccion__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Seccion__c==null}" style="color:red;"/>
+                            , folio 
+                            <apex:outputText value=" {!Promotora.Folio__c}" rendered="{!Promotora.Folio__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Folio__c==null}" style="color:red;"/>
+                            , hoja número 
+                            <apex:outputText value=" {!Promotora.N_Hoja__c}" rendered="{!Promotora.N_Hoja__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.N_Hoja__c==null}" style="color:red;"/>
+                            y en el Censo de Entidades Jurídicas del Ministerio de Hacienda con el 
+                            <apex:outputText value=" {!Apoderado.Tipo_de_documento__c}" rendered="{!Apoderado.Tipo_de_documento__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Apoderado.Tipo_de_documento__c==null}" style="color:red;"/> 
+                            número 
+                            <apex:outputText value=" {!Apoderado.N_Documento__c}" rendered="{!Apoderado.N_Documento__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Apoderado.N_Documento__c==null}" style="color:red;"/>
+                            . Actua en calidad de  
+                            <apex:outputText value=" {!promocion.Condicion__c}" rendered="{!promocion.Condicion__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.Condicion__c==null}" style="color:red;"/>
+                            .
+                        </p>
+                        <p class="parrafoJustificado">
+                            En lo sucesivo “la parte VENDEDORA”.
+                        </p>
+                        <p class="parrafoJustificado">
+                            El/Los segundos en su propio nombre y derecho. En lo sucesivo “la parte COMPRADORA”.
+                        </p>
+                        <p class="parrafoJustificado">
+                            Ambas partes se reconocen mutua y recíprocamente capacidad jurídica suficiente para la suscripción del presente contrato y a tal efecto                             
+                        </p>
+                    </div>
+                </td>
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    DE UNA Y OTRA PARTE ( VERSION INGLÉS )  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                <td style="width:50%">
+                    <div class="divReunidos">
+                        <p>
+                            <b>
+                                AUF DER EINEN SEITE:
+                            </b>
+                        </p>
+                        <p class="parrafoJustificado">
+                            Herr / Frau
+                            <apex:outputText value=" {!Apoderado.name}" rendered="{!Apoderado.name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Apoderado.name==null}" style="color:red;"/>
+                            , volljährig, mit dem Personalausweis Nr. 
+                            <apex:outputText value=" {!Apoderado.N_Documento__c}" rendered="{!Apoderado.N_Documento__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Apoderado.N_Documento__c==null}" style="color:red;"/>
+                            und mit der Adresse für Zustellungen im Zusammenhang mit diesem Vertrag in 
+                            <apex:outputText value=" {!promotora.DF_Tipo_de_via__c}" rendered="{!promotora.DF_Tipo_de_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Tipo_de_via__c==null}" style="color:red;"/>
+                            <apex:outputText value=" {!promotora.DF_Nombre_via__c}" rendered="{!promotora.DF_Nombre_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Nombre_via__c==null}" style="color:red;"/>
+                            <apex:outputText value=" {!promotora.DF_N_via__c}" rendered="{!promotora.DF_N_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_N_via__c==null}" style="color:red;"/>
+                            ,
+                            <apex:outputText value=" {!promotora.DF_Localidad__r.Name}" rendered="{!promotora.DF_Localidad__r.Name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Localidad__r.Name==null}" style="color:red;"/>
+                            ,
+                            <apex:outputText value=" {!promotora.DF_Provincia__c}" rendered="{!promotora.DF_Provincia__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Provincia__c==null}" style="color:red;"/>
+                            .
+                        </p>
+                        <p>
+                            <b>
+                                UND AUF DER ANDEREN SEITE,
+                            </b>
+                        </p>
+                        <p class="parrafoJustificado">
+                        <!-- >>>>>>>>>>>   AccountRecordType.Cuenta_personal__c >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                            <apex:outputPanel rendered="{!IF(cliente.recordTypeId == AccountRecordType.Cuenta_personal__c,  true, false)}">
+                                <apex:variable var="count" value="{!0}" />
+                                    <apex:repeat value="{!Titulares}" var="Titular">
+                                        <apex:outputText value="{!IF (count > 0, ' y; ', ' ')}"/>
+                                        Herr / Frau
+                                        <apex:outputText value=" {!Titular.Cliente__r.name}" rendered="{!Titular.Cliente__r.name!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.name==null}" style="color:red;"/>
+                                        , volljährig, mit dem Personalausweis Nr 
+                                        <apex:outputText value=" {!Titular.Cliente__r.N_Documento__c}" rendered="{!Titular.Cliente__r.N_Documento__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Documento__c==null}" style="color:red;"/>
+                                        , wohnhaft in 
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Tipo_de_vIa__c}" rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c==null}" style="color:red;"/>
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Nombre_via__c}" rendered="{!Titular.Cliente__r.DP_Nombre_via__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Nombre_via__c==null}" style="color:red;"/>
+                                            -  
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_N_via__c}" rendered="{!Titular.Cliente__r.DP_N_via__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_N_via__c==null}" style="color:red;"/>
+                                        , Postleitzahl   
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Codigo_postal__c}" rendered="{!Titular.Cliente__r.DP_Codigo_postal__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Codigo_postal__c==null}" style="color:red;"/> 
+                                        . Familienstand " 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Regimen__c}" rendered="{!Titular.Cliente__r.Regimen__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Regimen__c==null}" style="color:red;"/>
+                                        ".
+                                    </apex:repeat>
+                            </apex:outputPanel>
+                                <!-- >>>>>>>>>>>   AccountRecordType.Bussines_Account__c >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                            <apex:outputPanel rendered="{!IF(cliente.recordTypeId == AccountRecordType.Bussines_Account__c,  true, false)}">
+                                <apex:variable var="count" value="{!0}" />
+                                    <apex:repeat value="{!Titulares}" var="Titular">
+                                        <apex:outputText value="{!IF (count > 0, ' y ', ' ')}"/>
+                                        <apex:outputText value=" {!Titular.Cliente__r.name}" rendered="{!Titular.Cliente__r.name!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.name==null}" style="color:red;"/>
+                                        , con CIF número 
+                                        <apex:outputText value=" {!Titular.Cliente__r.N_Documento__c}" rendered="{!Titular.Cliente__r.N_Documento__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Documento__c==null}" style="color:red;"/>
+                                        , con domicilio social en 
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Tipo_de_vIa__c}" rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c==null}" style="color:red;"/>
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Nombre_via__c}" rendered="{!Titular.Cliente__r.DP_Nombre_via__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Nombre_via__c==null}" style="color:red;"/>
+                                        , número 
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_N_via__c}" rendered="{!Titular.Cliente__r.DP_N_via__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_N_via__c==null}" style="color:red;"/>
+                                        CP 
+                                        <apex:outputText value=" {!Titular.Cliente__r.DP_Codigo_postal__c}" rendered="{!Titular.Cliente__r.DP_Codigo_postal__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Codigo_postal__c==null}" style="color:red;"/>
+                                        , e inscrita en el Registro Mercantil de 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Lugar_del_registro__c}" rendered="{!Titular.Cliente__r.Lugar_del_registro__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Lugar_del_registro__c==null}" style="color:red;"/>
+                                        , al tomo 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Tomo__c}" rendered="{!Titular.Cliente__r.Tomo__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Tomo__c==null}" style="color:red;"/>
+                                        , sección 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Seccion__c}" rendered="{!Titular.Cliente__r.Seccion__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Seccion__c==null}" style="color:red;"/>
+                                        , folio 
+                                        <apex:outputText value=" {!Titular.Cliente__r.Folio__c}" rendered="{!Titular.Cliente__r.Folio__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Folio__c==null}" style="color:red;"/>
+                                        , hoja número 
+                                        <apex:outputText value=" {!Titular.Cliente__r.N_Hoja__c}" rendered="{!Titular.Cliente__r.N_Hoja__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Hoja__c==null}" style="color:red;"/>
+                                        . Actúa en representación de la sociedad Don 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].name}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].name!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].name==null}" style="color:red;"/>
+                                        , con 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Tipo_de_documento__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Tipo_de_documento__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Tipo_de_documento__c==null}" style="color:red;"/>
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].N_Documento__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].N_Documento__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].N_Documento__c==null}" style="color:red;"/>
+                                        , en su condición de 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Condicion__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Condicion__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Condicion__c==null}" style="color:red;"/>  
+                                        conforme a escritura otorgada por el notario de 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Lugar_de_notaria__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Lugar_de_notaria__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Lugar_de_notaria__c==null}" style="color:red;"/>
+                                        Don 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Nombre_notario__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Nombre_notario__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Nombre_notario__c==null}" style="color:red;"/>
+                                        , en fecha 
+                                        <apex:outputText value=" {!mapRepresentantesFechas[Titular.Cliente__r.id]}" rendered="{!mapRepresentantesFechas[Titular.Cliente__r.id]!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesFechas[Titular.Cliente__r.id]==null}" style="color:red;"/>
+                                        con el nº de su protocolo 
+                                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Numero_de_protocolo__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Numero_de_protocolo__c!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Numero_de_protocolo__c==null}" style="color:red;"/>
+                                        . 
+                                        <apex:variable var="count" value="{!count + 1}" />
+                                    </apex:repeat> 
+                            </apex:outputPanel>                            
+                        </p>
+                    </div>
+                    <div class="divIntervienen">
+                        <p style="text-align: center; letter-spacing: 2px;" >
+                            <b>
+                                SIE HANDELN
+                            </b>                            
+                            <br/>
+                            <br/>
+                        </p>
+                        <p class="parrafoJustificado">
+                            Ersterer handelt als Vertreter der Handelsgesellschaft 
+                            <apex:outputText value=" {!promotora.name}" rendered="{!promotora.name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.name==null}" style="color:red;"/>
+                            , mit Sitz in  
+                            <apex:outputText value=" {!promotora.DF_Provincia__c}" rendered="{!promotora.DF_Provincia__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Provincia__c==null}" style="color:red;"/>
+
+                            <apex:outputText value=" {!promotora.DF_Tipo_de_via__c}" rendered="{!promotora.DF_Tipo_de_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Tipo_de_via__c==null}" style="color:red;"/>
+
+                            <apex:outputText value=" {!promotora.DF_Nombre_via__c}" rendered="{!promotora.DF_Nombre_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Nombre_via__c==null}" style="color:red;"/>
+
+                            <apex:outputText value=" {!promotora.DF_N_via__c}" rendered="{!promotora.DF_N_via__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_N_via__c==null}" style="color:red;"/>
+                            ,
+                            <apex:outputText value=" {!promotora.DF_Codigo_postal__c}" rendered="{!promotora.DF_Codigo_postal__c !=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Codigo_postal__c==null}" style="color:red;"/>
+
+                            <apex:outputText value=" {!promotora.DF_Localidad__r.Name}" rendered="{!promotora.DF_Localidad__r.Name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Localidad__r.Name==null}" style="color:red;"/>
+                            (
+                            <apex:outputText value=" {!promotora.DF_Provincia__c}" rendered="{!promotora.DF_Provincia__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.DF_Provincia__c==null}" style="color:red;"/>
+                            );
+                            gegründet am 
+                            <apex:outputText value=" {!fechaEscrituraPromotora}" rendered="{!fechaEscrituraPromotora!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!fechaEscrituraPromotora==null}" style="color:red;"/>
+                            anhand der öffentlichen Urkunde, die von dem Notar in 
+                            <apex:outputText value=" {!Promotora.Lugar_del_registro__c}" rendered="{!Promotora.Lugar_del_registro__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Lugar_del_registro__c==null}" style="color:red;"/>
+                            Hr. 
+                            <apex:outputText value=" {!Promotora.Nombre_del_notario__c}" rendered="{!Promotora.Nombre_del_notario__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Nombre_del_notario__c==null}" style="color:red;"/>
+                            mit der Urkundenrolle Nr.  
+                            <apex:outputText value=" {!Promotora.Numero_de_protocolo__c}" rendered="{!Promotora.Numero_de_protocolo__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Numero_de_protocolo__c==null}" style="color:red;"/>
+                            genehmigt wurde, eingetragen im Handelsregister von 
+                            <apex:outputText value=" {!Promotora.Lugar_del_registro__c}" rendered="{!Promotora.Lugar_del_registro__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Lugar_del_registro__c==null}" style="color:red;"/>
+                            , im Band 
+                            <apex:outputText value=" {!Promotora.Tomo__c}" rendered="{!Promotora.Tomo__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Tomo__c==null}" style="color:red;"/>    
+                            , Seite  
+                            <apex:outputText value=" {!Promotora.Folio__c}" rendered="{!Promotora.Folio__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.Folio__c==null}" style="color:red;"/>
+                            , Blatt Nummer  
+                            <apex:outputText value=" {!Promotora.N_Hoja__c}" rendered="{!Promotora.N_Hoja__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Promotora.N_Hoja__c==null}" style="color:red;"/>
+                            , sowie im Register der juristischen Personen des Finanzministeriums mit der Steuernummer 
+                            <apex:outputText value=" {!Apoderado.Tipo_de_documento__c}" rendered="{!Apoderado.Tipo_de_documento__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Apoderado.Tipo_de_documento__c==null}" style="color:red;"/> 
+                        
+                            <apex:outputText value=" {!Apoderado.N_Documento__c}" rendered="{!Apoderado.N_Documento__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!Apoderado.N_Documento__c==null}" style="color:red;"/>
+                            Er handelt in seiner Eigenschaft als ermächtigt.
+                        </p>
+                        <p class="parrafoJustificado">
+                            Nachfolgend, „die VERKÄUFERSEITE“.
+                        </p>
+                        <p class="parrafoJustificado">
+                            Letztere handeln in eigenem Namen und Recht.Nachfolgend, „die KÄUFERSEITE“.
+                        </p>
+                        <p class="parrafoJustificado">
+                            Beide Parteien erkennen die ausreichende Geschäftsfähigkeit der jeweils anderen Partei an, um den vorliegenden Vertrag abzuschließen, wofür sie Folgendes                           
+                        </p>
+                    </div>
+                </td>       
+            </tr>
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   EXPONEN   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <tr valign="top">
+                <td style="width:50%">
+                    <div class="divExponen">
+                        <p style="text-align: center; letter-spacing: 2px;" >
+                            <b>
+                                EXPONEN
+                            </b>
+                            <br/>
+                            <br/>
+                        </p>
+            <!-- >>>>>>   (I)   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                        <p class="parrafoJustificado">
+                            <b>I. -</b>
+                                Que 
+                                <apex:outputText value=" {!promotora.name}" rendered="{!promotora.name!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!promotora.name==null}" style="color:red;"/>
+                                es titular de las siguientes parcelas de terreno: 
+                        </p>
+                    </div>
+                </td>
+                <td style="width:50%">
+                    <div class="divExponen">
+                        <p style="text-align: center; letter-spacing: 2px;" >
+                            <b>
+                                ERKLÄREN
+                            </b>
+                            <br/>
+                            <br/>
+                        </p>
+            <!-- >>>>>>   (I)   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                        <p class="parrafoJustificado">
+                            <b>I. -</b>
+                            Dass 
+                            <apex:outputText value=" {!promotora.name}" rendered="{!promotora.name!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promotora.name==null}" style="color:red;"/>
+                            Eigentümerin der folgenden Parzellen ist:
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="width:50%">
+                    <apex:outputPanel >
+                        <p class="parrafoJustificado">
+                            <b>Finca registral nº 67199_URBANA</b>: NUMERO DOS DE ORDEN. Porción de terreno identificada con la letra B en el plano, de superficie CINCO MIL SETECIENTOS VEINTISIETE METROS CUADRADOS.  Inscripción: Figura inscrita en el Registro de la Propiedad de Calviá 1, en el tomo 4565, libro 1726, folio 215.
+                        </p>
+                        <p class="parrafoJustificado">
+                            <b>Finca registral nº 67200_URBANA</b>: NUMERO TRES DE ORDEN. Consistente en la porción de terreno identificada con la letra C en el plano, de superficie CINCO MIL TRESCIENTOS VEINTIOCHO METROS CUADRADOS. Inscripción: Figura inscrita en el Registro de la Propiedad de Calviá 1, en el tomo 4565, libro 1726, folio 220.
+                        </p>
+                    </apex:outputPanel>
+                </td>
+                <td style="width:50%">
+                    <apex:outputPanel >
+                        <p class="parrafoJustificado">
+                            <b>Buchliegenschaft Nr. 67199 STÄDTISCHE LIEGENSCHAFT</b>: ORDNUNGSNUMMER ZWEI. Stück Land, das auf dem Plan mit dem Buchstaben B gekennzeichnet ist, mit einer Fläche von 5.727 QUADRATMETERN. Grundbuchdaten: Eingetragen im Grundbuch von Calviá 1, im Band 4565, Buch 1726, Seite 215.
+                        </p>
+                        <p class="parrafoJustificado">
+                            <b>Buchliegenschaft Nr. 67200 STÄDTISCHE LIEGENSCHAFT</b>: ORDNUNGSNUMMER DREI. Bestehend aus dem Stück Land, das auf dem Plan mit dem Buchstaben C gekennzeichnet ist, mit einer Fläche von 5.328 QUADRATMETERN. Grundbuchdaten: Eingetragen im Grundbuch von Calviá 1, im Band 4565, Buch 1726, Seite 220.
+                        </p>
+                    </apex:outputPanel>
+                </td>
+            </tr>
+            <!-- >>>>>>   (II)   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+            <tr valign="top">
+                <td style="width:50%">
+                    <p class="parrafoJustificado">
+                        <b>II. -</b>
+                        Que   
+                        <apex:outputText value=" {!promotora.name}" rendered="{!promotora.name!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!promotora.name==null}" style="color:red;"/>
+                        , ha encargado el correspondiente Proyecto de Arquitectura a fin de llevar a cabo una promoción de 
+                        <apex:outputText value=" {!promocion.N_Viviendas_totales_promocion__c}" rendered="{!promocion.N_Viviendas_totales_promocion__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!promocion.N_Viviendas_totales_promocion__c==null}" style="color:red;"/> 
+                        viviendas libres,  
+                        <apex:outputPanel rendered="{!IF(and(promocion.N_Garages_totales_promocion__c != null,promocion.N_Garages_totales_promocion__c > 0), true, false)}">            
+                            <apex:outputText value=" {!promocion.N_Garages_totales_promocion__c}" rendered="{!promocion.N_Garages_totales_promocion__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!promocion.N_Garages_totales_promocion__c==null}" style="color:red;"/>
+                            plazas de garaje
+                        </apex:outputpanel>
+                        , piscina y zonas comunes en las parcelas descritas anteriormente, denominado "<b>Residencial Avintia Mare</b>”.
+                    </p>
+                    <p class="parrafoJustificado">
+                        A tal efecto, el proyecto de ejecución correspondiente ha sido elaborado por el estudio de arquitectura 
+                        <apex:outputText value=" {!promocion.Informacion_de_arquitectos_de_obra__c}" rendered="{!promocion.Informacion_de_arquitectos_de_obra__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!promocion.Informacion_de_arquitectos_de_obra__c==null}" style="color:red;"/>
+                        .
+                    </p>
+                </td>
+                <td style="width:50%">
+                    <p class="parrafoJustificado">
+                        <b>II. -</b>
+                        Dass  
+                        <apex:outputText value=" {!promotora.name}" rendered="{!promotora.name!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!promotora.name==null}" style="color:red;"/>
+                        , die entsprechende Architektenplanung in Auftrag gegeben hat, um ein Bauprojekt von 
+                        <apex:outputText value=" {!promocion.N_Viviendas_totales_promocion__c}" rendered="{!promocion.N_Viviendas_totales_promocion__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!promocion.N_Viviendas_totales_promocion__c==null}" style="color:red;"/> 
+                        freien Wohnungen, Parkplätzen, Schwimmbad und Gemeinschaftszonen namens <b>„Residencial Avintia Mare“</b> auf den zuvor beschriebenen 
+                        Parzellen zu errichten.
+                    </p>
+                    <p class="parrafoJustificado">
+                        Zu diesem Zweck wurde die entsprechende Ausführungsplanung von dem Architekturstudio 
+                        <apex:outputText value=" {!promocion.Informacion_de_arquitectos_de_obra__c}" rendered="{!promocion.Informacion_de_arquitectos_de_obra__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!promocion.Informacion_de_arquitectos_de_obra__c==null}" style="color:red;"/>
+                        .
+                    </p>
+                </td>
+            </tr>
+            <!-- >>>>>>   (III)   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+            <tr valign="top">
+                <td style="width:50%">
+                    <p class="parrafoJustificado">
+                        <b>III. -</b> 
+                        Que conociendo lo expuesto en los Expositivos anteriores, la parte COMPRADORA quiere reservarse el derecho a adquirir la siguiente vivienda:
+                    </p>
+                    <apex:outputPanel rendered="{!IF(inmueble.Tipologia_de_vivienda__c == 'Chalet', true, false)}">
+                        &nbsp;&nbsp;
+                        Vivienda tipo 
+                        <apex:outputText value=" {!inmueble.Tipo_de_vivienda__c}" rendered="{!inmueble.Tipo_de_vivienda__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_vivienda__c==null}" style="color:red;"/>
+                        <apex:outputPanel rendered="{!IF(inmueble.N_Vivienda_Garaje_Trastero_Local__c != null, true, false)}">
+                            , Chalet  
+                            <apex:outputText value=" {!inmueble.N_Vivienda_Garaje_Trastero_Local__c}" rendered="{!inmueble.N_Vivienda_Garaje_Trastero_Local__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!inmueble.N_Vivienda_Garaje_Trastero_Local__c==null}" style="color:red;"/> 
+                        </apex:outputPanel>                                                    
+                    </apex:outputPanel>
+        
+                    <apex:outputPanel rendered="{!IF(inmueble.Tipologia_de_vivienda__c != 'Chalet', true, false)}">
+                        <ul style="margin-left: 80px; list-style-type: square">
+                            <li>
+                                Vivienda tipo 
+                                <apex:outputText value=" {!inmueble.Tipo_de_vivienda__c}" rendered="{!inmueble.Tipo_de_vivienda__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_vivienda__c==null}" style="color:red;"/>
+                            </li>
+                            <li>
+                                Bloque 
+                                <apex:outputText value=" {!inmueble.Bloque__c}" rendered="{!inmueble.Bloque__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.Bloque__c==null}" style="color:red;"/> 
+                            </li>
+                            <li>
+                                Portal 
+                                <apex:outputText value=" {!inmueble.Portal__c}" rendered="{!inmueble.Portal__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.Portal__c==null}" style="color:red;"/> 
+                            </li>
+                            <li>
+                                Planta 
+                                <apex:outputText value=" {!inmueble.Planta__c}" rendered="{!inmueble.Planta__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.Planta__c==null}" style="color:red;"/>
+                                Letra 
+                                <apex:outputText value=" {!inmueble.Letra_N_Puerta__c}" rendered="{!inmueble.Letra_N_Puerta__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.Letra_N_Puerta__c==null}" style="color:red;"/>
+                            </li>                 
+                            <apex:outputPanel rendered="{!IF(listGarajes != null, true, false)}">
+                                <apex:repeat value="{!MapGarajes}" var="garaje">
+                                    <li style="margin-left: 40px; list-style-type: square">                            
+                                            &nbsp;&nbsp;
+                                            Anejo: Plaza de parking nº 
+                                            <apex:outputText value=" {!MapGarajes[garaje][0]}" rendered="{!MapGarajes[garaje][0]!='#@#VACIO#@#'}"/>
+                                            <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][0]=='#@#VACIO#@#'}" style="color:red;"/>
+                                    </li>
+                                </apex:repeat>
+                            </apex:outputPanel>
+                        </ul>
+                    </apex:outputPanel>
+                    <p class="parrafoJustificado">
+                        (en adelante la “Finca”)
+                    </p>
+                </td>
+                <td style="width:50%">
+                    <p class="parrafoJustificado">
+                        <b>III -</b> 
+                        Nachdem die KÄUFERSEITE über das hier Dargelegte informiert wurde, möchte sie sich das Recht vorbehalten, die folgende Immobilie zu erwerben:
+                    </p>
+                        <apex:outputPanel rendered="{!IF(inmueble.Tipologia_de_vivienda__c == 'Chalet', true, false)}">
+                            &nbsp;&nbsp;
+                            Type Housing
+                            <apex:outputText value=" {!inmueble.Tipo_de_vivienda__c}" rendered="{!inmueble.Tipo_de_vivienda__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_vivienda__c==null}" style="color:red;"/>
+                            <apex:outputPanel rendered="{!IF(inmueble.N_Vivienda_Garaje_Trastero_Local__c != null, true, false)}">
+                                , Chalet  
+                                <apex:outputText value=" {!inmueble.N_Vivienda_Garaje_Trastero_Local__c}" rendered="{!inmueble.N_Vivienda_Garaje_Trastero_Local__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.N_Vivienda_Garaje_Trastero_Local__c==null}" style="color:red;"/> 
+                            </apex:outputPanel>                                                    
+                        </apex:outputPanel>
+            
+                        <apex:outputPanel rendered="{!IF(inmueble.Tipologia_de_vivienda__c != 'Chalet', true, false)}">
+                            <ul style="margin-left: 80px; list-style-type: square">
+                                <li>
+                                    Wohnung 
+                                    <apex:outputText value=" {!inmueble.Tipo_de_vivienda__c}" rendered="{!inmueble.Tipo_de_vivienda__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_vivienda__c==null}" style="color:red;"/>
+                                </li>
+                                <li>
+                                    BLOCK  
+                                    <apex:outputText value=" {!inmueble.Bloque__c}" rendered="{!inmueble.Bloque__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!inmueble.Bloque__c==null}" style="color:red;"/> 
+                                </li>
+                                <li>
+                                    EINGANG   
+                                    <apex:outputText value=" {!inmueble.Portal__c}" rendered="{!inmueble.Portal__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!inmueble.Portal__c==null}" style="color:red;"/> 
+                                </li>
+                                <li>
+                                    Geschoss 
+                                    <apex:outputText value=" {!inmueble.Planta__c}" rendered="{!inmueble.Planta__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!inmueble.Planta__c==null}" style="color:red;"/>
+                                    Buchstabe  
+                                    <apex:outputText value=" {!inmueble.Letra_N_Puerta__c}" rendered="{!inmueble.Letra_N_Puerta__c!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!inmueble.Letra_N_Puerta__c==null}" style="color:red;"/>
+                                </li>      
+                                <apex:outputPanel rendered="{!IF(listGarajes != null, true, false)}">
+                                    <apex:repeat value="{!MapGarajes}" var="garaje">
+                                        <li style="margin-left: 40px; list-style-type: square">                            
+                                                &nbsp;&nbsp;
+                                                Dazugehörend: Stellplatz 
+                                                <apex:outputText value=" {!MapGarajes[garaje][0]}" rendered="{!MapGarajes[garaje][0]!='#@#VACIO#@#'}"/>
+                                                <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][0]=='#@#VACIO#@#'}" style="color:red;"/>
+                                        </li>
+                                    </apex:repeat>
+                                </apex:outputPanel>
+                            </ul>
+                        </apex:outputPanel>
+                    <p class="parrafoJustificado">
+                        (nachfolgend die „Immobilie”)
+                    </p>
+                </td>
+			</tr>
+            <!-- >>>>>>   (IV)   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+            <tr valign="top">
+                <td style="width:50%">
+                    <p class="parrafoJustificado" style="display: inline">
+                        <b>IV.-</b> 
+                        Que, estando interesadas las Partes, suscriben el presente Contrato de Reserva de vivienda, y a tal efecto, 
+                    </p>
+                </td>
+                <td style="width:50%">
+                    <p class="parrafoJustificado" style="display: inline">
+                        <b>IV.-</b> 
+                        Da beide Parteien daran interessiert sind, schließen sie den vorliegenden Reservierungsvertrag einer Immobilie ab, wofür sie Folgendes 
+                    </p>
+                </td>
+            </tr>
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ACUERDAN   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <tr valign="top">
+                <td style="width:50%">
+                    <p style="text-align: center; letter-spacing: 2px;" >
+                        <b>
+                            ACUERDAN
+                        </b>
+                        <br/>
+                        <br/>
+                    </p>
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   PRIMERA   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                    <p><b>PRIMERO.-</b></p>
+                    <p class="parrafoJustificado">
+                        Que la parte Compradora entrega en este acto a la parte Vendedora justificante de ingreso o transferencia bancaria realizada en la cuenta titularidad de la parte 
+                        Vendedora abierta en la entidad BANCO SANTANDER, SWIFT: BSCHESMMXXX; número ES49 0049 1853 13 2710474791 por importe de <b>DIEZ MIL EUROS (10.000,00.-€)</b>, más el IVA 
+                        correspondiente, en concepto de reserva de la vivienda descrita en el Expositivo III en la promoción denominada “Residencial Avintia Mare”.
+                        Se adjunta al presente Documento de Reserva como Anexo I justificante acreditativo de la referida transferencia bancaria o ingreso.        
+                    </p>
+                    <p class="parrafoJustificado">
+                        Se adjunta al presente Documento de Reserva como <b>Anexo I</b> justificante acreditativo de la referida transferencia bancaria o ingreso.        
+                    </p>
+                </td>
+                <td style="width:50%">
+                    <p style="text-align: center; letter-spacing: 2px;" >
+                        <b>
+                            VEREINBAREN 
+                        </b>
+                        <br/>
+                        <br/>
+                    </p>
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   PRIMERA   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                    <p><b>ERSTENS.- </b></p>
+                    <p class="parrafoJustificado">
+                        Die Käuferseite übergibt der Verkäuferseite hiermit eine Einzahlungs- oder Überweisungsbestätigung der Reservierungsgebühr in Höhe von <b>ZEHNTAUSEND EURO (10,000. -€)</b>, 
+                        zzgl. der entsprechenden MwSt, auf das Konto der Verkäuferseite bei der Bankzzgl. der entsprechenden MwSt, auf das Konto der Verkäuferseite bei der Bank BANCO SANTANDER, 
+                        SWIFT: BSCHESMMXXX; Nr. ES49 0049 1853 13 2710474791, für die Reservierung der unter Punkt III beschriebenen Immobilie in dem Bauprojekt namens „Residencial Avintia Mare“.
+                    </p>
+                    <p class="parrafoJustificado">
+                        Der Nachweis der erwähnten Banküberweisung bzw. Einzahlung wird dem vorliegenden Reservierungs-dokument als <b>Anlage I</b> beigefügt.
+                    </p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="width:50%">
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   SEGUNDO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+					<p><b>SEGUNDO. -</b></p>
+					<p class="parrafoJustificado">
+                        La reserva se concede por el plazo de 30 días desde la fecha de firma del presente documento. Dentro de dicho plazo, y con antelación suficiente, la Parte VENDEDORA facilitará a la parte compradora el contrato privado de compraventa para su formalización. En caso de ejecutar la compra de la vivienda reservada, la cantidad aquí reflejada en concepto de reserva será considerada como ya entregada a cuenta del precio de la vivienda adquirida.
+					</p>
+                </td>
+                <td style="width:50%">
+					<p><b>ZWEITENS. -</b></p>
+					<p class="parrafoJustificado">
+                        Die Reservierung wird für eine Frist von 30 Tagen ab Unterzeichnung des vorliegenden Dokuments gewährt. Innerhalb der genannten Frist muss die VERKÄUFERSEITE der Käuferseite rechtzeitig im Voraus den privaten Kaufvertrag vorlegen, damit dieser abgeschlossen werden kann. Sollte der Kauf der reservierten Immobilie vollzogen werden, gilt der hier aufgeführte Reservierungsbetrag als bereits getätigte Akontozahlung auf den Preis der erworbenen Immobilie.
+                    </p>
+                </td>
+			</tr>
+			<tr valign="top">
+                <td style="width:50%">
+			<!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   TERCERO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+					<p><b>TERCERO.-</b></p>
+					<p class="parrafoJustificado">
+						Si la parte COMPRADORA no suscribiese el contrato, dentro del plazo indicado en el acuerdo segundo anterior, se entenderá que renuncia a la compraventa y ARABA, 
+						hará suya la cantidad recibida en concepto de reserva, como compensación por daños y perjuicios derivados de la imposibilidad de disponer de la vivienda durante 
+						el plazo de reserva, recobrando de forma automática, y sin necesidad de requerimiento alguno, la plena disposición sobre la finca, a la que podrá dar el destino 
+						que estime conveniente, sin que las partes tengan nada más que reclamarse.
+					</p>
+				</td>
+                <td style="width:50%">
+					<!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   TERCERO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+					<p><b>DRITTENS.-</b></p>
+					<p class="parrafoJustificado">
+                        Sollte die KÄUFERSEITE den Vertrag nicht innerhalb der unter ZWEITENS genannten Frist unterzeichnen, gilt dies als Kaufverzicht ihrerseits, und der als Reservierung erhaltene Betrag verbleibt als Ersatz für die Schäden, 
+                        die durch die Unmöglich-keit, während dem Reservierungszeit-raum über die Immobilie zu verfügen, entstandenen sind, bei ARABA; außerdem geht die volle Verfügung über die Immobilie automatisch und ohne die Erfordernis irgendeiner 
+                        Aufforderung zurück an ARABA, welche diese nutzen kann, wie sie es für angemessen hält, und die Parteien sind sich folglich nichts weiter schuldig. Sollte die Nichtunterzeichnung des privaten Kaufvertrags auf Gründe zurückzuführen sein, 
+                        die der VERKÄUFERSEITE zuzuschreiben sind, ist diese verpflichtet, den angezahlten Betrag innerhalb von 30 Tagen der KÄUFERSEITE rückzuvergüten.
+					</p>
+				</td>
+			</tr>
+            <tr valign="top">
+                <td style="width:50%">
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   CUARTO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< --> 
+                    <p><b>CUARTO.-</b></p>
+                    <p class="parrafoJustificado">
+                        El contrato privado de compraventa, en el que se fijará la fecha de entrega de los inmuebles y las demás condiciones establecidas 
+                        por la normativa aplicable, se someterá a los siguientes parámetros económicos básicos:
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>A)</b>
+                        Precio total:
+                        <b>
+                            <apex:outputText value=" {!StrOpporAmount}" rendered="{!StrOpporAmount !=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!StrOpporAmount==null}" style="color:red;"/>
+                            €
+                        </b>
+                        + IVA
+                    </p>
+                    <p class="parrafoJustificado"> 
+                        <b>B)</b>
+                        Forma de pago:
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>b.1</b> A la firma de la Reserva <b>10.000 €</b> + IVA
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>b.2</b> Contado a la firma del contrato: 15 % + IVA (De esta cantidad se descontará la entrega de la reserva en este acto).            
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>b.3</b> Aplazado hasta entrega de llaves: 15 % + IVA <b>(Mediante 20 pagos mensuales y consecutivos de igual importe por transferencia bancaria)</b>.                
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>b.4</b> Resto a escritura pública 
+                        <b>
+                            <apex:outputText value=" {!StrOpporPagoEscritura}" rendered="{!ROUND(oportunidad.Amount * oportunidad.Pago_Escritura__c/100, 2)!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!ROUND(oportunidad.Amount * oportunidad.Pago_Escritura__c/100, 2)==null}" style="color:red;"/>
+                            €
+                        </b>
+                        + IVA (Mediante cheque bancario).    
+                    </p>
+                    <p class="parrafoJustificado">
+                        Sobre todas las cantidades se aplicará el IVA vigente en cada momento.        
+                    </p>
+                </td>
+                <td style="width:50%">
+                    <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   CUARTO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< --> 
+                    <p><b>VIERTENS.-</b></p>
+                    <p class="parrafoJustificado">
+                        Der private Kaufvertrag, in welchem der Termin für die Übergabe der Immobilien sowie die weiteren gesetzlich geltenden Bedingungen festgelegt werden, 
+                        unterliegt den folgenden grundlegenden wirtschaftlichen Parametern:
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>A)</b>
+                        Gesamtpreis:
+                        <b>
+                            <apex:outputText value=" {!StrOpporAmount}" rendered="{!StrOpporAmount !=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!StrOpporAmount==null}" style="color:red;"/>
+                            €
+                        </b>
+                        + MwSt
+                    </p>
+                    <p class="parrafoJustificado"> 
+                        <b>B)</b>
+                        Zahlungsweise:
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>b.1</b> Bei Unterzeichnung des Reservierungsvertrags <b>10.000 €</b> + MwSt
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>b.2</b> In bar bei Unterzeichnung des privaten Kaufvertrags: 15 % + MwSt (Von diesem Betrag ist die hiermit übergebene Reservierung abzuziehen).            
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>b.3</b> Gestundet bis zur Schlüsselübergabe: 15 % + MwSt <b>(Durch 20 monatliche, aufeinander-folgende Zahlungen in derselben Höhe durch Banküberweisung)</b>.                
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>b.4</b> Der Rest bei Unterzeichnung der öffentlichen Urkunde  
+                        <b>
+                            <apex:outputText value=" {!StrOpporPagoEscritura}" rendered="{!ROUND(oportunidad.Amount * oportunidad.Pago_Escritura__c/100, 2)!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!ROUND(oportunidad.Amount * oportunidad.Pago_Escritura__c/100, 2)==null}" style="color:red;"/>
+                            €
+                        </b>
+                        + MwSt (Durch einen Bankscheck)                         
+                    </p>
+                    <p class="parrafoJustificado">
+                        Alle Beträge verstehen sich zuzüglich der jeweils geltenden MwSt.    
+                    </p>
+                </td>
+            </tr>
+				<tr valign="top">
+                    <td style="width:50%" cellpadding="10">
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   QUINTO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->                     
+						<p><b>QUINTO.-</b></p>                        
+						<p class="parrafoJustificado">
+							Desde el momento de la suscripción del presente documento de reserva, el Promotor garantizará al Interesado todas las cantidades entregadas hasta el momento de la escritura pública, con el correspondiente aval o póliza de afianzamiento, de conformidad con lo previsto en la Ley 20/2015, de 14 de julio, de ordenación, supervisión y solvencia de las entidades aseguradoras y reaseguradoras, la cual modifica la disposición adicional primera de la Ley 38/1999, de 5 de noviembre, de “Ordenación de la Edificación”, que se entregará en el plazo de 30 días desde la firma del presente documento.
+						</p>
+					</td>
+					<td style="width:50%" cellpadding="10">
+						<p><b>FÜNFTENS. –</b></p>                        
+						<p class="parrafoJustificado">
+                            Ab Unterzeichnung dieses Reservierungsvertrags muss der Bauträger dem Interessenten alle bis zur Unterzeichnung der öffentlichen Urkunde geleisteten Anzahlungen garantieren, und zwar durch eine entsprechende Kautionsversicherung oder Bürgschaft, gemäß den Bestimmungen des Gesetzes „Ley 20/2015 de 14 de julio“ über die Regelung, Kontrolle und Solvenz der Versicherer und Rückversicherer, welches die erste Zusatzbestimmung des Bauordnungs-gesetzes „Ley 38/1999 de 5 de noviembre“ ändert; die genannte Bürgschaft bzw. Versicherung muss innerhalb von 30 Tagen ab Unterzeichnung des vorliegenden Dokuments übergeben werden.
+                        </p>
+					</td>
+                </tr>
+                <tr valign="top">
+                    <td style="width:50%">
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   SEXTA   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->                     
+						<p><b>SEXTO.-</b></p>
+						<p class="parrafoJustificado">
+							La parte COMPRADORA manifiesta que actúa en su propio nombre y derecho y nunca como intermediario de terceros, por lo que la compraventa del Inmueble, en caso de tener lugar ésta dentro del Plazo, no podrá tener lugar a favor de persona o entidad distinta que la parte COMPRADORA, aunque sea la parte COMPRADORA quien presente a esa persona o entidad a la parte VENDEDORA. Por tanto, se prohíbe a la Parte COMPRADORA la cesión de los derechos derivados del presente documento de reserva a favor de terceros, salvo que cuente con la autorización previa y escrita por parte de la parte VENDEDORA.
+						</p>
+                    </td>
+                    <td style="width:50%">
+                        <p><b>SECHSTENS. –</b></p>
+						<p class="parrafoJustificado">
+                            Die KÄUFERSEITE erklärt, dass sie in eigenem Namen und Recht handelt und keinesfalls als Vermittler für Dritte, weshalb der Kauf/Verkauf der Immobilie, sofern er innerhalb der genannten Frist stattfindet, nicht zugunsten einer anderen Person oder Gesellschaft als der KÄUFERSEITE durchgeführt werden kann, auch wenn die KÄUFERSEITE diejenige ist, die der VERKÄUFERSEITE diese Person oder Gesellschaft vorstellt. Demnach wird der KÄUFERSEITE also verboten, die Rechte aus dem vorliegenden Reservierungsvertrag an Dritte abzutreten, es sei denn die VERKÄUFERSEITE hat dies im Vorhinein schriftlich genehmigt.
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td style="width:50%">
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   SEPTIMO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->        
+						<p><b>SEPTIMO. - PREVENCIÓN DE BLANQUEO DE CAPITALES</b></p>
+						<p class="parrafoJustificado">
+							La parte VENDEDORA declara que es sujeto obligado de la normativa de prevención de blanqueo de capitales de conformidad con la Ley 10/2010, de 28 de abril de prevención del blanqueo de capitales y de la financiación del terrorismo y su normativa de desarrollo, debiendo cumplir, entre otros requisitos, los deberes de diligencia debida que la normativa exige, como el de recabar de sus clientes su documentación identificativa, así como información suficiente para conocer el origen de los fondos para adquirir el/los inmueble/s, la naturaleza de su actividad profesional o empresarial, y sin la cual, la futura operación de compraventa no podrá realizarse. 
+						</p>
+						<p class="parrafoJustificado">
+							La parte COMPRADORA, a los efectos de colaborar en el cumplimiento de la normativa de prevención de blanqueo de capitales, declara en este acto, que el origen de los fondos utilizados para la adquisición del/los  inmueble/s objeto del presente contrato es legítimo, y por tanto no tiene relación alguna con dinero, capitales, bienes, fondos, haberes, beneficios, valores o títulos provenientes de actividades delictivas conforme a la normativa penal vigente, comprometiéndose a facilitar a la VENDEDORA aquélla documentación e información que ésta le solicite, al objeto exclusivo de dar cumplimiento a los deberes de diligencia debida exigidos por la referida normativa.
+						</p>
+                    </td>
+                    <td style="width:50%">
+						<p><b>SIEBTENS - VERHINDERUNG VON GELDWÄSCHE</b></p>
+						<p class="parrafoJustificado">
+                            Die VERKÄUFERSEITE erklärt, dass sie zur Einhaltung der Geldwäsche-vorschriften verpflichtet ist, in Übereinstimmung mit dem Gesetz Ley 10/2010, de 28 de Abril zur Verhinderung von Geldwäsche und Terrorismus-finanzierung sowie seiner Ausführungsverordnung, was bedeutet, dass sie u.a. der im Gesetz geforderten Sorgfaltspflicht nachkommen muss sowie der Pflicht, von ihren Kunden die Ausweisdokumente einzuholen sowie ausreichende Informationen, um die Herkunft der Mittel zum Erwerb der Immobilie/n und die Art ihrer beruflichen oder unternehmerischen Tätigkeiten zu kennen, ohne welche die künftige Kauftransaktion nicht möglich wäre.
+                        </p>
+						<p class="parrafoJustificado">
+                            Um die Einhaltung der Vorschriften zur Bekämpfung von Geldwäsche zu unterstützen, erklärt die KÄUFERSEITE hiermit, dass die Herkunft der Mittel, die für den Erwerb der vertragsgegen-ständlichen Immobilie/n verwendet werden, rechtmäßig ist und daher keinerlei Bezug zu Geldern, Kapital, Gütern, Fonds, Vermögenswerten, Gewinnen, Werten oder Wertpapieren hat, die von kriminellen Tätigkeiten herrühren, gemäß den geltenden strafrechtlichen Bestimmungen; zu diesem Zweck verpflichtet sie sich, der VERKÄUFERSEITE jene Unterlagen und Informationen zu übergeben, die von dieser beantragt werden, ausschließlich zum Zweck der Einhaltung der Sorgfaltspflicht, die von der genannten Gesetzgebung verlangt wird.
+                        </p>
+                    </td>
+				</tr>
+				<tr valign="top">
+                    <td style="width:50%">
+						<p class="parrafoJustificado">
+							La parte COMPRADORA se compromete a facilitar a la parte VENDEDORA, la documentación actualizada referente a datos de identificación, titularidad real, declaraciones, naturaleza de su actividad de negocio o ingresos, así como otra documentación de comprobación requerida, durante la vigencia del contrato o cada una de las fases que perfeccionan la relación comercial. 
+						</p>
+						<p class="parrafoJustificado">
+							Queda informada la parte COMPRADORA, que, en cumplimiento de la citada Ley, la parte VENDEDORA podrá requerir en cualquier momento, información, justificación, documentación actualizada o adicional de la información entregada por la COMPRADORA.
+						</p>
+                    </td>
+                    <td style="width:50%">
+						<p class="parrafoJustificado">
+                            Die KÄUFERSEITE verpflichtet sich, während der Laufzeit des Vertrags bzw. während der einzelnen Phasen, welche die Geschäftsbeziehung der Parteien vervollständigen, der VERKÄUFER-SEITE aktualisierte Unterlagen über die Identifizierungsdaten, den wirtschaftlichen Eigentümer, ihre Steuererklärungen, die Art ihrer geschäftlichen Tätigkeit oder ihr Einkommen sowie andere erforderliche Dokumentennachweise zur Verfügung zu stellen.
+                        </p>
+						<p class="parrafoJustificado">
+                            Die KÄUFERSEITE wird darüber informiert, dass die VERKÄUFERSEITE in Einhaltung des genannten Gesetzes jederzeit aktualisierte bzw. zusätzliche Informationen, Nachweise oder Unterlagen der von der KÄUFERSEITE zur Verfügung gestellten Informationen verlangen kann.
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td style="width:50%">
+                    <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   OCTAVO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+						<p>
+							<b>OCTAVO. - PROTECCIÓN DE DATOS</b>
+							<p class="parrafoJustificado">
+								En cumplimiento de la normativa vigente de protección de datos, los datos de los intervinientes en el presente contrato, así como cualquier otro que pudiera generarse durante su vigencia, serán tratados por ambas partes, de conformidad con la legislación vigente en materia de Protección de Datos, de manera confidencial y únicamente con la finalidad de atender y garantizar el buen fin del mismo. Así mismo, dichos datos no serán comunicados ni puestos a disposición de terceros a salvo de que así fueran requeridos por las Autoridades y/o por exigencia legal.
+							</p>
+							<p class="parrafoJustificado">
+								Cada parte responderá por el incumplimiento de la legislación en materia de protección de datos, acordando indemnizar a la otra parte por todas y cada una de las pérdidas y/o responsabilidades, incluyendo sanciones y penalizaciones, que la parte no infractora pueda sufrir como resultado del incumplimiento de dicha normativa.
+							</p>
+							<p class="parrafoJustificado">
+								Por parte del vendedor los datos serán tratados por ARABA DIRECTORSHIP, S.L. como responsable, con domicilio social en calle Emisora, 20, 28224, Pozuelo de Alarcón, Madrid, con la finalidad de ejecutar el presente contrato, así como para la gestión y administración del mismo. Sus datos serán obligatorios para dicha finalidad, por lo que su negativa a proporcionarlos imposibilitara realizar la compraventa de la vivienda objeto de este contrato.
+							</p>
+						</p>
+                    </td>
+                    <td style="width:50%">
+						<p>
+							<b>ACHTENS. - DATENSCHUTZ</b>
+							<p class="parrafoJustificado">
+                                In Einhaltung der geltenden Datenschutzbestimmungen müssen die Daten der Vertragsparteien sowie alle weiteren Daten, die während der Laufzeit des Vertrags erhoben werden, in Übereinstimmung mit der geltenden Datenschutzgesetzgebung von beiden Parteien vertraulich und allein zur erfolgreichen Erfüllung des Vertrags verarbeitet werden. Besagte Daten werden nicht an Dritte weitergeleitet oder diesen zur Verfügung gestellt, es sei denn dies wird gesetzlich oder von den zuständigen Behörden verlangt.
+                            </p>
+							<p class="parrafoJustificado">
+                                Jede Partei haftet für die Nichteinhaltung der Datenschutzgesetzgebung und es wird vereinbart, dass die Partei, die nicht zuwiderhandelt, für die Verluste und Haftungen, die ihr infolge der Nichteinhaltung der besagten Vorschriften entstehen, von der anderen Partei entschädigt werden muss.
+                            </p>
+							<p class="parrafoJustificado">
+                                Seitens des Verkäufers ist die ARABA DIRECTORSHIP, S.L. für die Verarbeitung der Daten verantwortlich, mit Sitz in calle Emisora 20, 28224 Pozuelo de Alarcón, Madrid, um den vorliegenden Vertrag auszuführen, abzuwickeln und zu verwalten. Ihre Daten sind zum genannten Zweck obligatorisch anzugeben. Ihre Weigerung, diese Daten anzugeben, macht die Durchführung des Kaufs/Verkaufs der vertragsgegen-ständlichen Immobilie unmöglich.
+                            </p>
+						</p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td style="width:50%">
+                        <p>
+							<p class="parrafoJustificado">
+								Igualmente les informamos que dichos datos serán comunicados a AVINTIA DESARROLLOS INMOBILIARIOS S.L, con domicilio social en la Calle Emisora, 20, 28224, Pozuelo de Alarcón, Madrid, como empresa matriz que participa en su capital, con la finalidad de gestionar sus datos como clientes e incorporarlos en sus sistemas, así como la atención y control de calidad de los mismos, e informarle de novedades de productos y servicios de empresas de AVINTIA DESARROLLOS INMOBILIARIOS S.L. Sus datos serán obligatorios para las mencionadas finalidades, por lo que su negativa a proporcionarlos imposibilitara la ejecución del presente contrato.
+							</p>
+							<p class="parrafoJustificado">
+								Asimismo, le comunicamos que sus datos personales serán conservados durante la duración del contrato, y el tiempo necesario para cumplir con las distintas obligaciones legales que incumben al responsable. Por otro lado, sus datos podrán ser comunicados a distintas Administraciones Publicas para dar cumplimiento a las obligaciones (fiscales, administrativas, legales…) de los responsables. Por el contrario, no serán objeto de transferencia internacional a países ubicados fuera de la Unión Europea. En caso de que fuese necesario, los responsables adaptaran las garantías adecuadas conforme a la normativa vigente.
+                            </p>
+                            <p class="parrafoJustificado">
+                                Le informamos que sus datos serán cedidos a la entidad financiera con la que se negocie la financiación de la promoción, con el objetivo de formalizar cuantos contratos, avales y cualquier otro documento que tenga como fin el afianzamiento de cantidades entregadas por los clientes, así como la obtención y tramitación de la referida financiación.  A estos efectos se adjunta Anexo II documento de cesión de datos a la entidad financiadora de la promoción.
+                            </p>
+                        </p>
+                    </td>
+                    <td style="width:50%">
+                        <p>
+							<p class="parrafoJustificado">
+                                Ferner teilen wir Ihnen mit, dass diese Daten an die AVINTIA DESARROLLOS INMOBILIARIOS S.L. mit Sitz in calle Emisora 20, 28224 Pozuelo de Alarcón, Madrid, als Mutterunternehmen, das am Kapital beteiligt ist, weitergeleitet werden, um Ihre Kundendaten zu verwalten, in die Systeme der Firma aufzunehmen und sie einer Qualitätskontrolle zu unterziehen, und um Sie über neue Produkte und Dienstleistungen der AVINTIA DESARROLLOS INMOBILIARIOS S.L. informieren zu können. Ihre Daten sind zum genannten Zweck obligatorisch anzugeben. Ihre Weigerung, diese Daten anzugeben, macht die Durchführung des Kaufs/Verkaufs der vertragsgegen-ständlichen Immobilie unmöglich.
+                            </p>
+							<p class="parrafoJustificado">
+                                Ihre persönlichen Daten werden während der Laufzeit des Vertrags bzw. so lange wie nötig gespeichert, um den diversen gesetzlichen Pflichten des Verantwort-lichen nachkommen zu können. Desweiteren können Ihre Daten an die öffentliche Verwaltung weitergeleitet werden, um den steuerlichen, administrativen, gesetzlichen und anderen Pflichten des Verantwortlichen nachzukommen. Auf internationaler Ebene werden Ihre Daten jedoch nicht in Länder außerhalb der Europäischen Union weitergeleitet. Wenn nötig muss der Verantwortliche die laut geltender Gesetzgebung angemessenen Garantien bieten.
+                            </p>
+                            <p class="parrafoJustificado">
+                                Ihre Daten werden an das Geldinstitut weitergeleitet, mit dem die Finanzierung des Bauprojekts verhandelt wird, zum Zweck der Formalisierung aller nötigen Verträge, Bürgschaften und jedes anderen Dokuments, das die Absicherung der von den Kunden gezahlten Beträge zum Ziel hat, sowie die Beschaffung und Abwicklung der genannten Finanzierung.  Zu diesem Zweck wird als Anhang II das Dokument zur Abtretung der Daten an die Bank, die das Bauprojekt finanziert, beigefügt.
+                            </p>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td style="width:50%">
+                  		<p>
+							<p class="parrafoJustificado">
+								En cualquier momento podrá ejercer sus derechos, en los términos legalmente previstos, dirigiendo una comunicación por escrito a AVINTIA DESARROLLOS INMOBILIARIOS S.L.: C/Emisora, 20-Pozuelo de Alarcón-28224 Madrid, indicando en el mismo: ADI – LOPD. En dicha comunicación deberá indicar el derecho que quiere ejercer, los datos o conjunto de datos personales objeto de su reclamación y aportar su documento de identidad en vigor.
+							</p>
+							<p class="parrafoJustificado">
+								Para cualquier duda o reclamación respecto al tratamiento de datos personales podrá contactar con nuestro Delegado de Protección de Datos, a través de la dirección de correo electrónico: dpo@grupoavintia.com
+							</p>
+							<p class="parrafoJustificado">
+								Por último, en el supuesto de que considere que el ejercicio de sus derechos no ha sido debidamente atendido, tendrá derecho a interponer una reclamación ante la Agencia Española de Protección de Datos como autoridad de control. Puede acceder a la información de sus derechos y del supervisor en la materia en: www.agpd.es
+							</p>
+						</p>
+                    </td>
+                    <td style="width:50%">
+						<p>
+							<p class="parrafoJustificado">
+                                Sie können Ihre Rechte jederzeit unter den gesetzlich festgelegten Bedingungen ausüben, indem Sie sich schriftlich an die AVINTIA DESARROLLOS INMOBILIARIOS S.L. richten: C/ Emisora 20, 28224 Pozuelo de Alarcón, Madrid, unter der Angabe des Betreffs: ADI – LOPD. In diesem Schreiben müssen Sie das Recht angeben, welches Sie ausüben möchten, sowie die betreffenden Daten oder Datensätze, auf die sich Ihre Reklamation bezieht, und müssen Ihr gültiges Ausweisdokument beifügen.
+                            </p>
+							<p class="parrafoJustificado">
+                                Für jede Art von Zweifel oder Reklamation hinsichtlich der Datenverarbeitung können Sie sich mit unserem Datenschutzbeauftragten unter der folgenden E-Mail-Adresse in Verbindung setzen: dpo@grupoavintia.com.</p>
+							<p class="parrafoJustificado">
+                                Schließlich, sollten Sie der Ansicht sein, dass die Ausübung Ihrer Rechte nicht ordnungsgemäß berücksichtigt wurde, können Sie eine Beschwerde bei der spanischen Datenschutzbehörde Agencia Española de Protección de Datos einlegen. Information über Ihre Rechte sowie die Kontrollbehörde  erhalten Sie auf: www.agpd.es
+                            </p>
+						</p>
+                    </td>
+                </tr>
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   NOVENO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                <tr valign="top">
+                    <td style="width:50%">
+						<p><b>NOVENO.- IDIOMA</b></p>
+						<p class="parrafoJustificado">
+                            Este Acuerdo se redacta en español y alemán. En caso de discrepancia prevalecerá la versión española.
+                        </p>
+                    </td>
+                    <td style="width:50%">
+						<p><b>NEUNTENS. - NEUNTENS</b></p>
+						<p class="parrafoJustificado">
+                            Diese Vereinbarung wird in spanischer und deutscher Sprache verfasst. Im Fall von Abweichungen hat die spanische Version vorrangige Gültigkeit.
+                        </p>
+                    </td>
+                </tr>
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   DÉCIMO   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                <tr valign="top">
+                    <td style="width:50%">
+                        <p><b>ZEHNTENS.-</b></p>
+                        <p class="parrafoJustificado">
+                            el presente contrato se regirá conforme a la legislación española y se someterá de forma exclusiva a los Juzgados y Tribunales españoles.
+                        </p>
+                    </td>
+                    <td style="width:50%">
+                        <p><b>ZEHNTENS. - NEUNTENS</b></p>
+                        <p class="parrafoJustificado">
+                            Der vorliegende Vertrag unterliegt spanischem Recht und unterwirft sich ausschließlich den spanischen Gerichten.
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td style="width:50%">
+               <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ACURDO DE FIRMA   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+						<p class="parrafoJustificado">
+                            Y en prueba de conformidad con cuanto antecede todas las partes lo firman por duplicado y a un solo efecto, en el lugar y fecha en el encabezamiento indicado.
+                        </p>
+                    </td>
+                    <td style="width:50%">  
+						<p class="parrafoJustificado">
+                            Zu Urkund dessen unterzeichnen alle Parteien das vorliegende Dokument in zweifacher Ausfertigung am oben aufgeführten Ort und Datum.
+                        </p>
+                    </td>
+                </tr>
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  FIRMA   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                <tr valign="top">
+                    <td style="width:50%">
+						<div class="firma">
+							<table>
+								<tr valign="top">
+									<td style="width: 350px">
+										<p>
+											<b>LA PARTE VENDEDORA</b>
+											<br/><br/><br/><br/>
+										</p>
+									</td>
+									<td>
+										<p>
+											<b>LA PARTE COMPRADORA</b>
+											<br/><br/><br/><br/>
+										</p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<td style="width: 350px">
+										<p style="margin: 0"><apex:outputText value=" {!Promotora.name}" rendered="{!Promotora.name!=null}"/>
+											<apex:outputText value=" __________ " rendered="{!Promotora.name==null}" style="color:red;"/>
+										</p>
+										<p style="margin: 0">
+											<b>Fdo.</b> 
+											<apex:outputText value=" {!Apoderado.name}" rendered="{!Apoderado.name!=null}"/>
+											<apex:outputText value=" __________ " rendered="{!Apoderado.name==null}" style="color:red;"/>
+										</p>
+									</td>
+									<td>
+										<apex:repeat value="{!Titulares}" var="Titular">
+											<p style="margin-top: 0px">  
+												<b>Fdo.</b> 
+												<apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/>
+												<apex:outputText value=" __________ " rendered="{!Titular.name==null}" style="color:red;"/>
+												<br/><br/><br/><br/>
+											</p>
+										</apex:repeat> 
+									</td>
+								</tr>
+							</table>
+						</div>
+                    </td>
+                    <td style="width:50%">
+						<div class="firma">
+							<table>
+								<tr valign="top">
+									<td style="width: 350px">
+										<p>
+											<b>DIE VERKÄUFERSEITE</b>
+											<br/><br/><br/><br/>
+										</p>
+									</td>
+									<td>
+										<p>                     
+											<b>DIE KÄUFERSEITE</b>
+											<br/><br/><br/><br/>
+										</p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<td style="width: 350px">
+										<p style="margin: 0"><apex:outputText value=" {!Promotora.name}" rendered="{!Promotora.name!=null}"/>
+											<apex:outputText value=" __________ " rendered="{!Promotora.name==null}" style="color:red;"/>
+										</p>
+										<p style="margin: 0">
+											<b>Gez.</b> 
+											<apex:outputText value=" {!Apoderado.name}" rendered="{!Apoderado.name!=null}"/>
+											<apex:outputText value=" __________ " rendered="{!Apoderado.name==null}" style="color:red;"/>
+										</p>
+									</td>
+									<td>
+										<apex:repeat value="{!Titulares}" var="Titular">
+											<p style="margin-top: 0px">  
+												<b>Gez.</b>
+												<apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/>
+												<apex:outputText value=" __________ " rendered="{!Titular.name==null}" style="color:red;"/>
+												<br/><br/><br/><br/>
+											</p>
+										</apex:repeat> 
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+        </table>
+    </body>
+</apex:page>

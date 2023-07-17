@@ -1,0 +1,9 @@
+{
+	'__metadata': { 
+		'type': 'SP.Data.ContratosItem' 
+  	},
+    'IdPromocion': 'ID promo',
+    'TipoDocumento': 'Tipo doc',
+    'Categoria': 'cat',
+    'Subcategoria': 'subcat'
+}

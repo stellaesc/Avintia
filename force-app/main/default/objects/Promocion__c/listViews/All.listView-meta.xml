@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Estado__c</columns>
+    <columns>Localidad__c</columns>
+    <columns>Tipo_de_vivienda__c</columns>
+    <columns>Tipologia_de_edificacion__c</columns>
+    <columns>Vistas__c</columns>
+    <columns>WebAvinita__c</columns>
+    <columns>Nombre_Comercial_Avintia_Inmobiliaria__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Todos</label>
+</ListView>

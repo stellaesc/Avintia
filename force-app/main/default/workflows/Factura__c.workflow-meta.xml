@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Actualizar_Factura_rectificada</fullName>
+        <field>Factura_rectificada__c</field>
+        <formula>Numero_de_factura__c + &apos;, &apos;+ FacturaRectificada__c</formula>
+        <name>Actualizar Factura rectificada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualizar_Factura_rectificada_2</fullName>
+        <field>FacturaRectificada__c</field>
+        <formula>Numero_de_factura__c + &apos;, &apos;+ FacturaRectificada__c</formula>
+        <name>Actualizar Factura rectificada	2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Anadir Num Factura a campo Factura Rectificada</fullName>
+        <actions>
+            <name>Actualizar_Factura_rectificada_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND( NOT(ISBLANK(FacturaRectificada__c)), ISBLANK(PRIORVALUE(Numero_de_factura__c)), NOT(ISBLANK(Numero_de_factura__c)) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

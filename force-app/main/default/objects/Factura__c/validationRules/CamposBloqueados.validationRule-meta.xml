@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CamposBloqueados</fullName>
+    <active>false</active>
+    <description>Regla para el bloqueo de campos en factura para perfiles no Administradores.</description>
+    <errorConditionFormula>AND(
+				OR(ISCHANGED( Numero_de_factura__c ),
+							ISCHANGED( SecuencialFactura__c ),
+							ISCHANGED( Tipo_de_factura__c ),
+							ISCHANGED( Importe__c ),
+							ISCHANGED( Tipologia__c ),
+							ISCHANGED( Obra__c ),
+							ISCHANGED( Cliente__c ),
+							ISCHANGED( Oportunidad__c ),
+							ISCHANGED( Sociedad__c ), 
+							ISCHANGED( Fecha_de_emision__c ),
+							ISCHANGED( Fecha_Contable__c ),
+							ISCHANGED( Condicion_Cobro__c ),
+							ISCHANGED( Metodo_de_cobro__c ),
+							ISCHANGED( Pago_o_Cuota__c ) 
+						 ),
+    $User.ProfileId != &apos;00ef2000001aiAs&apos;				
+)</errorConditionFormula>
+    <errorMessage>Ese campo solo puede ser modificado por un administrador.</errorMessage>
+</ValidationRule>

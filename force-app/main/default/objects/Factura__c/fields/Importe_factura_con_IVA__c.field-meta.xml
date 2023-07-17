@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Importe_factura_con_IVA__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(Codigo_Impuesto__c &lt;&gt; 0, NOT(ISNULL(Codigo_Impuesto__c))),
+    Importe__c *  (1+Codigo_Impuesto__c), 
+				Importe__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Importe factura con IVA</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

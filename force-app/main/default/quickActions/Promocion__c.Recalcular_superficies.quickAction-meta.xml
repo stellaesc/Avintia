@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Action para actualizar los campos de superficies de la promocion</description>
+    <flowDefinition>Recalcular_Superficies</flowDefinition>
+    <label>Recalcular superficies</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_DireccionCliente__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+AND(ISBLANK(Cliente__r.DF_Nombre_via__c),ISBLANK(Cliente__r.DP_Nombre_via__c),ISBLANK(TEXT(Cliente__r.DF_N_via__c)),ISBLANK(TEXT(Cliente__r.DP_N_via__c)),ISBLANK(Cliente__r.DF_Codigo_postal__c),ISBLANK(Cliente__r.DP_Codigo_postal__c)),
+(Cliente__r.DireccionExtranjeraPB__c),
+IF(
+AND(ISBLANK(TEXT(Cliente__r.DF_Tipo_de_via__c)),ISBLANK(Cliente__r.DF_Nombre_via__c),ISBLANK(TEXT(Cliente__r.DF_N_via__c)),ISBLANK(Cliente__r.DF_Codigo_postal__c), ISBLANK( Cliente__r.DF_Localidad__c)),
+TEXT(Cliente__r.DP_Tipo_de_vIa__c)+&apos; &apos;+(Cliente__r.DP_Nombre_via__c)+&apos;, número &apos;+TEXT(Cliente__r.DP_N_via__c)+&apos;, CP &apos;+ (Cliente__r.DP_Codigo_postal__c) + &apos; en la localidad de &apos; + (Cliente__r.DP_Localidad__r.Name) + &apos;, provincia de &apos; + (Cliente__r.DP_Localidad__r.Provincia__r.Name),
+TEXT(Cliente__r.DF_Tipo_de_via__c)+&apos; &apos;+(Cliente__r.DF_Nombre_via__c)+&apos;, numero &apos;+TEXT(Cliente__r.DF_N_via__c)+&apos;, CP &apos;+ (Cliente__r.DF_Codigo_postal__c) + &apos; en la localidad de &apos; + (Cliente__r.DF_Localidad__r.Name) + &apos;, provincia de &apos; + (Cliente__r.DF_Localidad__r.Provincia__r.Name)
+))</formula>
+    <label>CONGA_DireccionCliente</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

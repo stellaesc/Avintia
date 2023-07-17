@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGATitularesSinRegimen__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Cliente__r.RecordType.DeveloperName = &apos;PersonAccount&apos;, &apos;Don/Dña. &apos; + IF(OR(ISBLANK(Cliente__r.FirstName),ISNULL(Cliente__r.FirstName)),&apos; ________ &apos;,Cliente__r.FirstName) + &apos; &apos; + IF(OR(ISBLANK(Cliente__r.LastName),ISNULL(Cliente__r.LastName)),&apos; _______ &apos;,Cliente__r.LastName) + &apos;, mayor de edad, con &apos; + IF(OR(ISBLANK(TEXT(Cliente__r.Tipo_de_documento__c)), ISNULL(TEXT(Cliente__r.Tipo_de_documento__c))),&apos; _____ &apos;,TEXT(Cliente__r.Tipo_de_documento__c)) + &apos; num. &apos; + IF(OR(ISBLANK(Cliente__r.N_Documento__c),ISNULL(Cliente__r.N_Documento__c)),&apos; ______ &apos;,Cliente__r.N_Documento__c) + &apos;, con domicilio en &apos; +
+IF(
+AND(ISBLANK(Cliente__r.DF_Nombre_via__c),ISBLANK(Cliente__r.DP_Nombre_via__c),ISBLANK(Cliente__r.NumeroVia2Text__c),ISBLANK( Cliente__r.NumeroViaText__c ),ISBLANK(Cliente__r.DF_Codigo_postal__c),ISBLANK(Cliente__r.DP_Codigo_postal__c)),
+(Cliente__r.DireccionExtranjeraPB__c),
+IF(
+AND(ISBLANK(TEXT(Cliente__r.DF_Tipo_de_via__c)),ISBLANK(Cliente__r.DF_Nombre_via__c),ISBLANK(Cliente__r.NumeroVia2Text__c),ISBLANK(Cliente__r.DF_Codigo_postal__c)),
+TEXT(Cliente__r.DP_Tipo_de_vIa__c)+&apos; &apos;+(Cliente__r.DP_Nombre_via__c)+&apos;, número &apos;+Cliente__r.NumeroViaText__c+&apos;, CP &apos;+ (Cliente__r.DP_Codigo_postal__c),
+TEXT(Cliente__r.DF_Tipo_de_via__c)+&apos; &apos;+(Cliente__r.DF_Nombre_via__c)+&apos;, número &apos;+Cliente__r.NumeroVia2Text__c+&apos;, CP &apos;+ (Cliente__r.DF_Codigo_postal__c)
+)
+) + &apos;.&apos;,&apos;&apos;) +
+
+
+
+IF(Cliente__r.RecordType.DeveloperName = &apos;Cuenta&apos;,
+
+
+IF(OR(ISBLANK(Cliente__r.Name),ISNULL(Cliente__r.Name)),&apos; ______ &apos;,Cliente__r.Name) + &apos; &apos; + &apos;, con CIF número &apos; + IF(OR(ISBLANK(Cliente__r.N_Documento__c),ISNULL(Cliente__r.N_Documento__c)),&apos; ________ &apos;,Cliente__r.N_Documento__c) +
+&apos;, con domicilio social en &apos; +
+IF(
+AND(ISBLANK(Cliente__r.DP_Nombre_via__c),ISBLANK(Cliente__r.NumeroViaText__c),ISBLANK(Cliente__r.DP_Codigo_postal__c)),
+(Cliente__r.DireccionExtranjeraPB__c),
+TEXT(Cliente__r.DP_Tipo_de_vIa__c)+&apos; &apos;+Cliente__r.DP_Nombre_via__c + &apos;, número &apos; + Cliente__r.NumeroViaText__c+ &apos;, CP &apos; + Cliente__r.DP_Codigo_postal__c
+)
+
++ &apos;, e inscrita en el Registro Mercantil de &apos; + IF(OR(ISBLANK(Cliente__r.Lugar_del_registro__c),ISNULL(Cliente__r.Lugar_del_registro__c)),&apos; _______ &apos;,Cliente__r.Lugar_del_registro__c) + &apos;, al tomo&apos; + IF(OR(ISBLANK(Cliente__r.Tomo__c),ISNULL(Cliente__r.Tomo__c)),&apos; _______ &apos;,Cliente__r.Tomo__c) + &apos;, sección&apos; + IF(OR(ISBLANK(Cliente__r.Seccion__c),ISNULL(Cliente__r.Seccion__c)),&apos; _____ &apos;,Cliente__r.Seccion__c) + &apos;, folio&apos; + IF(OR(ISBLANK(Cliente__r.Folio__c),ISNULL(Cliente__r.Folio__c)),&apos; _____ &apos;,Cliente__r.Folio__c) + &apos;, hoja número&apos; + IF(OR(ISBLANK(Cliente__r.N_Hoja__c),ISNULL(Cliente__r.N_Hoja__c)),&apos; _____ &apos;,Cliente__r.N_Hoja__c) + &apos;.&apos;, &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_Titulares Sin Régimen</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

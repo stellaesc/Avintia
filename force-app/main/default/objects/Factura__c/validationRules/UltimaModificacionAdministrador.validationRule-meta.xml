@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UltimaModificacionAdministrador</fullName>
+    <active>true</active>
+    <description>Si la última modificación ha sido realizada por el usuario de integración y un comercial intenta modificar la factura salta la regla de validación.</description>
+    <errorConditionFormula>AND(
+					LastModifiedBy.ProfileId = &apos;00ef2000001aiAs&apos;,
+     $User.ProfileId = &apos;00ef2000001nphv&apos;,
+				 ISPICKVAL(Estado_de_la_factura__c, &apos;Cobrada&apos;) 
+	)</errorConditionFormula>
+    <errorMessage>Esta factura solo puede ser modificada por un administrador ya que ya ha pasado por todos los procesos automáticos.</errorMessage>
+</ValidationRule>

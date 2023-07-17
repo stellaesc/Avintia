@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Semestre_de_escrituracion__c</fullName>
+    <externalId>false</externalId>
+    <label>Semestre de escrituración</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Primer</fullName>
+                <default>false</default>
+                <label>Primer</label>
+            </value>
+            <value>
+                <fullName>Segundo</fullName>
+                <default>false</default>
+                <label>Segundo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

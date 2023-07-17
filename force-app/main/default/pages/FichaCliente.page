@@ -1,0 +1,269 @@
+<apex:page standardController="Lead" extensions="ControllerFichaCliente" renderAs="PDF" applyBodyTag="false" applyHtmlTag="false" standardStylesheets="false" showHeader="false">
+<head>
+
+    <Style> 
+         @page { margin-left: 1.5cm; margin-right: 1.5cm; margin-top: 2cm; margin-bottom: 0.5cm }        
+        body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Arial Unicode MS"; font-size:x-small; border-collapse: collapse} 
+            
+            @page {
+              size: portrait;
+             
+            } 
+        </Style>
+    
+</head>
+    <body>
+         <table>
+            <tr width="100%">
+                <td width="33.3%"><div align="left"><apex:image value="{!$Resource.LogoAvintia}" /></div></td>
+            </tr>
+        </table>
+        
+        <br/><br/><br/>
+        <table width="100%">
+            <tr width="100%" >
+                <td width="100%" style="border: 1px solid black;background-color: #ced7e5"><div align="center" style="font-size: 22px;text-align:center"><b>FICHA CLIENTE</b></div></td>
+            </tr>
+        </table>
+        
+        <br/><br/><br/><br/>
+        <table width="100%">
+            <tr style="height: 30px;">
+                <td width="30%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b>NOMBRE</b></div></td>
+                <td width="70%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center">{!candidato.FirstName}</div></td>
+            </tr>
+            <tr style="height: 30px;">
+                <td width="30%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b>APELLIDOS</b></div></td>
+                <td width="70%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center">{!candidato.LastName}</div></td>
+            </tr>
+            <tr style="height: 30px;">
+                <td width="30%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b>TELÉFONO</b></div></td>
+                <td width="70%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center">{!candidato.MobilePhone}</div></td>
+            </tr>
+            <tr style="height: 30px;">
+                <td width="30%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b>EMAIL</b></div></td>
+                <td width="70%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center">{!candidato.Email}</div></td>
+            </tr>
+            <tr style="height: 30px;">
+                <td width="30%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b>POBLACIÓN CP</b></div></td>
+                <td width="70%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center">{!candidato.Localidad__r.Name}, {!candidato.Codigo_postal__c}</div></td>
+            </tr>
+            <tr style="height: 30px;">
+                <td width="30%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b>¿CÓMO NOS CONOCIÓ?</b></div></td>
+                <td width="70%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center">{!candidato.LeadSource}</div></td>
+            </tr>
+        </table>
+        
+        <br/><br/><br/><br/>
+        <table width="100%">
+            <tr width="100%" >
+                <td width="100%" style="border: 1px solid black;background-color: #ced7e5"><div align="center" style="font-size: 22px;text-align:center"><b>TIPOLOGÍA Y USO DE VIVIENDA</b></div></td>
+            </tr>
+        </table>
+        
+        <br/><br/><br/>
+        <table width="100%">
+            <tr style="height: 30px">
+                <td width="20%" style="border: 1px solid black"><div style="font-size: 15px;text-align:center"><b>DORMITORIOS</b><div style="font-size: 10px;">
+	
+                    </div></div></td>
+                <td width="80%">
+                    
+                     <table >
+                       <table width="100%">
+                        <tr> 
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">1 DORMITORIO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    
+                                	<apex:outputPanel rendered="{!if(undormitorio==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(undormitorio==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">2 DORMITORIOS&nbsp;&nbsp;&nbsp;                                    
+                                	<apex:outputPanel rendered="{!if(dosdormitorios==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(dosdormitorios==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">3 DORMITORIOS&nbsp;&nbsp;&nbsp;
+                                	<apex:outputPanel rendered="{!if(tresdormitorios==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(tresdormitorios==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                        </tr>
+                        <tr> 
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">4 DORMITORIOS&nbsp;&nbsp;&nbsp;
+                                	<apex:outputPanel rendered="{!if(cuatrodormitorios==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(cuatrodormitorios==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                            <td><div style="font-size: 15px;"></div></td>
+                            <td><div style="font-size: 15px;"></div></td>
+                        </tr>
+                    </table>
+                    </table></td> 
+            </tr>
+        </table>
+        <br/><br/>
+        
+        
+        <table width="100%">
+            <tr style="height: 30px">
+                <td width="20%" style="border: 1px solid black"><div style="font-size: 15px;text-align:center"><b>USO DEL INMUBLE</b><div style="font-size: 10px;">
+	
+                    </div></div></td>
+                <td width="80%">
+                    
+                     <table >
+                       <table width="100%">
+                        <tr> 
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">RESIDENCIAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                   
+                                	<apex:outputPanel rendered="{!if(residencial==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(residencial==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">VACACIONAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                	<apex:outputPanel rendered="{!if(vacacional==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(vacacional==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">INVERSIÓN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                	<apex:outputPanel rendered="{!if(inversion==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(inversion==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                        </tr>
+                    </table>
+                    </table></td> 
+            </tr>
+        </table>        
+        <br/><br/>
+         
+        <table width="100%">
+            <tr style="height: 30px">
+                <td width="20%" style="border: 1px solid black"><div style="font-size: 15px;text-align:center"><b>ALTURA</b><div style="font-size: 10px;">
+	
+                    </div></div></td>
+                <td width="80%">
+                    
+                     <table >
+                       <table width="100%">
+                        <tr> 
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">PLANTA BAJA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    
+                                	<apex:outputPanel rendered="{!if(baja==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(baja==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">PRIMERA PLANTA&nbsp;&nbsp;
+                                	<apex:outputPanel rendered="{!if(primera==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(primera==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">ÁTICOS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                	<apex:outputPanel rendered="{!if(atico==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(atico==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                        </tr>
+                        <tr> 
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">OTROS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                	<apex:outputPanel rendered="{!if(otros==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(otros==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                            <td><div style="font-size: 15px;"></div></td>
+                            <td><div style="font-size: 15px;"></div></td>
+                        </tr>
+                        
+                    </table>
+                    </table></td> 
+            </tr>
+        </table>
+        <br/><br/><br/>
+        
+        <table>
+            <tr width="100%" >
+                <td width="60%" ><div align="center" style="font-size: 20px;text-align:center"><b>INDIQUENOS SI NECESITA FINANCIACIÓN</b></div></td>
+                <td width="40%">
+                    <table >
+                       <table width="100%">
+                        <tr> 
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">SI&nbsp;&nbsp;&nbsp;                                    
+                                	<apex:outputPanel rendered="{!if(candidato.Necesita_Financiacion__c==false , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(candidato.Necesita_Financiacion__c==true , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                            <td width="33.3%"><div style="font-size: 15px;text-align:center">NO&nbsp;&nbsp;&nbsp;
+                                	<apex:outputPanel rendered="{!if(candidato.Necesita_Financiacion__c==false , true ,false)}">
+                                        <apex:image value="{!$Resource.checked}" width="20" height="20" /></apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(candidato.Necesita_Financiacion__c==true , true ,false)}">
+                                        <apex:image value="{!$Resource.unchecked}" width="20" height="20" /></apex:outputPanel>
+                                </div></td>
+                        </tr>
+                        </table>
+                    </table></td>
+            </tr>
+        </table>
+        <div style="page-break-after:always;"/>
+        
+    <div style="font-size: 13px; margin-left: 1cm; margin-right: 1.5cm;" align="justify">
+            <p style="font-size: 13px;">En cumplimiento con la normativa vigente de protección de datos, le informamos que los datos personales que nos facilite serán tratados por {!promocion.Socio_Empresa_Promotora__r.Name} como responsable del tratamiento con domicilio en {!promocion.Socio_Empresa_Promotora__r.DP_Tipo_de_vIa__c} {!promocion.Socio_Empresa_Promotora__r.DP_Nombre_via__c} {!promocion.Socio_Empresa_Promotora__r.DP_N_via__c}, {!promocion.Socio_Empresa_Promotora__r.DP_Localidad__r.Name}, {!promocion.Socio_Empresa_Promotora__r.DP_Provincia__c}, {!promocion.Socio_Empresa_Promotora__r.DP_Codigo_postal__c}.
+    </p></div>
+        
+    <div style="font-size: 13px; margin-left: 1cm; margin-right: 1.5cm;" align="justify">
+            <p style="font-size: 13px;">Con esta cláusula solicitamos su consentimiento para mandarle publicidad, promociones y ofertas de viviendas en base a sus preferencias, por medios ordinarios y electrónicos de productos y servicios ofrecidos por AVINTIA DESARROLLOS INMOBILIARIOS S.L.. Si consiente dicho tratamiento, comunicaremos sus datos personales a entidades vinculadas al responsable del tratamiento para el envío de dichas comunicaciones.
+    </p></div>
+        
+    <div style="font-size: 13px; margin-left: 1cm; margin-right: 1.5cm;" align="justify">
+            <p style="font-size: 13px;">Los datos serán conservados mientras sean necesarios para la finalidad indicada y hasta que usted revoque su consentimiento.
+    </p></div>
+        
+    <div style="font-size: 13px; margin-left: 1cm; margin-right: 1.5cm;" align="justify">
+            <p style="font-size: 13px;">Para cualquier duda o reclamación respecto al tratamiento de datos personales podrá contactar con nuestro Delegado de Protección de Datos, a través de la dirección de correo electrónico: <span style="color:blue; font-weight: bold; text-decoration:underline">dpo@grupoavintia.com</span> o podrá interponer una reclamación ante la Agencia Española de Protección de Datos, como autoridad de control: <span style="color:blue; font-weight: bold; text-decoration:underline">www.aepd.es</span>
+    </p></div>
+        
+        <br/><br/><br/><br/>
+        
+        <table width="100%">
+            <tr style="height: 30px;">
+                <td width="10%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b>SÍ</b></div></td>
+                <td width="10%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b>NO</b></div></td>
+                <td width="80%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b></b></div></td>
+            </tr>
+            <tr style="height: 30px;">
+                <td width="10%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b></b></div></td>
+                <td width="10%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b></b></div></td>
+                <td width="80%" style="border: 1px solid black"><div style="font-size: 12px;text-align:left">Consiento la comunicación de datos a  terceras Entidades vinculadas a AVINTIA DESARROLLOS INMOBILIARIOS S.L. para el envío de información comercial, ordinaria o electrónica.</div></td>
+            </tr>
+            <tr style="height: 30px;">
+                <td width="10%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b></b></div></td>
+                <td width="10%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"><b></b></div></td>
+                <td width="80%" style="border: 1px solid black"><div style="font-size: 12px;text-align:left">Consiento la comunicación de datos a las empresas de Avintia Desarrollos Inmobiliarias S.L  para el envío de información comercial, ordinaria o electrónica.</div></td>
+            </tr>
+        </table>
+        
+        <br/><br/><br/><br/>
+        <table width="60%" align="right">
+            <tr>
+                <td width="30%" ><div style="font-size: 15px;text-align:center">Firmado:</div></td>
+                <td width="70%" ><div style="font-size: 12px;text-align:center"></div></td>
+            </tr>
+            <tr style="height: 100px;">
+                <td width="30%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center"></div></td>
+                <td width="70%" style="border: 1px solid black"><div style="font-size: 12px;text-align:center">{!candidato.FirstName} {!candidato.LastName} <br/>{!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}</div></td>
+            </tr>
+        </table>
+    </body>        
+        
+        
+        
+</apex:page>
