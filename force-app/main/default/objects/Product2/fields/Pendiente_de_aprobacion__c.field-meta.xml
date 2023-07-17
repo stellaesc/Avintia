@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pendiente_de_aprobacion__c</fullName>
+    <description>Check que indica si el precio es distinto del precio propuesto. Sirve para indicar si está pendiente de aprobación.</description>
+    <externalId>false</externalId>
+    <formula>AND(Precio_propuesto__c  &lt;&gt;  Precio__c, NOT(ISBLANK(Precio_propuesto__c)), NOT(ISBLANK(Precio__c)), Promocion__r.Pendiente_de_aprobacion_de_tarifario__c )</formula>
+    <inlineHelpText>Indica si el precio está pendiente de aprobación</inlineHelpText>
+    <label>Pendiente de aprobacion</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

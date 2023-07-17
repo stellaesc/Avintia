@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_TxtCom1__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Account.RecordType.DeveloperName = &apos;PersonAccount&apos;,&apos;en su propio nombre y derecho.&apos;, &apos;, en nombre y representación de &apos; + IF(ISBLANK(Account.Name), &quot;________&quot;, Account.Name) + &apos; S.L. con CIF &apos; + IF(ISBLANK(Account.N_Documento__c), &quot;________&quot;, Account.N_Documento__c) + &apos; y con domicilio social en &apos; + IF(Account.DP_Pais__r.Name = &apos;España&apos;,  IF(ISBLANK(TEXT(Account.DP_Tipo_de_vIa__c)), &quot;________&quot;, TEXT(Account.DP_Tipo_de_vIa__c)) + &apos; &apos; + IF(ISBLANK(Account.DP_Nombre_via__c), &quot;________&quot;, Account.DP_Nombre_via__c) + &apos;, número &apos; + IF(ISBLANK(Account.NumeroViaText__c), &quot;________&quot;, Account.NumeroViaText__c) + &apos; CP &apos; + IF(ISBLANK(Account.DP_Codigo_postal__c), &quot;________&quot;, Account.DP_Codigo_postal__c),&apos;&apos;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_TxtCom1</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

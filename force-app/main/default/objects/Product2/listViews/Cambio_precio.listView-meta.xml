@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cambio_precio</fullName>
+    <columns>PRODUCT2.NAME</columns>
+    <columns>Tipologia_Vivienda_Garaje_Trastero_Local__c</columns>
+    <columns>Tipo_de_inmueble__c</columns>
+    <columns>Estado__c</columns>
+    <columns>Precio__c</columns>
+    <columns>Superficie_Util_m2__c</columns>
+    <columns>Bloque__c</columns>
+    <columns>Planta__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Promocion__c</field>
+        <operation>contains</operation>
+        <value>AVINTIANOVA</value>
+    </filters>
+    <filters>
+        <field>Tipologia_Vivienda_Garaje_Trastero_Local__c</field>
+        <operation>notEqual</operation>
+        <value>garaje,VIVIENDA</value>
+    </filters>
+    <label>Cambio precio</label>
+</ListView>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rellenar_Localidad_extranjera</fullName>
+    <active>true</active>
+    <description>Rellene la Localidad extranjera si el Pais indicado es distinto de España</description>
+    <errorConditionFormula>AND( 
+
+OR(
+
+AND(
+ DP_Pais__r.Name &lt;&gt; &quot;España&quot;,
+ DP_Pais__r.Name &lt;&gt; &quot;&quot;,
+ ISBLANK (  Localidad_Extranjera_P__c )),
+
+AND
+ (Direcciones_iguales__c = FALSE,
+ DF_Pais__r.Name &lt;&gt; &quot;España&quot;,
+ DF_Pais__r.Name &lt;&gt; &quot;&quot;, 
+ ISBLANK (Localidad_Extranjera_F__c)),
+
+AND(
+Copiar_direccion_2__c = FALSE, 
+Pais_FISCAL__r.Name &lt;&gt; &quot;España&quot;, 
+Pais_FISCAL__r.Name &lt;&gt; &quot;&quot;,
+ISBLANK( Localidad_Extranjera_FISCAL__c ))
+
+)
+)</errorConditionFormula>
+    <errorMessage>Por favor,  indique el campo de &quot;Localidad Extranjera&quot; si el País no es España.</errorMessage>
+</ValidationRule>

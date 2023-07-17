@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nivel_Riesgo_PBC__c</fullName>
+    <externalId>false</externalId>
+    <label>Nivel Riesgo PBC</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>risk.4.prohibited</fullName>
+                <default>false</default>
+                <label>Prohibido</label>
+            </value>
+            <value>
+                <fullName>risk.5.direct.high</fullName>
+                <default>false</default>
+                <label>Alto Directo</label>
+            </value>
+            <value>
+                <fullName>risk.3.high</fullName>
+                <default>false</default>
+                <label>Alto</label>
+            </value>
+            <value>
+                <fullName>risk.2.medium</fullName>
+                <default>false</default>
+                <label>Medio</label>
+            </value>
+            <value>
+                <fullName>risk.1.low</fullName>
+                <default>false</default>
+                <label>Bajo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

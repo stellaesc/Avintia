@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CheckFirmadoParaAceptoAvintia</fullName>
+    <active>true</active>
+    <description>No se puede marcar el check Acepto Comunicaciones Avintia sin antes haber marcado el check Ha Firmado</description>
+    <errorConditionFormula>AND( HaFirmado__c = false,
+AceptoComunAvintia__c = true,
+OR( ISCHANGED(AceptoComunAvintia__c),
+ISCHANGED(HaFirmado__c))
+)</errorConditionFormula>
+    <errorMessage>No se puede marcar el check Acepto Comunicaciones Avintia sin antes haber marcado el check Ha Firmado</errorMessage>
+</ValidationRule>

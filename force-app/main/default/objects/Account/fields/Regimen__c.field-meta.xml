@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regimen__c</fullName>
+    <externalId>false</externalId>
+    <label>Régimen</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Casado/a en régimen de gananciales</fullName>
+                <default>false</default>
+                <label>Casado/a en régimen de gananciales</label>
+            </value>
+            <value>
+                <fullName>Casado/a en separación de bienes</fullName>
+                <default>false</default>
+                <label>Casado/a en separación de bienes</label>
+            </value>
+            <value>
+                <fullName>Otros</fullName>
+                <default>false</default>
+                <label>Otros</label>
+            </value>
+            <value>
+                <fullName>Soltero/a</fullName>
+                <default>false</default>
+                <label>Soltero/a</label>
+            </value>
+            <value>
+                <fullName>Divorciado/a</fullName>
+                <default>false</default>
+                <label>Divorciado/a</label>
+            </value>
+            <value>
+                <fullName>Casado en régimen de gananciales</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Casado en régimen de gananciales</label>
+            </value>
+            <value>
+                <fullName>Casado en separación de bienes</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Casado en separación de bienes</label>
+            </value>
+            <value>
+                <fullName>Divorciado</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Divorciado</label>
+            </value>
+            <value>
+                <fullName>Soltero</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Soltero</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

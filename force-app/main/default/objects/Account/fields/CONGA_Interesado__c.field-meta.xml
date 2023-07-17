@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_Interesado__c</fullName>
+    <externalId>false</externalId>
+    <formula>&quot;Don/Dña. &quot; + IF( ISBLANK(Name),&quot;________&quot; , Name)   +
+	&quot;, mayor de edad, estado civil &quot; +  IF( ISBLANK(TEXT(Estado_Civil__pc)),&quot;________&quot; , TEXT(Estado_Civil__pc)) + 
+	&quot;, vecino de &quot; + IF( ISBLANK( DP_Localidad__r.Name),&quot;________&quot; ,  DP_Localidad__r.Name) +
+	&quot; con domicilio en &quot; + IF(ISBLANK(TEXT(DP_Tipo_de_vIa__c)),&quot;________&quot; , TEXT(DP_Tipo_de_vIa__c)) +
+ &quot; &quot; + 	IF( ISBLANK(DP_Nombre_via__c),&quot;________&quot; , DP_Nombre_via__c) +
+	&quot;, número &quot; + IF( ISBLANK(NumeroViaText__c),&quot;________&quot; , NumeroViaText__c)  +
+	&quot; CP &quot; + IF( ISBLANK(DP_Codigo_postal__c),&quot;________&quot; , DP_Codigo_postal__c) + 
+	&quot; y provisto/a de &quot; + IF( ISBLANK(TEXT(Tipo_de_documento__c)),&quot;________&quot; , TEXT(Tipo_de_documento__c)) + &quot; &quot; +
+IF( ISBLANK(N_Documento__c),&quot;________&quot; , N_Documento__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_Interesado</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

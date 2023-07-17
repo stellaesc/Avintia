@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Descripcion_motivo_descarte_otros</fullName>
+    <active>true</active>
+    <description>Regla para hacer obligatorio el campo Descripción de motivo de descarte cuando el valor es Otros. Se añade la condición para que el process se ejecute al cambiar el comercial de una promoción.</description>
+    <errorConditionFormula>AND(
+    NOT(ISCHANGED(OwnerId)),
+    ISPICKVAL(Motivo_de_descarte__c, &quot;Otros&quot;),
+    ISBLANK(Descripcion_motivo_de_descarte__c)
+)</errorConditionFormula>
+    <errorDisplayField>Descripcion_motivo_de_descarte__c</errorDisplayField>
+    <errorMessage>Cuando el motivo de descarte es &quot;Otros&quot;, debe introducir una descripción del motivo de descarte</errorMessage>
+</ValidationRule>

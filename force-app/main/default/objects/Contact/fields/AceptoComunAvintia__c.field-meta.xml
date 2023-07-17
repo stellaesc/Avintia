@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AceptoComunAvintia__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Campo checkbox que acepta la comuniación de sus datos dentro de Avintia.</description>
+    <externalId>false</externalId>
+    <label>Acepto Comunicación Avintia</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

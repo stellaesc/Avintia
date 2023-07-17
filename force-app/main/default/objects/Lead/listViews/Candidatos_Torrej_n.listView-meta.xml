@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Candidatos_Torrej_n</fullName>
+    <columns>LEAD.SALUTATION</columns>
+    <columns>FULL_NAME</columns>
+    <columns>LEAD.MOBILE_PHONE</columns>
+    <columns>LEAD.PHONE</columns>
+    <columns>LEAD.EMAIL</columns>
+    <columns>Idioma_candidato__c</columns>
+    <columns>LEAD.CREATED_DATE</columns>
+    <columns>LEAD.LEAD_SOURCE</columns>
+    <columns>Medio_de_conocimiento__c</columns>
+    <columns>LEAD.STATUS</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>Maximo_precio_de_interes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>LEAD.STATUS</field>
+        <operation>contains</operation>
+        <value>Lead,Cliente Potencial,Descartado,Cliente Gestión</value>
+    </filters>
+    <filters>
+        <field>Promocion__c</field>
+        <operation>equals</operation>
+        <value>MIRADOR DE TORREJÓN</value>
+    </filters>
+    <label>Candidatos Torrejón</label>
+</ListView>

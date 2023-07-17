@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_Mostrar_Fecha_de_Escritura__c</fullName>
+    <externalId>false</externalId>
+    <formula>Opportunity.Promocion__r.Mostrar_Fecha_de_Escritura__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_Mostrar_Fecha_de_Escritura</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado_actual_cliente__c</fullName>
+    <externalId>false</externalId>
+    <label>Estado actual del cliente</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cautivo Consolidado</fullName>
+                <default>false</default>
+                <label>Cautivo Consolidado</label>
+            </value>
+            <value>
+                <fullName>Cautivo en fase de Consolidación</fullName>
+                <default>false</default>
+                <label>Cautivo en fase de Consolidación</label>
+            </value>
+            <value>
+                <fullName>Cautivo sin consolidar</fullName>
+                <default>false</default>
+                <label>Cautivo sin consolidar</label>
+            </value>
+            <value>
+                <fullName>Cautivo sin Actividad</fullName>
+                <default>false</default>
+                <label>Cautivo sin Actividad</label>
+            </value>
+            <value>
+                <fullName>Desaparecido</fullName>
+                <default>false</default>
+                <label>Desaparecido</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

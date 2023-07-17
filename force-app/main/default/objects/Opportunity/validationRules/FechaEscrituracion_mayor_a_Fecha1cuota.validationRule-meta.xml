@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FechaEscrituracion_mayor_a_Fecha1cuota</fullName>
+    <active>true</active>
+    <errorConditionFormula>Fecha_de_Escrituracion__c &lt;= Fecha_de_primera_cuota__c</errorConditionFormula>
+    <errorMessage>La Fecha de Escrituración debe de ser mayor a la Fecha de primera cuota</errorMessage>
+</ValidationRule>

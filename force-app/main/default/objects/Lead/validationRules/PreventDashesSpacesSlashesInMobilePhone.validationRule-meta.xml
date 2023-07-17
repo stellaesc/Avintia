@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PreventDashesSpacesSlashesInMobilePhone</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+CONTAINS(MobilePhone , &quot;/&quot;),
+CONTAINS(MobilePhone , &quot; &quot;),
+CONTAINS(MobilePhone , &quot;-&quot;)
+)</errorConditionFormula>
+    <errorDisplayField>MobilePhone</errorDisplayField>
+    <errorMessage>El teléfono no puede contener guiones(&quot;-&quot;), barras(&quot;/&quot;) o espacios en blanco.</errorMessage>
+</ValidationRule>

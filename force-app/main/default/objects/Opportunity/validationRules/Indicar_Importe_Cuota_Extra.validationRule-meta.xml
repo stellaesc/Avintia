@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Indicar_Importe_Cuota_Extra</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+NOT( ISNULL(Numero_Cuotas_Extra__c)),
+Numero_Cuotas_Extra__c &lt;&gt; 0,
+ ISNULL( Importe_Cuota_Extra__c ) 
+)</errorConditionFormula>
+    <errorMessage>Existen Cuotas Extra, Indique el Importe de Cuota Extra</errorMessage>
+</ValidationRule>

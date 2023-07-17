@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ritmo_de_ventas_caida__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Ritmo de ventas (caída)</label>
+    <referenceTo>Ritmo_ventas__c</referenceTo>
+    <relationshipLabel>Oportunidaes (caída)</relationshipLabel>
+    <relationshipName>Oportunidades_caidas</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

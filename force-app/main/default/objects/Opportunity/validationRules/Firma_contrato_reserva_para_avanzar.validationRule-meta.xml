@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Firma_contrato_reserva_para_avanzar</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISPICKVAL(PRIORVALUE(StageName), &apos;Reserva&apos;),
+ISPICKVAL(StageName, &apos;Contrato&apos;),
+NOT(Contrato_Reserva_firmado__c)
+)</errorConditionFormula>
+    <errorDisplayField>Contrato_Reserva_firmado__c</errorDisplayField>
+    <errorMessage>Hay que firmar el contrato de reserva antes de avanzar la oportunidad.</errorMessage>
+</ValidationRule>

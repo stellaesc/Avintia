@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fecha_Visita_Obligatoria</fullName>
+    <active>true</active>
+    <description>Impide la conversión de candidatos cuando no tienen relleno el campo Fecha_Visita__c.</description>
+    <errorConditionFormula>AND(
+IsConverted,
+ISNULL( Fecha_Visita__c ),
+$User.ProfileId != &apos;00ef2000001aiAs&apos;
+)</errorConditionFormula>
+    <errorMessage>El campo Fecha 1ª Visita debe estar relleno antes de convertir el candidato!</errorMessage>
+</ValidationRule>

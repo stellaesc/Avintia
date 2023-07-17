@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subcategoria__c</fullName>
+    <externalId>false</externalId>
+    <label>Subcategoría</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Categoria__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Subcategoría 1</fullName>
+                <default>false</default>
+                <label>Subcategoría 1</label>
+            </value>
+            <value>
+                <fullName>Subcategoría 2</fullName>
+                <default>false</default>
+                <label>Subcategoría 2</label>
+            </value>
+            <value>
+                <fullName>Subcategoría 3</fullName>
+                <default>false</default>
+                <label>Subcategoría 3</label>
+            </value>
+            <value>
+                <fullName>Subcategoría 4</fullName>
+                <default>false</default>
+                <label>Subcategoría 4</label>
+            </value>
+            <value>
+                <fullName>Subcategoría 5</fullName>
+                <default>false</default>
+                <label>Subcategoría 5</label>
+            </value>
+            <value>
+                <fullName>Subcategoría 6</fullName>
+                <default>false</default>
+                <label>Subcategoría 6</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Categoria 1</controllingFieldValue>
+            <valueName>Subcategoría 1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Categoria 1</controllingFieldValue>
+            <valueName>Subcategoría 2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Categoría 3-4</controllingFieldValue>
+            <valueName>Subcategoría 3</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Categoría 3-4</controllingFieldValue>
+            <valueName>Subcategoría 4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Categoría 5-6</controllingFieldValue>
+            <valueName>Subcategoría 5</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Categoría 5-6</controllingFieldValue>
+            <valueName>Subcategoría 6</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

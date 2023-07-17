@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rellenar_idioma</fullName>
+    <active>false</active>
+    <description>Debe indicarse un idioma si el contacto reside en el extranjero.</description>
+    <errorConditionFormula>AND(IsPersonAccount == true,
+ISPICKVAL( Idioma_contacto__pc,&quot;&quot;), NOT( DP_Pais__r.Name = &apos;España&apos;))</errorConditionFormula>
+    <errorMessage>Debe rellenarse el idioma de contacto.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_TxtResB__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Tipo_de_Reserva__c, &apos;Reserva sin IVA&apos;),&apos;La cantidad restante hasta completar el precio total, asciende a &apos; + IF(OR(ISBLANK(Amount), ISBLANK(Pago_Contrato_al_contado__c)),&apos; _________ &apos; ,TEXT(Amount * Pago_Contrato_al_contado__c)) + &apos;€, Más I.V.A., que hacen un total de &apos; + IF(OR(ISBLANK(Amount), ISBLANK(Pago_Contrato_al_contado__c), ISBLANK(Porcentaje_IVA__c)),&apos; _________ &apos; ,TEXT(Amount * Pago_Contrato_al_contado__c * (1 +  Porcentaje_IVA__c))) + &apos;€ que la parte COMPRADORA entrega en este acto  mediante cheque bancario/transferencia a la cuenta de la vendedora, que se acepta salvo buen fin, y cuya fotocopia se adjunta.&apos;, &apos;&apos;) + IF(ISPICKVAL(Tipo_de_Reserva__c, &apos;Reserva con IVA&apos;),&apos;La cantidad de &apos; + IF(OR(ISBLANK(Amount), ISBLANK(Pago_Contrato_al_contado__c), ISBLANK(Reserva__c)),&apos; _________ &apos; , TEXT(Amount * Pago_Contrato_al_contado__c - Reserva__c)) + &apos;€, más I.V.A., que hacen un total de &apos; + IF(OR(ISBLANK(Amount), ISBLANK(Pago_Contrato_al_contado__c), ISBLANK(Reserva__c), ISBLANK(Porcentaje_IVA__c)),&apos; _________ &apos; , TEXT((Amount * Pago_Contrato_al_contado__c - Reserva__c) *(1 + Porcentaje_IVA__c))) + &apos;€ que la parte compradora  entrega en este acto  mediante cheque bancario/transferencia a la cuenta de la vendedora, que se acepta salvo buen fin, y cuya fotocopia se adjunta.&apos;, &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_TxtResB</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
