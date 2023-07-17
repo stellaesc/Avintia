@@ -1,0 +1,694 @@
+<apex:page controller="Documento_Adenda_Controller" renderAs="PDF" applyBodyTag="false">
+
+<head> 
+      
+	<style> 
+
+            .pageBreak{page-break-before: always;} 
+             
+            @page {
+            size: 21.0cm 29.7cm;
+			margin: 2.5cm; 
+       		}
+            body,div,table,thead,tbody,tfoot,tr,th,td,p {font-family:"Calibri"; font-size:medium; border-collapse: collapse;}
+            
+            .parrafoJustificado{
+            
+            text-align: justify;
+            
+            }
+        
+            .saltoDePagina{
+				display:block;
+				page-break-before:always;
+			}
+              
+	</style>
+       
+</head>
+    
+<body>    
+<div>
+	<p style="text-align: center; font-size: 20px"> 
+		<b>ADENDA AL CONTRATO DE COMPRAVENTA DE VIVIENDA</b>
+	</p>     
+    <p style="text-align: center; font-size: 20px; text-transform: uppercase"> 
+		<b>DE <apex:outputText value=" {!fechaCreacion}" rendered="{!fechaCreacion!=null}"/> <apex:outputText value=" __________ " rendered="{!fechaCreacion==null}" style="color:red;" /></b>
+	</p>
+    <p style="text-align: center" >
+    	<b>En <apex:outputText value=" {!Promotora.DF_localidad__r.name}" rendered="{!Promotora.DF_localidad__r.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.DF_localidad__r.name==null}" style="color:red;" />,
+            a <apex:outputText value=" {!fechaCreacion}" rendered="{!fechaCreacion!=null}"/> <apex:outputText value=" __________ " rendered="{!fechaCreacion==null}" style="color:red;" /> </b>
+        <br/>
+        <br/>
+    </p>
+</div> 
+    
+<div style="margin-top: 20px;">
+            <p style="display: inline; "> <b>OBJETO.-&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                
+                <apex:outputText value=" {!Promocion.name}" rendered="{!Promocion.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Promocion.name==null}" style="color:red;" /></b><br/>
+            </p>
+  
+    		<p> 
+            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:outputText value=" {!inmueble.Tipo_de_via__c}" rendered="{!inmueble.Tipo_de_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_via__c==null}" style="color:red;" />  
+                <apex:outputText value=" {!inmueble.Nombre_Via__c}" rendered="{!inmueble.Nombre_Via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.Nombre_Via__c==null}" style="color:red;" />,                 
+            <apex:outputPanel rendered="{!IF(inmueble.Portal__c != null, true, false)}">
+               portal <apex:outputText value=" {!inmueble.Portal__c}" rendered="{!inmueble.Portal__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.Portal__c==null}" style="color:red;" />, 
+               piso <apex:outputText value=" {!inmueble.Piso__c}" rendered="{!inmueble.Piso__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.Piso__c==null}" style="color:red;" />,
+                letra <apex:outputText value=" {!inmueble.Letra_N_Puerta__c}" rendered="{!inmueble.Letra_N_Puerta__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.Letra_N_Puerta__c==null}" style="color:red;" />
+            </apex:outputPanel>   
+			</p>  
+</div>    
+
+<div style="margin-top: 40px;">
+	<p style="text-align: center; text-decoration: underline; letter-spacing: 2px; margin-top: 20px;"> 
+        <b>REUNIDOS</b> 
+	</p>     
+</div> 
+
+    
+<div>    
+    <p> 
+        <b>DE UNA PARTE.-</b>  
+	</p>  
+    <p> 
+        <apex:outputPanel rendered="{!IF(Apoderado.Sexo__c == 'Hombre',  true, false)}">
+                Don.
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!IF(Apoderado.Sexo__c == 'Mujer',  true, true)}">
+                Dña.
+        </apex:outputPanel>
+         <apex:outputText value=" {!Apoderado.name}" rendered="{!Apoderado.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Apoderado.name==null}" style="color:red;" />, 
+        mayor de edad, con <apex:outputText value=" {!Apoderado.Tipo_de_documento__c}" rendered="{!Apoderado.Tipo_de_documento__c!=null}"/> 
+        <apex:outputText value=" __________ " rendered="{!Apoderado.Tipo_de_documento__c==null}" style="color:red;" /> 
+        nº <apex:outputText value=" {!Apoderado.N_Documento__c}" rendered="{!Apoderado.N_Documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Apoderado.N_Documento__c==null}" style="color:red;" /> y 
+         domicilio a efectos del presente contrato en 
+        <apex:outputText value=" {!promotora.DF_Tipo_de_via__c}" rendered="{!promotora.DF_Tipo_de_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_Tipo_de_via__c==null}" style="color:red;" /> 
+        <apex:outputText value=" {!promotora.DF_Nombre_via__c}" rendered="{!promotora.DF_Nombre_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_Nombre_via__c==null}" style="color:red;" />,
+        número <apex:outputText value=" {!promotora.DF_N_via__c}" rendered="{!promotora.DF_N_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_N_via__c==null}" style="color:red;" />
+        de <apex:outputText value=" {!promotora.DF_Localidad__r.Name}" rendered="{!promotora.DF_Localidad__r.Name!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_Localidad__r.Name==null}" style="color:red;" />,
+        <apex:outputText value=" {!promotora.DF_Provincia__c}" rendered="{!promotora.DF_Provincia__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_Provincia__c==null}" style="color:red;" />.
+	</p>
+    <p> 
+        <b>Y DE OTRA.- </b> 
+	</p>
+    
+    <p class="parrafoJustificado">
+                
+<!-- si es cuenta personal -->
+     	<apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'PersonAccount',  true, false)}"> 
+        	<apex:variable var="count" value="{!0}" />
+            <apex:repeat value="{!Titulares}" var="Titular">
+                <apex:outputText value="{!IF (count > 0, ' y; ', ' ')}"/>
+                <apex:outputPanel rendered="{!IF(Titular.Sexo__pc == 'Hombre',  true, false)}">
+                    Don.
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(Titular.Sexo__pc == 'Mujer',  true, true)}">
+                    Dña.
+                </apex:outputPanel>
+                 <apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.name==null}" style="color:red;" />,
+                 mayor de edad, con un porcentaje de participación de
+                <apex:outputText value=" {!clientePorcPart[Titular.id]}" rendered="{!clientePorcPart[Titular.id]!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!clientePorcPart[Titular.id]==null}" style="color:red;" />
+                % <apex:outputText value=", {!Titular.Regimen__c}" rendered="{!Titular.Regimen__c!=null}"/> <apex:outputText value="" rendered="{!Titular.Direccion_Extranjera_P__c==null}" style="color:red;" />
+                y con <apex:outputText value=" {!Titular.Tipo_de_documento__c}" rendered="{!Titular.Tipo_de_documento__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!Titular.Tipo_de_documento__c==null}" style="color:red;" />
+                número <apex:outputText value=" {!Titular.N_Documento__c}" rendered="{!Titular.N_Documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.N_Documento__c==null}" style="color:red;" />, 
+                con domicilio en 
+                <apex:outputPanel rendered="{!IF(Titular.DP_Pais__c == idEspanha,  true, false)}">
+                    <apex:outputText value=" {!Titular.DP_Tipo_de_vIa__c}" rendered="{!Titular.DP_Tipo_de_vIa__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.DP_Tipo_de_vIa__c==null}" style="color:red;" /> 
+                    <apex:outputText value=" {!Titular.DP_Nombre_via__c}" rendered="{!Titular.DP_Nombre_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.DP_Nombre_via__c==null}" style="color:red;" />, 
+                    número <apex:outputText value=" {!Titular.DP_N_via__c}" rendered="{!Titular.DP_N_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.DP_N_via__c==null}" style="color:red;" /> 
+                    CP <apex:outputText value=" {!Titular.DP_Codigo_postal__c}" rendered="{!Titular.DP_Codigo_postal__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.DP_Codigo_postal__c==null}" style="color:red;" />
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(Titular.DP_Pais__c == idEspanha,  false, true)}">
+                    <apex:outputText value=" {!Titular.Direccion_Extranjera_P__c}" rendered="{!Titular.Direccion_Extranjera_P__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Direccion_Extranjera_P__c==null}" style="color:red;" />, 
+                     <apex:outputText value=" {!Titular.Localidad_Extranjera_P__c}" rendered="{!Titular.Localidad_Extranjera_P__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Localidad_Extranjera_P__c==null}" style="color:red;" /> 
+                </apex:outputPanel>
+                <apex:variable var="count" value="{!count + 1}" />
+            </apex:repeat>
+                    .
+        </apex:outputPanel> 
+                
+<!-- Si es cuenta empresa -->
+        <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'Cuenta',  true, false)}"> 
+            <apex:variable var="count" value="{!0}" />
+            <apex:repeat value="{!Titulares}" var="Titular">
+                <apex:outputText value="{!IF (count > 0, ' y ', ' ')}"/>
+                <apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.name==null}" style="color:red;" />,
+                con CIF número <apex:outputText value=" {!Titular.N_Documento__c}" rendered="{!Titular.N_Documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.N_Documento__c==null}" style="color:red;" />, 
+                con domicilio social en <apex:outputPanel rendered="{!IF(Titular.DP_Pais__c == idEspanha,  true, false)}"> <apex:outputText value=" {!Titular.DP_Tipo_de_vIa__c}" rendered="{!Titular.DP_Tipo_de_vIa__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.DP_Tipo_de_vIa__c==null}" style="color:red;" /> <apex:outputText value=" {!Titular.DP_Nombre_via__c}" rendered="{!Titular.DP_Nombre_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.DP_Nombre_via__c==null}" style="color:red;" />, 
+                número <apex:outputText value=" {!Titular.DP_N_via__c}" rendered="{!Titular.DP_N_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.DP_N_via__c==null}" style="color:red;" /> 
+                CP <apex:outputText value=" {!Titular.DP_Codigo_postal__c}" rendered="{!Titular.DP_Codigo_postal__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.DP_Codigo_postal__c==null}" style="color:red;" />
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(Titular.DP_Pais__c == idEspanha,  false, true)}">
+                    <apex:outputText value=" {!Titular.Direccion_Extranjera_P__c}" rendered="{!Titular.Direccion_Extranjera_P__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Direccion_Extranjera_P__c==null}" style="color:red;" />, 
+                    <apex:outputText value=" {!Titular.Localidad_Extranjera_P__c}" rendered="{!Titular.Localidad_Extranjera_P__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Localidad_Extranjera_P__c==null}" style="color:red;" /> 
+                </apex:outputPanel>,
+                e inscrita en el Registro Mercantil de <apex:outputText value=" {!Titular.Lugar_del_registro__c}" rendered="{!Titular.Lugar_del_registro__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!Titular.Lugar_del_registro__c==null}" style="color:red;" />, 
+                al tomo <apex:outputText value=" {!Titular.Tomo__c}" rendered="{!Titular.Tomo__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Tomo__c==null}" style="color:red;" />, 
+                sección <apex:outputText value=" {!Titular.Seccion__c}" rendered="{!Titular.Seccion__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Seccion__c==null}" style="color:red;" />, 
+                folio <apex:outputText value=" {!Titular.Folio__c}" rendered="{!Titular.Folio__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Folio__c==null}" style="color:red;" />,
+                hoja número <apex:outputText value=" {!Titular.N_Hoja__c}" rendered="{!Titular.N_Hoja__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.N_Hoja__c==null}" style="color:red;" />.
+                Actúa en representación de la sociedad Don <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].name}" rendered="{!mapRepresentantesLegales[Titular.id].name!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].name==null}" style="color:red;" />, 
+                con <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Tipo_de_documento__c}" rendered="{!mapRepresentantesLegales[Titular.id].Tipo_de_documento__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Tipo_de_documento__c==null}" style="color:red;" />
+                <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].N_Documento__c}" rendered="{!mapRepresentantesLegales[Titular.id].N_Documento__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].N_Documento__c==null}" style="color:red;" />, 
+                en su condición de <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Condicion__c}" rendered="{!mapRepresentantesLegales[Titular.id].Condicion__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Condicion__c==null}" style="color:red;" />  
+                conforme a escritura otorgada por el notario de <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Lugar_de_notaria__c}" rendered="{!mapRepresentantesLegales[Titular.id].Lugar_de_notaria__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Lugar_de_notaria__c==null}" style="color:red;" />
+                Don <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Nombre_notario__c}" rendered="{!mapRepresentantesLegales[Titular.id].Nombre_notario__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Nombre_notario__c==null}" style="color:red;" />, 
+                en fecha <apex:outputText value=" {!mapRepresentantesFechas[Titular.id]}" rendered="{!mapRepresentantesFechas[Titular.id]!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesFechas[Titular.id]==null}" style="color:red;" />
+                con el nº de su protocolo <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Numero_de_protocolo__c}" rendered="{!mapRepresentantesLegales[Titular.id].Numero_de_protocolo__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Numero_de_protocolo__c==null}" style="color:red;"/>.
+                <apex:variable var="count" value="{!count + 1}" />
+            </apex:repeat> 
+        </apex:outputPanel>
+            </p>
+
+</div> 
+
+<div style="margin-top: 40px">
+	<p style="text-align: center; margin-top: 20px;"> 
+        <b>INTERVIENEN </b>
+	</p>   
+    <p> 
+    El primero en nombre y representación de la sociedad mercantil <b><apex:outputText value=" {!Promotora.name}" rendered="{!Promotora.name!=null}"/> 
+        <apex:outputText value=" __________ " rendered="{!Promotora.name==null}" style="color:red;"/></b>, constituida por 
+    tiempo indefinido mediante escritura otorgada el día <apex:outputText value=" {!fechaEscrituraPromotora}" rendered="{!fechaEscrituraPromotora!=null}"/> 
+        <apex:outputText value=" __________ " rendered="{!fechaEscrituraPromotora==null}" style="color:red;" /> ante el Notario de
+        <apex:outputText value=" {!Promotora.Lugar_del_registro__c}" rendered="{!Promotora.Lugar_del_registro__c!=null}"/>
+        <apex:outputText value=" __________ " rendered="{!Promotora.Lugar_del_registro__c==null}" style="color:red;" />, 
+    <apex:outputText value=" {!Promotora.Nombre_del_notario__c}" rendered="{!Promotora.Nombre_del_notario__c!=null}"/>
+        <apex:outputText value=" __________ " rendered="{!Promotora.Nombre_del_notario__c==null}" style="color:red;" />,
+        con el número <apex:outputText value=" {!Promotora.Numero_de_protocolo__c}" rendered="{!Promotora.Numero_de_protocolo__c!=null}"/>
+        <apex:outputText value=" __________ " rendered="{!Promotora.Numero_de_protocolo__c==null}" style="color:red;" /> de protocolo.
+    Tiene CIF número <apex:outputText value=" {!Promotora.N_Documento__c}" rendered="{!Promotora.N_Documento__c!=null}"/> 
+        <apex:outputText value=" __________ " rendered="{!Promotora.N_Documento__c==null}" style="color:red;" />. Actúa en su condición 
+    de <apex:outputText value=" {!promocion.Condicion__c}" rendered="{!promocion.Condicion__c!=null}"/>
+        <apex:outputText value=" __________ " rendered="{!promocion.Condicion__c==null}" style="color:red;" /> de la sociedad en virtud de escritura de poder otorgada el día
+        <apex:outputText value=" {!fechaEscrituracionPromocion}" rendered="{!fechaEscrituracionPromocion!=null}"/> 
+        <apex:outputText value=" __________ " rendered="{!fechaEscrituracionPromocion==null}" style="color:red;"/> por el notario 
+    de <apex:outputText value=" {!promocion.Lugar_de_la_notaria__c}" rendered="{!promocion.Lugar_de_la_notaria__c!=null}"/>
+        <apex:outputText value=" __________ " rendered="{!promocion.Lugar_de_la_notaria__c==null}" style="color:red;"/>, <apex:outputText value=" {!promocion.Nombre_notario__c}" rendered="{!promocion.Nombre_notario__c!=null}"/>
+        <apex:outputText value=" __________ " rendered="{!promocion.Nombre_notario__c==null}" style="color:red;"/>
+        con el nº <apex:outputText value=" {!promocion.Numero_de_protocolo__c}" rendered="{!promocion.Numero_de_protocolo__c!=null}"/> 
+        <apex:outputText value=" __________ " rendered="{!promocion.Numero_de_protocolo__c==null}" style="color:red;" /> de su protocolo. 
+    En lo sucesivo “la parte <b>VENDEDORA</b>”.
+	</p>
+    <p> 
+		El segundo 
+        <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'Cuenta',  true, false)}"> 
+            , en nombre y representación de 
+            <apex:variable var="count" value="{!0}" />
+            <apex:repeat value="{!Titulares}" var="Titular">
+                <apex:outputText value="{!IF (count > 0, ' y ', ' ')}"/>
+                <apex:outputText value=" {!cliente.name}" rendered="{!cliente.name!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.name==null}" style="color:red;" />,
+                S.L. con CIF
+                <apex:outputText value=" {!cliente.N_Documento__c}" rendered="{!cliente.N_Documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.N_Documento__c==null}" style="color:red;" />
+                y con domicilio social en
+                <apex:outputPanel rendered="{!IF(cliente.DP_Pais__c == idEspanha,  true, false)}"> <apex:outputText value=" {!cliente.DP_Tipo_de_vIa__c}" rendered="{!cliente.DP_Tipo_de_vIa__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.DP_Tipo_de_vIa__c==null}" style="color:red;" />
+                    <apex:outputText value=" {!cliente.DP_Nombre_via__c}" rendered="{!cliente.DP_Nombre_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.DP_Nombre_via__c==null}" style="color:red;" />, 
+                    número <apex:outputText value=" {!cliente.DP_N_via__c}" rendered="{!cliente.DP_N_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.DP_N_via__c==null}" style="color:red;" /> 
+                    CP <apex:outputText value=" {!cliente.DP_Codigo_postal__c}" rendered="{!cliente.DP_Codigo_postal__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.DP_Codigo_postal__c==null}" style="color:red;" />
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(cliente.DP_Pais__c == idEspanha,  false, true)}">
+                    <apex:outputText value=" {!cliente.Direccion_Extranjera_P__c}" rendered="{!cliente.Direccion_Extranjera_P__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.Direccion_Extranjera_P__c==null}" style="color:red;" />, 
+                    <apex:outputText value=" {!cliente.Localidad_Extranjera_P__c}" rendered="{!cliente.Localidad_Extranjera_P__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.Localidad_Extranjera_P__c==null}" style="color:red;" /> 
+                </apex:outputPanel>.
+                Constituida mediante escritura otorgada en Madrid el día 
+                <apex:outputText value=" {!cliente.Fecha_de_Escritura__c}" rendered="{!cliente.Fecha_de_Escritura__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!cliente.Fecha_de_Escritura__c==null}" style="color:red;" />                
+                ante la notario 
+                <apex:outputText value=" {!cliente.Nombre_del_notario__c}" rendered="{!cliente.Nombre_del_notario__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!cliente.Nombre_del_notario__c==null}" style="color:red;" />, 
+                con el número 
+                <apex:outputText value=" {!cliente.Numero_de_protocolo__c}" rendered="{!cliente.Numero_de_protocolo__c!=null}"/>
+                <apex:outputText value=" _____ " rendered="{!cliente.Numero_de_protocolo__c==null}" style="color:red;"/>.
+                de protocolo, que se inscribió en el Registro Mercantil de 
+                <apex:outputText value=" {!Titular.Lugar_del_registro__c}" rendered="{!Titular.Lugar_del_registro__c!=null}"/><apex:outputText value=" __________ " rendered="{!Titular.Lugar_del_registro__c==null}" style="color:red;" />, 
+                en el tomo 
+                <apex:outputText value=" {!Titular.Tomo__c}" rendered="{!Titular.Tomo__c!=null}"/> <apex:outputText value=" _____ " rendered="{!Titular.Tomo__c==null}" style="color:red;" />,
+                folio 
+                <apex:outputText value=" {!Titular.Folio__c}" rendered="{!Titular.Folio__c!=null}"/> <apex:outputText value=" _____ " rendered="{!Titular.Folio__c==null}" style="color:red;" />,
+                hoja número 
+                <apex:outputText value=" {!Titular.N_Hoja__c}" rendered="{!Titular.N_Hoja__c!=null}"/> <apex:outputText value=" _____ " rendered="{!Titular.N_Hoja__c==null}" style="color:red;" />.
+                e inscripción 1ª. 
+                Actúa en su calidad de <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Condicion__c}" rendered="{!mapRepresentantesLegales[Titular.id].Condicion__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Condicion__c==null}" style="color:red;" />  
+                en virtud de escritura otorgada en Madrid el día <apex:outputText value=" {!mapRepresentantesFechas[Titular.id]}" rendered="{!mapRepresentantesFechas[Titular.id]!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesFechas[Titular.id]==null}" style="color:red;" /> 
+                ante el notario don <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Nombre_notario__c}" rendered="{!mapRepresentantesLegales[Titular.id].Nombre_notario__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Nombre_notario__c==null}" style="color:red;" /> 
+                con el número     
+                <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].name}" rendered="{!mapRepresentantesLegales[Titular.id].name!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].name==null}" style="color:red;" />
+                de su protocolo, que causó la inscripción
+                con <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Tipo_de_documento__c}" rendered="{!mapRepresentantesLegales[Titular.id].Tipo_de_documento__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Tipo_de_documento__c==null}" style="color:red;" />
+                <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].N_Documento__c}" rendered="{!mapRepresentantesLegales[Titular.id].N_Documento__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].N_Documento__c==null}" style="color:red;" />, 
+                en su condición de <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Condicion__c}" rendered="{!mapRepresentantesLegales[Titular.id].Condicion__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Condicion__c==null}" style="color:red;" />  
+                conforme a escritura otorgada por el notario de <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Lugar_de_notaria__c}" rendered="{!mapRepresentantesLegales[Titular.id].Lugar_de_notaria__c!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Lugar_de_notaria__c==null}" style="color:red;" />
+                Don <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Nombre_notario__c}" rendered="{!mapRepresentantesLegales[Titular.id].Nombre_notario__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Nombre_notario__c==null}" style="color:red;" />, 
+                en fecha <apex:outputText value=" {!mapRepresentantesFechas[Titular.id]}" rendered="{!mapRepresentantesFechas[Titular.id]!=null}"/> 
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesFechas[Titular.id]==null}" style="color:red;" />
+                con el nº de su protocolo <apex:outputText value=" {!mapRepresentantesLegales[Titular.id].Numero_de_protocolo__c}" rendered="{!mapRepresentantesLegales[Titular.id].Numero_de_protocolo__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.id].Numero_de_protocolo__c==null}" style="color:red;"/>.
+                <apex:variable var="count" value="{!count + 1}" />
+            </apex:repeat> 
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'PersonAccount',  true, false)}">
+            en su propio nombre y derecho.
+        </apex:outputPanel>
+         En lo sucesivo “la parte COMPRADORA”.
+	</p> 
+    <p> 
+		Ambas partes se reconocen mutua y recíprocamente capacidad jurídica suficiente para la suscripción del presente contrato y a tal efecto 
+	</p> 
+</div>     
+
+<div style="margin-top: 40px">
+	<p style="text-align: center; letter-spacing: 2px; margin-top: 20px;"> 
+		<b>EXPONEN</b>  
+	</p>   
+    <p> 
+		<b>I.-</b> Que ambas partes han suscrito con fecha <apex:outputText value=" {!fechaFirmaContratoCompraventa}" rendered="{!fechaFirmaContratoCompraventa!=null}"/> 
+        <apex:outputText value=" __________ " rendered="{!fechaFirmaContratoCompraventa==null}" style="color:red;"/>, contrato de compraventa de vivienda respecto al inmueble que se describirá a continuación, 
+        perteneciente a la promoción denominada ‘‘<apex:outputText value=" {!Promocion.name}" rendered="{!Promocion.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Promocion.name==null}" style="color:red;" />’’:
+	</p>
+</div>
+<div>    
+ 	<ul>
+      <li>
+          		Vivienda <apex:outputText value=" {!inmueble.Tipo_de_vivienda__c}" rendered="{!inmueble.Tipo_de_vivienda__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_vivienda__c==null}" style="color:red;"/>  
+                        <apex:outputPanel rendered="{!IF(inmueble.Portal__c != null, true, false)}">
+                        	Portal <apex:outputText value=" {!inmueble.Portal__c}" rendered="{!inmueble.Portal__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.Portal__c==null}" style="color:red;"/>  
+                        </apex:outputPanel> 
+                        <apex:outputPanel rendered="{!IF(inmueble.Planta__c != null, true, false)}">
+                        	Planta <apex:outputText value=" {!inmueble.Planta__c}" rendered="{!inmueble.Planta__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.Planta__c==null}" style="color:red;"/>   
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(inmueble.Letra_N_Puerta__c != null, true, false)}">
+                        	  Letra <apex:outputText value=" {!inmueble.Letra_N_Puerta__c}" rendered="{!inmueble.Letra_N_Puerta__c!=null}"/> 
+                         <apex:outputText value=" __________ " rendered="{!inmueble.Letra_N_Puerta__c==null}" style="color:red;"/>
+                        </apex:outputPanel> 
+                        , cuya superficie construida aproximada es <apex:outputText value=" {!StrInmuSuperConstTot}" rendered="{!inmueble.Superficie_Construida_total_con_ZZCC_m2__c!=null}"/> 
+                       <apex:outputText value=" __________ " rendered="{!inmueble.Superficie_Construida_total_con_ZZCC_m2__c==null}" style="color:red;"/> metros cuadrados. 
+                        Consta de <apex:outputText value=" {!inmueble.N_habitaciones__c}" rendered="{!inmueble.N_habitaciones__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.N_habitaciones__c==null}" style="color:red;"/> dormitorios, <apex:outputText value=" {!inmueble.N_banos__c}" rendered="{!inmueble.N_banos__c!=null}"/> <apex:outputText value=" __________ " rendered="{!inmueble.N_banos__c==null}"/> cuartos de baño                      
+          <apex:outputText value="{!IF(AND(inmueble.sup_Cocina__c != null, inmueble.sup_Cocina__c > 0), ', cocina', '')}"/>
+          <apex:outputText value="{!IF(AND(inmueble.sup_Salon__c != null, inmueble.sup_Salon__c > 0), ', tendedero', '')}"/>
+          <apex:outputText value="{!IF(AND(inmueble.Superficie_Terrazas_Descubiertas__c != null, inmueble.Superficie_Terrazas_Descubiertas__c > 0), ', terraza', '')}"/>
+          <apex:outputText value="{!IF(AND(inmueble.Superficie_Terrazas_Cubiertas__c != null, inmueble.Superficie_Terrazas_Cubiertas__c > 0), ', terraza cubierta', '')}"/>
+         .
+      </li>
+       
+                  
+          <apex:outputPanel rendered="{!IF(listTrasteros != null, true, false)}">
+                         <apex:repeat value="{!MapTrasteros}" var="trastero">
+                        <li style="margin-left: 57px;">
+                            <p class="parrafoJustificado">
+                                &nbsp;&nbsp;
+                                Trastero nº 
+                                <apex:outputText value=" {!MapTrasteros[trastero][0]}" rendered="{!MapTrasteros[trastero][0]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapTrasteros[trastero][0]=='#@#VACIO#@#'}" style="color:red;"/>
+                                situado en planta nº: 
+                                <apex:outputText value=" {!MapTrasteros[trastero][1]}" rendered="{!MapTrasteros[trastero][1]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!OR(MapTrasteros[trastero][1]=='', MapTrasteros[trastero][1]=='#@#VACIO#@#')}" style="color:red;"/>
+                                , con una superficie construida aproximada de 
+                                <apex:outputText value=" {!MapTrasteros[trastero][2]}" rendered="{!MapTrasteros[trastero][2]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapTrasteros[trastero][2]=='#@#VACIO#@#'}" style="color:red;"/>
+                                m2.
+                            </p>
+                        </li>
+                    </apex:repeat>
+          </apex:outputPanel>
+                    
+          <apex:outputPanel rendered="{!IF(listGarajes != null, true, false)}">
+                        <apex:repeat value="{!MapGarajes}" var="garaje">
+                        <li style="margin-left: 40px;">
+                            <p class="parrafoJustificado">
+                                &nbsp;&nbsp;
+                                Plaza de garaje nº 
+                                <apex:outputText value=" {!MapGarajes[garaje][0]}" rendered="{!MapGarajes[garaje][0]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][0]=='#@#VACIO#@#'}" style="color:red;"/>
+                                situada en planta nº: 
+                                <apex:outputText value=" {!MapGarajes[garaje][1]}" rendered="{!MapGarajes[garaje][1]!='#@#VACIO#@#'}"/> <!--{!MapGarajes[garaje][1]!='' && !MapGarajes[garaje][1]!='#@#VACIO#@#'}-->
+                                <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][1]=='#@#VACIO#@#'}" style="color:red;"/>
+                                , con una superficie construida aproximada de 
+                                <apex:outputText value=" {!MapGarajes[garaje][2]}" rendered="{!MapGarajes[garaje][2]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][2]=='#@#VACIO#@#'}" style="color:red;"/>
+                                m2.
+                            </p>
+                        </li>
+                    </apex:repeat>
+         </apex:outputPanel>
+	</ul>
+</div> 
+<div>
+	<p> 
+		<b>II.-</b> Que, ambas partes tienen la voluntad de modificar la forma de pago del Precio acordada en
+        la Estipulación Tercera del Contrato referido en el Expositivo I y sustituir el plan de pagos recogido en
+        su Anexo “Plan de Pagos” por el que acompaña a la presente Adenda.
+	</p>
+    <p>
+        <b>III.-</b> Que, las partes de común acuerdo otorgan la presente ADENDA que modifica la Estipulación Tercera del Contrato
+        de Compraventa de Vivienda sobre forma de pago y sustituye el plan de pagos recogido en su ANEXO “PLAN DE PAGOS” por el
+        que acompaña a la presente Adenda, dejando sin alterar y plenamente en vigor el resto de los términos y condiciones del
+        CONTRATO referido en el Expositivo I y lo llevan a efecto conforme a las siguientes.
+    </p>
+</div>
+<div>
+	<p style="text-decoration: underline; text-align: center; margin-top: 40px"> 
+		<b>ESTIPULACIONES</b> 
+	</p>
+</div>
+<div>
+	<p> 
+		<b>PRIMERA. -</b> Modificación de la Estipulación Tercera del Contrato de Compraventa de Vivienda de fecha {!fechaFirmaContratoCompraventa}:
+ 		Las partes acuerdan, desde la firma de la presente, modificar la forma de pago de la compraventa, por lo que la Estipulación Tercera del contrato de compraventa referido 
+        pasará a tener el siguiente tenor: 
+ 
+	</p>
+</div>
+<div>
+    
+	<p style="font-style: italic;"> 
+        <b>‘‘TERCERA. –</b> FORMA DE PAGO.<br/>
+    		El Precio convenido será satisfecho del siguiente modo:
+	</p>
+</div>
+<div>
+    <!-- SI ES RESERVA CON IVA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <apex:outputPanel rendered="{!IF(oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA',  true, false)}">
+        <p style="font-style: italic;"> 
+            A) La cantidad de 
+            <apex:outputText value=" {!StrOpporImpReservaSinIVA}" rendered="{!StrOpporImpReservaSinIVA!=null}"/>
+            <apex:outputText value=" _________________________ " rendered="{!StrOpporImpReservaSinIVA==null}" style="color:red;"/>
+            EUROS, más I.V.A., que hacen un total de 
+            <apex:outputText value=" {!StrOpporImpReserva}" rendered="{!StrOpporImpReserva!=null}"/>
+            <apex:outputText value=" _________________________ " rendered="{!StrOpporImpReserva==null}" style="color:red;"/>
+            €, que la parte compradora entregó con anterioridad al presente contrato en concepto de reserva. Se adjunta como ANEXO I copia del documento justificativo de pago del 
+            importe entregado en concepto de reserva.
+        </p>
+    </apex:outputPanel>
+</div>
+<div>
+    <p style="font-style: italic;"> 
+        <apex:outputPanel rendered="{!IF(oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA',  true, false)}">
+            B)
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!IF(oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA',  false, true)}">
+            A)
+        </apex:outputPanel>
+        La cantidad de 
+        <apex:outputText value=" {!StrOpporAmountSinIVA}" rendered="{!StrOpporAmountSinIVA!=null}"/>
+        <apex:outputText value=" _________________________ " rendered="{!StrOpporAmountSinIVA==null}" style="color:red;"/>
+        EUROS, más I.V.A., que hacen un total de 
+        <apex:outputText value=" {!StrOpporAmount}" rendered="{!StrOpporAmount!=null}"/>
+        <apex:outputText value=" ________________ " rendered="{!StrOpporAmount==null}" style="color:red;"/>
+        €  que la parte compradora entrega en este acto  mediante cheque bancario/transferencia a la cuenta de la vendedora,
+        que se acepta salvo buen fin, y cuya fotocopia se adjunta.
+    </p>
+</div>
+<div>
+    
+    <p style="font-style: italic;"> 
+        <apex:outputPanel rendered="{!IF(oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA',  true, false)}">
+            C)
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!IF(oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA',  false, true)}">
+            B)
+        </apex:outputPanel>
+        La cantidad de
+        <apex:outputText value=" {!StrOpporImpPlanPagosSinIVA}" rendered="{!StrOpporImpPlanPagosSinIVA!=null}"/>
+        <apex:outputText value=" ________________" rendered="{!StrOpporImpPlanPagosSinIVA==null}" style="color:red;"/>
+        EUROS, más I.V.A. (lo que supone un total de 
+        <apex:outputText value=" {!StrOpporImpPlanPagos}" rendered="{!StrOpporImpPlanPagos!=null}"/>
+        <apex:outputText value=" ________________" rendered="{!StrOpporImpPlanPagos==null}" style="color:red;"/>
+        EUROS), se pagará en 
+        <apex:outputText value=" {!oportunidad.N_Cuotas__c}" rendered="{!oportunidad.N_Cuotas__c!=null}"/>
+        <apex:outputText value=" ___" rendered="{!oportunidad.N_Cuotas__c==null}" style="color:red;"/>
+        plazos de
+        <apex:outputText value=" {!StrOpporImpCuota}" rendered="{!StrOpporImpCuota!=null}"/>
+        <apex:outputText value=" ________________" rendered="{!StrOpporImpCuota==null}" style="color:red;"/>
+        EUROS más I.V.A. cada uno durante la construcción, con vencimiento mensual y sucesivos, a partir del 
+        <apex:outputText value=" {!fechaPrimeraCuota}" rendered="{!fechaPrimeraCuota!=null}"/>
+        <apex:outputText value=" ________________" rendered="{!fechaPrimeraCuota==null}" style="color:red;"/>.
+        Se adjunta como ANEXO II calendario de pagos. 
+    </p>
+    </div>
+    <div>
+        <p style="font-style: italic;"> 
+            Todos los recibos serán domiciliados en la cuenta designada por la parte compradora que en este acto acepta que se le giren;
+            siendo la cuenta referida la siguiente C.C.:
+            <apex:outputText value=" {!oportunidad.Cuenta_Bancaria_de_mandato__c}" rendered="{!oportunidad.Cuenta_Bancaria_de_mandato__c!=null}"/>
+            <apex:outputText value=" ____ ________ ________ ____________________" rendered="{!oportunidad.Cuenta_Bancaria_de_mandato__c==null}" style="color:red;"/>
+            . 
+        </p>
+</div>
+<div>
+    <p style="font-style: italic;"> 
+        <apex:outputPanel rendered="{!IF(oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA',  true, false)}">
+            D)
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!IF(oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA',  false, true)}">
+            C)
+        </apex:outputPanel> 
+        La cantidad de
+        <apex:outputText value=" {!StrOpporImpEsc}" rendered="{!StrOpporImpEsc!=null}"/>
+        <apex:outputText value=" ___.___ " rendered="{!StrOpporImpEsc==null}" style="color:red;"/>
+        EUROS, más I.V.A., que se abonarán al otorgamiento de la escritura pública de compraventa.
+    </p>
+</div>    
+<div>
+	<p style="font-style: italic;"> 
+		La parte compradora le confiere autorización y mandato tan amplio como en derecho se requiere y sea necesario, para que la parte vendedora, o quien ella designe, en relación con las Fincas 
+        objeto de este contrato, pueda concertar y formalizar préstamos con garantía hipotecaria; y para que hasta el momento de la entrega de las Fincas (es decir, la transmisión de la propiedad) 
+        pueda modificar, novar y dividir tal hipoteca de acuerdo con las condiciones de pago pactadas en este contrato, distribuyendo las responsabilidades que la garanticen, en la forma que tenga 
+        por conveniente, pudiendo firmar liquidaciones y percibir directamente el importe total del préstamo en una o más entregas, pagar cantidades y, en definitiva, ejecutar cuantos actos y 
+        otorgar cuantos documentos públicos o privados considere convenientes a tales fines, siendo de cuenta del vendedor los gastos ocasionados, y por cuenta del comprador todos los gastos d
+        erivados de una eventual subrogación.’’
+	</p>
+</div>     
+<div>
+	<p> 
+        <b>SEGUNDA. – Reconocimiento de cantidades.</b> <br/>        
+	</p>
+</div>       
+<div>
+	<p> 
+        Las Partes reconocen la parte Compradora ha satisfecho la cantidad total de 
+        <apex:outputText value=" {!StrPagado}" rendered="{!StrPagado!=null}"/>
+        <apex:outputText value=" ____________ " rendered="{!StrPagado==null}" style="color:red;"/>
+        EUROS a la fecha indicada en el encabezamiento 
+        Así mismo, las Partes reconocen que queda pendiente de pago el resto de los importes indicados en los apartados, 
+        <apex:outputText value=" {!StrPorPagar}" rendered="{!StrPorPagar!=null}"/>
+        <apex:outputText value=" ____________ " rendered="{!StrPorPagar==null}" style="color:red;"/>
+        , de la estipulación anterior, y que serán abonados conforme a lo acordado 
+        por las partes en la presente.
+	</p>
+</div>
+<div>
+	<p> 
+		<b>TERCERA. – Modificación del Plan de Pagos contenido en el Anexo “Plan de Pagos” del Contrato de Compraventa de
+            Vivienda de fecha {!fechaFirmaContratoCompraventa}.</b><br/>
+        Las partes acuerdan que, el ANEXO “PLAN DE PAGOS” al Contrato de Compraventa de Vivienda de fecha 
+        {!fechaFirmaContratoCompraventa} se sustituye por el que acompaña a la presente ADENDA como Anexo I, que pasa a formar
+        parte integrante del mismo y es firmado por ambas partes en prueba de su conocimiento y conformidad con el mismo.   
+	</p>
+</div>        
+<div>
+    <p>
+        <b>CUARTA. - Vigencia e inalterabilidad del Contrato de Compraventa de Vivienda de fecha  {!fechaFirmaContratoCompraventa}.</b><br/>
+        Que mediante la presente ADENDA queda modificada única y exclusivamente la Estipulación Tercera del Contrato de Compraventa de Vivienda
+        referido en el Expositivo I y su ANEXO “PLAN DE PAGOS”, tal y como acuerdan las Partes en los términos establecidos en las estipulaciones
+        anteriores y permaneciendo inalterado y manteniendo su vigencia el resto de las estipulaciones y condiciones contenidas en dicho contrato
+        en lo no expresamente modificado por la presente.
+        <br/>
+		Y en prueba de conformidad con cuanto antecede las partes suscriben el presente documento por duplicado ejemplar y a un solo efecto en el lugar y fecha indicados en el encabezamiento del mismo.
+	</p>
+</div>   
+<div class="firma">
+                
+	<table>
+        
+    	<tr>
+        	<td style="width: 400px">
+            	<p>Por la parte VENDEDORA</p>
+            </td>
+            <td>
+            	<p>Por la parte COMPRADORA</p>
+            </td>
+       </tr>
+       <!-- Fila 2 -->
+       <tr>
+       		<td style="width: 400px">
+            	<p style="margin: 0">Fdo. <apex:outputText value=" {!Apoderado.name}" rendered="{!Apoderado.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Apoderado.name==null}" style="color:red;"/></p>
+                <p style="margin: 0"><apex:outputText value=" {!Apoderado.Account.name}" rendered="{!Apoderado.Account.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Apoderado.Account.name==null}" style="color:red;"/></p>
+            </td>
+            <td>
+                <apex:repeat value="{!Titulares}" var="Titular">
+                    <p style="margin-top: 50px">Fdo. <apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.name==null}" style="color:red;"/></p>
+                </apex:repeat> 
+             </td>
+        </tr>
+    </table>
+                
+            </div>
+
+
+    <div class="saltoDePagina">
+        <div>
+            <b>CALENDARIO DE PAGOS (EN EUROS, IVA NO INCLUÍDO)</b>
+            <br/>
+            <br/>
+        </div>
+        
+        <div>
+            <apex:repeat value="{!facturasNoCuotasList}" var="facturaNoCuota">
+                <apex:outputPanel rendered="{!and(oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA', facturaNoCuota.Origen__c == 'Reserva')}">
+                    <apex:variable var="claseEstado" value="#31c831" rendered="{!IF(facturaNoCuota.Estado_de_la_factura__c = 'Cobrada' ,True, False)}"  />
+                    <apex:variable var="claseEstado" value="#ffef99" rendered="{!IF(facturaNoCuota.Estado_de_la_factura__c != 'Cobrada' ,True, False)}"  />
+                    <table class="tablaPlaPagos" width="99%">
+                        <tr>
+                            <td style="border: 1px solid black;" width="33%">
+                                RESERVA
+                            </td>
+                            <td style="border: 1px solid black;" width="33%">
+                                {!MapFacturaNoCuota[facturaNoCuota.Id]}
+                            </td>
+                            <td style="border: 1px solid black; background-color: {!claseEstado};" width="33%" >
+                                <apex:outputText rendered="{!facturaNoCuota.Estado_de_la_factura__c == 'Cobrada'}">
+                                    Cobrado
+                                </apex:outputText>
+                                <apex:outputText rendered="{!facturaNoCuota.Estado_de_la_factura__c != 'Cobrada'}">
+                                    Pendiente
+                                </apex:outputText>    
+                            </td>
+                        </tr>
+                    </table>
+                </apex:outputPanel>
+            </apex:repeat> 
+            
+            <apex:repeat value="{!facturasNoCuotasList}" var="facturaNoCuota">
+                <apex:outputPanel rendered="{!facturaNoCuota.Origen__c == 'Entrada'}">
+                    <apex:variable var="claseEstado" value="#31c831" rendered="{!IF(facturaNoCuota.Estado_de_la_factura__c == 'Cobrada' ,True, False)}"  />
+                    <apex:variable var="claseEstado" value="#ffef99" rendered="{!IF(facturaNoCuota.Estado_de_la_factura__c != 'Cobrada' ,True, False)}"  />
+                    <table class="tablaPlaPagos" width="99%">
+                        <tr>
+                            <td style="border: 1px solid black; background-color: {!claseEstado};" width="33%">
+                                CONTRATO PRIVADO DE COMPRAVENTA
+                            </td>
+                            <td style="border: 1px solid black;" width="33%">
+                                {!MapFacturaNoCuota[facturaNoCuota.Id]}
+                            </td>
+                            <td style="border: 1px solid black; background-color: {!claseEstado};" width="33%">
+                                <apex:outputText rendered="{!facturaNoCuota.Estado_de_la_factura__c == 'Cobrada'}">
+                                    Cobrado
+                                </apex:outputText>
+                                <apex:outputText rendered="{!facturaNoCuota.Estado_de_la_factura__c != 'Cobrada'}">
+                                    Pendiente
+                                </apex:outputText>    
+                            </td>
+                        </tr>
+                    </table>
+                </apex:outputPanel>
+            </apex:repeat> 
+            
+            <apex:repeat value="{!facturasUnificadasList}" var="facturaUnificada">
+                <apex:variable var="claseEstado" value="#31c831" rendered="{!IF(facturaUnificada.Estado_de_la_factura__c == 'Cobrada' ,True, False)}"  />
+                <apex:variable var="claseEstado" value="#ffef99" rendered="{!IF(facturaUnificada.Estado_de_la_factura__c != 'Cobrada' ,True, False)}"  />
+                <table class="tablaPlaPagos" width="99%">
+                    <tr>
+                        <td style="border: 1px solid black;" width="33%">
+                            <apex:outputText value="{0,date,MM/yy}"> 
+                                <apex:param value="{!facturaUnificada.Fecha_de_emision__c}" /> 
+                            </apex:outputText>
+                        </td>
+                        <td style="border: 1px solid black;" width="33%">
+                            {!MapFacturaUnificada[facturaUnificada.Id]}
+                        </td>
+                        <td style="border: 1px solid black; background-color: {!claseEstado};" width="33%">
+                            <apex:outputText rendered="{!facturaUnificada.Estado_de_la_factura__c == 'Cobrada'}">
+                                Cobrado
+                            </apex:outputText>
+                            <apex:outputText rendered="{!facturaUnificada.Estado_de_la_factura__c != 'Cobrada'}">
+                                Pendiente
+                            </apex:outputText>    
+                        </td>
+                    </tr>
+                </table> 
+            </apex:repeat>
+            
+            <apex:repeat value="{!facturasNoCuotasList}" var="facturaNoCuota">
+                <apex:outputPanel rendered="{!facturaNoCuota.Origen__c == 'Escritura'}">
+                    <apex:variable var="claseEstado" value="#31c831" rendered="{!IF(facturaNoCuota.Estado_de_la_factura__c == 'Cobrada' ,True, False)}"  />
+                    <apex:variable var="claseEstado" value="#ffef99" rendered="{!IF(facturaNoCuota.Estado_de_la_factura__c != 'Cobrada' ,True, False)}"  />
+                    <table class="tablaPlaPagos" width="99%">
+                        <tr>
+                            <td style="border: 1px solid black; background-color: {!claseEstado}" width="33%">
+                                ESCRITURACIÓN
+                            </td>
+                            <td style="border: 1px solid black;" width="33%">
+                                {!StrOpporImpEsc}
+                            </td>
+                            <td style="border: 1px solid black; background-color: {!claseEstado};" width="33%">
+                                {!StrEstadoEscrituracion}                                             
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black;" width="33%">
+                                % ESCRITURACIÓN
+                            </td>
+                            <td style="border: 1px solid black;" width="33%">
+                                {!oportunidad.Pago_Escritura__c}
+                            </td>
+                            <td style="border: 1px solid black;" width="33%">
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </apex:outputPanel>
+            </apex:repeat> 
+            <table class="tablaPlaPagos" width="99%">
+                <tr>
+                    <td style="border: 1px solid black;" width="33%">
+                        TOTAL SIN IVA
+                    </td>
+                    <td style="border: 1px solid black;" width="33%">
+                        {!StrOpporAmountSinIVA}
+                    </td>
+                    <td style="border: 1px solid black;" width="33%">
+                        
+                    </td>
+                </tr> 
+                <tr>
+                    <td style="border: 1px solid black;" width="33%">
+                        TOTAL CON IVA
+                    </td>
+                    <td style="border: 1px solid black;" width="33%">
+                        {!StrOpporAmount}
+                    </td>
+                    <td style="border: 1px solid black;" width="33%">
+                        
+                    </td>
+                </tr> 
+            </table>
+            
+        </div>
+    </div>
+
+
+    
+</body>  
+</apex:page>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado_de_la_factura__c</fullName>
+    <externalId>false</externalId>
+    <label>Estado de la factura</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Proforma</fullName>
+                <default>false</default>
+                <label>Proforma</label>
+            </value>
+            <value>
+                <fullName>Pendiente de emisión</fullName>
+                <default>false</default>
+                <label>Pdte.Envío a Oracle</label>
+            </value>
+            <value>
+                <fullName>Volcada a Oracle</fullName>
+                <default>false</default>
+                <label>Volcada a Oracle</label>
+            </value>
+            <value>
+                <fullName>Conciliada SF</fullName>
+                <default>false</default>
+                <label>Conciliada SF</label>
+            </value>
+            <value>
+                <fullName>Emitida</fullName>
+                <default>false</default>
+                <label>Emitida</label>
+            </value>
+            <value>
+                <fullName>Cobrada</fullName>
+                <default>false</default>
+                <label>Cobrada</label>
+            </value>
+            <value>
+                <fullName>Cancelada</fullName>
+                <default>false</default>
+                <label>Cancelada</label>
+            </value>
+            <value>
+                <fullName>Volcada y Emitida</fullName>
+                <default>false</default>
+                <label>Volcada y Emitida</label>
+            </value>
+            <value>
+                <fullName>Impagada</fullName>
+                <default>false</default>
+                <label>Impagada</label>
+            </value>
+            <value>
+                <fullName>Abonada</fullName>
+                <default>false</default>
+                <label>Abonada</label>
+            </value>
+            <value>
+                <fullName>Anulada</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Anulada</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

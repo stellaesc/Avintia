@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProformaNoEnvioOracle</fullName>
+    <active>true</active>
+    <description>Si el estado de la factura es &apos;Proforma&apos; solo los administradores pueden chequear el envío a Oracle.</description>
+    <errorConditionFormula>AND( ISCHANGED(Enviar_Factura_Oracle__c),
+				ISPICKVAL(Estado_de_la_factura__c, &apos;Proforma&apos;),
+    $User.ProfileId != &apos;00ef2000001aiAs&apos;
+)</errorConditionFormula>
+    <errorMessage>Solo los administradores pueden modificar el check de Envío a Oracle cuando el estado es &apos;Proforma&apos;.</errorMessage>
+</ValidationRule>

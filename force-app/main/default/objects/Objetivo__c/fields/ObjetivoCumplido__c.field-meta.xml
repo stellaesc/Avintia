@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ObjetivoCumplido__c</fullName>
+    <description>Cuando los valores alcanzados superen a los valores objetivos, se marcará a TRUE</description>
+    <externalId>false</externalId>
+    <formula>ImporteAlcanzado__c &gt;= ObjetivoImporte__c  &amp;&amp;  ViviendasAlcanzadas__c &gt;=ObjetivoViviendas__c &amp;&amp; GarajesAlcanzados__c &gt;=ObjetivoGarajes__c &amp;&amp; TrasterosAlcanzados__c&gt;=ObjetivoTrasteros__c &amp;&amp; LocalesAlcanzados__c&gt;=ObjetivoLocales__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Objetivo cumplido</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

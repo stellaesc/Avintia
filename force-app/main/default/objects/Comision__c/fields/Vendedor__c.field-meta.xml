@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vendedor__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Vendedor al que se le concede la comisión</description>
+    <externalId>false</externalId>
+    <label>Vendedor</label>
+    <referenceTo>Vendedor__c</referenceTo>
+    <relationshipLabel>Comisiones</relationshipLabel>
+    <relationshipName>Comisiones</relationshipName>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

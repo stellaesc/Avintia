@@ -1,0 +1,43 @@
+<apex:page standardController="Promocion__c" extensions="SliderController">
+
+    <body>
+    <div class="flex-container"
+         style="{!IF(numImagenes == 0, 'margin:auto; display:none; width: 80%;', 'margin:auto; display:block; width: 80%;')}">
+        <div class="flexslider">
+            <ul class="slides">
+                <apex:repeat value="{!imagenes}" var="imagen">
+                    <apex:variable value="{!prefijo + imagen.id}" var="urlImagen"/>
+                    <li><img class="img_slide" src="{!urlImagen}"/></li>
+                </apex:repeat>
+            </ul>
+        </div>
+    </div>
+    <p style="{!IF(numImagenes == 0, 'display:block', 'display:none;')}">
+        <b>ATENCIÓN</b><br/>
+        En el proceso de clonado no se clonarán las imágenes del carrusel. Podrás añadir nuevas imágenes al carrusel después al terminar el proceso.
+    </p>
+    <link type="text/css" rel="stylesheet" href="{!$Resource.css_flexslider}"/>
+    </body>
+
+
+    <script src="{!$Resource.jquery}"></script>
+    <script src="{!$Resource.slider_jquery}"></script>
+    <script type="text/javascript">    
+        $(window).load(function() {
+            $('.flexslider').flexslider({
+                animation: "slide", 
+                controlsContainer: ".flex-container",
+                directionNav: true
+            });
+            if($(window).width() > 600){
+                $('.img_slide').height($(window).height()); 
+                $('.img_slide').width($(window).width()*4/5); 
+            }else{
+                $('.img_slide').height($(window).height()/2);  
+                
+            }
+        });
+
+    </script>
+
+</apex:page>

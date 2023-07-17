@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Activar_Nuevo_plan_pagos_sin_Aprobac</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISCHANGED( Estado__c ),
+ISPICKVAL( Estado__c , &quot;Activo&quot;),
+NOT (PRIORVALUE(Estado__c )= &quot;Pdte de Aprobación&quot;)
+)</errorConditionFormula>
+    <errorMessage>No se puede pasar a Activo sin que antes haya pasado por un proceso de Aprobación</errorMessage>
+</ValidationRule>

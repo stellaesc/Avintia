@@ -1,0 +1,348 @@
+<apex:page controller="Ficha_Escrituracion_Controller" renderAs="PDF" applyBodyTag="false" applyHtmlTag="false" standardStylesheets="false" showHeader="false">
+ <head> 
+   <Style> 
+           
+            
+            .pageBreak{page-break-before: always;} 
+             
+            @page {
+            size: 21.0cm 29.7cm;
+			margin: 1cm; 
+       		}
+            body,div, thead,tbody,tfoot, p,{font-family:"Calibri"; font-size:medium;}
+       
+       		th, td {
+    			padding: 3px;
+			}
+       		
+       		table{border: 1px solid black;
+       			  font-family:"Calibri";
+       			  font-size:medium;
+       			  margin-top: 2%;
+       			  margin-bottom: 2%;
+       			  margin-left:0%;
+       			  margin-right:0%;
+       			  border-collapse: collapse;
+       		}
+       
+       	    td{margin-top: 2%;}
+       
+       		.titulos{text-align: center;
+       				 font-weight: bold;
+       				 font-style: italic;
+       				 margin-left:auto; 
+    				 margin-right:auto;
+       				 margin-bottom: 1%;
+       				 margin-top: 5%;
+       				 width:25%;
+       				 border-top: 1px solid black;
+       				 border-left: 1px solid black;
+       				 border-bottom: 2px solid black;
+       				 border-right: 2px solid black;
+       				 padding: 5px;
+       				 background-color: #C0C0C0;
+       				 color: #333399;
+       				
+       		}
+       
+       		.titulos2{
+       				 font-weight: bold;
+       				 font-style: italic;
+       				 width:100%;
+       				 padding-top: 5px;
+       				 padding-bottom: 5px;
+       				 background-color: #333399;
+       				 color: white;
+       				 margin-bottom: 0%;
+       				
+       		}
+       
+       		.celdasTabla3{border: 1px solid black;
+      					  margin: 0px;
+       					  text-align: right;
+            }
+       
+            .celdasTabla4{border: 1px solid black;
+      					  margin: 0px;			  
+            }
+       
+
+
+    </Style>
+  </head>  
+    <body>
+    <div style="border: 1px solid black;">
+        
+        <table style="width:100%">
+          <tr>
+            <th style = "width:20%;"></th>
+            <th style = "width:60%; text-align:center;font-size:20px;">INFORME PARA ESCRITURACIÓN</th> 
+            <th style = "width:20%;"> <apex:outputText value=" {0,date,dd/MM/yyyy  HH:mm}"> <apex:param value="{!NOW()}" /> </apex:outputText> </th>
+          </tr>
+          <tr>
+            <td colspan="3" style = "font-style: italic; font-weight: bold;">Promoción {!promocion.Name} </td>
+          </tr>
+          <tr>
+            <td colspan="3" style = "font-style: italic; font-weight: bold; width:100%;">Fecha Escritura 
+                <apex:outputText value=" {0,date,dd/MM/yyyy}"> 
+                    <apex:param value="{!oportunidad.Fecha_de_Escrituracion__c}" /> 
+                </apex:outputText>
+            </td>
+          </tr>
+        </table>
+ 
+    </div>   
+ 
+    <div class="titulos">
+            Compradores 
+    </div>         
+
+    <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'PersonAccount',  true, false)}">     
+    <div style="border: 1px solid black;">
+        <apex:variable var="count" value="{!0}" />
+    	<apex:repeat value="{!Titulares}" var="titular">
+    		<table style="width:100%; ">
+                  <apex:outputPanel rendered="{!count > 0}">
+                  <tr style="padding: 2%;">
+                    <td style = "font-style: italic; width:24%;"></td>
+                    <td style = "text-align: right; width:24%;"></td> 
+                    <td style = "text-align: right; width:4%;"></td> 
+                    <td style = "font-style: italic; width:24%;"></td>
+                    <td style = "text-align: right; width:24%;"></td>
+                  </tr>
+                  </apex:outputPanel>
+                  <tr style="padding: 2%;">
+                    <td style = "font-style: italic; width:24%;"> Nombre y Apellidos </td>
+                    <td style = "text-align: right; width:24%;">{!titular.Name}</td> 
+                    <td style = "text-align: right; width:4%;"></td> 
+                    <td style = "font-style: italic; width:24%;">NIF</td>
+                    <td style = "text-align: right; width:24%;">{!titular.N_Documento__c}</td>
+                  </tr>
+                  <tr>
+                    <td style = "font-style: italic; width:24%;"> Domicilio </td>
+                    <td style = "text-align: right; width:24%;">{!titular.DP_Tipo_de_vIa__c} {!titular.DP_Nombre_via__c} N {!titular.DP_N_via__c} {!titular.DP_N_piso__c} {!titular.DP_Puerta__c} {!titular.DP_Localidad__r.Name}</td> 
+                    <td style = "text-align: right; width:4%;"></td> 
+                    <td style = "font-style: italic; width:24%;">Teléfono</td>
+                    <td style = "text-align: right; width:24%;">{!titular.Phone}</td>
+                  </tr>
+                  <tr>
+                    <td style = "font-style: italic; width:24%;"> Profesión </td>
+                    <td style = "text-align: right; width:24%;">{!titular.Profesion__pc}</td> 
+                    <td style = "text-align: right; width:4%;"></td> 
+                    <td style = "font-style: italic; width:24%;">Fecha de Nacimiento</td>
+                    <td style = "text-align: right; width:24%;">
+                    	<apex:outputText value=" {0,date,dd/MM/yyyy}"> 
+                    		<apex:param value="{!titular.PersonBirthdate}" /> 
+                		</apex:outputText></td>
+                  </tr>
+                  <tr>
+                    <td style = "font-style: italic; width:24%;"> Estado Civil </td>
+                    <td style = "text-align: right; width:24%;">{!titular.Estado_Civil__pc}</td> 
+                    <td style = "text-align: right; width:4%;"></td> 
+                    <td style = "font-style: italic; width:24%;">Régimen Económico</td>
+                    <td style = "text-align: right; width:24%;"></td>
+                  </tr>
+                <apex:variable var="count" value="{!count + 1}" />
+
+        	</table>    
+    	</apex:repeat>    	
+    </div>
+    </apex:outputPanel> 
+        
+    <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'Cuenta',  true, false)}">     
+    <div style="border: 1px solid black;">
+        <apex:variable var="count" value="{!0}" />
+    	<apex:repeat value="{!Titulares}" var="titular">
+    		<table style="width:100%; ">
+                  <apex:outputPanel rendered="{!count > 0}">
+                  <tr style="padding: 2%;">
+                    <td style = "font-style: italic; width:24%;"></td>
+                    <td style = "text-align: right; width:24%;"></td> 
+                    <td style = "text-align: right; width:4%;"></td> 
+                    <td style = "font-style: italic; width:24%;"></td>
+                    <td style = "text-align: right; width:24%;"></td>
+                  </tr>
+                  </apex:outputPanel>
+                  <tr style="padding: 2%;">
+                    <td style = "font-style: italic; width:24%;"> Nombre y Apellidos Representante </td>
+                    <td style = "text-align: right; width:24%;"></td> 
+                    <td style = "text-align: right; width:4%;"></td> 
+                    <td style = "font-style: italic; width:24%;"></td>
+                    <td style = "text-align: right; width:24%;"></td>
+                  </tr>
+                  <tr>
+                    <td style = "font-style: italic; width:24%;"> Nombre empresa </td>
+                    <td style = "text-align: right; width:24%;">{!titular.Name}</td> 
+                    <td style = "text-align: right; width:4%;"></td> 
+                    <td style = "font-style: italic; width:24%;">CIF</td>
+                    <td style = "text-align: right; width:24%;">{!titular.N_Documento__c}</td>
+                  </tr>
+                  <tr>
+                    <td style = "font-style: italic; width:24%;"> Domicilio </td>
+                    <td style = "text-align: right; width:24%;">{!titular.Tipo_de_via_FISCAL__c} {!titular.Nombre_de_via_FISCAL__c} N {!titular.N_via_FISCAL__c} {!titular.N_piso_FISCAL__c} {!titular.Puerta_FISCAL__c} {!titular.Localidad_FISCAL__r.Name}</td> 
+                    <td style = "text-align: right; width:4%;"></td> 
+                    <td style = "font-style: italic; width:24%;"></td>
+                    <td style = "text-align: right; width:24%;"></td>
+                  </tr>
+                <apex:variable var="count" value="{!count + 1}" />
+
+        	</table>    
+    	</apex:repeat>    	
+    </div>
+    </apex:outputPanel>     
+        
+        
+    
+    <div class="titulos">
+            Fincas 
+    </div>
+
+    	<apex:repeat value="{!opportunityLineItemList}" var="opportunityLineItem">
+             <apex:outputPanel rendered="{!IF(opportunityLineItem.Product2.Tipo_de_inmueble__r.Tipo__c == 'Vivienda', true, false)}">
+                 <div class="titulos2">
+                 	Vivienda: PORTAL {!opportunityLineItem.Product2.Portal__c}, PISO {!opportunityLineItem.Product2.Piso__c}, LETRA {!opportunityLineItem.Product2.N_Vivienda_Garaje_Trastero_Local__c} REFERENCIA CATASTRAL: 
+                 </div>
+             </apex:outputPanel>  
+             <apex:outputPanel rendered="{!IF(opportunityLineItem.Product2.Tipo_de_inmueble__r.Tipo__c == 'Garaje', true, false)}">
+                 <div class="titulos2">
+                 	Garaje: PLANTA {!opportunityLineItem.Product2.Planta__c} NÚMERO {!opportunityLineItem.Product2.N_Vivienda_Garaje_Trastero_Local__c} REFERENCIA CATASTRAL: 
+                 </div>
+             </apex:outputPanel> 
+             <apex:outputPanel rendered="{!IF(opportunityLineItem.Product2.Tipo_de_inmueble__r.Tipo__c == 'Trastero', true, false)}">
+                 <div class="titulos2">
+                 	Trastero: PLANTA {!opportunityLineItem.Product2.Planta__c} NÚMERO {!opportunityLineItem.Product2.N_Vivienda_Garaje_Trastero_Local__c} REFERENCIA CATASTRAL: 
+                 </div>
+             </apex:outputPanel> 
+
+               <div style="border: 1px solid black;">
+
+                   
+                        <table style="width:100%; margin-top:0%;">
+                          <tr>
+                            <td style = "font-style: italic; width:16.66%;">Precio Venta</td>
+                            <td style = "text-align: right; width:16.66%;">{!MapOpporUnitPrice[opportunityLineItem.Id]}</td> 
+                            <td style = "font-style: italic; width:16.66%;">Hipoteca</td>
+                            <td style = "text-align: right; width:16.66%;">
+                                <apex:outputPanel rendered="{!and(precioConjunto, opportunityLineItem.Product2.Tipo_de_inmueble__r.Tipo__c == 'Vivienda')}">
+                                    {!StrOpporPagoEscritura} 
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!!precioConjunto}">
+                                    {!MapHipoteca[opportunityLineItem.Id]}
+                                </apex:outputPanel> 
+                            </td>
+                            <td style = "text-align: right; width:16.66%;"></td>
+                            <td style = "text-align: right; width:16.66%;"></td>
+                          </tr>
+                          <tr>
+                            <td style = "font-style: italic; width:16.66%;">Metros construídos</td>
+                            <td style = "text-align: right; width:16.66%;"> <apex:outputText value=" {!MapOpporProdSupCon[opportunityLineItem.Id]}" rendered="{!opportunityLineItem.Product2.Tipo_de_inmueble__r.Tipo__c == 'Vivienda'}" ></apex:outputText> </td> 
+                            <td style = "font-style: italic; width:16.66%;">Metros útiles</td>
+                            <td style = "text-align: right; width:16.66%;">{!MapOpporProdSupUtil[opportunityLineItem.Id]}</td>
+                            <td style = "font-style: italic; width:16.66%;">Metros Cons. con Zonas Comunes</td>
+                            <td style = "text-align: right; width:16.66%;">{!MapOpporProdSupConTotal[opportunityLineItem.Id]}</td>
+                          </tr>
+                          <tr>
+                            <td style = "font-style: italic; width:16.66%;">Cuota Bloque</td>
+                            <td style = "text-align: right; width:16.66%;"></td> 
+                            <td style = "font-style: italic; width:16.66%;">Cuota Urbanización</td>
+                            <td style = "text-align: right; width:16.66%;"></td>
+                            <td style = "text-align: right; width:16.66%;"></td>
+                            <td style = "text-align: right; width:16.66%;"></td>
+                          </tr>
+                        </table> 
+                        
+                   </div> 
+
+    	</apex:repeat>
+        
+
+    <div class="titulos">
+            Datos económicos
+    </div>          
+          
+        
+    <div>
+            <table style="width:100%;">
+              <tr>
+                <td class="celdasTabla3" style= "border-top:0px, border left:0px"></td>
+                <td class="celdasTabla3" style = "font-weight: bold; color: #333399; background-color: #C0C0C0;">Importe</td>
+                <td class="celdasTabla3" style = "font-weight: bold;color: #333399; background-color: #C0C0C0;">IVA</td>
+                <td class="celdasTabla3" style = "font-weight: bold; color: #333399; background-color: #C0C0C0;">Total</td>
+              </tr>
+              <tr>
+                <td class="celdasTabla3" style = "font-style: italic; font-weight: bold; color: #333399; background-color: #C0C0C0;">PRECIO VENTA</td>
+                <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrOpporAmount}</td> 
+                <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrPrecioVentaIVA}</td>
+                <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrPrecioVentaTotal}</td>
+              </tr>
+              <tr>
+                <td class="celdasTabla3" style = "font-style: italic; font-weight: bold; color: #333399; background-color: #C0C0C0;">YA PAGADO</td>
+                <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrOpporAcumImpPag}</td> 
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrOpporAcumImpPagIVA}</td>
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrOpporAcumImpPagTotal}</td>
+              </tr>
+              <tr>
+                <td class="celdasTabla3" style = "font-style: italic; font-weight: bold; color: #333399; background-color: #C0C0C0;">Vtos. Pendientes</td>
+                <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrVencPendientes}</td> 
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrVencPendientesIVA}</td>
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrVencPendientesTotal}</td>
+              </tr>
+              <tr>
+                <td class="celdasTabla3" style = "font-style: italic; font-weight: bold; color: #333399; background-color: #C0C0C0;">I.V.A Hipoteca</td>
+                <td class="celdasTabla3" style = "text-align: right; width:25%;"></td> 
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrHipotecaIVA}</td>
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrHipotecaIVA}</td>
+              </tr>
+              <tr>
+                <td class="celdasTabla3" style = "font-style: italic; font-weight: bold; color: #333399; background-color: #C0C0C0;">A LIQUIDAR EN LLAVES</td>
+                <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrVencPendientes}</td> 
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrLiqIVA}</td>
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrLiqIVA}</td>
+              </tr>
+              <tr>
+                <td class="celdasTabla3" style = "font-style: italic; font-weight: bold; color: #333399; background-color: #C0C0C0;">HIPOTECA A SUBROGAR</td>
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrOpporPagoEscritura}</td> 
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;"></td>
+                  <td class="celdasTabla3" style = "text-align: right; width:25%;">{!StrOpporPagoEscritura}</td>
+              </tr>
+            </table> 
+
+    </div>
+
+    <div class="titulos">
+            Formas de cobro 
+    </div>  
+        
+    <div>
+            <table style="width:100%">
+                  <tr>
+                    <th class="celdasTabla4" style = "font-weight: bold; color: #333399; text-align:center; background-color: #C0C0C0;">Origen</th>
+                    <th class="celdasTabla4" style = "font-weight: bold; color: #333399; text-align:center; background-color: #C0C0C0;">Descripción</th>
+                    <th class="celdasTabla4" style = "font-weight: bold; color: #333399; text-align:center; background-color: #C0C0C0;">Forma de Cobro</th>
+                    <th class="celdasTabla4" style = "font-weight: bold; color: #333399; text-align:center; background-color: #C0C0C0;">Importe</th>
+                    <th class="celdasTabla4" style = "font-weight: bold; color: #333399; text-align:center; background-color: #C0C0C0;">Fecha</th>
+                    <th class="celdasTabla4" style = "font-weight: bold; color: #333399; text-align:center; background-color: #C0C0C0;">Nº de factura</th>
+                  </tr> 
+                 
+                  <apex:repeat value="{!facturasCobradas}" var="facturas">
+                            <tr>
+                                <td class="celdasTabla4"></td>
+                                <td class="celdasTabla4">{!facturas.Descripcion__c}</td> 
+                                <td class="celdasTabla4">{!facturas.Metodo_de_cobro__c}</td>
+                                <td class="celdasTabla4" style="text-align:right">{!MapFactura[facturas.Id]}</td>
+                                <td class="celdasTabla4" style="text-align:center">
+                                    <apex:outputText value=" {0,date,dd/MM/yyyy}"> 
+                                        <apex:param value="{!facturas.Fecha_de_emision__c}" /> 
+                                    </apex:outputText>
+                                </td>
+                                <td class="celdasTabla4">{!facturas.Numero_de_factura__c}</td> 
+                            </tr>    
+                  </apex:repeat>       
+              	  
+              
+            </table> 
+
+    </div>
+        
+    </body>
+</apex:page>

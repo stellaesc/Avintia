@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Paises_con_codigos</fullName>
+    <columns>NAME</columns>
+    <columns>Codigo_ISO2__c</columns>
+    <columns>Codigo_ISO3__c</columns>
+    <columns>Codigo_ISO3_num__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>Paises con códigos</label>
+</ListView>

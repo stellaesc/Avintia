@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limite_de_caracteres</fullName>
+    <active>true</active>
+    <description>Limita a 150 el número de caracteres de la descripción</description>
+    <errorConditionFormula>LEN(DescripcionLinea__c) &gt; 150</errorConditionFormula>
+    <errorDisplayField>DescripcionLinea__c</errorDisplayField>
+    <errorMessage>La descripción no puede superar los 150 caracteres.</errorMessage>
+</ValidationRule>

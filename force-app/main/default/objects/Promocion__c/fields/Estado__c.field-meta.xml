@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado__c</fullName>
+    <externalId>false</externalId>
+    <label>Estado</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Fase__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Estados_de_promocion</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Anteproyecto</controllingFieldValue>
+            <valueName>Alta promoción</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Anteproyecto</controllingFieldValue>
+            <valueName>Proyecto desestimado</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Configuración técnica</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Configuración comercial</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Documentación marketing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Aprobar comercializacion</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Comercialización</controllingFieldValue>
+            <valueName>Sin Iniciar</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Comercialización</controllingFieldValue>
+            <controllingFieldValue>Ejecución del proyecto</controllingFieldValue>
+            <valueName>Pre_Reservas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Comercialización</controllingFieldValue>
+            <controllingFieldValue>Ejecución del proyecto</controllingFieldValue>
+            <valueName>Reservas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Comercialización</controllingFieldValue>
+            <controllingFieldValue>Ejecución del proyecto</controllingFieldValue>
+            <valueName>Compra_Venta</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Comercialización</controllingFieldValue>
+            <controllingFieldValue>Ejecución del proyecto</controllingFieldValue>
+            <valueName>100% Vendida</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Escrituración</controllingFieldValue>
+            <valueName>Escriturada</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

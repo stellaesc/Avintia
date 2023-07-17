@@ -1,0 +1,261 @@
+<apex:page controller="Contrato_compraventa_controller" renderAs="PDF" applyBodyTag="false" applyHtmlTag="false" standardStylesheets="false" showHeader="false">
+    <head> 
+        <title>Contrato de compraventa</title>
+        <Style>
+            .pageBreak{page-break-before: always;} 
+            
+            @page {
+                size: 21.0cm 29.7cm;
+                margin: 2.5cm;
+            	@bottom-left {
+                	content: element(footer);
+                }
+            }
+            .parrafo2 {
+                text-align: justify;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                font-family: TimesRoman;
+                font-size: 11pt;
+            }
+            .parrafo1 {
+                font-weight: bold;
+                text-align: center;
+                margin-top: 15px;
+                font-family: TimesRoman;
+                font-size: 11pt;
+            }
+            .parrafo3 {
+                text-align: justify;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                font-family: TimesRoman;
+                font-size: 11pt;
+            }
+            .parrafo4 {
+                text-align: right;
+                margin-top: 50px;
+                margin-bottom: 40px;
+                font-family: TimesRoman;
+                font-size: 11pt;
+            }
+            @page {
+            	size: portrait;
+            	@bottom-right {
+                    content: counter(page);
+                    font-weight: lighter;
+                    font-size:10pt;
+                }
+            }
+        </Style>
+    </head>
+    <body>
+        <div class="parrafo1">
+            <p>
+                <b> RESOLUCIÓN DE MUTUO ACUERDO DEL CONTRATO DE
+                    COMPRAVENTA DE VIVIENDA DE FECHA  <apex:outputText value=" {!fechaFirmaContratoCompraventa}" rendered="{!fechaFirmaContratoCompraventa!=null}"/> <apex:outputText value=" __________ " rendered="{!fechaFirmaContratoCompraventa==null}" />
+                </b>
+            </p>
+        </div> 
+        <div class="parrafo4" style="text-align:center">
+            <p>
+                En <apex:outputText value=" {!Promotora.DF_Localidad__r.name}" rendered="{!Promotora.DF_Localidad__r.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.DF_Localidad__r.name==null}"/>, a 
+                <apex:outputText value=" {!fechaCreacion}" rendered="{!fechaCreacion!=null}"/> <apex:outputText value=" __________ " rendered="{!fechaCreacion==null}" />
+            </p>
+        </div> 
+        <div class="divReunidos">
+            <p style="text-align: center; text-decoration: underline; letter-spacing: 2px;" >
+                <b>REUNIDOS</b>
+                <br/>
+                <br/>
+            </p>
+            <p>
+                <b>DE UNA PARTE.-</b>
+            </p>
+            <p class="parrafoJustificado"> 
+                Don/Dña <apex:outputText value=" {!Apoderado.name}" rendered="{!Apoderado.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Apoderado.name==null}"/>, 
+                mayor de edad, con <apex:outputText value=" {!Apoderado.Tipo_de_documento__c}" rendered="{!Apoderado.Tipo_de_documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Apoderado.Tipo_de_documento__c==null}" />  
+                N.º <apex:outputText value=" {!Apoderado.N_Documento__c}" rendered="{!Apoderado.N_Documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Apoderado.N_Documento__c==null}" /> y 
+                domicilio a estos efectos en calle 
+                <apex:outputText value=" {!promotora.DF_Tipo_de_via__c}" rendered="{!promotora.DF_Tipo_de_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_Tipo_de_via__c==null}" />   
+                <apex:outputText value=" {!promotora.DF_Nombre_via__c}" rendered="{!promotora.DF_Nombre_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_Nombre_via__c==null}" />,
+                <apex:outputText value=" {!promotora.DF_N_via__c}" rendered="{!promotora.DF_N_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_N_via__c==null}" />
+                <apex:outputText value=" {!promotora.DF_Localidad__r.Name}" rendered="{!promotora.DF_Localidad__r.Name!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_Localidad__r.Name==null}"/>, 
+                <apex:outputText value=" {!promotora.DF_Provincia__c}" rendered="{!promotora.DF_Provincia__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promotora.DF_Provincia__c==null}" />. 
+            </p>
+            <p><b>Y DE OTRA.-</b></p>
+            <p class="parrafoJustificado">
+                <apex:variable var="count" value="{!0}" />
+                <apex:repeat value="{!Titulares}" var="Titular">
+                    <apex:outputText value="{!IF (count > 0, ' y; ', ' ')}"/>
+                    Don/Dña. <apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.name==null}" />, 
+                    mayor de edad, con <apex:outputText value=" {!Titular.Cliente__r.Tipo_de_documento__c}" rendered="{!Titular.Cliente__r.Tipo_de_documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Tipo_de_documento__c==null}" />
+                    N.º <apex:outputText value=" {!Titular.Cliente__r.N_Documento__c}" rendered="{!Titular.Cliente__r.N_Documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Documento__c==null}" />,
+                    con domicilio a estos efectos en calle <apex:outputText value=" {!Titular.Cliente__r.DP_Tipo_de_vIa__c}" rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c==null}" />
+                    <apex:outputText value=" {!Titular.Cliente__r.DP_Nombre_via__c}" rendered="{!Titular.Cliente__r.DP_Nombre_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Nombre_via__c==null}" />,
+                    <apex:outputText value=" {!Titular.Cliente__r.DP_N_via__c}" rendered="{!Titular.Cliente__r.DP_N_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_N_via__c==null}" />
+                    <apex:variable var="count" value="{!count + 1}" />
+                </apex:repeat>.
+            </p>
+        </div>
+        <div class="divIntervienen">
+            <br/>
+            <p style="text-align: center; letter-spacing: 2px;" >
+                <b>INTERVIENEN</b>
+                <br/>
+                <br/>
+            </p>
+            <p class="parrafoJustificado">
+                El primero en nombre y representación de la sociedad mercantil <b><apex:outputText value=" {!Promotora.name}" rendered="{!Promotora.name!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.name==null}" /></b>
+                domiciliada en Madrid, calle Emisora, número 20; constituida mediante escritura autorizada por el notario de <apex:outputText value=" {!Promotora.Lugar_del_registro__c}" rendered="{!Promotora.Lugar_del_registro__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.Lugar_del_registro__c==null}"/>, 
+                Don <apex:outputText value=" {!Promotora.Nombre_del_notario__c}" rendered="{!Promotora.Nombre_del_notario__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.Nombre_del_notario__c==null}"/> el día <apex:outputText value=" {!fechaEscrituraPromotora}" rendered="{!fechaEscrituraPromotora!=null}"/> <apex:outputText value=" __________ " rendered="{!fechaEscrituraPromotora==null}" />
+                con el número <apex:outputText value=" {!Promotora.Numero_de_protocolo__c}" rendered="{!Promotora.Numero_de_protocolo__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.Numero_de_protocolo__c==null}" />
+                de protocolo, e inscrita en el Registro Mercantil de <apex:outputText value=" {!Promotora.Lugar_del_registro__c}" rendered="{!Promotora.Lugar_del_registro__c!=null}"/><apex:outputText value=" __________ " rendered="{!Promotora.Lugar_del_registro__c==null}" />
+                en el tomo <apex:outputText value=" {!Promotora.Tomo__c}" rendered="{!Promotora.Tomo__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.Tomo__c==null}" />,
+                folio <apex:outputText value=" {!Promotora.Folio__c}" rendered="{!Promotora.Folio__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.Folio__c==null}" />,
+                hoja número <apex:outputText value=" {!Promotora.N_Hoja__c}" rendered="{!Promotora.N_Hoja__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.N_Hoja__c==null}" />,
+                y en el Censo de Entidades Jurídicas del Ministerio de Hacienda con el CIF <apex:outputText value=" {!Promotora.N_Documento__c}" rendered="{!Promotora.N_Documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!Promotora.N_Documento__c==null}" />.
+                Su representación y facultades derivan de su condición de <apex:outputText value=" {!promocion.Condicion__c}" rendered="{!promocion.Condicion__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promocion.Condicion__c==null}" />,
+                otorgada el día <apex:outputText value=" {!fechaEscrituracionPromocion}" rendered="{!fechaEscrituracionPromocion!=null}"/> <apex:outputText value=" __________ " rendered="{!fechaEscrituracionPromocion==null}" />,
+                ante el notario de <apex:outputText value=" {!promocion.Lugar_de_la_notaria__c}" rendered="{!promocion.Lugar_de_la_notaria__c!=null}"/><apex:outputText value=" __________ " rendered="{!promocion.Lugar_de_la_notaria__c==null}"/>, Don <apex:outputText value=" {!promocion.Nombre_notario__c}" rendered="{!promocion.Nombre_notario__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promocion.Nombre_notario__c==null}"/>
+                con número de protocolo <apex:outputText value=" {!promocion.Numero_de_protocolo__c}" rendered="{!promocion.Numero_de_protocolo__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promocion.Numero_de_protocolo__c==null}"/>. En lo sucesivo “la parte <b>VENDEDORA</b>”.
+            </p>
+            <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'PersonAccount',  true, false)}">
+                <p class="parrafoJustificado">
+                    El segundo en su propio nombre y derecho. En lo sucesivo “la parte <b>COMPRADORA</b>”.
+                </p>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'Cuenta',  true, false)}">
+                <p class="parrafoJustificado">
+                El segundo en nombre y representación de la sociedad mercantil<apex:outputText value=" {!cliente.name}" rendered="{!cliente.name!=null}"/><apex:outputText value=" __________ " rendered="{!cliente.name==null}"/>
+                domiciliada en <apex:outputText value=" {!cliente.DP_Tipo_de_vIa__c}" rendered="{!cliente.DP_Tipo_de_vIa__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.DP_Tipo_de_vIa__c==null}"/>
+                <apex:outputText value=" {!cliente.DP_Nombre_via__c}" rendered="{!cliente.DP_Nombre_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.DP_Nombre_via__c==null}"/>, 
+                número <apex:outputText value=" {!cliente.DP_N_via__c}" rendered="{!cliente.DP_N_via__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.DP_N_via__c==null}"/>, 
+                código postal <apex:outputText value=" {!cliente.DP_Codigo_postal__c}" rendered="{!cliente.DP_Codigo_postal__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.DP_Codigo_postal__c==null}"/> ;
+                constituida mediante escritura autorizada por el notario de <apex:outputText value=" {!cliente.Lugar_del_registro__c}" rendered="{!cliente.Lugar_del_registro__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.Lugar_del_registro__c==null}"/>, 
+                Don <apex:outputText value=" {!cliente.Nombre_del_notario__c}" rendered="{!cliente.Nombre_del_notario__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.Nombre_del_notario__c==null}"/> el día <apex:outputText value=" {!fechaEscrituraClienteEmpresa}" rendered="{!fechaEscrituraClienteEmpresa!=null}"/> <apex:outputText value=" __________ " rendered="{!fechaEscrituraClienteEmpresa==null}" />
+                con el número <apex:outputText value=" {!cliente.Numero_de_protocolo__c}" rendered="{!cliente.Numero_de_protocolo__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.Numero_de_protocolo__c==null}" />
+                de protocolo, e inscrita en el Registro Mercantil de <apex:outputText value=" {!cliente.Lugar_del_registro__c}" rendered="{!cliente.Lugar_del_registro__c!=null}"/><apex:outputText value=" __________ " rendered="{!cliente.Lugar_del_registro__c==null}" />
+                en el tomo <apex:outputText value=" {!cliente.Tomo__c}" rendered="{!cliente.Tomo__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.Tomo__c==null}" />,
+                folio <apex:outputText value=" {!cliente.Folio__c}" rendered="{!cliente.Folio__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.Folio__c==null}" />,
+                hoja número <apex:outputText value=" {!cliente.N_Hoja__c}" rendered="{!cliente.N_Hoja__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.N_Hoja__c==null}" />,
+                y en el Censo de Entidades Jurídicas del Ministerio de Hacienda con el CIF <apex:outputText value=" {!cliente.N_Documento__c}" rendered="{!cliente.N_Documento__c!=null}"/> <apex:outputText value=" __________ " rendered="{!cliente.N_Documento__c==null}" />.
+                Su representación y facultades derivan de su condición de <apex:outputText value=" {!promocion.Condicion__c}" rendered="{!promocion.Condicion__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promocion.Condicion__c==null}" />,
+                otorgada el día <apex:outputText value=" {!fechaEscrituracionPromocion}" rendered="{!fechaEscrituracionPromocion!=null}"/> <apex:outputText value=" __________ " rendered="{!fechaEscrituracionPromocion==null}" />,
+                ante el notario de <apex:outputText value=" {!promocion.Lugar_de_la_notaria__c}" rendered="{!promocion.Lugar_de_la_notaria__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promocion.Lugar_de_la_notaria__c==null}"/>,
+                Don <apex:outputText value=" {!promocion.Nombre_notario__c}" rendered="{!promocion.Nombre_notario__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promocion.Nombre_notario__c==null}"/> con número de protocolo <apex:outputText value=" {!promocion.Numero_de_protocolo__c}" rendered="{!promocion.Numero_de_protocolo__c!=null}"/> <apex:outputText value=" __________ " rendered="{!promocion.Numero_de_protocolo__c==null}"/>.
+                En lo sucesivo “la parte <b>COMPRADORA</b>”.
+                </p>
+            </apex:outputPanel>
+            <p class="parrafoJustificado">
+                Ambas partes, en la calidad en la que intervienen se reconocen mutuamente capacidad legal suficiente para otorgar la presente RESOLUCIÓN DE CONTRATO y, al efecto,
+            </p>
+        </div>
+        <div class="parrafo1">
+            <p>
+                <b>EXPONEN:</b>
+            </p>
+        </div>         
+        <div class="parrafo2">
+            <p>
+                <b>I.</b>- Que, con fecha <apex:outputText value=" {!fechaFirmaContratoCompraventa}" rendered="{!fechaFirmaContratoCompraventa!=null}"/> <apex:outputText value=" __________ " rendered="{!fechaFirmaContratoCompraventa==null}"/>, 
+                la parte VENDEDORA y la parte COMPRADORA, formalizaron un Contrato de Compraventa de la vivienda y anejos que se describen a continuación pertenecientes a la promoción denominada “<apex:outputText value="{!promocion.name}" rendered="{!promocion.name!=null}"/><apex:outputText value=" __________ " rendered="{!promocion.name==null}"/>” (en adelante, “la vivienda”):
+                <ul>
+                    <apex:variable var="countt" value="{!1}" />
+                    <apex:variable var="countg" value="{!1}" />
+                    <li>
+                        <apex:outputText value="Vivienda: {!inmueble.name}"/><apex:outputText value=", {!inmueble.description}" rendered="{!and(inmueble.description != null, inmueble.description != '')}"/>
+                    </li>
+                    <apex:repeat value="{!listTrasteros}" var="trastero">
+                        <li>
+                            <apex:outputText value="Trastero nº{!countt}: {!trastero.name}"/><apex:outputText value=", {!trastero.description}" rendered="{!and(trastero.description != null, trastero.description != '')}"/>
+                            <apex:variable var="countt" value="{!countt + 1}" />
+                        </li>
+                    </apex:repeat>
+                    <apex:repeat value="{!listGarajes}" var="garaje">
+                        <li>
+                            <apex:outputText value="Plaza de garaje nº{!countg}: {!garaje.name}"/><apex:outputText value=", {!garaje.description}" rendered="{!and(garaje.description != null, garaje.description != '')}"/>
+                            <apex:variable var="countg" value="{!countg + 1}" />
+                        </li>
+                    </apex:repeat>
+            	</ul>                 
+            </p>
+            <p>
+                <b>II.</b>- Que, ambas partes tienen la voluntad de resolver anticipadamente el Contrato
+                de Compraventa referido en el Expositivo I anterior y, en consecuencia, dejar extinguidas
+                cualquier tipo de obligaciones o derechos que pudiesen estar establecidas entre las partes. Y
+                estando todas las partes de acuerdo, lo llevan a efecto conforme a las siguientes
+            </p>
+        </div>
+        <div class="parrafo1">
+            <p>
+                <b>ESTIPULACIONES</b>
+            </p>
+        </div>         
+        <div class="parrafo3">
+        </div> 
+        <div class="parrafo2">
+            <p>
+                <b>PRIMERA.</b> Ambas partes acuerdan resolver de manera amistosa y anticipadamente el Contrato de Compraventa de vivienda descrito en el Expositivo I, que se encontraba vigente hasta la fecha.
+            </p>
+            <p> 
+                <b>SEGUNDA.</b> -La parte VENDEDORA devolverá a la parte COMPRADORA, en un plazo de entre 15 y 20 días desde la firma
+                del presente documento, los importes que hubiera satisfecho hasta el momento esta última en concepto de pago del precio de la vivienda referida en el Expositivo I
+                <apex:outputPanel rendered="{!AND(oportunidad.Penalizacion_Contrato__c != null, oportunidad.Penalizacion_Contrato__c > 0)}">               
+                    , después de que la parte VENDEDORA haga suyo el 
+                    <apex:outputText value=" {!StrOpporPenal}" rendered="{!StrOpporPenal!=null}"/><apex:outputText value="___" rendered="{!StrOpporPenal==null}"/>% del referido importe en concepto de penalización por los daños 
+                    y perjuicios derivados de la presente resolución.     
+                </apex:outputPanel>
+                <apex:outputText value="." rendered="{!OR(oportunidad.Penalizacion_Contrato__c == null, oportunidad.Penalizacion_Contrato__c == 0)}"/>               
+              	<span>
+                    Dicha devolución se realizará mediante transferencia a la cuenta titularidad de la parte COMPRADORA desde la que se realizaron los pagos.
+            	</span> 
+            </p>
+            <p>
+                <b>TERCERA.</b> - Ambas partes reconocen que no queda ningún concepto de pago pendiente entre las partes, 
+                salvo los especificados en la estipulación anterior, y acuerdan la extinción de los derechos y obligaciones
+                inherentes al Contrato referido en el Expositivo I, recobrando la parte VENDEDORA de forma automática la plena
+                disposición sobre la vivienda descrita en el Expositivo I desde la firma de la presente. 
+            </p>
+            <p>
+                <b>CUARTA.</b> - Ambas partes, de común acuerdo, dan por resuelta la relación contractual que les vinculaba, 
+                entendiéndose totalmente liquidada la relación habida entre las partes de acuerdo con lo establecido en la 
+                presente. Las partes renuncian expresamente a las reclamaciones o acciones que en Derecho pudieran asistirles
+                y que derivaran del Contrato que hoy extinguen. 
+            </p>
+            <p>
+                Y en prueba de conformidad con cuanto antecede las partes suscriben el presente documento por duplicado ejemplar
+                y a un solo efecto en el lugar y fecha indicados en el encabezamiento del mismo.
+            </p>
+        </div>
+        <div class="firma" style="page-break-inside: avoid;">
+            <table>
+                <tr>
+                    <td style="width: 400px">
+                        <p>La parte VENDEDORA</p>
+                    </td>
+                    <td>
+                        <p>La parte COMPRADORA</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 400px">
+                        <p style="padding-left: 8px; margin-bottom: 60px">D.…………………………………</p>
+                    </td>
+                    <td>
+                        <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'PersonAccount',  true, false)}"> 
+                            <apex:repeat value="{!Titulares}" var="Titular">
+                                <p style="padding-left: 8px; margin-bottom: 60px">D.…………………………………</p>
+                            </apex:repeat>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'Cuenta',  true, false)}"> 
+                            <apex:repeat value="{!listRepresentatesLegales}" var="Representante">
+                                <p style="padding-left: 8px; margin-bottom: 60px">D.…………………………………</p>
+                            </apex:repeat>
+                        </apex:outputPanel>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</apex:page>

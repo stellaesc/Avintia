@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ModificacionPorcentajeParticipancion</fullName>
+    <active>false</active>
+    <description>Bloquear la modificación del porcentaje de participación excepto para los usuarios con permisos</description>
+    <errorConditionFormula>AND(
+  NOT( ISBLANK( PRIORVALUE(Porcentaje_de_participacion__c) ) ),
+  ISCHANGED(Porcentaje_de_participacion__c ), 
+  NOT( $Profile.Name = &apos;System Administrator&apos; ),
+  NOT( $Profile.Name = &apos;Departamento Financiero&apos; ),
+  NOT( $Profile.Name = &apos;Administrador del sistema&apos; )
+)</errorConditionFormula>
+    <errorMessage>No se puede modificar el porcentaje del participante</errorMessage>
+</ValidationRule>

@@ -1,0 +1,7 @@
+{
+    "timestamp": "2019-09-09T09:03:16.351+0000",
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "BadCredentialsException",
+    "path": "/amlcheck/api/authentication"
+}

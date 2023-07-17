@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Opportunity</entityName>
+    <fieldName>StageName</fieldName>
+    <masterLabel>Gestión de oportunidad</masterLabel>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;¡Ha cancelado la oportunidad! Si es necesario, gestione la cancelación.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://grupoavintia.my.salesforce.com/sfc/p/f20000019ZCs/a/f2000000I8nv/PHIYnq54MF7m.G7K_3GDsq09WyuozqFbRg_zWzzJujg&quot; target=&quot;_blank&quot; style=&quot;font-size: 13px;&quot;&gt;Manual de usuario&lt;b&gt; &amp;quot;Gestión de Oportunidades&amp;quot;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</info>
+        <picklistValueName>Cancelada</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Contrato_Compraventa_firmado__c</fieldNames>
+        <fieldNames>Fecha_firma_Contrato_Compraventa__c</fieldNames>
+        <fieldNames>Fecha_de_primera_cuota__c</fieldNames>
+        <info>&lt;ul&gt;&lt;li&gt;Genere y revise el contrato de Compraventa (&lt;span style=&quot;font-size: 13px;&quot;&gt;la &amp;quot;fecha de primera cuota&amp;quot; se tiene que poder cumplir, sabiendo que tiene que ser posterior a la firma del contrato Compraventa. Si no, el contrato no cumpliría el número de cuotas indicado).&lt;/span&gt;&lt;/li&gt;&lt;li&gt;Contacte con el cliente para la firma del contrato de Compraventa.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://grupoavintia.my.salesforce.com/sfc/p/f20000019ZCs/a/f2000000I8nv/PHIYnq54MF7m.G7K_3GDsq09WyuozqFbRg_zWzzJujg&quot; target=&quot;_blank&quot; style=&quot;font-size: 13px;&quot;&gt;Manual de usuario&lt;b&gt; &amp;quot;Gestión de Oportunidades&amp;quot;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</info>
+        <picklistValueName>Contrato</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;ul&gt;&lt;li&gt;Revise que toda la información de escrituración está rellena.&lt;/li&gt;&lt;li&gt;Contactar con el cliente para la firma de la escritura.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://grupoavintia.my.salesforce.com/sfc/p/f20000019ZCs/a/f2000000I8nv/PHIYnq54MF7m.G7K_3GDsq09WyuozqFbRg_zWzzJujg&quot; target=&quot;_blank&quot; style=&quot;font-size: 13px;&quot;&gt;Manual de usuario&lt;b&gt; &amp;quot;Gestión de Oportunidades&amp;quot;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</info>
+        <picklistValueName>Escrituración</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;ul&gt;&lt;li&gt;Revise que las cuotas se van pasando y cobrando mes a mes.&lt;/li&gt;&lt;li&gt;Una vez que acaba el plazo, hay que revisar todos los documentos para pasar a la escrituración.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://grupoavintia.my.salesforce.com/sfc/p/f20000019ZCs/a/f2000000I8nv/PHIYnq54MF7m.G7K_3GDsq09WyuozqFbRg_zWzzJujg&quot; target=&quot;_blank&quot; style=&quot;font-size: 13px;&quot;&gt;Manual de usuario&lt;b&gt; &amp;quot;Gestión de Oportunidades&amp;quot;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</info>
+        <picklistValueName>Plan de pagos</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Reserva__c</fieldNames>
+        <fieldNames>Pago_Contrato_al_contado__c</fieldNames>
+        <fieldNames>Pago_Contrato__c</fieldNames>
+        <fieldNames>Pago_Escritura__c</fieldNames>
+        <fieldNames>Fecha_de_primera_cuota__c</fieldNames>
+        <info>&lt;ul&gt;&lt;li&gt;Revise que el plan de pagos está informado.&lt;/li&gt;&lt;li&gt;Revise que los porcentajes a pagar en cada etapa son los correctos.&lt;/li&gt;&lt;li&gt;Si el cliente le envía el justificante de la Reserva, recuerde añadir los campos de mandato: IBAN, Número mandato SEPA y BIC&lt;/li&gt;&lt;li&gt;Suba el justificante del pago antes de pasar a la siguiente etapa.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://grupoavintia.my.salesforce.com/sfc/p/f20000019ZCs/a/f2000000I8nv/PHIYnq54MF7m.G7K_3GDsq09WyuozqFbRg_zWzzJujg&quot; target=&quot;_blank&quot; style=&quot;font-size: 13px;&quot;&gt;Manual de usuario&lt;b&gt; &amp;quot;Gestión de Oportunidades&amp;quot;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</info>
+        <picklistValueName>Pre-Reserva</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Fecha_de_primera_cuota__c</fieldNames>
+        <info>&lt;ul&gt;&lt;li&gt;Realice el presupuesto para el cliente de las viviendas interesadas&lt;/li&gt;&lt;li&gt;Una vez tenga claro el presupuesto y lo acepte, sincronícelo para pasar a la siguiente etapa.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://grupoavintia.my.salesforce.com/sfc/p/f20000019ZCs/a/f2000000I8nv/PHIYnq54MF7m.G7K_3GDsq09WyuozqFbRg_zWzzJujg&quot; target=&quot;_blank&quot;&gt;Manual de usuario&lt;b&gt; &amp;quot;Gestión de Oportunidades&amp;quot;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</info>
+        <picklistValueName>Presupuesto</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Contrato_Reserva_firmado__c</fieldNames>
+        <fieldNames>Fecha_firma_Contrato_Reserva__c</fieldNames>
+        <fieldNames>Periodo_de_Reserva__c</fieldNames>
+        <info>&lt;ul&gt;&lt;li&gt;Genere y revise el contrato de la Reserva.&lt;/li&gt;&lt;li&gt;Contacte con el cliente para la firma del contrato de Reserva.&lt;/li&gt;&lt;li&gt;Revise el contrato Borrador de Compraventa (la &amp;quot;fecha de primera cuota&amp;quot; se tiene que poder cumplir, sabiendo que tiene que ser posterior a la firma del contrato Compraventa).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://grupoavintia.my.salesforce.com/sfc/p/f20000019ZCs/a/f2000000I8nv/PHIYnq54MF7m.G7K_3GDsq09WyuozqFbRg_zWzzJujg&quot; target=&quot;_blank&quot; style=&quot;font-size: 13px;&quot;&gt;Manual de usuario&lt;b&gt; &amp;quot;Gestión de Oportunidades&amp;quot;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</info>
+        <picklistValueName>Reserva</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Titular_de_la_cuenta__c</fieldNames>
+        <fieldNames>Numero_de_mandato__c</fieldNames>
+        <fieldNames>N_mero_SEPA__c</fieldNames>
+        <fieldNames>Cuenta_Bancaria_de_mandato__c</fieldNames>
+        <fieldNames>Fecha_de_firma_del_mandato__c</fieldNames>
+        <info>&lt;ul&gt;&lt;li&gt;En cuanto llegue el cobro de la Reserva desde Oracle, la etapa cambiará automáticamente a &amp;quot;Reserva&amp;quot;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://grupoavintia.my.salesforce.com/sfc/p/f20000019ZCs/a/f2000000I8nv/PHIYnq54MF7m.G7K_3GDsq09WyuozqFbRg_zWzzJujg&quot; target=&quot;_blank&quot; style=&quot;font-size: 13px;&quot;&gt;Manual de usuario&lt;b&gt; &amp;quot;Gestión de Oportunidades&amp;quot;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</info>
+        <picklistValueName>Reserva Pdte. Cobro</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

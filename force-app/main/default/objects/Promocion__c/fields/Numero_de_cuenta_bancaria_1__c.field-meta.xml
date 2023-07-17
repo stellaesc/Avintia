@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Numero_de_cuenta_bancaria_1__c</fullName>
+    <description>Lo incluye Tesorería después de dar de alta la promoción. Si hay cambios los actualiza</description>
+    <externalId>false</externalId>
+    <label>Número de cuenta bancaria 1</label>
+    <length>24</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

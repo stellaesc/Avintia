@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Suma_Precios_Inmuebles__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>Suma del campo precio de todos los inmuebles asociados a la promoción</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Suma de todos los precios de los inmuebles de la promoción</inlineHelpText>
+    <label>Suma Precios Inmuebles</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

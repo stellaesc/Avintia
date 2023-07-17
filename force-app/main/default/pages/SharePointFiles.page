@@ -1,0 +1,22 @@
+<apex:page controller="SharePointFilesListController" lightningStylesheets="true">
+  <script>
+  </script>
+  <apex:form >
+    <apex:pageBlock >
+      <apex:pageBlockButtons location="top">
+        <apex:actionFunction action="{!searchFiles}" name="fnSearchFiles" reRender="spFilesTable" />
+        <apex:inputText value="{! search}" onkeyup="fnSearchFiles()" />
+        <!--<apex:commandButton value="Subir archivo" />-->
+      </apex:pageBlockButtons>
+
+      <apex:pageBlockTable value="{! table}" var="rows" id="spFilesTable">
+        <apex:repeat value="{! tableHeaders}" var="headerKey">
+          <apex:column headerValue="{! headersMap[headerKey]}" rendered="{! If(headerKey != 'FileRef', true, false)}">
+            <apex:outputLink value="{! rows['FileRef']}" rendered="{! If(headerKey == 'Name', true, false)}">{! rows[headerKey]}</apex:outputLink>
+            <apex:outputText value="{! if(rows[headerKey] == 'null', '--', rows[headerKey])}" rendered="{! If(headerKey != 'Name', true, false)}" />
+          </apex:column>
+        </apex:repeat>
+      </apex:pageBlockTable>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

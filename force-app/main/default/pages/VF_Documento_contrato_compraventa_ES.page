@@ -1,0 +1,1584 @@
+<apex:page controller="Contrato_compraventa_controller" renderAs="PDF" applyBodyTag="false">
+
+    <head>
+
+        <style> 
+
+            .pageBreak{page-break-before: always;} 
+
+            @page {
+            size: 21.0cm 29.7cm;
+            margin: 2.5cm; 
+            }
+            body,div,table,thead,tbody,tfoot,tr,th,td,p {font-family:"Calibri"; font-size:medium; border-collapse: collapse;}
+
+            .parrafoJustificado{
+
+            text-align: justify;
+
+            }
+
+            .tablaPlaPagos{
+            table, th, td {
+            border: 1px solid black;
+            }
+            }
+
+            .saltoDePagina{
+            display:block;
+            page-break-before:always;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="encabezado">
+            <p style="text-align: center; font-size: 20px" >
+                <b>
+                    Contrato de Compraventa de Vivienda
+                </b>
+                <br/>
+                <br/>
+            </p>
+            <p style="text-align: center" >
+                <b>
+                    En 
+                    <apex:outputText value=" {!Promotora.DF_localidad__r.name}" rendered="{!Promotora.DF_localidad__r.name!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!Promotora.DF_localidad__r.name==null}" style="color:black;"/>
+                    , a 
+                    <apex:outputText value=" {!fechaCreacion}" rendered="{!fechaCreacion!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!fechaCreacion==null}" style="color:black;"/>
+                </b>
+                <br/>
+                <br/>
+            </p>
+        </div>
+        <br/>
+        
+        <div class="divObjeto">
+            <p style="display: inline; "> 
+                <b>
+                    OBJETO.-
+                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:outputText value=" {!Promocion.nombre_promocion__c}" rendered="{!Promocion.nombre_promocion__c!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!Promocion.nombre_promocion__c==null}" style="color:black;"/>
+                </b>
+                
+                <br/>
+                
+            </p>
+        </div>
+        <div style="text-align: center; margin-top: 15px">
+            <p style="display: inline">
+                <apex:outputText value=" {!inmueble.Tipo_de_via__c}" rendered="{!inmueble.Tipo_de_via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_via__c==null}" style="color:black;"/>
+                <apex:outputText value=" {!inmueble.Nombre_Via__c}" rendered="{!inmueble.Nombre_Via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!inmueble.Nombre_Via__c==null}" style="color:black;"/>
+                 num. 
+                <apex:outputText value=" {!inmueble.N_Via__c}" rendered="{!inmueble.N_Via__c!=null}"/>
+                <apex:outputText value=" " rendered="{!inmueble.N_Via__c==null}" style="color:black;"/>
+                <apex:outputText value=" {!oportunidad.Description}" rendered="{!oportunidad.Description!=null}"/>
+                <apex:outputText value=" " rendered="{!oportunidad.Description==null}" style="color:black;"/>
+                , CP 
+                <apex:outputText value=" {!inmueble.Codigo_postal__c}" rendered="{!inmueble.Codigo_postal__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!inmueble.Codigo_postal__c==null}" style="color:black;"/>
+                .
+            </p>
+        </div>
+        <br/>
+        <br/>
+        
+        <div class="divReunidos">
+            <p style="text-align: center; text-decoration: underline; letter-spacing: 2px;" >
+                <b>
+                    REUNIDOS
+                </b>
+                <br/>
+                <br/>
+            </p>
+            <p>
+                <b>
+                    DE UNA PARTE.-
+                </b>
+            </p>
+            <p class="parrafoJustificado">
+                Don/Dña. 
+                <apex:outputText value=" {!Apoderado.name}" rendered="{!Apoderado.name!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Apoderado.name==null}" style="color:black;"/>
+                , mayor de edad, con 
+                <apex:outputText value=" {!Apoderado.Tipo_de_documento__c}" rendered="{!Apoderado.Tipo_de_documento__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Apoderado.Tipo_de_documento__c==null}" style="color:black;"/> 
+                num.
+                <apex:outputText value=" {!Apoderado.N_Documento__c}" rendered="{!Apoderado.N_Documento__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Apoderado.N_Documento__c==null}" style="color:black;"/>
+                , con domicilio a estos efectos en 
+                <apex:outputText value=" {!promotora.DF_Localidad__r.Name}" rendered="{!promotora.DF_Localidad__r.Name!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promotora.DF_Localidad__r.Name==null}" style="color:black;"/>
+                ,
+                <apex:outputText value=" {!promotora.DF_Tipo_de_via__c}" rendered="{!promotora.DF_Tipo_de_via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promotora.DF_Tipo_de_via__c==null}" style="color:black;"/>
+                <apex:outputText value=" {!promotora.DF_Nombre_via__c}" rendered="{!promotora.DF_Nombre_via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promotora.DF_Nombre_via__c==null}" style="color:black;"/>
+                , nº 
+                <apex:outputText value=" {!promotora.DF_N_via__c}" rendered="{!promotora.DF_N_via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promotora.DF_N_via__c==null}" style="color:black;"/>
+                (
+                <apex:outputText value=" {!promotora.DF_Provincia__c}" rendered="{!promotora.DF_Provincia__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promotora.DF_Provincia__c==null}" style="color:black;"/>.
+                ).
+            </p>
+            <p>
+                <b>
+                    Y DE OTRA.-
+                </b>
+            </p>
+            <p class="parrafoJustificado">
+                <!-- SI ES CUENTA PERSONAL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'PersonAccount',  true, false)}">
+                    <apex:variable var="count" value="{!0}" />
+                    <apex:repeat value="{!Titulares}" var="Titular">
+                        <apex:outputText value="{!IF (count > 0, ' y; ', ' ')}"/>
+                        Don/Dña. 
+                        <apex:outputText value=" {!Titular.Cliente__r.name}" rendered="{!Titular.Cliente__r.name!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.name==null}" style="color:black;"/>
+                        , mayor de edad, con 
+                        <apex:outputText value=" {!Titular.Cliente__r.Tipo_de_documento__c}" rendered="{!Titular.Cliente__r.Tipo_de_documento__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Tipo_de_documento__c==null}" style="color:black;"/>
+                         num.
+                        <apex:outputText value=" {!Titular.Cliente__r.N_Documento__c}" rendered="{!Titular.Cliente__r.N_Documento__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Documento__c==null}" style="color:black;"/>
+                        , con domicilio en 
+                        <apex:outputText value=" {!Titular.Cliente__r.DP_Tipo_de_vIa__c}" rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c==null}" style="color:black;"/>
+                        <apex:outputText value=" {!Titular.Cliente__r.DP_Nombre_via__c}" rendered="{!Titular.Cliente__r.DP_Nombre_via__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Nombre_via__c==null}" style="color:black;"/>
+                        , número 
+                        <apex:outputText value=" {!Titular.Cliente__r.DP_N_via__c}" rendered="{!Titular.Cliente__r.DP_N_via__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_N_via__c==null}" style="color:black;"/>
+                        CP 
+                        <apex:outputText value=" {!Titular.Cliente__r.DP_Codigo_postal__c}" rendered="{!Titular.Cliente__r.DP_Codigo_postal__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Codigo_postal__c==null}" style="color:black;"/> 
+                        en estado "
+                        <apex:outputText value=" {!Titular.Cliente__r.Regimen__c}" rendered="{!Titular.Cliente__r.Regimen__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Regimen__c==null}" style="color:black;"/>
+                        "
+                        . 
+                    </apex:repeat>
+                </apex:outputPanel>
+                <!-- SI ES CUENTA EMPRESA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'Cuenta',  true, false)}">
+                    <apex:variable var="count" value="{!0}" />
+                    <apex:repeat value="{!Titulares}" var="Titular">
+                        <apex:outputText value="{!IF (count > 0, ' y ', ' ')}"/>
+                        <apex:outputText value=" {!Titular.Cliente__r.name}" rendered="{!Titular.Cliente__r.name!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.name==null}" style="color:black;"/>
+                        , con CIF número 
+                        <apex:outputText value=" {!Titular.Cliente__r.N_Documento__c}" rendered="{!Titular.Cliente__r.N_Documento__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Documento__c==null}" style="color:black;"/>
+                        , con domicilio social en 
+                        <apex:outputText value=" {!Titular.Cliente__r.DP_Tipo_de_vIa__c}" rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c==null}" style="color:black;"/>
+                        <apex:outputText value=" {!Titular.Cliente__r.DP_Nombre_via__c}" rendered="{!Titular.Cliente__r.DP_Nombre_via__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Nombre_via__c==null}" style="color:black;"/>
+                        , número 
+                        <apex:outputText value=" {!Titular.Cliente__r.DP_N_via__c}" rendered="{!Titular.Cliente__r.DP_N_via__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_N_via__c==null}" style="color:black;"/>
+                         CP 
+                        <apex:outputText value=" {!Titular.Cliente__r.DP_Codigo_postal__c}" rendered="{!Titular.Cliente__r.DP_Codigo_postal__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Codigo_postal__c==null}" style="color:black;"/>
+                        , e inscrita en el Registro Mercantil de 
+                        <apex:outputText value=" {!Titular.Cliente__r.Lugar_del_registro__c}" rendered="{!Titular.Cliente__r.Lugar_del_registro__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Lugar_del_registro__c==null}" style="color:black;"/>
+                        , al tomo 
+                        <apex:outputText value=" {!Titular.Cliente__r.Tomo__c}" rendered="{!Titular.Cliente__r.Tomo__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Tomo__c==null}" style="color:black;"/>
+                        , sección 
+                        <apex:outputText value=" {!Titular.Cliente__r.Seccion__c}" rendered="{!Titular.Cliente__r.Seccion__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Seccion__c==null}" style="color:black;"/>
+                        , folio 
+                        <apex:outputText value=" {!Titular.Cliente__r.Folio__c}" rendered="{!Titular.Cliente__r.Folio__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Folio__c==null}" style="color:black;"/>
+                        , hoja número 
+                        <apex:outputText value=" {!Titular.Cliente__r.N_Hoja__c}" rendered="{!Titular.Cliente__r.N_Hoja__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Hoja__c==null}" style="color:black;"/>
+                        . Actúa en representación de la sociedad Don 
+                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].name}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].name!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].name==null}" style="color:black;"/>
+                        , con 
+                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Tipo_de_documento__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Tipo_de_documento__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Tipo_de_documento__c==null}" style="color:black;"/>
+                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].N_Documento__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].N_Documento__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].N_Documento__c==null}" style="color:black;"/>
+                        , en su condición de 
+                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Condicion__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Condicion__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Condicion__c==null}" style="color:black;"/>  
+                        conforme a escritura otorgada por el notario de 
+                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Lugar_de_notaria__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Lugar_de_notaria__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Lugar_de_notaria__c==null}" style="color:black;"/>
+                        Don 
+                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Nombre_notario__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Nombre_notario__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Nombre_notario__c==null}" style="color:black;"/>
+                        , en fecha 
+                        <apex:outputText value=" {!mapRepresentantesFechas[Titular.Cliente__r.id]}" rendered="{!mapRepresentantesFechas[Titular.Cliente__r.id]!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesFechas[Titular.Cliente__r.id]==null}" style="color:black;"/>
+                        con el nº de su protocolo 
+                        <apex:outputText value=" {!mapRepresentantesLegales[Titular.Cliente__r.id].Numero_de_protocolo__c}" rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Numero_de_protocolo__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!mapRepresentantesLegales[Titular.Cliente__r.id].Numero_de_protocolo__c==null}" style="color:black;"/>
+                        . 
+                        <apex:variable var="count" value="{!count + 1}" />
+                    </apex:repeat> 
+                </apex:outputPanel>
+            </p>
+        </div>
+        
+        <div class="divIntervienen">
+        <br/>
+            <p style="text-align: center; letter-spacing: 2px;" >
+                <b>
+                    INTERVIENEN
+                </b>
+                <br/>
+                <br/>
+            </p>
+            <p class="parrafoJustificado">
+                El primero en calidad de apoderado de la mercantil
+                <b>
+                    <apex:outputText value=" {!promotora.name}" rendered="{!promotora.name!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!promotora.name==null}" style="color:black;"/>
+                </b>
+                , domiciliada en 
+                <apex:outputText value=" {!Promotora.DF_Localidad__r.Name}" rendered="{!Promotora.DF_Localidad__r.Name!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.DF_Localidad__r.Name==null}" style="color:black;"/>
+                (
+                <apex:outputText value=" {!Promotora.DF_Provincia__c}" rendered="{!Promotora.DF_Provincia__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.DF_Provincia__c==null}" style="color:black;"/>
+                ),
+                <apex:outputText value=" {!Promotora.DF_Tipo_de_via__c}" rendered="{!Promotora.DF_Tipo_de_via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.DF_Tipo_de_via__c==null}" style="color:black;"/>
+                <apex:outputText value=" {!Promotora.DF_Nombre_via__c}" rendered="{!Promotora.DF_Nombre_via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.DF_Nombre_via__c==null}" style="color:black;"/>
+                 nº 
+                <apex:outputText value=" {!Promotora.DF_N_via__c}" rendered="{!Promotora.DF_N_via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.DF_N_via__c==null}" style="color:black;"/>
+                , constituida mediante escritura autorizada por el notario de 
+                <apex:outputText value=" {!Promotora.Lugar_del_registro__c}" rendered="{!Promotora.Lugar_del_registro__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.Lugar_del_registro__c==null}" style="color:black;"/>
+                , Don 
+                <apex:outputText value=" {!Promotora.Nombre_del_notario__c}" rendered="{!Promotora.Nombre_del_notario__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.Nombre_del_notario__c==null}" style="color:black;"/>
+                , el día 
+                <apex:outputText value=" {!fechaEscrituraPromotora}" rendered="{!fechaEscrituraPromotora!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!fechaEscrituraPromotora==null}" style="color:black;"/>
+                , con el número 
+                <apex:outputText value=" {!Promotora.Numero_de_protocolo__c}" rendered="{!Promotora.Numero_de_protocolo__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.Numero_de_protocolo__c==null}" style="color:black;"/>
+                de protocolo, e inscrita en 
+                <apex:outputText value=" {!Promotora.Lugar_del_registro__c}" rendered="{!Promotora.Lugar_del_registro__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.Lugar_del_registro__c==null}" style="color:black;"/>
+                 en el Tomo 
+                <apex:outputText value=" {!Promotora.Tomo__c}" rendered="{!Promotora.Tomo__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.Tomo__c==null}" style="color:black;"/>
+                , folio 
+                <apex:outputText value=" {!Promotora.Folio__c}" rendered="{!Promotora.Folio__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.Folio__c==null}" style="color:black;"/>
+                , hoja número 
+                <apex:outputText value=" {!Promotora.N_Hoja__c}" rendered="{!Promotora.N_Hoja__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.N_Hoja__c==null}" style="color:black;"/>
+                , sección 
+                <apex:outputText value=" {!Promotora.Seccion__c}" rendered="{!Promotora.Seccion__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.Seccion__c==null}" style="color:black;"/>
+                 y en el Censo de Entidades Jurídicas del Ministerio de Hacienda con el 
+                <apex:outputText value=" {!Promotora.Tipo_de_documento__c}" rendered="{!Promotora.Tipo_de_documento__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.Tipo_de_documento__c==null}" style="color:black;"/>
+                num.
+                <apex:outputText value=" {!Promotora.N_Documento__c}" rendered="{!Promotora.N_Documento__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!Promotora.N_Documento__c==null}" style="color:black;"/>
+                . Actúa en su condición de 
+                <apex:outputText value=" {!promocion.Condicion__c}" rendered="{!promocion.Condicion__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Condicion__c==null}" style="color:black;"/>
+                de la sociedad en virtud de escritura de poder otorgada el día 
+                <apex:outputText value=" {!fechaEscrituracionPromocion}" rendered="{!fechaEscrituracionPromocion!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!fechaEscrituracionPromocion==null}" style="color:black;"/>
+                ante el notario de 
+                <apex:outputText value=" {!promocion.Lugar_de_la_notaria__c}" rendered="{!promocion.Lugar_de_la_notaria__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Lugar_de_la_notaria__c==null}" style="color:black;"/>
+                , Don 
+                <apex:outputText value=" {!promocion.Nombre_notario__c}" rendered="{!promocion.Nombre_notario__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Nombre_notario__c==null}" style="color:black;"/> 
+                con el nº 
+                <apex:outputText value=" {!promocion.Numero_de_protocolo__c}" rendered="{!promocion.Numero_de_protocolo__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Numero_de_protocolo__c==null}" style="color:black;"/>
+                de su protocolo. En adelante “la parte
+                <b>
+                     VENDEDORA
+                </b>
+                ”.
+                <p class="parrafoJustificado">
+                    El segundo en su propio nombre y derecho. En lo sucesivo “la parte 
+                    <b>
+                        COMPRADORA
+                    </b>
+                    ”.
+                </p>
+            </p>
+            <p class="parrafoJustificado">
+                Ambas partes se reconocen mutua y recíprocamente capacidad legal suficiente para la suscripción del presente 
+                contrato y a tal efecto
+            </p>
+        </div>
+        
+        <div class="divExponen">
+            <p style="text-align: center; letter-spacing: 2px;" >
+                <b>
+                    EXPONEN
+                </b>
+                
+                <br/>
+                <br/>
+            </p>
+            <p class="parrafoJustificado">
+                <b>
+                    I. -
+                </b>
+                Que la parte VENDEDORA es propietaria en pleno dominio de la Finca registral Nº 
+                <apex:outputText value=" {!promocion.Finca__c}" rendered="{!promocion.Finca__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Finca__c==null}" style="color:black;"/> 
+                , sita en 
+                <!--<apex:outputText value=" {!promocion.Tipo_via__c}" rendered="{!promocion.Tipo_via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Tipo_via__c==null}" style="color:black;"/>
+                <apex:outputText value=" {!promocion.Nombre_via__c}" rendered="{!promocion.Nombre_via__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Nombre_via__c==null}" style="color:black;"/>
+                , 
+                <apex:outputText value=" {!promocion.Localidad__r.Name}" rendered="{!promocion.Localidad__r.Name!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Localidad__r.Name==null}" style="color:black;"/>
+                (
+                <apex:outputText value=" {!promocion.Provincia__c}" rendered="{!promocion.Provincia__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Provincia__c==null}" style="color:black;"/>
+                )--> 
+                <apex:outputText value=" {!promocion.Direccion_Suelo__c}" rendered="{!promocion.Direccion_Suelo__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Direccion_Suelo__c==null}" style="color:black;"/>
+                y cuya descripción registral, según nota simple informativa, obtenida del Registro de la Propiedad de 
+                <apex:outputText value=" {!promocion.Lugar_del_registro__c}" rendered="{!promocion.Lugar_del_registro__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Lugar_del_registro__c==null}" style="color:black;"/>
+                , es la que se hace constar a continuación:
+            </p>
+            <p class="parrafoJustificado">
+                <apex:outputText value=" {!promocion.Descripcion_Suelo__c}" rendered="{!promocion.Descripcion_Suelo__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Descripcion_Suelo__c==null}" style="color:black;"/>
+            </p>
+            <p class="parrafoJustificado">
+                El Solar consta de la siguiente referencia catastral 
+                <apex:outputText value=" {!promocion.Referencia_catastral__c}" rendered="{!promocion.Referencia_catastral__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Referencia_catastral__c==null}" style="color:black;"/>
+                , siendo la edificabilidad de la parcela de 
+                <apex:outputText value=" {!StrPromSupTotalParcela}" rendered="{!StrPromSupTotalParcela!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!StrPromSupTotalParcela==null}" style="color:black;"/>
+                 m2.
+            </p>
+            <p class="parrafoJustificado">
+                En adelante, la "Parcela".
+            </p>
+            <p class="parrafoJustificado">
+                <b>
+                    II. -
+                </b> 
+                En dicha Parcela se va a proceder a la construcción de una promoción de 
+                <apex:outputText value=" {!promocion.N_Viviendas_totales_promocion__c}" rendered="{!promocion.N_Viviendas_totales_promocion__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.N_Viviendas_totales_promocion__c==null}" style="color:black;"/> 
+                viviendas 
+                <apex:outputPanel rendered="{!IF(and(promocion.N_Garages_totales_promocion__c != null,promocion.N_Garages_totales_promocion__c > 0), true, false)}">
+                    , 
+                    <apex:outputText value=" {!promocion.N_Garages_totales_promocion__c}" rendered="{!promocion.N_Garages_totales_promocion__c!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!promocion.N_Garages_totales_promocion__c==null}" style="color:black;"/> 
+                    garajes, piscinas y zonas comunes, resultantes del Proyecto de Ejecución de Obras redactado por 
+                    <apex:outputText value=" {!promocion.Informacion_de_arquitectos_de_obra__c}" rendered="{!promocion.Informacion_de_arquitectos_de_obra__c!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!promocion.Informacion_de_arquitectos_de_obra__c==null}" style="color:black;"/>
+                    y habiendo obtenido en fecha 
+                    <apex:outputText value=" {!hitoPromocion.Aprobacion_de_la_licencia_de_obras__c}" rendered="{!hitoPromocion.Aprobacion_de_la_licencia_de_obras__c!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!hitoPromocion.Aprobacion_de_la_licencia_de_obras__c==null}" style="color:black;"/>
+                     la correspondiente Licencia de Obras del Ayuntamiento de 
+                    <apex:outputText value=" {!promocion.Localidad__r.Name}" rendered="{!promocion.Localidad__r.Name!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!promocion.Localidad__r.Name==null}" style="color:black;"/>
+                    (
+                    <apex:outputText value=" {!promocion.Provincia__c}" rendered="{!promocion.Provincia__c!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!promocion.Provincia__c==null}" style="color:black;"/>
+                    ) En adelante, la "Promoción"
+                </apex:outputPanel>
+            </p>
+            <p class="parrafoJustificado">
+                El proyecto de ejecución de obra y su adaptación redactados y aprobados por los Arquitectos conforme a los cuales se realizarán las obras de edificación 
+                de la promoción, han podido ser examinados por el comprador y están a su disposición para su consulta y aclaraciones hasta la entrega de las viviendas 
+                en las oficinas del vendedor, pudiendo realizar tales consultas de forma que no altere la normal actividad del vendedor.
+            </p>
+            <p class="parrafoJustificado">
+                <b>
+                    III. -
+                </b> 
+                Que las fincas resultantes de la Promoción, objeto de la presente compraventa, son las que a continuación
+                se exponen de acuerdo con las descripciones del Proyecto de Ejecución:
+            </p>
+            <ul style="margin-left: 80px; list-style-type: disc">
+                <li>
+                    <apex:outputPanel rendered="{!IF(inmueble.Tipologia_de_vivienda__c == 'Chalet', true, false)}">
+                        &nbsp;&nbsp;
+                        Vivienda tipo 
+                        <apex:outputText value=" {!inmueble.Tipo_de_vivienda__c}" rendered="{!inmueble.Tipo_de_vivienda__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_vivienda__c==null}" style="color:black;"/>
+                        <apex:outputPanel rendered="{!IF(inmueble.N_Vivienda_Garaje_Trastero_Local__c != null, true, false)}">
+                            , chalet  
+                            <apex:outputText value=" {!inmueble.N_Vivienda_Garaje_Trastero_Local__c}" rendered="{!inmueble.N_Vivienda_Garaje_Trastero_Local__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!inmueble.N_Vivienda_Garaje_Trastero_Local__c==null}" style="color:black;"/> 
+                        </apex:outputPanel>                                                    
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!IF(inmueble.Tipologia_de_vivienda__c == 'Piso', true, false)}">
+                        &nbsp;&nbsp;
+                        Vivienda tipo 
+                        <apex:outputText value=" {!inmueble.Tipo_de_vivienda__c}" rendered="{!inmueble.Tipo_de_vivienda__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_vivienda__c==null}" style="color:black;"/>     
+                        <apex:outputPanel rendered="{!IF(inmueble.Portal__c != null, true, false)}">
+                            , Portal 
+                            <apex:outputText value=" {!inmueble.Portal__c}" rendered="{!inmueble.Portal__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!inmueble.Portal__c==null}" style="color:black;"/> 
+                        </apex:outputPanel> 
+                        <apex:outputPanel rendered="{!IF(inmueble.Planta__c != null, true, false)}">
+                            Planta 
+                            <apex:outputText value=" {!inmueble.Planta__c}" rendered="{!inmueble.Planta__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!inmueble.Planta__c==null}" style="color:black;"/>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(inmueble.Letra_N_Puerta__c != null, true, false)}">
+                            Letra 
+                            <apex:outputText value=" {!inmueble.Letra_N_Puerta__c}" rendered="{!inmueble.Letra_N_Puerta__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!inmueble.Letra_N_Puerta__c==null}" style="color:black;"/>
+                        </apex:outputPanel>
+                    </apex:outputPanel>              
+                    , cuya superficie construida aproximada es 
+                    <apex:outputText value=" {!StrInmuSuperConstTot}" rendered="{!StrInmuSuperConstTot!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!StrInmuSuperConstTot==null}" style="color:black;"/> 
+                    metros cuadrados. Consta de 
+                    <apex:outputText value=" {!inmueble.N_habitaciones__c}" rendered="{!inmueble.N_habitaciones__c!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!inmueble.N_habitaciones__c==null}" style="color:black;"/> 
+                    dormitorios, 
+                    <apex:outputText value=" {!inmueble.N_banos__c}" rendered="{!inmueble.N_banos__c!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!inmueble.N_banos__c==null}" style="color:black;"/> 
+                    cuartos de baño
+                    <apex:outputText value="{!IF(AND(inmueble.sup_Cocina__c != null, inmueble.sup_Cocina__c > 0), ', cocina', '')}"/>
+                    <apex:outputText value="{!IF(AND(inmueble.sup_Salon__c != null, inmueble.sup_Salon__c > 0), ', tendedero', '')}"/>
+                    <apex:outputText value="{!IF(AND(inmueble.Superficie_Terrazas_Descubiertas__c != null, inmueble.Superficie_Terrazas_Descubiertas__c > 0), ', terraza', '')}"/>
+                    <apex:outputText value="{!IF(AND(inmueble.Superficie_Terrazas_Cubiertas__c != null, inmueble.Superficie_Terrazas_Cubiertas__c > 0), ' , terraza cubierta', '')}"/>
+                    .
+                </li>
+                <apex:outputPanel rendered="{!IF(listTrasteros != null, true, false)}">
+                    <apex:repeat value="{!MapTrasteros}" var="trastero">
+                        <li style="margin-left: 57px;">
+                            <p class="parrafoJustificado">
+                                &nbsp;&nbsp;
+                                Trastero nº 
+                                <apex:outputText value=" {!MapTrasteros[trastero][0]}" rendered="{!MapTrasteros[trastero][0]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapTrasteros[trastero][0]=='#@#VACIO#@#'}" style="color:black;"/>
+                                situado en planta nº: 
+                                <apex:outputText value=" {!MapTrasteros[trastero][1]}" rendered="{!MapTrasteros[trastero][1]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!OR(MapTrasteros[trastero][1]=='', MapTrasteros[trastero][1]=='#@#VACIO#@#')}" style="color:black;"/>
+                                , con una superficie construida aproximada de 
+                                <apex:outputText value=" {!MapTrasteros[trastero][2]}" rendered="{!MapTrasteros[trastero][2]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapTrasteros[trastero][2]=='#@#VACIO#@#'}" style="color:black;"/>
+                                m2.
+                            </p>
+                        </li>
+                    </apex:repeat>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(listGarajes != null, true, false)}">
+                    <apex:repeat value="{!MapGarajes}" var="garaje">
+                        <li style="margin-left: 40px;">
+                            <p class="parrafoJustificado">
+                                &nbsp;&nbsp;
+                                Plaza de garaje nº 
+                                <apex:outputText value=" {!MapGarajes[garaje][0]}" rendered="{!MapGarajes[garaje][0]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][0]=='#@#VACIO#@#'}" style="color:black;"/>
+                                situada en planta nº: 
+                                <apex:outputText value=" {!MapGarajes[garaje][1]}" rendered="{!MapGarajes[garaje][1]!='#@#VACIO#@#'}"/> <!--{!MapGarajes[garaje][1]!='' && !MapGarajes[garaje][1]!='#@#VACIO#@#'}-->
+                                <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][1]=='#@#VACIO#@#'}" style="color:black;"/>
+                                , con una superficie construida aproximada de 
+                                <apex:outputText value=" {!MapGarajes[garaje][2]}" rendered="{!MapGarajes[garaje][2]!='#@#VACIO#@#'}"/>
+                                <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][2]=='#@#VACIO#@#'}" style="color:black;"/>
+                                m2.
+                            </p>
+                        </li>
+                    </apex:repeat>
+                </apex:outputPanel>
+            </ul>
+            <p class="parrafoJustificado">
+                En adelante, en conjunto, las “Fincas”.
+            </p>
+            <p class="parrafoJustificado" style="display: inline">
+                <b>
+                    IV.- 
+                </b> 
+                Que las obras de ejecución de la Promoción se realizan por 
+            </p>
+            <!-- EN ROJO -->
+            <p class="parrafoJustificado" style="display: inline">
+                <apex:outputText value=" {!promocion.Constructora__r.Name}" rendered="{!promocion.Constructora__r.Name!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Constructora__r.Name==null}" style="color:black;"/>
+                , con domicilio en 
+                <apex:outputText value=" {!promocion.Constructora__r.Tipo_de_via_FISCAL__c}" rendered="{!promocion.Constructora__r.Tipo_de_via_FISCAL__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Constructora__r.Tipo_de_via_FISCAL__c==null}" style="color:black;"/>
+                <apex:outputText value=" {!promocion.Constructora__r.Nombre_de_via_FISCAL__c}" rendered="{!promocion.Constructora__r.Nombre_de_via_FISCAL__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Constructora__r.Nombre_de_via_FISCAL__c==null}" style="color:black;"/>
+                nº 
+                <apex:outputText value=" {!promocion.Constructora__r.N_via_FISCAL__c}" rendered="{!promocion.Constructora__r.N_via_FISCAL__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Constructora__r.N_via_FISCAL__c==null}" style="color:black;"/>
+                , 
+                <apex:outputText value=" {!promocion.Constructora__r.Codigo_postal_FISCAL__c}" rendered="{!promocion.Constructora__r.Codigo_postal_FISCAL__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Constructora__r.Codigo_postal_FISCAL__c==null}" style="color:black;"/>
+                <apex:outputText value=" {!promocion.Constructora__r.Localidad_FISCAL__r.name}" rendered="{!promocion.Constructora__r.Localidad_FISCAL__r.name!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Constructora__r.Localidad_FISCAL__r.name==null}" style="color:black;"/>
+                (
+                <apex:outputText value="{!promocion.Constructora__r.Pais_FISCAL__r.name}" rendered="{!promocion.Constructora__r.Pais_FISCAL__r.name!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Constructora__r.Pais_FISCAL__r.name==null}" style="color:black;"/>
+                ), con 
+                <apex:outputText value=" {!promocion.Constructora__r.Tipo_de_documento__c}" rendered="{!promocion.Constructora__r.Tipo_de_documento__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Constructora__r.Tipo_de_documento__c==null}" style="color:black;"/>
+                <apex:outputText value=" {!promocion.Constructora__r.N_Documento__c}" rendered="{!promocion.Constructora__r.N_Documento__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Constructora__r.N_Documento__c==null}" style="color:black;"/>
+                .
+            </p>
+            <p class="parrafoJustificado">
+                <b>
+                    V.-
+                </b> 
+                Que interesando a ambas partes la compraventa de la Fincas anteriormente descritas en el expositivo III, éstas otorgan 
+                el presente Contrato de Compraventa conforme a las siguientes;
+            </p>
+        </div>
+        <br/>
+        
+        <div class="divEstipulaciones">
+            <p style="text-align: center; letter-spacing: 2px;" >
+                <b>
+                    ESTIPULACIONES
+                </b>
+                <br/>
+                <br/>
+            </p>
+            <p>
+                <b>
+                    PRIMERA.- OBJETO
+                </b>
+            </p>
+            <p class="parrafoJustificado">
+                <b>
+                    <apex:outputText value=" {!promotora.name}" rendered="{!promotora.name!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!promotora.name==null}" style="color:black;"/>
+                </b>
+                , vende, a 
+                <!-- SI ES CUENTA PERSONAL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'PersonAccount',  true, false)}">
+                    <apex:variable var="count" value="{!0}" />
+                    <apex:repeat value="{!MapTitulares}" var="Titular">
+                        <apex:outputText value="{!IF (count > 0, ' y; ', ' ')}"/>
+                        Don/Dña. 
+                        <apex:outputText value=" {!MapTitulares[Titular][0]}" rendered="{!MapTitulares[Titular][0]!='#@#VACIO#@#'}"/>
+                        <apex:outputText value=" __________ " rendered="{!MapTitulares[Titular][0]=='#@#VACIO#@#'}" style="color:black;"/>
+                        en estado "
+                        <apex:outputText value=" {!MapTitulares[Titular][1]}" rendered="{!MapTitulares[Titular][1]!='#@#VACIO#@#'}"/>
+                        <apex:outputText value=" __________ " rendered="{!MapTitulares[Titular][1]=='#@#VACIO#@#'}"/>
+                        " y un porcentaje de participación del 
+                        <apex:outputText value=" {!MapTitulares[Titular][2]}" rendered="{!MapTitulares[Titular][2]!='#@#VACIO#@#'}"/>
+                        <apex:outputText value=" __________ " rendered="{!MapTitulares[Titular][2]=='#@#VACIO#@#'}" style="color:black;"/>
+                         %, 
+                        <apex:variable var="count" value="{!count + 1}" />
+                    </apex:repeat>
+                </apex:outputPanel>
+                <!-- SI ES CUENTA EMPRESA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'Cuenta',  true, false)}">
+                    <apex:variable var="count" value="{!0}" />
+                    <apex:repeat value="{!Titulares}" var="Titular">
+                        <apex:outputText value="{!IF (count > 0, ' y ', ' ')}"/>
+                        <apex:outputText value=" {!Titular.Cliente__r.name}" rendered="{!Titular.Cliente__r.name!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.name==null}" style="color:black;"/>
+                        , 
+                        <apex:variable var="count" value="{!count + 1}" />
+                    </apex:repeat> 
+                </apex:outputPanel>
+                que compran para su sociedad de gananciales (u otra) por mitad y proindiviso las Fincas descritas en el expositivo 
+                tercero de este documento, con cuantos derechos, usos, servicios y servidumbres le sean inherentes y resulten del 
+                proyecto de edificación y de las normas urbanísticas de la zona, incluida la parte proporcional que le corresponda 
+                en los elementos comunes de la urbanización la cual será determinada en la escritura pública de compraventa de las Fincas
+            </p>
+            <br/>
+            <p>
+                <b>
+                    SEGUNDA.- PRECIO
+                </b>
+            </p>
+            <p class="parrafoJustificado">
+                El precio de la Finca objeto de la compraventa asciende a la cantidad de 
+                <b>
+                    <apex:outputText value=" {!StrOpporAmount}" rendered="{!StrOpporAmount!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!StrOpporAmount==null}" style="color:black;"/>
+                </b>
+                € más Impuesto sobre el Valor Añadido. (en adelante, el “Precio”).
+                <apex:outputPanel rendered="{!OR(precioGarajes > 0, precioTrasteros > 0)}" >
+                    Correspondiendo a la vivienda la cantidad de 
+                    <apex:outputText value=" {!StrInmuPrecio}" rendered="{!StrInmuPrecio!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!StrInmuPrecio==null}" style="color:black;"/>
+                    € 
+                    <apex:repeat value="{!MapGarajes}" var="garaje">
+                        <apex:outputPanel rendered="{!MapGarajes[garaje][3]!='#@#VACIO#@#'}">
+                            y a la plaza de garaje cantidad de 
+                            <apex:outputText value=" {!MapGarajes[garaje][3]}" rendered="{!MapGarajes[garaje][3]!='#@#VACIO#@#'}"/>
+                            <apex:outputText value=" __________ " rendered="{!MapGarajes[garaje][3]=='#@#VACIO#@#'}" style="color:black;"/>
+                            €
+                        </apex:outputPanel>
+                    </apex:repeat>
+                    <apex:repeat value="{!MapTrasteros}" var="trastero">
+                        <apex:outputPanel rendered="{!MapTrasteros[trastero][3]!='#@#VACIO#@#'}">
+                            y al trastero cantidad de 
+                            <apex:outputText value=" {!MapTrasteros[trastero][3]}" rendered="{!MapTrasteros[trastero][3]!='#@#VACIO#@#'}"/>
+                            <apex:outputText value=" __________ " rendered="{!MapTrasteros[trastero][3]=='#@#VACIO#@#'}" style="color:black;"/>
+                            €
+                        </apex:outputPanel>
+                    </apex:repeat>.
+                </apex:outputPanel>
+            </p>
+            <p class="parrafoJustificado">
+                En el caso de que se produzcan modificaciones del tipo impositivo del IVA fijado actualmente en el 
+                <apex:outputText value=" {!StrOpporPorc}" rendered="{!StrOpporPorc!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!StrOpporPorc==null}" style="color:black;"/>
+                % , el precio final incluido IVA pactado en el contrato, será modificado en la cuantía
+                que resulte de aplicar los tipos vigentes en la fecha de devengo.
+            </p>
+            <br/>
+            <p>
+                <b>
+                    TERCERA.- FORMA DE PAGO
+                </b>
+            </p>
+            <!-- SIN IVA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+            <apex:outputPanel rendered="{!IF(oportunidad.Tipo_de_Reserva__c == 'Reserva sin IVA', true, false)}">
+                <p>
+                    El Precio convenido será satisfecho del siguiente modo:
+                    <br/>
+                    <br/>
+                    <p class="parrafoJustificado">
+                        <b>
+                            A)
+                        </b> 
+                        La cantidad restante hasta completar el precio total, asciende a
+                            <apex:outputText value=" {!StrOpporAmountRest}" rendered="{!StrOpporAmountRest!=null}"/>
+                        
+                            <apex:outputText value=" __________ " rendered="{!StrOpporAmountRest==null}" style="color:black;"/>
+                       
+                         €, más I.V.A., que hacen un total de
+                        
+                        <apex:outputText value=" {! StrOpporAmountRestIVA}" rendered="{!StrOpporAmountRestIVA!=null}"/>
+                        
+                        <apex:outputText value=" __________ " rendered="{!StrOpporAmountRestIVA}" style="color:black;">
+                        </apex:outputText>
+                         € que la parte COMPRADORA entregó con anterioridad a la firma del presente contrato en concepto de reserva.
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>
+                            B)
+                        </b> 
+                        La cantidad restante hasta completar el precio total, asciende a 
+                        <apex:outputText value=" {!StrOpporAmountRest}" rendered="{!oportunidad.amount * oportunidad.Pago_Contrato_al_contado__c/100!=null}">
+                        </apex:outputText>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.amount * oportunidad.Pago_Contrato_al_contado__c/100==null}" style="color:black;">
+                        </apex:outputText>
+                        €, más I.V.A., que hacen un total de 
+                        <apex:outputText value=" {!StrOpporAmountRestIVA}" rendered="{!oportunidad.amount * oportunidad.Pago_Contrato_al_contado__c/100 *(1 + oportunidad.Porcentaje_IVA__c/100)!=null}">
+                        </apex:outputText>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.amount * oportunidad.Pago_Contrato_al_contado__c/100 *(1 + oportunidad.Porcentaje_IVA__c/100)==null}" style="color:black;">
+                        </apex:outputText>
+                         € que la parte compradora entrega en este acto  mediante cheque bancario/transferencia a la cuenta de la vendedora, que se acepta salvo buen fin, y cuya fotocopia se adjunta.
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>
+                            C)
+                        </b>
+                        La cantidad de 
+                        <apex:outputText value=" {!StrImporteAPlazos}" rendered="{!ImporteAPlazos!=null}">
+                        </apex:outputText>
+                        <apex:outputText value=" __________ " rendered="{!ImporteAPlazos==null}" style="color:black;">
+                        </apex:outputText>
+                        €, más I.V.A. (lo que supone un total de
+                        <apex:outputText value=" {!StrImporteAPlazosIVA}" rendered="{!ImporteAPlazosConIva!=null}">
+                        </apex:outputText> 
+                        <apex:outputText value=" __________ " rendered="{!ImporteAPlazosConIva==null}" style="color:black;">
+                        </apex:outputText>
+                         €), se pagará en 
+                        <apex:outputText value=" {!oportunidad.N_Cuotas__c}" rendered="{!oportunidad.N_Cuotas__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.N_Cuotas__c==null}" style="color:black;"/>
+                         plazos de
+                        <apex:outputText value=" {!StrOpporImpCuota}" rendered="{!oportunidad.Importe_de_Cuota__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.Importe_de_Cuota__c==null}" style="color:black;"/>
+                         € más I.V.A. cada uno durante la construcción, con vencimiento mensual y sucesivos, a partir del
+                        <apex:outputText value=" {!FechaPrimeraCuota}" rendered="{!FechaPrimeraCuota!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!FechaPrimeraCuota==null}" style="color:black;"/>.
+                        <apex:variable var="cuotasExtra" value="{!IF(AND(NOT(ISBLANK(oportunidad.Numero_Cuotas_Extra__c)),oportunidad.Numero_Cuotas_Extra__c > 0),true, false)}"/>
+                        <apex:outputPanel rendered="{!IF(cuotasExtra == true, true, false)}">
+                            ; y la cantidad de 
+                            <apex:outputText value="{!StrImporteCuotasExtra}" rendered="{!ImporteCuotasExtra!=null}">
+                            </apex:outputText> 
+                            <apex:outputText value=" __________ " rendered="{!ImporteCuotasExtra==null}" style="color:black;">
+                            </apex:outputText>
+                             €, más I.V.A. (lo que supone un total de 
+                            <apex:outputText value=" {!StrImporteCuotasExtraIVA}" rendered="{!ImporteCuotasExtraconIva!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!ImporteCuotasExtraconIva==null}" style="color:black;"/>
+                            € ), se pagará en 
+                            <apex:outputText value=" {!oportunidad.Numero_Cuotas_Extra__c}" rendered="{!oportunidad.Numero_Cuotas_Extra__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!oportunidad.Numero_Cuotas_Extra__c==null}" style="color:black;"/>
+                             plazos de 
+                            <apex:outputText value=" {!StrOpporImpCuotaExtra}" rendered="{!oportunidad.Importe_Cuota_Extra__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!oportunidad.Importe_Cuota_Extra__c==null}" style="color:black;"/>
+                             € más I.V.A. cada uno.
+                        </apex:outputPanel>
+                        Se adjunta como ANEXO I calendario de pagos
+                    </p>
+                    <p class="parrafoJustificado">
+                        Todos los recibos serán domiciliados en la cuenta designada por la parte compradora que en este
+                        acto acepta que se le giren; siendo la cuenta referida la siguiente C.C.: 
+                        <apex:outputText value=" {!oportunidad.Cuenta_Bancaria_de_mandato__c}" rendered="{!oportunidad.Cuenta_Bancaria_de_mandato__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.Cuenta_Bancaria_de_mandato__c==null}" style="color:black;"/>
+                        . 
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>
+                            D)
+                        </b> 
+                        La cantidad restante hasta completar el precio total, asciende a 
+                        <apex:outputText value=" {!StrOpporImpEscritura}" rendered="{!oportunidad.Importe_escritura__c!=null}">
+                        </apex:outputText> 
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.Importe_escritura__c==null}" style="color:black;">
+                        </apex:outputText>
+                         €, más I.V.A., que se abonarán al otorgamiento de la escritura pública de compraventa.
+                    </p>
+                    <p class="parrafoJustificado">
+                    La parte COMPRADORA confiere autorización y mandato tan amplio como en derecho se requiere y sea necesario, 
+                    a la parte VENDEDORA, para que ésta o quien ella designe, en relación con la Finca objeto de este contrato, 
+                     pueda concertar y formalizar préstamos con garantía hipotecaria; y para que hasta el momento de la 
+                    entrega de la Finca (es decir, la transmisión de la propiedad) pueda modificar, novar y dividir tal hipoteca 
+                    de acuerdo con las condiciones de pago pactadas en este contrato, distribuyendo las responsabilidades que la 
+                    garanticen, en la forma que tenga por conveniente, pudiendo firmar liquidaciones y percibir directamente el 
+                    importe total del préstamo en una o más entregas, pagar cantidades y, en definitiva, ejecutar cuantos actos y 
+                    otorgar cuantos documentos públicos o privados considere convenientes a tales fines, siendo de cuenta del 
+                    VENDEDOR los gastos ocasionados, y por cuenta de la COMPRADORA todos los gastos derivados de una eventual subrogación.
+                    </p>
+                </p>
+                </apex:outputPanel>
+                <!-- CON IVA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                <apex:outputPanel rendered="{!IF(oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA', true, false)}">
+                    <p class="parrafoJustificado">
+                        El Precio convenido será satisfecho del siguiente modo:
+                    </p>
+                    <p class="parrafoJustificado">
+                        <b>
+                            A)
+                        </b>
+                        La cantidad de 
+                        <apex:outputText value=" {!StrOpporReserv}" rendered="{!oportunidad.Reserva__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.Reserva__c==null}" style="color:black;"/>
+                         €, más I.V.A., que hacen un total de 
+                        <apex:outputText value=" {!StrReservaConIva}" rendered="{!ReservaConIva!=null}">
+                        </apex:outputText>
+                        <apex:outputText value=" __________ " rendered="{!ReservaConIva==null}" style="color:black;">
+                        </apex:outputText>
+                        € que la  parte compradora entregó con anterioridad al presente contrato en concepto de reserva.
+                            </p>
+                    <p class="parrafoJustificado">
+                        <b>
+                            B)
+                        </b>
+                        La cantidad de 
+                        <apex:outputText value=" {!StrOpporPagoContrato}" rendered="{!oportunidad.amount* oportunidad.Pago_Contrato_al_contado__c*0.01 - oportunidad.Reserva__c!=null}">
+                        </apex:outputText>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.amount* oportunidad.Pago_Contrato_al_contado__c*0.01 - oportunidad.Reserva__c==null}" style="color:black;">
+                        </apex:outputText>
+                        €, más I.V.A., que hacen un total de 
+                        <apex:outputText value=" {!StrOpporPagoContratoIVA}" rendered="{!(oportunidad.amount* oportunidad.Pago_Contrato_al_contado__c*0.01 - oportunidad.Reserva__c) * (1 + oportunidad.Porcentaje_IVA__c*0.01)!=null}">
+                        </apex:outputText>
+                        <apex:outputText value=" __________ " rendered="{!(oportunidad.amount* oportunidad.Pago_Contrato_al_contado__c*0.01 - oportunidad.Reserva__c) * (1 + oportunidad.Porcentaje_IVA__c*0.01)==null}" style="color:black;">
+                        </apex:outputText>
+                        € que la parte compradora  entrega en este acto  mediante cheque bancario/transferencia a la cuenta de la vendedora,
+                         que se acepta salvo buen fin, y cuya fotocopia se adjunta.
+                    </p>
+                    <p class="parrafoJustificado"> 
+                        <b>
+                            C)
+                        </b> 
+                        La cantidad de 
+                        <apex:outputText value=" {!StrImporteAPlazos}" rendered="{!importeAPlazos!=null}">
+                        </apex:outputText>
+                        <apex:outputText value=" __________ " rendered="{!importeAPlazos==null}" style="color:black;">
+                        </apex:outputText>
+                        €, más I.V.A. (lo que supone un total de
+                        <apex:outputText value=" {!StrImporteAPlazosIVA}" rendered="{!ImporteAPlazosConIva!=null}">
+                        </apex:outputText> 
+                        <apex:outputText value=" __________ " rendered="{!ImporteAPlazosConIva==null}" style="color:black;">
+                        </apex:outputText>
+                        €), se pagará en 
+                        <apex:outputText value=" {!oportunidad.N_Cuotas__c}" rendered="{!oportunidad.N_Cuotas__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.N_Cuotas__c==null}" style="color:black;"/>
+                         plazos de 
+                        <apex:outputText value=" {!StrOpporImpCuota}" rendered="{!oportunidad.Importe_de_Cuota__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.Importe_de_Cuota__c==null}" style="color:black;"/>
+                         € más I.V.A. cada uno durante la construcción, con vencimiento mensual y sucesivos, a partir del 
+                        <apex:outputText value=" {!FechaPrimeraCuota}" rendered="{!FechaPrimeraCuota!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!FechaPrimeraCuota==null}" style="color:black;"/>
+                        <apex:variable var="cuotasExtra" value="{!IF(AND(NOT(ISBLANK(oportunidad.Numero_Cuotas_Extra__c)),oportunidad.Numero_Cuotas_Extra__c > 0),true, false)}"/>
+                        <apex:outputPanel rendered="{!IF(cuotasExtra == true, true, false)}">
+                            ; y la cantidad de 
+                            <apex:outputText value=" {!StrImporteCuotasExtra}" rendered="{!ImporteCuotasExtra!=null}">
+                            </apex:outputText>
+                            <apex:outputText value=" __________ " rendered="{!ImporteCuotasExtra==null}" style="color:black;">
+                            </apex:outputText>
+                            €, más I.V.A. (lo que supone un total de 
+                            <apex:outputText value=" {!StrImporteCuotasExtraIVA}" rendered="{!ROUND(oportunidad.Numero_Cuotas_Extra__c * oportunidad.Importe_Cuota_Extra__c * (1 + oportunidad.Porcentaje_IVA__c * 0.01), 2)!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!ROUND(oportunidad.Numero_Cuotas_Extra__c * oportunidad.Importe_Cuota_Extra__c * (1 + oportunidad.Porcentaje_IVA__c * 0.01), 2)==null}" style="color:black;"/>  € ), 
+                            se pagará en 
+                            <apex:outputText value=" {!oportunidad.Numero_Cuotas_Extra__c}" rendered="{!oportunidad.Numero_Cuotas_Extra__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!oportunidad.Numero_Cuotas_Extra__c==null}" style="color:black;"/>
+                             plazos de 
+                            <apex:outputText value=" {!StrOpporImpCuotaExtra}" rendered="{!oportunidad.Importe_Cuota_Extra__c!=null}"/>
+                            <apex:outputText value=" __________ " rendered="{!oportunidad.Importe_Cuota_Extra__c==null}" style="color:black;"/>
+                             € más I.V.A. cada uno. 
+                        </apex:outputPanel>
+                        Se adjunta como ANEXO II calendario de pagos. 
+                    </p>
+                    <p class="parrafoJustificado">
+                        Todos los recibos serán domiciliados en la cuenta designada por la parte compradora que en este 
+                        acto acepta que se le giren; siendo la cuenta referida la siguiente C.C.: 
+                        <apex:outputText value=" {!oportunidad.Cuenta_Bancaria_de_mandato__c}" rendered="{!oportunidad.Cuenta_Bancaria_de_mandato__c!=null}"/>
+                        <apex:outputText value=" __________ " rendered="{!oportunidad.Cuenta_Bancaria_de_mandato__c==null}" style="color:black;"/>
+                        .
+                    </p>
+                    <p class="parrafoJustificado">  
+                        <b>
+                            D)
+                        </b>
+                         La cantidad restante hasta completar el precio total, asciende a  
+                         <apex:outputText value=" {!StrOpporImpEscritura}" rendered="{!oportunidad.Importe_escritura__c!=null}"/>
+                         <apex:outputText value=" __________ " rendered="{!oportunidad.Importe_escritura__c==null}" style="color:black;"/>
+                         €, más I.V.A., que se abonarán al otorgamiento de la escritura pública de compraventa. 
+                    </p>
+                    <p class="parrafoJustificado">
+                        La parte compradora le confiere autorización y mandato tan amplio como en derecho se requiere y sea 
+                        necesario, para que la parte vendedora, o quien ella designe, en relación con la Finca objeto de 
+                        este contrato, pueda concertar y formalizar préstamos con garantía hipotecaria; y para que hasta el 
+                        momento de la entrega de la Finca (es decir, la transmisión de la propiedad) pueda modificar, novar y 
+                        dividir tal hipoteca de acuerdo con las condiciones de pago pactadas en este contrato, distribuyendo las 
+                        responsabilidades que la garanticen, en la forma que tenga por conveniente, pudiendo firmar liquidaciones 
+                        y percibir directamente el importe total del préstamo en una o más entregas, pagar cantidades y, en definitiva, 
+                        ejecutar cuantos actos y otorgar cuantos documentos públicos o privados considere convenientes a tales fines, 
+                        siendo de cuenta del vendedor los gastos ocasionados, y por cuenta del comprador todos los gastos derivados de 
+                        una eventual subrogación.
+                    </p>
+                </apex:outputPanel>
+                <br/>
+                <p><b>CUARTA.- SUBROGACIÓN EN EL PRÉSTAMO CONCEDIDO AL PROMOTOR</b></p>
+                <p class="parrafoJustificado">
+                La parte compradora podrá subrogarse, con las características, requisitos e importes que se fijen con 
+                la Entidad de Crédito Acreedora, en el préstamo o crédito hipotecario que concederá a la parte vendedora 
+                y que grave la Finca objeto de este contrato, siendo de cuenta de la parte compradora los gastos de cualquier
+                tipo que se deriven del otorgamiento de la escritura de subrogación.
+                </p>
+                <p class="parrafoJustificado">
+                La subrogación deberá ser previamente autorizada por la entidad bancaria, sin que exista responsabilidad por
+                parte del Vendedor al respecto; por tanto, si la entidad bancaria no aceptara la subrogación del Comprador, el importe
+                pendiente del precio de la compraventa deberá ser satisfecho por el Comprador mediante cheque bancario en el momento del
+                otorgamiento de la escritura pública de compraventa.
+                </p>
+                <p class="parrafoJustificado">
+                Así mismo, en el supuesto de que el comprador opte por no subrogarse en el contrato de préstamo con garantía hipotecaria
+                suscrito por el vendedor, éste se obliga a cancelar a sus exclusivas costas la citada garantía hipotecaria, extremo que 
+                podrá realizarse de forma simultánea al otorgamiento de la escritura pública de compraventa.
+                </p>
+                <p class="parrafoJustificado">
+                En caso contrario, si la parte compradora opta por subrogarse en el contrato de préstamo con garantía hipotecaria
+                sobre la vivienda, asumiendo tal compromiso, el comprador retendrá en su poder y descontará la cantidad de principal del
+                préstamo hipotecario, por cuyo motivo la parte compradora faculta a la parte vendedora para percibir de la entidad de crédito
+                dicha cantidad, comprometiéndose a asumir en el momento de la firma de la escritura pública de compraventa y de subrogación 
+                en el préstamo la condición jurídica de deudor y, subrogándose no sólo en la garantía hipotecaria, sino también en la 
+                obligación personal y demás responsabilidades derivadas del préstamo hipotecario con aquélla garantizada; siempre 
+                que la entidad de crédito preste su conformidad expresa o tácita, según lo dispuesto en el artículo 118 de la Ley Hipotecaria.
+                </p>
+                <p class="parrafoJustificado">
+                En el supuesto de no obtenerse la conformidad de la entidad financiera a la subrogación del comprador en la garantía 
+                hipotecaria y en la obligación personal derivada del préstamo, la parte compradora se obliga a pagar a la parte vendedora
+                el total importe previsto para dicho préstamo, que coincide con el apartado D) de la estipulación tercera, más el I.V.A. 
+                correspondiente,  en el momento del otorgamiento de la escritura pública de compraventa . El incumplimiento de esta obligación
+                será causa de resolución del presente contrato a instancia de la parte vendedora. 
+                </p>
+                <p class="parrafoJustificado">
+                Cualquiera de las cantidades aplazadas, se considerarán vencidas, líquidas y exigibles a partir del día acordado para el
+                abono de cada una de ellas de conformidad con lo previsto en la Estipulación tercera. 
+                </p>
+                <br/>
+
+                <p><b>QUINTA.- AFIANZAMIENTO DE CANTIDADES</b></p>
+
+                <p class="parrafoJustificado">
+                De conformidad con la Ley 20/2015, de 14 de julio, de ordenación, supervisión y solvencia de las entidades 
+                aseguradoras y reaseguradoras, la cual modifica la disposición adicional primera de la Ley 38/1999, de 5 de 
+                noviembre, de “Ordenación de la Edificación”, el vendedor garantiza las entregas señaladas en la Estipulación 
+                tercera mediante el vendedor garantiza las entregas señaladas en la Estipulación tercera mediante aval solidario o 
+                seguro de afianzamiento concertado con una Compañía Aseguradora o Entidad Financiera, obligándose la 
+                vendedora a facilitar al comprador el correspondiente suplemento individual de dicha póliza, en el momento que 
+                le sea facilitado por la Compañía Aseguradora. Las cantidades entregadas a cuenta del precio de la compraventa 
+                se ingresarán en una cuenta especial destinada a tal efecto, con nº &nbsp;
+                <apex:outputText value="{!IF(promocion.Cuenta_Activa_1__c == true, promocion.Numero_de_cuenta_bancaria_1__c,
+                promocion.Numero_de_cuenta_bancaria_2__c)}"/>,
+                abierta en entidad &nbsp;
+
+                <apex:outputText value="{!IF(promocion.Cuenta_Activa_1__c == true, promocion.Entidad_Bancaria1__c,
+                promocion.Entidad_Bancaria2__c)}"/>,
+
+                Oficina <apex:outputText value=" {!oficina}" rendered="{!oficina!=null}"/> <apex:outputText value=" __________ " rendered="{!oficina==null}" style="color:black;"/>.
+                </p>
+                <p class="parrafoJustificado">
+                En el momento de entrega de las llaves, el comprador se obliga a devolver al vendedor el aval que haya recibido.
+                Sin este requisito no se le entregarán las llaves, salvo en el supuesto de extravío o pérdida de los citados avales,
+                en cuyo caso la firma de la escritura de compraventa implicará automáticamente la renuncia a los repetidos avales.
+                </p>
+                <br/> 
+
+
+                <p><b>SEXTA.-  PROYECTO DE OBRAS Y MODIFICACIONES</b></p>
+                <p class="parrafoJustificado">
+                La parte vendedora se reserva el derecho de efectuar durante las obras de la Promoción, las modificaciones que
+                oficialmente le fuesen impuestas por la autoridad competente, así como aquellas otras que vengan motivadas por 
+                exigencias técnicas o jurídicas puestas de manifiesto durante su ejecución, en tanto no supongan una alteración 
+                significativa del objeto de este contrato. Tales modificaciones, cuando sean sustanciales, deberán contar con la 
+                aprobación de la compradora si conllevan modificación del Precio.
+                </p>
+                <p class="parrafoJustificado">
+                La parte compradora autoriza a la parte vendedora para que, en su caso, y antes de la entrega, pueda modificar la
+                declaración de obra nueva y división de propiedad horizontal del edificio, para adecuar los títulos a la nueva realidad física.
+                </p>
+                <p class="parrafoJustificado">
+                En el caso de que tales modificaciones supongan una alteración significativa y sustancial del objeto del contrato o
+                del precio, la parte compradora podrá optar por resolver el contrato con devolución de las cantidades anticipadas a cuenta. 
+                </p>
+                <p class="parrafoJustificado">
+                Cualquier modificación o reforma propuesta por el comprador y aceptada por el vendedor serán, asimismo, objeto de 
+                formalización documental que contendrá sucinta descripción de su contenido y las concretas repercusiones que tengan 
+                en el precio y en el plazo de entrega.
+                </p>
+                <br/>
+
+                <p><b>SÉPTIMA.- GASTOS Y TRIBUTOS</b></p>
+                <p style="display: inline"><b>7.1.</b></p>
+                <p style="display: inline; text-decoration: underline">Gastos que asume la parte compradora desde la puesta a disposición de los 
+                inmuebles objeto de este contrato.
+                </p>
+                <p class="parrafoJustificado">
+                El Comprador, a partir del día en que se pongan a su disposición la Finca objeto de venta, participará en la
+                proporción que resulte de la aplicación de los coeficientes que le correspondan, en el mantenimiento de los gastos
+                comunes del edificio y de la zona común de la urbanización.
+                    </p>
+                <p class="parrafoJustificado">
+                Asimismo, vendrá obligada, a partir de la entrega, a pagar todos los gastos, impuestos, tasas y arbitrios que se 
+                refieran a la Finca objeto de este contrato, aunque figuren a nombre del Vendedor, así como los proporcionales a los
+                elementos comunes que le correspondan. También serán de cuenta del Comprador los gastos y tributos desde la puesta a 
+                disposición de la Finca si la entrega se demora por causa que le sea imputable.
+                </p>
+                <p class="parrafoJustificado">
+                Serán de cuenta del Comprador los gastos a los que tenga que hacer frente el titular de la finca, en la proporción que
+                corresponda y a partir de la entrega de llaves de las mismas, para el supuesto de que, a requerimiento del Ayuntamiento,
+                la edificación deba integrarse en cualquier entidad o asociación de carácter urbanístico para el mantenimiento y 
+                conservación de la urbanización del sector de planeamiento al que pertenecen.
+                </p>
+                <p style="display: inline"><b>7.2.-</b></p>
+                <p style="display: inline; text-decoration: underline">Tributos y otros gastos.</p>
+                <p>
+                Son de cuenta del Vendedor:
+                </p>
+
+                <ul style="margin-left: 70px; list-style-type: disc">
+                <li>
+                <p class="parrafoJustificado">
+                &nbsp;&nbsp;Los gastos de la declaración de Obra Nueva y División en Propiedad Horizontal del edificio, 
+                incluso su escrituración e inscripción registral.
+                </p>
+                </li>
+
+                <li>
+                <p class="parrafoJustificado">
+                &nbsp;&nbsp;Los gastos correspondientes a la constitución y división de la hipoteca que garantice los 
+                préstamos, así como los de cancelación en el caso de que no se produzca la subrogación por el Comprador
+                en dichos préstamos; y el Impuesto sobre el Incremento del Valor de los Terrenos de Naturaleza Urbana 
+                (plusvalía municipal).
+                </p>
+                </li>
+                </ul>
+
+                <p>Son de cuenta del Comprador:</p> 
+
+                <ul style="margin-left: 70px; list-style-type: disc">
+                <li>
+                <p class="parrafoJustificado">
+                &nbsp;&nbsp;Producida la subrogación en los préstamos hipotecarios, los gastos de subrogación de la hipoteca.
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                &nbsp;&nbsp;El Impuesto sobre Transmisiones Patrimoniales y Actos Jurídicos Documentados, modalidad documentos
+                notariales, que grava la escritura de compraventa y, en su caso, la subrogación en el préstamo hipotecario, 
+                así como todos los demás tributos y gastos que se originen por los actos, negocios jurídicos y escrituras 
+                derivadas del presente contrato y la correspondiente notificación de alteración catastral.
+                </p>
+                </li>
+                </ul>
+                <p class="parrafoJustificado">
+                Todos los demás tributos y gastos serán de cuenta de la parte a la que legalmente le correspondan.
+                </p>
+                <p class="parrafoJustificado">
+                En relación al Impuesto sobre Bienes Inmuebles (IBI) el Vendedor podrá repercutir al Comprador la parte 
+                proporcional que le corresponda atendiendo al período de titularidad compartida dentro del ejercicio anual 
+                en que se materialice la escritura de compraventa. Dicho importe se calculará realizando una simple operación 
+                aritmética consistente en el prorrateo del importe del impuesto, atendiendo a los días transcurridos desde que 
+                se materialice la entrega de llaves hasta la finalización del periodo impositivo.
+                </p>
+                <br/>
+
+                <p><b>OCTAVA.- NOTIFICACIONES</b></p>
+                <p class="parrafoJustificado">
+                A cualquier efecto de los que se previenen en este contrato, se entenderá como domicilio hábil para toda clase
+                de notificaciones y requerimientos, el que figura en el encabezamiento.
+                </p>
+                <p class="parrafoJustificado">
+                Cualquier variación en los domicilios facilitados deberán ser comunicados entre las partes, de no ser comunicada 
+                dicha circunstancia se darán por efectuados y válidos los requerimientos y notificaciones en los domicilios que 
+                figuran en la presente.
+                </p>
+                <br/>
+
+                <p><b>NOVENA.- RESOLUCIÓN</b></p>
+                <p style="display: inline"><b>9.1.-</b></p>
+                <p style="display: inline">
+                Serán causas de resolución del presente contrato, a instancias de la parte COMPRADORA, las siguientes: 
+                </p>
+                <ol type="a"><!-- NO FUNCIONA TYPE -->
+                <li>
+                <p class="parrafoJustificado">
+                El incumplimiento en el plazo de entrega de las Fincas objeto de venta por causas imputables a la parte VENDEDORA,
+                 por un plazo superior a seis meses (6 meses) con respecto a lo establecido en la Cláusula Décima del presente contrato,
+                 pudiendo en este caso la parte COMPRADORA optar por la resolución del contrato.
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                En los supuestos en los que se hayan producido modificaciones en los Proyectos que supongan una alteración significativa del objeto del contrato 
+                o del Precio, la parte COMPRADORA podrá optar por la resolución del contrato, de conformidad con lo previsto en la Estipulación Sexta..
+                </p>
+                </li>
+                </ol>
+                <p class="parrafoJustificado">
+                El incumplimiento en el plazo de entrega de las fincas objeto de venta, no será imputable a la parte VENDEDORA cuando sea producido por 
+                i) Fuerza Mayor, ii) Orden Judicial, iii) demora de la Administración en la concesión de las Licencias pertinentes. En estos supuestos, si 
+                el retraso fuese por un plazo superior a seis (6) meses, la parte COMPRADORA podrá optar por resolver el contrato con devolución de las cantidades 
+                anticipadas a cuenta. La devolución de estas cantidades implica renuncia a cualquier reclamación de la parte COMPRADORA.
+                </p>
+                <p class="parrafoJustificado" >
+                En el supuesto de resolución del contrato a instancias de la parte COMPRADORA, por la causa indicada en el apartado a) anterior, la parte VENDEDORA 
+                queda obligada a devolver las cantidades recibidas de la parte COMPRADORA, incrementadas en un importe equivalente al 50% de las cantidades satisfechas 
+                por la parte COMPRADORA hasta el momento de la resolución, como cláusula penal de incumplimiento. Esta cláusula penal tiene carácter indemnizatorio y 
+                sancionador, por lo que no será posible reclamar importes distintos al anterior. La devolución de estas cantidades implica renuncia a cualquier reclamación 
+                de la parte COMPRADORA.
+                </p>
+                <p style="display: inline"><b>9.2.-</b></p>
+                <p style="display: inline">Serán causas de resolución del presente contrato, 
+                a instancias del Vendedor, las siguientes: 
+                </p>
+                <ol type="a"><!-- NO FUNCIONA TYPE -->
+                <li>
+                <p class="parrafoJustificado">
+                El impago de cualquiera de las cantidades señaladas en este contrato, que implique el incumplimiento de la cantidad correspondiente a uno cualquiera de los plazos del Precio.
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                La no comparecencia al acto de la firma de la Escritura pública de compraventa, cuando sea convocado para ello la parte COMPRADORA.
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                Cualquier causa que impida de forma permanente el cumplimiento del objeto del presente contrato, entre otras, la no obtención de la 
+                Licencia de Primera ocupación, o que no se obtenga la calificación definitiva o las autorizaciones administrativas necesarias, dará 
+                lugar a la resolución automática del presente contrato procediendo la parte VENDEDORA a devolver a la parte COMPRADORA las cantidades 
+                percibidas a cuenta hasta la fecha, renunciando la parte COMPRADORA a cualquier tipo de reclamación contra la parte VENDEDORA.
+                </p>
+                </li>
+                </ol>
+                <p class="parrafoJustificado">
+                En los supuestos de resolución del contrato a instancias de la parte VENDEDORA, por las causas a y b indicadas anteriormente, la parte 
+                VENDEDORA podrá optar entre exigir el cumplimiento del contrato o la resolución de este contrato, que se producirá, de pleno derecho, 
+                con la sola declaración en tal sentido de la parte Vendedora, notificada a la parte Compradora, mediante requerimiento notarial, judicial 
+                o burofax. La notificación se entenderá válidamente efectuada si se dirige al domicilio que consta en el encabezamiento de este contrato, 
+                siendo indiferente que sea o no recepcionado por la parte Compradora, surtiendo plenos efectos desde el momento en que se intente su entrega 
+                por el personal competente. El domicilio señalado a efectos de notificaciones podrá ser modificado, comunicándolo previamente a la parte Vendedora, 
+                momento a partir del cual solo surtirán efecto las notificaciones allí dirigidas, siempre que la comunicación sobre el cambio de domicilio haya 
+                sido recibida por la parte a la que se dirigió la misma. 
+                </p>
+                <p class="parrafoJustificado">
+                Si la parte VENDEDORA optase por la resolución derivada de cualquier incumplimiento por parte de la parte COMPRADORA, incluidas las indicadas 
+                en el apartado a y b anteriores, la parte VENDEDORA restituirá a la parte COMPRADORA, de las cantidades entregadas por este último, en la parte 
+                que quede después de deducir y hacer suyo el 50% de los importes que hubiera satisfecho la parte COMPRADORA hasta el momento de la resolución, 
+                como cláusula penal por incumplimiento.
+                </p>
+                <p class="parrafoJustificado">
+                Instada la resolución en los términos previstos en la presente Estipulación, la parte VENDEDORA podrá disponer libremente de las Fincas objeto de este contrato.
+                </p>
+                <p class="parrafoJustificado">
+                La parte COMPRADORA responderá solidariamente, en su caso, del cumplimiento de la totalidad de las obligaciones que asume y se deducen del presente 
+                contrato o sean consecuencia de su incumplimiento, cualesquiera que fuera su naturaleza. La parte VENDEDORA podrá exigir el cumplimiento íntegro de 
+                dichas obligaciones de cualquiera de los obligados solidarios que pudieran integrar la posición contractual de parte COMPRADORA (la COMPRADORA), quedando 
+                facultada para dirigir contra los mismos, conjunta o separadamente, cuantas acciones considere oportunas.
+                </p>
+                <p class="parrafoJustificado">
+                En todo caso, los intereses de demora en caso de impago se fijan en el interés legal del dinero, incrementado en 3 puntos, y se devengarán a partir de la 
+                fecha en que aquél se produzca.
+                </p>
+                <br/>
+                <p><b>DÉCIMA.- ENTREGA Y POSESIÓN DE LA VIVIENDA</b></p>
+                <p class="parrafoJustificado">
+                La parte VENDEDORA se compromete a entregar las llaves de las fincas a la parte COMPRADORA durante el 
+                <apex:outputText value=" {!promocion.Semestre_de_escrituracion__c}" rendered="{!promocion.Semestre_de_escrituracion__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Semestre_de_escrituracion__c==null}" style="color:black;"/>
+                semestre del {!annoInicioEscrituracion},
+                esto es, como máximo el
+                <apex:outputPanel rendered="{!If(promocion.Semestre_de_escrituracion__c == 'Primer',true, false)}">
+                    30 de junio de 
+                    <apex:outputText value=" {!annoInicioEscrituracion}" rendered="{!annoInicioEscrituracion!=null}"/>
+                    <apex:outputText value=" __________ " rendered="{!annoInicioEscrituracion==null}" style="color:black;"/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!If(promocion.Semestre_de_escrituracion__c == 'Segundo',true, false)}">
+                31 de diciembre de <apex:outputText value=" {!annoInicioEscrituracion}" rendered="{!annoInicioEscrituracion!=null}"/> <apex:outputText value=" __________ " rendered="{!annoInicioEscrituracion==null}" style="color:black;"/>
+                </apex:outputPanel>
+                , siempre que el Comprador haya comparecido en la escritura pública y abonado la totalidad del Precio de la compraventa, conforme se establece en el 
+                presente contrato. (en adelante el “Plazo de Entrega”).
+                </p>
+                <p class="parrafoJustificado">
+                No obstante, dicho Plazo de Entrega podrá retrasarse, sin que pueda reputarse incumplimiento por parte de la PROMOTORA, siempre y cuando existan justificadas 
+                razones de fuerza mayor, índole técnica, constructivo o cuando las obras sean suspendidas o paralizadas por orden o resolución judicial (en especial procedimientos 
+                posesorios, anteriores, interdictos) o administrativa. En dicho supuesto, y cuando la incidencia en el plazo tenga una repercusión superior a seis meses, será debidamente 
+                notificada y justificada a la parte COMPRADORA, a los efectos de que, si así lo estimara, pueda instar la facultad resolutoria concedida, sin aplicación de penalización alguna 
+                y renunciando la parte COMPRADORA a cualquier tipo de acción legal contra la parte VENDEDORA.
+                </p>
+                <p class="parrafoJustificado">
+                En el caso de que la parte VENDEDORA no pueda entregar las Fincas objeto de venta en el Plazo de Entrega por causas imputables a éste, la parte COMPRADORA 
+                otorgará al VENDEDOR un plazo de cortesía de seis (6) meses para la entrega de la finca referidas. Si en el plazo de cortesía indicado anteriormente, la parte 
+                VENDEDORA no hubiese podido entregar la finca referida a la parte COMPRADORA, será de aplicación lo dispuesto en la Estipulación referida a la resolución del contrato.
+                </p>
+                <p class="parrafoJustificado">
+                De acuerdo con lo dispuesto en el R.D. 515/1989 sobre protección de los consumidores en cuanto a la información a suministrar a los COMPRADORES de vivienda, 
+                la elección del Notario corresponde a la parte COMPRADORA. En este sentido, la Escritura Pública de compraventa será autorizada por el Notario elegido por la parte 
+                COMPRADORA, designación que deberá notificar al VENDEDOR con al menos un mes de antelación al primer día del trimestre más próximo en que deba realizarse la entrega 
+                de las fincas objeto de venta. Si transcurrido dicho plazo no se hubiera producido la notificación, quedará autorizado irrevocablemente la parte VENDEDORA para designar 
+                el Notario que estime conveniente..
+                </p>
+                <p class="parrafoJustificado">
+                La parte VENDEDORA comunicará a la parte COMPRADORA, con diez días naturales de antelación, el día y hora para la formalización de la escritura de compraventa, 
+                siendo su falta de comparecencia causa de resolución de la compraventa, tal y como se establece en la Estipulación novena sobre resolución del presente contrato.
+                </p>
+                <p class="parrafoJustificado">
+                En tanto no se formalice la escritura pública de compraventa y la parte VENDEDORA reciba el importe del Precio, la parte VENDEDORA se reserva el pleno dominio de 
+                las Fincas objeto de este contrato, condición que acepta expresamente la parte COMPRADORA.
+                </p>
+                <br/>
+                <p><b>UNDÉCIMA.- DERECHOS DE TANTEO Y RETRACTO.</b></p>
+                <p class="parrafoJustificado">
+                El Vendedor hace constar expresamente que la Finca objeto de venta no se encuentran sometidas a derechos de 
+                tanteo y retracto.
+                </p>
+                <br/>
+                <p><b>DUODÉCIMA.- CONJUNTO RESIDENCIAL Y COMUNIDAD DE PROPIETARIOS.</b></p>
+                <p class="parrafoJustificado">
+                La escritura de parcelación, declaración de obra nueva y división horizontal tumbada del conjunto residencial al que pertenecen las fincas se encuentra 
+                pendiente de otorgamiento a esta fecha; en dichas escrituras se contendrá la descripción de cada finca, con sus linderos y superficies, tanto particulares 
+                como generales que le correspondan, por lo que, desde ahora, la parte COMPRADORA faculta irrevocablemente a la parte Vendedora a fin de que, por sí solo, 
+                proceda al otorgamiento de las aludidas escrituras, estableciendo con la más amplia libertad de criterio el contenido de la misma con las particularidades, 
+                que, con carácter meramente enunciativo y no limitativo, han quedado mencionadas.
+                </p>
+                <p class="parrafoJustificado">
+                Igualmente, se faculta a la parte VENDEDORA para que constituya servidumbres de saneamiento, adosamiento, e incluso proceda a la segregación si fuera preciso 
+                para la ubicación de las conducciones o centros de suministro al conjunto inmobiliario y, en todo caso, a favor de organismos públicos, entidades dependientes 
+                de la Administración o compañías suministradoras de los servicios de agua, gas, energía eléctrica, saneamiento, teléfono, etc.
+                </p>
+                <p class="parrafoJustificado">
+                Asimismo, la parte Compradora faculta expresamente a la parte Vendedora para que contrate los servicios precisos para la puesta en funcionamiento del conjunto 
+                residencial, y cuyo importe le será satisfecho por la parte Compradora en el momento de la entrega de llaves, procediéndose a practicar la oportuna liquidación y 
+                justificación de tales gastos.
+                </p>
+                <p class="parrafoJustificado">
+                La parte Compradora confiere poder a favor de la parte Vendedora, tan amplio y necesario como en Derecho se requiera, comprometiéndose a otorgar poder notarial, 
+                si fuera necesario, para que ejercite libremente los derechos y facultades reconocidos en la presente estipulación.
+                </p>
+                <br/>
+                <p><b>DECIMOTERCERA. - PROHIBICIÓN DE INTERMEDIARIOS</b></p>
+                <p class="parrafoJustificado">
+                La parte COMPRADORA manifiesta que actúa en su propio nombre y derecho y nunca como intermediario de terceros, por lo que la escritura pública de compraventa del 
+                Inmueble no podrá tener lugar a favor de persona o entidad distinta que LA COMPRADORA, aunque sea LA COMPRADORA quien presente a esa persona o entidad a LA VENDEDORA. 
+                Por tanto, se prohíbe a LA COMPRADORA la cesión de los derechos derivados del presente documento privado de compraventa a favor de terceros, salvo que cuente con la 
+                autorización previa y escrita por parte de LA VENDEDORA.
+                </p>
+                <br/>
+                <p><b>DECIMOCUARTA.- PROTECCIÓN DE DATOS</b></p>
+                <p class="parrafoJustificado">
+                En cumplimiento de la normativa vigente de protección de datos, los datos de los intervinientes en el presente contrato, así como 
+                cualquier otro que pudiera generarse durante su vigencia, serán tratados por ambas partes, de conformidad con la legislación vigente en 
+                materia de Protección de Datos, de manera confidencial y únicamente con la finalidad de atender y garantizar el buen fin del mismo. 
+                Así mismo, dichos datos no serán comunicados ni puestos a disposición de terceros a salvo de que así fueran requeridos por las Autoridades 
+                y/o por exigencia legal.
+                </p>
+                <p class="parrafoJustificado">
+                Cada parte responderá por el incumplimiento de la legislación en materia de protección de datos, acordando indemnizar a la otra parte 
+                por todas y cada una de las pérdidas y/o responsabilidades, incluyendo sanciones y penalizaciones, que la parte no infractora pueda sufrir 
+                como resultado del incumplimiento de dicha normativa.
+                </p>
+                <ul>
+                <li>
+                <p class="parrafoJustificado">
+                Por parte del vendedor los datos serán tratados por OSORIO DIRECTORSHIP, S.L. como responsable, con domicilio social en calle Emisora, 20, 28224, 
+                Pozuelo de Alarcón, Madrid, con la finalidad de ejecutar el presente contrato, así como para la gestión y administración del mismo. Sus datos serán 
+                obligatorios para dicha finalidad, por lo que su negativa a proporcionarlos imposibilitara realizar la compraventa de la vivienda objeto de este contrato.
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                Igualmente les informamos que dichos datos serán comunicados a AVINTIA DESARROLLOS INMOBILIARIOS S.L, con domicilio social en la Calle Emisora, 20, 28224, 
+                Pozuelo de Alarcón, Madrid, como empresa matriz que participa en su capital, con la finalidad de gestionar sus datos como clientes e incorporarlos en sus 
+                sistemas, así como la atención y control de calidad de los mismos, e informarle de novedades de productos y servicios de empresas de AVINTIA DESARROLLOS INMOBILIARIOS S.L. 
+                Sus datos serán obligatorios para las mencionadas finalidades, por lo que su negativa a proporcionarlos imposibilitara la ejecución del presente contrato.
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                Asimismo, le comunicamos que sus datos personales serán conservados durante la duración del contrato, y el tiempo necesario para cumplir con las distintas 
+                obligaciones legales que incumben al responsable. Por otro lado, sus datos podrán ser comunicados a distintas Administraciones Publicas para dar cumplimiento 
+                a las obligaciones (fiscales, administrativas, legales…) de los responsables. Por el contrario, no serán objeto de transferencia internacional a países ubicados 
+                fuera de la Unión Europea. En caso de que fuese necesario, los responsables adaptaran las garantías adecuadas conforme a la normativa vigente.
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                Le informamos que sus datos serán cedidos a la entidad financiera con la que se negocie la financiación de la promoción, con el objetivo de formalizar cuantos 
+                contratos, avales y cualquier otro documento que tenga como fin el afianzamiento de cantidades entregadas por los clientes, así como la obtención y tramitación 
+                de la referida financiación.  A estos efectos se adjunta Anexo II documento de cesión de datos a la entidad financiadora de la promoción.
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                En cualquier momento podrá ejercer sus derechos, en los términos legalmente previstos, dirigiendo una comunicación por escrito a AVINTIA DESARROLLOS 
+                INMOBILIARIOS S.L.: C/Emisora, 20-Pozuelo de Alarcón-28224 Madrid, indicando en el mismo: ADI – LOPD. En dicha comunicación deberá indicar el derecho que 
+                quiere ejercer, los datos o conjunto de datos personales objeto de su reclamación y aportar su documento de identidad en vigor.
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                Para cualquier duda o reclamación respecto al tratamiento de datos personales podrá contactar con nuestro Delegado de Protección de Datos, a través de la 
+                dirección de correo electrónico: dpo@grupoavintia.com .
+                </p>
+                </li>
+                <li>
+                <p class="parrafoJustificado">
+                Por último, en el supuesto de que considere que el ejercicio de sus derechos no ha sido debidamente atendido, tendrá derecho a interponer una reclamación 
+                ante la Agencia Española de Protección de Datos como autoridad de control. Puede acceder a la información de sus derechos y del supervisor en la materia en: www.agpd.es.</p>
+                </li>
+                </ul>
+                <br/>
+                <p><b>DECIMOQUINTA.- PREVENCIÓN DEL BLANQUEO DE CAPITALES.</b></p>
+                <p class="parrafoJustificado">
+                La parte VENDEDORA declara que es sujeto obligado de la normativa de prevención de blanqueo de capitales de 
+                conformidad con la Ley 10/2010, de 28 de abril de prevención del blanqueo de capitales y de la financiación 
+                del terrorismo y su normativa de desarrollo, debiendo cumplir, entre otros requisitos, los deberes de diligencia
+                debida que la normativa exige, como el de recabar de sus clientes su documentación identificativa, así como información
+                suficiente para conocer el origen de los fondos para adquirir el/los inmueble/s, la naturaleza de su actividad profesional
+                o empresarial, y sin la cual, la futura operación de compraventa no podrá realizarse. 
+                </p>
+                <p class="parrafoJustificado">
+                La parte COMPRADORA, a los efectos de colaborar en el cumplimiento de la normativa de prevención de blanqueo de
+                capitales, declara en este acto, que el origen de los fondos utilizados para la adquisición del/los  inmueble/s 
+                objeto del presente contrato es legítimo, y por tanto no tiene relación alguna con dinero, capitales, bienes, fondos,
+                haberes, beneficios, valores o títulos provenientes de actividades delictivas conforme a la normativa penal vigente, 
+                comprometiéndose a facilitar a la VENDEDORA aquélla documentación e información que ésta le solicite, al objeto exclusivo
+                de dar cumplimiento a los deberes de diligencia debida exigidos por la referida normativa.
+                </p>
+                <p class="parrafoJustificado">
+                La parte COMPRADORA se compromete a facilitar a la parte VENDEDORA, la documentación actualizada referente a datos de
+                identificación, titularidad real, declaraciones, naturaleza de su actividad de negocio o ingresos, así como otra 
+                documentación de comprobación requerida, durante la vigencia del contrato o cada una de las fases que perfeccionan
+                la relación comercial. 
+                </p>
+                <p class="parrafoJustificado">
+                Queda informada la parte COMPRADORA, que en cumplimiento de la citada Ley, la parte VENDEDORA podrá requerir en cualquier
+                momento, información, justificación, documentación actualizada o adicional de la información entregada por la COMPRADORA. 
+                </p>
+                <p class="parrafoJustificado">
+                La parte COMPRADORA, por la presente, manifiesta expresamente que conoce y acepta que el cumplimiento de la Obligación de Prevención del Blanqueo 
+                es una condición indispensable o requisito previo e ineludible para el otorgamiento de la Escritura pública de Compraventa de la/s Finca/s y que, 
+                por tanto, el VENDEDOR estará facultado para resolver de pleno derecho el presente Contrato, quedando éste  nulo y sin efecto alguno si concurre 
+                cualquiera de las siguientes circunstancias: (i) que el Interesado no hubiere entregado en plazo al VENDEDOR la documentación y/o información necesaria 
+                para que este pueda efectuar la verificación del origen lícito de los fondos destinados al pago del precio de la compraventa; (ii) que, a juicio del 
+                VENDEDOR la documentación y/o información entregada por el Interesado resulte insuficiente para la  acreditación a que se refiere el punto (i) anterior 
+                en atención a lo dispuesto en la Normativa sobre Prevención del Blanqueo; y/o (iii) que cualquiera de los titulares reales del COMPRADOR se encuentre investigado 
+                y/o encausado  en cualesquiera causas judiciales relacionadas con delitos económicos. En caso de concurrir una o varias de las circunstancias a que se refieren 
+                los puntos (i) a (iii) anteriores, El VENDEDOR podrá resolver unilateralmente el presente Contrato, quedando éste nulo y sin efecto y, en consecuencia, el 
+                VENDEDOR recuperará la plena disponibilidad de la/s Finca/s y procederá a restituir al Interesado el importe íntegro que éste último hubiera entregado al VENDEDOR, 
+                sin derecho de las Partes a nada más pedir o reclamar por éste u otro concepto.
+                </p>
+                <br/>
+                <p><b>DECIMOSEXTA.- FUERO</b></p>
+                <p class="parrafoJustificado">
+                Para cuantas cuestiones puedan derivarse del presente documento, ambas partes, con renuncia de su fuero propio,
+                se someten a los Juzgados y Tribunales de 
+                <apex:outputText value=" {!promocion.Lugar_del_registro__c}" rendered="{!promocion.Lugar_del_registro__c!=null}"/>
+                <apex:outputText value=" __________ " rendered="{!promocion.Lugar_del_registro__c==null}" style="color:black;"/>, 
+                y como domicilio a efectos de notificaciones y requerimientos 
+                se establece el reseñado en el encabezamiento del presente documento.
+                </p>
+                <p class="parrafoJustificado">
+                Y en prueba de conformidad con cuanto antecede firman el presente documento en dos juegos de papel común y a un
+                solo efecto en el lugar y fecha en el encabezamiento indicado.
+                </p>
+                
+                <div class="firma">
+                    <table>
+                        <tr>
+                            <td style="width: 350px">
+                                <p>
+                                    Por la parte VENDEDORA
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    Por la parte COMPRADORA
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 350px">
+                                <p style="margin: 0"><apex:outputText value=" {!Promotora.name}" rendered="{!Promotora.name!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Promotora.name==null}" style="color:black;"/>
+                                </p>
+                                <p style="margin: 0">
+                                    Fdo. 
+                                    <apex:outputText value=" {!Apoderado.name}" rendered="{!Apoderado.name!=null}"/>
+                                    <apex:outputText value=" __________ " rendered="{!Apoderado.name==null}" style="color:black;"/>
+                                </p>
+                            </td>
+                            <td>
+                                <apex:repeat value="{!Titulares}" var="Titular">
+                                    <p style="margin-top: 0px">
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Fdo. 
+                                        <apex:outputText value=" {!Titular.name}" rendered="{!Titular.name!=null}"/>
+                                        <apex:outputText value=" __________ " rendered="{!Titular.name==null}" style="color:black;"/>
+                                        <br/>
+                                        <br/>
+                                    </p>
+                                </apex:repeat> 
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="saltoDePagina">
+                <div>
+                <b>CALENDARIO DE PAGOS (EN EUROS, IVA NO INCLUÍDO)</b>
+                <br/>
+                <br/>
+                </div>
+
+                <div>
+                    <table class="tablaPlaPagos" width="50%">
+                    <tr>
+                    <td style="border: 1px solid black;" width="25%">
+                    TOTAL
+                    </td>
+                    <td style="border: 1px solid black;" width="25%">
+                    {!StrOpporAmount} €
+                    </td>
+                    </tr> 
+                    </table>
+                    <apex:outputPanel rendered="{!oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA'}">
+                    <table class="tablaPlaPagos" width="50%">
+                    <tr>
+                    <td style="border: 1px solid black;" width="50%">
+                    CONTRATO DE ARRAS 
+                    </td>
+                    <td style="border: 1px solid black;" width="50%">
+                    {!StrOpporReserv} €
+                    </td>
+                    </tr>
+                    </table>
+                    </apex:outputPanel>
+
+                    <apex:outputPanel rendered="{!oportunidad.Tipo_de_Reserva__c == 'Reserva con IVA'}">
+                    <table class="tablaPlaPagos" width="50%">
+                    <tr>
+                    <td style="border: 1px solid black;" width="50%">
+                    <table width="50%">
+                    <tr>
+                    <td width="100%">
+                    CONTRATO PRIVADO DE COMPRAVENTA
+                    </td>
+                    </tr>
+                    </table>
+                    </td>
+                    <td style="border: 1px solid black;" width="50%">
+                    <table width="50%">
+                    <tr>
+                    <td width="100%">
+                    {!StrContratoPrivado} €
+                    </td>
+                    </tr>
+                    </table>
+                    </td>
+                    </tr>
+                    </table>
+                    </apex:outputPanel> 
+                    <apex:outputPanel rendered="{!oportunidad.Tipo_de_Reserva__c == 'Reserva sin IVA'}">
+                    <table class="tablaPlaPagos" width="50%">
+                    <tr>
+                    <td style="border: 1px solid black;" width="50%">
+                    <table width="50%">
+                    <tr>
+                    <td width="100%">
+                    CONTRATO PRIVADO DE COMPRAVENTA
+                    </td>
+                    </tr>
+                    </table>
+                    </td>
+                    <td style="border: 1px solid black;" width="50%">
+                    <table width="50%">
+                    <tr>
+                    <td width="100%">
+                    {!StrOpporImpEntrada} €
+                    </td>
+                    </tr>
+                    </table>
+                    </td>
+                    </tr>
+                    </table>
+                    </apex:outputPanel> 
+                    <table class="tablaPlaPagos" width="50%">
+                    <apex:repeat value="{!fechaPrimeraCuotaList}" var="fechaPrimeraCuota">
+                    <tr>
+                    <td style="border: 1px solid black;" width="50%">
+                    {!fechaPrimeraCuota}
+                    </td>
+                    <td style="border: 1px solid black;" width="50%">
+                    {!StrOpporImpCuota} €
+                    </td>
+                    </tr>
+                    </apex:repeat> 
+                    <apex:repeat value="{!cuotasExtraListForm}" var="cuotaExtra">
+                    <tr>
+                    <td style="border: 1px solid black;" width="50%">
+                    CUOTA EXTRA
+                    </td>
+                    <td style="border: 1px solid black;" width="50%">
+                    {!cuotaExtra} €
+                    </td>
+                    </tr>
+                    </apex:repeat> 
+                    <tr>
+                    <td style="border: 1px solid black;" width="50%">
+                    ESCRITURA
+                    </td>
+                    <td style="border: 1px solid black;" width="50%">
+                    {!StrOpporImpEscritura} €
+                    </td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="anexo">
+                <div>
+                    <b>ANEXO CESION DATOS ENTIDAD FINANCIERA</b>
+                    <br/>
+                    <br/>
+                </div>
+                <div>
+                    <p class="parrafoJustificado">
+                        <apex:outputPanel rendered="{!IF(cliente.recordtype.developername == 'PersonAccount',  true, false)}">
+                            <apex:variable var="count" value="{!0}" />
+                            <apex:repeat value="{!Titulares}" var="Titular">
+                                <apex:outputText value="{!IF (count > 0, ' y; ', ' ')}"/>
+                                Don/Dña. 
+                                <apex:outputText value=" {!Titular.Cliente__r.name}" rendered="{!Titular.Cliente__r.name!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.name==null}" style="color:black;"/>
+                                , mayor de edad, con domicilio en 
+                                <apex:outputText value=" {!Titular.Cliente__r.DP_Tipo_de_vIa__c}" rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Tipo_de_vIa__c==null}" style="color:black;"/>
+                                <apex:outputText value=" {!Titular.Cliente__r.DP_Nombre_via__c}" rendered="{!Titular.Cliente__r.DP_Nombre_via__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Nombre_via__c==null}" style="color:black;"/>
+                                , número 
+                                <apex:outputText value=" {!Titular.Cliente__r.DP_N_via__c}" rendered="{!Titular.Cliente__r.DP_N_via__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_N_via__c==null}" style="color:black;"/>
+                                CP 
+                                <apex:outputText value=" {!Titular.Cliente__r.DP_Codigo_postal__c}" rendered="{!Titular.Cliente__r.DP_Codigo_postal__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.DP_Codigo_postal__c==null}" style="color:black;"/> 
+                                ,
+                                <apex:outputText value=" {!Titular.Cliente__r.Tipo_de_documento__c}" rendered="{!Titular.Cliente__r.Tipo_de_documento__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Tipo_de_documento__c==null}" style="color:black;"/>
+                                 num.
+                                <apex:outputText value=" {!Titular.Cliente__r.N_Documento__c}" rendered="{!Titular.Cliente__r.N_Documento__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.N_Documento__c==null}" style="color:black;"/>
+                                , con nº de teléfono
+                                <apex:outputText value=" {!Titular.Cliente__r.Phone}" rendered="{!Titular.Cliente__r.Phone!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.Phone==null}" style="color:black;"/>
+                                 y correo electrónico 
+                                <apex:outputText value=" {!Titular.Cliente__r.PersonEmail}" rendered="{!Titular.Cliente__r.PersonEmail!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!Titular.Cliente__r.PersonEmail==null}" style="color:black;"/>
+                                , comprador de la vivienda sita en
+                                <apex:outputText value=" {!inmueble.Tipo_de_via__c}" rendered="{!inmueble.Tipo_de_via__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.Tipo_de_via__c==null}" style="color:black;"/>
+                                <apex:outputText value=" {!inmueble.Nombre_Via__c}" rendered="{!inmueble.Nombre_Via__c!=null}"/>
+                                <apex:outputText value=" __________ " rendered="{!inmueble.Nombre_Via__c==null}" style="color:black;"/>
+                                num. 
+                                <apex:outputText value=" {!inmueble.N_Via__c}" rendered="{!inmueble.N_Via__c!=null}"/>
+                                <apex:outputText value=" " rendered="{!inmueble.N_Via__c==null}" style="color:black;"/>
+                                 de
+                                <apex:outputText value=" {!inmueble.Localidad__c}" rendered="{!inmueble.Localidad__c!=null}"/>
+                                <apex:outputText value=" " rendered="{!inmueble.Localidad__c==null}" style="color:black;"/>
+                                ,
+                             </apex:repeat>                              
+                            (en adelante, “la Vivienda”), mediante la suscripción del presente documento CONSIENTE Y AUTORIZA expresamente a OSORIO DIRECTOSHIP, S.L. 
+                            para que comunique a BANCO IBERCAJA, con NIF A-99319030, sus datos de contacto, con la finalidad de que esta última los trate con el objeto de 
+                            contactarle, telefónicamente o por correo electrónico, a los efectos de informarle de las posibilidades de financiación para la adquisición de 
+                            la Vivienda. Este consentimiento será revocable en cualquier momento, sin efectos retroactivos.
+                        </apex:outputPanel>                    
+                    </p>
+                    <p class="parrafoJustificado">
+                        Si usted lo consiente mediante la firma del presente documento, BANCO IBERCAJA (con NIF A-99319030 y domicilio en PLAZA DE BASILIO PARAISO 2, 
+                        CP 50008 ZARAGOZA), como responsable del tratamiento, tratará sus datos únicamente para finalidad indicada y mientras usted no se oponga al 
+                        consentimiento otorgado, siendo sus datos conservados a los únicos efectos de cumplir las obligaciones legales requeridas, y para la formulación, 
+                        ejercicio o defensa de reclamaciones. Puede contactar con el Delegado de Protección de datos de IBERCAJA a través de: dpo@Ibercaja.es.
+                    </p>
+                    <p class="parrafoJustificado">
+                        Asimismo, estos datos podrán ser comunicados a autoridades y organismos públicos, para el cumplimiento de una obligación legal requerida, 
+                        así como a proveedores de servicios y a terceros necesarios para la gestión y ejecución de las relaciones derivadas del servicio y/o contractuales.
+                    </p>
+                    <p class="parrafoJustificado">
+                        El titular de los datos de carácter personal podrá ejercer los derechos en relación a los mismos de acuerdo con la normativa vigente, en las 
+                        oficinas de BANCO IBERCAJA, en el correo electrónico dpo@Ibercaja.es o en www.ibercaja.es. Asimismo, puede dirigir las reclamaciones derivadas 
+                        del tratamiento de sus datos de carácter personal a la Agencia Española de Protección de Datos (www.agpd.es).                        
+                    </p>
+                </div>
+            </div>            
+    </body>
+</apex:page>

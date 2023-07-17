@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RV_ComprobarTareasParaCambiarEstado</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(  
+   OR( 
+
+     ISPICKVAL(Estado__c  , &apos;Configuración técnica&apos;) &amp;&amp;           
+     NOT(CONTAINS(TAREASCOMPLETADASPRUEBA__c, &apos;Alta promoción&apos;)),
+
+     ISPICKVAL(Estado__c  , &apos;Configuración comercial&apos;) &amp;&amp;
+      NOT(CONTAINS(TAREASCOMPLETADASPRUEBA__c, &apos;Asociación inmuebles&apos;)),
+
+
+     ISPICKVAL(Estado__c  , &apos;Documentación marketing&apos;) &amp;&amp;
+       NOT(CONTAINS(TAREASCOMPLETADASPRUEBA__c, &apos;Validación de documentación marketing&apos;)),
+
+ISPICKVAL(Estado__c  , &apos;Documentación marketing&apos;) &amp;&amp;
+       NOT(CONTAINS(TAREASCOMPLETADASPRUEBA__c, &apos;Validación de documentación marketing&apos;))
+
+
+     ),
+
+     
+true,
+false
+   
+)</errorConditionFormula>
+    <errorMessage>Se deben completar todas las tareas de un estado para poder pasar al siguiente</errorMessage>
+</ValidationRule>

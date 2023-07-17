@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Numero_de_mandato_SEPA__c</fullName>
+    <externalId>false</externalId>
+    <formula>Cliente__r.N_Documento__c + Opportunity__c +
+LEFT(&apos;00000000000&apos;,35-LEN(Cliente__r.N_Documento__c + Opportunity__c + TEXT (IF(Opportunity__r.Secuencial_Cuenta_Bancaria__c - 1 &lt; 0, 0, Opportunity__r.Secuencial_Cuenta_Bancaria__c - 1)))) +
+TEXT(IF(Opportunity__r.Secuencial_Cuenta_Bancaria__c &lt; 0, 0, Opportunity__r.Secuencial_Cuenta_Bancaria__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Número de mandato SEPA</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

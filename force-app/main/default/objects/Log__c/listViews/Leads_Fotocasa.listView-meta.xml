@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Leads_Fotocasa</fullName>
+    <columns>NAME</columns>
+    <columns>Aplicacion__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>MensajeRecibido__c</columns>
+    <columns>MensajeEnviado__c</columns>
+    <columns>identificador__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>equals</operation>
+        <value>CargaLeadsFotocasa</value>
+    </filters>
+    <label>Leads Fotocasa</label>
+</ListView>

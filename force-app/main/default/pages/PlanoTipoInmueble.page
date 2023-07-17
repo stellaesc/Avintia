@@ -1,0 +1,18 @@
+<apex:page standardController="Product2" extensions="PlanoTipoInmuebleController">
+   
+       
+      <apex:variable value="{!prefijo + imagen.id}" var="urlImagen"/> 
+      <div style="text-align: center">
+          <img class="img_slide" src="{!urlImagen}" />
+    </div>
+    
+
+
+    <script src="{!$Resource.jquery}"></script>
+    <script type="text/javascript">    
+        $(window).load(function() {
+            
+            $('.img_slide').height($(window).height());	
+        });
+    </script>
+</apex:page>

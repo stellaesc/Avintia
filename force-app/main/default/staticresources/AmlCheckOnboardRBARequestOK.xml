@@ -1,0 +1,17 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <ns3:onboardingRbaResponse xmlns:ns2="http://www.amlcheck.es/ws/clientbase/v1" xmlns:ns3="http://www.amlcheck.es/ws/onboarding/v1">
+         <ns2:returnCode>0</ns2:returnCode>
+         <ns2:returnCodeDescription/>
+         <ns2:persnume>0000001G</ns2:persnume>
+         <ns2:perscodi>P</ns2:perscodi>
+         <ns2:persiden>0000001G</ns2:persiden>
+         <ns2:idalerta>0</ns2:idalerta>
+         <ns2:idevidencia>0</ns2:idevidencia>
+         <ns2:rbalevel>risk.2.medium</ns2:rbalevel>
+         <ns2:rbarulecode/>
+         <ns2:rbarulecodedesc/>
+      </ns3:onboardingRbaResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

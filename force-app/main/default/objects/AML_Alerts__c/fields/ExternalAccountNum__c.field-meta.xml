@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExternalAccountNum__c</fullName>
+    <description>Numero identificador del cliente en los sistemas externos a AML</description>
+    <externalId>true</externalId>
+    <label>Nº Identificador externo cliente</label>
+    <length>50</length>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

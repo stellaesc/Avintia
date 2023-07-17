@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Promocion</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Promociones</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Formato Promocion</layout>
+        <sections>
+            <label></label>
+            <section>% Pagos y Penalización</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Condiciones de pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Configuración de contacto con cliente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contabilidad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos generales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Descripción Promoción</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle tipología</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Galería</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Hitos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Registro</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Plantillas Conga</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Plantillas Visualforce</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Precio Nº Dormitorios</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Promotora, Comercializadora y Constructora</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Prueba Componente VF</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Publicación en portales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Recursos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Representante Legal de la sociedad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Responsables de promoción</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ritmo de Ventas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Superficies</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ubicación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Zonas comunes</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>Recalcular_superficies</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>Submit_for_Approval_Tarifario</name>
+    </quickActions>
+    <sharingReasons>
+        <label></label>
+        <name>Departamento_Tecnico</name>
+    </sharingReasons>
+    <sharingReasons>
+        <label></label>
+        <name>Perfil_Compliance</name>
+    </sharingReasons>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>PorcentajesSuman100</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>RV_ComprobarTareasParaCambiarEstado</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>VR_FlujoFases</name>
+    </validationRules>
+    <webLinks>
+        <label></label>
+        <name>SendDocuSignPromocion</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>Use_HelloSign</name>
+    </webLinks>
+</CustomObjectTranslation>

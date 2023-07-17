@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_FlujoFases</fullName>
+    <active>true</active>
+    <description>Las fases deben seguir un flujo</description>
+    <errorConditionFormula>IF(  
+
+ISPICKVAL(PRIORVALUE(Fase__c),&quot;Anteproyecto&quot;) &amp;&amp;  ISPICKVAL(Fase__c, &quot;Comercialización&quot;) , 
+
+true,
+false
+)</errorConditionFormula>
+    <errorMessage>No se puede saltar la fase de proyecto</errorMessage>
+</ValidationRule>

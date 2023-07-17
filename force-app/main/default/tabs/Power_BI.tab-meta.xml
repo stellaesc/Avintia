@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <frameHeight>600</frameHeight>
+    <hasSidebar>false</hasSidebar>
+    <label>Power BI</label>
+    <mobileReady>false</mobileReady>
+    <motif>Custom97: Thermometer</motif>
+    <url>https://app.powerbi.com/reportEmbed?reportId=9211d75b-d0cd-45c5-a81f-f650a1b21ccb&amp;groupId=af6cb94c-3f18-4fcc-a611-7a4a50d65b0c&amp;autoAuth=true</url>
+    <urlEncodingKey>UTF-8</urlEncodingKey>
+</CustomTab>
