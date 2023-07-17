@@ -12,51 +12,6 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Idealista</fullName>
-                <default>false</default>
-                <label>Idealista</label>
-            </value>
-            <value>
-                <fullName>Caseta</fullName>
-                <default>false</default>
-                <label>Caseta</label>
-            </value>
-            <value>
-                <fullName>Fotocasa</fullName>
-                <default>false</default>
-                <label>Fotocasa</label>
-            </value>
-            <value>
-                <fullName>Web Corporativa</fullName>
-                <default>false</default>
-                <label>Web Corporativa</label>
-            </value>
-            <value>
-                <fullName>Otros</fullName>
-                <default>false</default>
-                <label>Otros</label>
-            </value>
-            <value>
-                <fullName>SIMA 2019</fullName>
-                <default>false</default>
-                <label>SIMA 2019</label>
-            </value>
-            <value>
-                <fullName>Globaliza</fullName>
-                <default>false</default>
-                <label>Globaliza</label>
-            </value>
-            <value>
-                <fullName>Housage</fullName>
-                <default>false</default>
-                <label>Housage</label>
-            </value>
-            <value>
-                <fullName>Habitaclia</fullName>
-                <default>false</default>
-                <label>Habitaclia</label>
-            </value>
-            <value>
                 <fullName>PUNTO DE VENTA</fullName>
                 <default>false</default>
                 <label>PUNTO DE VENTA</label>
@@ -67,29 +22,49 @@
                 <label>API</label>
             </value>
             <value>
-                <fullName>PUBLICIDAD EXTERIOR (CIRCUITO DE VALLA+BUS+BUZONEO)</fullName>
+                <fullName>PUBLICIDAD EXTERIOR</fullName>
                 <default>false</default>
-                <label>PUBLICIDAD EXTERIOR (CIRCUITO DE VALLA+BUS+BUZONEO)</label>
+                <label>PUBLICIDAD EXTERIOR</label>
             </value>
             <value>
-                <fullName>PORTALES INMOBILIARIOS</fullName>
+                <fullName>PUBICIDAD EN SUELO</fullName>
                 <default>false</default>
-                <label>PORTALES INMOBILIARIOS</label>
+                <label>PUBICIDAD EN SUELO</label>
             </value>
             <value>
-                <fullName>WEB AVINTIA INMOBILIARIA</fullName>
+                <fullName>PORTALES VERTICALES</fullName>
                 <default>false</default>
-                <label>WEB AVINTIA INMOBILIARIA</label>
+                <label>PORTALES VERTICALES</label>
             </value>
             <value>
-                <fullName>ONLINE (RRSS+ADWORDS+PROGRAMATICA)</fullName>
+                <fullName>INTERNET CAMPAÑAS</fullName>
                 <default>false</default>
-                <label>ONLINE (RRSS+ADWORDS+PROGRAMATICA)</label>
+                <label>INTERNET CAMPAÑAS</label>
             </value>
             <value>
-                <fullName>ACCIONES ESPECIALES (TORNEO GOLF +SIMA+CENTRO COMERCIAL+FLYER)</fullName>
+                <fullName>INTERNET PROPIOS</fullName>
                 <default>false</default>
-                <label>ACCIONES ESPECIALES (TORNEO GOLF +SIMA+CENTRO COMERCIAL+FLYER)</label>
+                <label>INTERNET PROPIOS</label>
+            </value>
+            <value>
+                <fullName>ACCIONES ESPECIALES</fullName>
+                <default>false</default>
+                <label>ACCIONES ESPECIALES</label>
+            </value>
+            <value>
+                <fullName>PRENSA, REVISTAS</fullName>
+                <default>false</default>
+                <label>PRENSA, REVISTAS</label>
+            </value>
+            <value>
+                <fullName>RECOMENDACIÓN</fullName>
+                <default>false</default>
+                <label>RECOMENDACIÓN</label>
+            </value>
+            <value>
+                <fullName>MARKETING DIRECTO</fullName>
+                <default>false</default>
+                <label>MARKETING DIRECTO</label>
             </value>
         </valueSetDefinition>
     </valueSet>
