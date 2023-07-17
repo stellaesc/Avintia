@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_TxtCliente__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Account.RecordType.Name = &apos;PersonAccount&apos;,&apos;El segundo en su propio nombre y derecho. En lo sucesivo “la parte COMPRADORA”.&apos;,
+
+&apos;El segundo en nombre y representación de la sociedad mercantil &apos; +  IF(ISBLANK(Account.Name), &quot;________&quot;, Account.Name) + &apos; domiciliada en &apos; + IF(ISBLANK(TEXT(Account.DP_Tipo_de_vIa__c)), &quot;________&quot;, TEXT(Account.DP_Tipo_de_vIa__c)) + &apos; &apos; + IF(ISBLANK(Account.DP_Nombre_via__c), &quot;________&quot;, Account.DP_Nombre_via__c) + &apos;, número &apos; + IF(ISBLANK(Account.NumeroViaText__c), &quot;________&quot;, Account.NumeroViaText__c) + &apos;, código postal &apos; + IF(ISBLANK(Account.DP_Codigo_postal__c), &quot;________&quot;, Account.DP_Codigo_postal__c) + &apos;; constituida mediante escritura autorizada por el notario de &apos; + IF(ISBLANK(Account.Lugar_del_registro__c), &quot;________&quot;, Account.Lugar_del_registro__c) + &apos;, Don &apos; + IF(ISBLANK(Account.Nombre_del_notario__c), &quot;________&quot;, Account.Nombre_del_notario__c) + &apos; el día &apos; +  IF(ISBLANK(Account.Fecha_de_Escritura__c ), &quot;________&quot;, TEXT(Account.Fecha_de_Escritura__c)) + &apos; con el número &apos; + IF(ISBLANK(Account.Numero_de_protocolo__c), &quot;________&quot;, TEXT(Account.Numero_de_protocolo__c)) + &apos; de protocolo, e inscrita en el Registro Mercantil de &apos; + IF(ISBLANK(Account.Lugar_del_registro__c), &quot;________&quot;, Account.Lugar_del_registro__c) + &apos; en el tomo &apos; + IF(ISBLANK(Account.Tomo__c), &quot;________&quot;, Account.Tomo__c) + &apos;, folio &apos; + IF(ISBLANK(Account.Folio__c), &quot;________&quot;, Account.Folio__c) + &apos;, hoja número &apos; + IF(ISBLANK(Account.N_Hoja__c), &quot;________&quot;, Account.N_Hoja__c) + &apos;, y en el Censo de Entidades Jurídicas del Ministerio de Hacienda con el CIF &apos; + IF(ISBLANK(Account.N_Documento__c), &quot;________&quot;, Account.N_Documento__c) + &apos;. Su representación y facultades derivan de su condición de &apos; + IF(ISBLANK(Promocion__r.Condicion__c), &quot;________&quot;, Promocion__r.Condicion__c) + &apos;, otorgada el día &apos; + IF(ISBLANK(Promocion__r.Fecha_de_escritura__c), &quot;________&quot;, TEXT(Promocion__r.Fecha_de_escritura__c)) + &apos;, ante el notario de &apos; + IF(ISBLANK(Promocion__r.Lugar_de_la_notaria__c), &quot;________&quot;, Promocion__r.Lugar_de_la_notaria__c) + &apos;, Don &apos; + IF(ISBLANK(Promocion__r.Nombre_notario__c), &quot;________&quot;, Promocion__r.Nombre_notario__c) + &apos; con número de protocolo &apos; + IF(ISBLANK(Promocion__r.Numero_de_protocolo__c), &quot;________&quot;, Promocion__r.Numero_de_protocolo__c) + &apos;. En lo sucesivo “la parte COMPRADORA”.&apos;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_TxtCliente</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

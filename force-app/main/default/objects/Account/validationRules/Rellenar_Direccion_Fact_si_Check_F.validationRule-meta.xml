@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rellenar_Direccion_Fact_si_Check_F</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+
+OR(
+  RecordType.Name= &quot;Cliente Empresa&quot;,
+  RecordType.Name= &quot;Cliente Personal&quot;),
+
+  Direcciones_iguales__c = FALSE,
+
+OR(
+  DF_Pais__r.Name  = &quot;España&quot;, 
+ DF_Pais__r.Name = &quot;&quot;),
+
+OR(  
+ ISBLANK( TEXT(DF_Tipo_de_via__c )),
+ ISBLANK( DF_Nombre_via__c ),
+ ISBLANK ( NumeroVia2Text__c ),
+ ISBLANK( DF_Pais__c ) ,
+ ISBLANK( DF_Localidad__c  ),
+ ISBLANK( DF_Codigo_postal__c )
+)
+)</errorConditionFormula>
+    <errorMessage>Introduzca la dirección de Facturación: Tipo de vía, Nombre de vía, Nº de vía, Pais,  Localidad y Código Postal</errorMessage>
+</ValidationRule>

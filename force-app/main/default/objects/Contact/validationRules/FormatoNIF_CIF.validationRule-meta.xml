@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FormatoNIF_CIF</fullName>
+    <active>true</active>
+    <description>- NIF: 9 dígitos y comenzar por un número.
+- NIE: comenzar por X, Y o Z, tener 7 dígitos y acabar por un número o letra.
+- CIF: 9 dígitos y comenzar por letra.</description>
+    <errorConditionFormula>OR( AND( ISPICKVAL(Tipo_de_documento__c, &apos;NIF&apos;),
+         NOT(REGEX(N_Documento__c, &quot;[0-9]{8}[A-Z]{1}&quot;)) ),
+    AND( ISPICKVAL(Tipo_de_documento__c, &apos;NIE&apos;),
+         AND( NOT(REGEX(N_Documento__c, &quot;[X-Z]{1}[0-9]{8}&quot;)),
+             NOT(REGEX(N_Documento__c, &quot;[X-Z]{1}[0-9]{7}[A-Z]{1}&quot;)) ) ),
+    AND( ISPICKVAL(Tipo_de_documento__c, &apos;CIF&apos;),
+         NOT(REGEX(N_Documento__c, &quot;[A-Z]{1}[0-9]{8}&quot;)) )
+)</errorConditionFormula>
+    <errorMessage>El formato de documento introducido es erróneo. Un NIF debe tener 9 dígitos empezando por número. Un NIE debe tener 9 dígitos empezando por X, Y o Z. Un CIF debe tener 9 dígitos empezando por letra.</errorMessage>
+</ValidationRule>

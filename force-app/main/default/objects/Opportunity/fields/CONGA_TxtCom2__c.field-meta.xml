@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_TxtCom2__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Account.RecordType.DeveloperName = &apos;PersonAccount&apos;,&apos;&apos;, &apos;. Constituida mediante escritura otorgada en Madrid el día &apos; + IF(ISBLANK(Account.Fecha_de_Escritura__c), &quot;________&quot;, TEXT(Account.Fecha_de_Escritura__c)) + &apos; ante la notario &apos; + IF(ISBLANK(Account.Nombre_del_notario__c), &quot;________&quot;, Account.Nombre_del_notario__c) + &apos;, con el número &apos; + IF(ISBLANK(Account.Numero_de_protocolo__c), &quot;________&quot;, TEXT(Account.Numero_de_protocolo__c)) + &apos;. de protocolo, que se inscribió en el Registro Mercantil de &apos; + IF(ISBLANK(Account.Lugar_del_registro__c), &quot;________&quot;, Account.Lugar_del_registro__c) + &apos;, en el tomo &apos; + IF(ISBLANK(Account.Tomo__c), &quot;________&quot;, Account.Tomo__c) + &apos;, folio &apos; + IF(ISBLANK(Account.Fecha_de_Escritura__c ), &quot;________&quot;, TEXT(Account.Fecha_de_Escritura__c)) + &apos; con el número &apos; + IF(ISBLANK(Account.Numero_de_protocolo__c), &quot;________&quot;, TEXT(Account.Numero_de_protocolo__c)) + &apos; de protocolo, e inscrita en el Registro Mercantil de &apos; + IF(ISBLANK(Account.Lugar_del_registro__c), &quot;________&quot;, Account.Lugar_del_registro__c) + &apos; en el tomo &apos; + IF(ISBLANK(Account.Tomo__c), &quot;________&quot;, Account.Tomo__c) + &apos;, folio &apos; + IF(ISBLANK(Account.Folio__c), &quot;________&quot;, Account.Folio__c) + &apos;, hoja número &apos; + IF(ISBLANK(Account.N_Hoja__c), &quot;________&quot;, Account.N_Hoja__c) + &apos;.  e inscripción 1ª.&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_TxtCom2</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

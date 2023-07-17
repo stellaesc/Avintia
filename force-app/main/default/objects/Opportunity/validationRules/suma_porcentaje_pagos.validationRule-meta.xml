@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>suma_porcentaje_pagos</fullName>
+    <active>true</active>
+    <errorConditionFormula>(Pago_Escritura__c + Pago_Contrato_al_contado__c + Pago_Contrato__c) != 1</errorConditionFormula>
+    <errorMessage>La suma de los porcentajes de los pagos debe ser del 100%</errorMessage>
+</ValidationRule>

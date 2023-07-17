@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedir_motivo_de_descarte_si_no_interesa</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+
+ ISPICKVAL( Resultado_contacto__c , &quot;No interesado&quot;),
+ ISBLANK(TEXT ( Motivo_de_descarte__c )) 
+)</errorConditionFormula>
+    <errorDisplayField>Motivo_de_descarte__c</errorDisplayField>
+    <errorMessage>Introduzca un motivo de descarte</errorMessage>
+</ValidationRule>

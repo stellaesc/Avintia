@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalFacturasEscrituracion__c</fullName>
+    <description>Sumatoria de facturas abonadas y cobrados para Conga</description>
+    <externalId>false</externalId>
+    <label>Total Facturas Escrituración</label>
+    <summarizedField>Factura__c.Importe_factura_con_IVA__c</summarizedField>
+    <summaryFilterItems>
+        <field>Factura__c.Estado_de_la_factura__c</field>
+        <operation>equals</operation>
+        <value>Cobrada, Cobrada, Abonada</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Factura__c.Tipo_de_factura__c</field>
+        <operation>notEqual</operation>
+        <value>DEPOSITOS, FACTURA RECTIFICATIVA</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Factura__c.Oportunidad__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

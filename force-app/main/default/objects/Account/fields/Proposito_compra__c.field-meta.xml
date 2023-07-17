@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proposito_compra__c</fullName>
+    <externalId>false</externalId>
+    <label>Proposito de compra</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Inversión</fullName>
+                <default>false</default>
+                <label>Inversión</label>
+            </value>
+            <value>
+                <fullName>Vivienda habitual</fullName>
+                <default>false</default>
+                <label>Vivienda habitual</label>
+            </value>
+            <value>
+                <fullName>Segunda residencia</fullName>
+                <default>false</default>
+                <label>Segunda residencia</label>
+            </value>
+            <value>
+                <fullName>Para un tercero (Hijo)</fullName>
+                <default>false</default>
+                <label>Para un tercero (Hijo)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mostrar_precio_a_comerciales__c</fullName>
+    <defaultValue>true</defaultValue>
+    <externalId>false</externalId>
+    <label>Mostrar precio a comerciales</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AllOpportunities</fullName>
+    <columns>Promocion__c</columns>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Verificando_PBC__c</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>Descripcion_Viviendas__c</columns>
+    <columns>Fecha_firma_Contrato_Compraventa__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Promocion__c</field>
+        <operation>contains</operation>
+        <value>ALCORCON</value>
+    </filters>
+    <label>All Opportunities</label>
+</ListView>

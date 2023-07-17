@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_TxtResC__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(OR(ISPICKVAL(Tipo_de_Reserva__c, &apos;Reserva sin IVA&apos;), ISPICKVAL(Tipo_de_Reserva__c, &apos;Reserva con IVA&apos;)),&apos;La cantidad de &apos; + IF(ISBLANK(Importe_plan_de_pagos_real__c),&apos; _________ &apos; ,TEXT(Importe_plan_de_pagos_real__c)) + &apos;€, más I.V.A. (lo que supone un total de &apos; + IF(OR(ISBLANK(Importe_plan_de_pagos_real__c), ISBLANK(Porcentaje_IVA__c)),&apos; _________ &apos; ,TEXT(Importe_plan_de_pagos_real__c * (1 + Porcentaje_IVA__c))) + &apos; €), se pagará en &apos; + IF(ISBLANK(N_Cuotas__c ),&apos; _________ &apos; ,TEXT(N_Cuotas__c )) + &apos; plazos de &apos; + IF(ISBLANK(Importe_Cuota_Extra__c),&apos; _________ &apos; ,TEXT(Importe_Cuota_Extra__c)) + &apos;€ más I.V.A. cada uno durante la construcción, con vencimiento mensual y sucesivos, a partir del &apos; + IF(ISBLANK(Fecha_de_primera_cuota__c),&apos; _________ &apos; ,  TEXT(DAY(Fecha_de_primera_cuota__c)) + &apos; del &apos; + TEXT(MONTH(Fecha_de_primera_cuota__c)) + &apos; de &apos; + TEXT(YEAR(Fecha_de_primera_cuota__c))) + IF(OR(ISBLANK(Numero_Cuotas_Extra__c), Numero_Cuotas_Extra__c &lt; 0),&apos;&apos;, &apos;; y la cantidad de &apos; + IF(OR(ISBLANK(Numero_Cuotas_Extra__c),ISBLANK(Importe_Cuota_Extra__c)),&apos; _________ &apos; ,TEXT(Numero_Cuotas_Extra__c * Importe_Cuota_Extra__c)) + &apos;€, más I.V.A. (lo que supone un total de &apos;  + IF(OR(ISBLANK(Numero_Cuotas_Extra__c),ISBLANK(Importe_Cuota_Extra__c),ISBLANK(Porcentaje_IVA__c)),&apos; _________ &apos; ,TEXT(Numero_Cuotas_Extra__c * Importe_Cuota_Extra__c * (1 + Porcentaje_IVA__c))) + &apos;€ ), se pagará en &apos; + IF(ISBLANK(Numero_Cuotas_Extra__c),&apos; _________ &apos; ,TEXT(Numero_Cuotas_Extra__c)) + &apos; plazos de &apos; + IF(ISBLANK(Importe_Cuota_Extra__c),&apos; _________ &apos; ,TEXT(Importe_Cuota_Extra__c)) + &apos;€ más I.V.A. cada uno.&apos;) + &apos;Se adjunta como ANEXO I&apos; + IF(ISPICKVAL(Tipo_de_Reserva__c, &apos;Reserva con IVA&apos;), &apos;I&apos;,&apos;&apos;) + &apos;calendario de pagos.&apos;, &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_TxtResC</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

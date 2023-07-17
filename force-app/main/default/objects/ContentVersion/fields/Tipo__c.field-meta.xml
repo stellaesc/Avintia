@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Imagen</fullName>
+                <default>false</default>
+                <label>Imagen</label>
+            </value>
+            <value>
+                <fullName>Archivo</fullName>
+                <default>false</default>
+                <label>Archivo</label>
+            </value>
+            <value>
+                <fullName>Plano</fullName>
+                <default>false</default>
+                <label>Plano</label>
+            </value>
+            <value>
+                <fullName>Pre-reserva</fullName>
+                <default>false</default>
+                <label>Pre-reserva</label>
+            </value>
+            <value>
+                <fullName>Justificante de pago</fullName>
+                <default>false</default>
+                <label>Justificante de pago</label>
+            </value>
+            <value>
+                <fullName>Reserva</fullName>
+                <default>false</default>
+                <label>Reserva</label>
+            </value>
+            <value>
+                <fullName>Borrador de contrato</fullName>
+                <default>false</default>
+                <label>Borrador de contrato</label>
+            </value>
+            <value>
+                <fullName>Contrato</fullName>
+                <default>false</default>
+                <label>Contrato</label>
+            </value>
+            <value>
+                <fullName>Factura</fullName>
+                <default>false</default>
+                <label>Factura</label>
+            </value>
+            <value>
+                <fullName>Imagen_carrusel</fullName>
+                <default>false</default>
+                <label>Imagen carrusel</label>
+            </value>
+            <value>
+                <fullName>Carrusel_lifestyle</fullName>
+                <default>false</default>
+                <label>Carrusel Lifestyle</label>
+            </value>
+            <value>
+                <fullName>Video</fullName>
+                <default>false</default>
+                <label>Video</label>
+            </value>
+            <value>
+                <fullName>Folleto</fullName>
+                <default>false</default>
+                <label>Folleto</label>
+            </value>
+            <value>
+                <fullName>Memoria_calidades</fullName>
+                <default>false</default>
+                <label>Memoria Calidades</label>
+            </value>
+            <value>
+                <fullName>Planos_zonas_comunes</fullName>
+                <default>false</default>
+                <label>Planos Zonas Comunes</label>
+            </value>
+            <value>
+                <fullName>Carrusel_entorno</fullName>
+                <default>false</default>
+                <label>Carrusel Entorno</label>
+            </value>
+            <value>
+                <fullName>Pie_de_web</fullName>
+                <default>false</default>
+                <label>Pie de web</label>
+            </value>
+            <value>
+                <fullName>Imagen_financiera</fullName>
+                <default>false</default>
+                <label>Imagen Financiera</label>
+            </value>
+            <value>
+                <fullName>Logo Promoción</fullName>
+                <default>false</default>
+                <label>Logo Promoción</label>
+            </value>
+            <value>
+                <fullName>Plano_PDF</fullName>
+                <default>false</default>
+                <label>Plano_PDF</label>
+            </value>
+            <value>
+                <fullName>Cuadro_superficies</fullName>
+                <default>false</default>
+                <label>Cuadro superficies</label>
+            </value>
+            <value>
+                <fullName>Video_Youtube</fullName>
+                <default>false</default>
+                <label>Video Youtube</label>
+            </value>
+            <value>
+                <fullName>Visita VR</fullName>
+                <default>false</default>
+                <label>Visita VR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

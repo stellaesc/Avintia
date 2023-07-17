@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Campos_obligatorios_Cliente_Personal</fullName>
+    <active>true</active>
+    <description>Obliga a informar determinados campos desde la etapa Pre-Reserva de la oportunidad</description>
+    <errorConditionFormula>AND (     Account.RecordType.Name = &quot;Cliente Personal&quot;, 
+
+
+                   OR(     ISBLANK( TEXT(    Account.Tipo_de_documento__c   )),  
+                           ISBLANK(    Account.N_Documento__c  ),  
+                           ISBLANK( TEXT(   Account.AccountSource   )),  
+                           ISBLANK( TEXT( Account.Estado_comercial__c )), 
+                           ISBLANK(       Account.PersonContact.Nacionalidad__c    ), 
+                           ISBLANK(      Account.DP_Pais__c   ), 
+                           ISBLANK(  TEXT(   Account.PersonContact.Sexo__c  )),  
+                           ISBLANK(    Account.PersonContact.Pais_nacimiento__c   ),  
+                           ISBLANK(   Account.PersonContact.Birthdate    ),
+                           ISBLANK( TEXT( Account.PersonContact.Estado_Civil__c )),
+                           ISBLANK( Account.PersonContact.Profesion__c  ),
+                           ISBLANK( TEXT(  Account.Situacion_laboral__c  )),                              
+                           ISBLANK( TEXT(   Account.PersonContact.Idioma_contacto__c   ))),
+
+       NOT (ISPICKVAL( StageName , &quot;Presupuesto&quot;)),
+
+      AND ($User.Username !=&apos;integracion@grupoavintia.com.pro&apos;,
+           $User.Username !=&apos;b2bmaintegration@00df20000019zcseam.ext&apos;)
+)</errorConditionFormula>
+    <errorMessage>Los siguientes campos de Cuenta deben estar informados: Tipo de documento, Nº Documento, Nacionalidad, País nacimiento, Sexo, Agregador origen Leads, Birthdate, Estado comercial, Estado civil, Profesión, Situación laboral, País_1, Idioma contacto</errorMessage>
+</ValidationRule>

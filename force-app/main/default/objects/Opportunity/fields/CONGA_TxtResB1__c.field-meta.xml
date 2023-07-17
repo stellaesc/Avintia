@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CONGA_TxtResB1__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(ISPICKVAL(Tipo_de_Reserva__c, &apos;Reserva sin IVA&apos;), NOT(ISBLANK(Importe_plan_de_pagos_real__c))),&apos;B) La cantidad de &apos; + IF(ISBLANK(Importe_plan_de_pagos_real__c),&apos; _________ &apos; ,TEXT(Importe_plan_de_pagos_real__c)) + &apos;€, Más I.V.A. (lo que supone un total de &apos; + IF(OR(ISBLANK(Importe_plan_de_pagos_real__c), ISBLANK(Porcentaje_IVA__c)),&apos; _________ &apos; ,TEXT(Importe_plan_de_pagos_real__c * (1 + Porcentaje_IVA__c))) + &apos;€) se pagará en &apos; + IF(ISBLANK(N_Cuotas__c),&apos; _________ &apos; ,TEXT(N_Cuotas__c)) + &apos; plazos de &apos; + IF(ISBLANK(Importe_de_Cuota__c),&apos; _________ &apos; ,TEXT(Importe_de_Cuota__c)) + &apos;€ más I.V.A. cada uno durante la construcción, con vencimiento mensual y sucesivos, a partir del &apos; + IF(ISBLANK(Fecha_de_primera_cuota__c),&apos; _________ &apos; ,  TEXT(DAY(Fecha_de_primera_cuota__c)) + &apos; del &apos; + TEXT(MONTH(Fecha_de_primera_cuota__c)) + &apos; de &apos; + TEXT(YEAR(Fecha_de_primera_cuota__c))) + &apos;. Se adjunta como ANEXO II calendario de pagos.&apos;,&apos;&apos;) + IF(ISPICKVAL(Tipo_de_Reserva__c, &apos;Reserva con IVA&apos;), IF(ISBLANK(Reserva__c), &apos;A) &apos;, &apos;B) &apos;) + &apos;La cantidad de &apos; + IF(OR(ISBLANK(Amount), ISBLANK(Pago_Contrato_al_contado__c), ISBLANK(Reserva__c)),&apos; _________ &apos; ,TEXT(Amount * Pago_Contrato_al_contado__c - Reserva__c)) + &apos;€, Más I.V.A., que hacen un total de &apos; + IF(OR(ISBLANK(Amount), ISBLANK(Pago_Contrato_al_contado__c), ISBLANK(Reserva__c), ISBLANK(Porcentaje_IVA__c)),&apos; _________ &apos; ,TEXT((Amount * Pago_Contrato_al_contado__c - Reserva__c) * (1 + Porcentaje_IVA__c))) + &apos;€  que la parte compradora  entrega en este acto  mediante cheque bancario/transferencia a la cuenta de la vendedora, que se acepta salvo buen fin, y cuya fotocopia se adjunta.&apos;
+
+,&apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CONGA_TxtResB1</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

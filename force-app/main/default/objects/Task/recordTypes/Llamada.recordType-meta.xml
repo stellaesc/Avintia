@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Llamada</fullName>
+    <active>true</active>
+    <description>Rt para tareas de llamada</description>
+    <label>Llamada</label>
+    <picklistValues>
+        <picklist>Estado_evento__c</picklist>
+        <values>
+            <fullName>Cancelado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Planificado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Realizado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Motivo_de_descarte__c</picklist>
+        <values>
+            <fullName>Otros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Precio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Promoción Vendida</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proyecto</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ubicación</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority</picklist>
+        <values>
+            <fullName>Baja</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resultado__c</picklist>
+        <values>
+            <fullName>Atención a comprador</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Descarte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No es posible contactar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Próxima tarea o evento</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resultado_contacto__c</picklist>
+        <values>
+            <fullName>Completada su información</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No interesado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visita Fijada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volver a contactarle</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status</picklist>
+        <values>
+            <fullName>Cancelada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subject</picklist>
+        <values>
+            <fullName>Agendar visita</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Quote</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subtipo__c</picklist>
+        <values>
+            <fullName>Atención a comprador</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Primer contacto</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seguimiento</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TareaAutomatica__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Llamada del cliente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Llamada del comercial</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

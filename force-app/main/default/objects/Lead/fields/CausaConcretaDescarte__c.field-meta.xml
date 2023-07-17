@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CausaConcretaDescarte__c</fullName>
+    <externalId>false</externalId>
+    <label>Causa Concreta Descarte</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Motivo_de_descarte__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Demasiado pronto</fullName>
+                <default>false</default>
+                <label>Demasiado pronto</label>
+            </value>
+            <value>
+                <fullName>Demasiado tarde</fullName>
+                <default>false</default>
+                <label>Demasiado tarde</label>
+            </value>
+            <value>
+                <fullName>Datos erróneos</fullName>
+                <default>false</default>
+                <label>Datos erróneos</label>
+            </value>
+            <value>
+                <fullName>No responde</fullName>
+                <default>false</default>
+                <label>No responde</label>
+            </value>
+            <value>
+                <fullName>Aplaza compra</fullName>
+                <default>false</default>
+                <label>Aplaza compra</label>
+            </value>
+            <value>
+                <fullName>Desiste de la compra</fullName>
+                <default>false</default>
+                <label>Desiste de la compra</label>
+            </value>
+            <value>
+                <fullName>Competencia</fullName>
+                <default>false</default>
+                <label>Competencia</label>
+            </value>
+            <value>
+                <fullName>Error</fullName>
+                <default>false</default>
+                <label>Error</label>
+            </value>
+            <value>
+                <fullName>Financiación</fullName>
+                <default>false</default>
+                <label>Financiación</label>
+            </value>
+            <value>
+                <fullName>Forma de pago</fullName>
+                <default>false</default>
+                <label>Forma de pago</label>
+            </value>
+            <value>
+                <fullName>Calidades</fullName>
+                <default>false</default>
+                <label>Calidades</label>
+            </value>
+            <value>
+                <fullName>Distribución</fullName>
+                <default>false</default>
+                <label>Distribución</label>
+            </value>
+            <value>
+                <fullName>Fachada</fullName>
+                <default>false</default>
+                <label>Fachada</label>
+            </value>
+            <value>
+                <fullName>Imprescindible terraza</fullName>
+                <default>false</default>
+                <label>Imprescindible terraza</label>
+            </value>
+            <value>
+                <fullName>Nº dormitorios</fullName>
+                <default>false</default>
+                <label>Nº dormitorios</label>
+            </value>
+            <value>
+                <fullName>Orientación</fullName>
+                <default>false</default>
+                <label>Orientación</label>
+            </value>
+            <value>
+                <fullName>Tamaño</fullName>
+                <default>false</default>
+                <label>Tamaño</label>
+            </value>
+            <value>
+                <fullName>Tipología</fullName>
+                <default>false</default>
+                <label>Tipología</label>
+            </value>
+            <value>
+                <fullName>Zonas comunes</fullName>
+                <default>false</default>
+                <label>Zonas comunes</label>
+            </value>
+            <value>
+                <fullName>Comunicaciones</fullName>
+                <default>false</default>
+                <label>Comunicaciones</label>
+            </value>
+            <value>
+                <fullName>Falta de servicios</fullName>
+                <default>false</default>
+                <label>Falta de servicios</label>
+            </value>
+            <value>
+                <fullName>Prestigio zona</fullName>
+                <default>false</default>
+                <label>Prestigio zona</label>
+            </value>
+            <value>
+                <fullName>Obra nueva</fullName>
+                <default>false</default>
+                <label>Obra nueva</label>
+            </value>
+            <value>
+                <fullName>Segunda mano</fullName>
+                <default>false</default>
+                <label>Segunda mano</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Calidades</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Distribución</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Fachada</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Imprescindible terraza</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Nº dormitorios</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Orientación</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Tamaño</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Tipología</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proyecto</controllingFieldValue>
+            <valueName>Zonas comunes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ubicación</controllingFieldValue>
+            <valueName>Comunicaciones</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ubicación</controllingFieldValue>
+            <valueName>Falta de servicios</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ubicación</controllingFieldValue>
+            <valueName>Prestigio zona</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Fecha de entrega</controllingFieldValue>
+            <valueName>Demasiado pronto</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Fecha de entrega</controllingFieldValue>
+            <valueName>Demasiado tarde</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Precio</controllingFieldValue>
+            <valueName>Financiación</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Precio</controllingFieldValue>
+            <valueName>Forma de pago</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Imposible contactar</controllingFieldValue>
+            <valueName>Datos erróneos</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Imposible contactar</controllingFieldValue>
+            <valueName>No responde</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Motivos personales</controllingFieldValue>
+            <valueName>Aplaza compra</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Motivos personales</controllingFieldValue>
+            <valueName>Desiste de la compra</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No interesado real</controllingFieldValue>
+            <valueName>Competencia</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No interesado real</controllingFieldValue>
+            <valueName>Error</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ya ha comprado</controllingFieldValue>
+            <valueName>Obra nueva</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ya ha comprado</controllingFieldValue>
+            <valueName>Segunda mano</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

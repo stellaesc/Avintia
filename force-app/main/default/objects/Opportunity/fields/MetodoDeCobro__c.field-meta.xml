@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MetodoDeCobro__c</fullName>
+    <externalId>false</externalId>
+    <label>Método de cobro</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>RECIBO</fullName>
+                <default>true</default>
+                <label>RECIBO</label>
+            </value>
+            <value>
+                <fullName>TRANSFERENCIA</fullName>
+                <default>false</default>
+                <label>TRANSFERENCIA</label>
+            </value>
+            <value>
+                <fullName>CHEQUE</fullName>
+                <default>false</default>
+                <label>CHEQUE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

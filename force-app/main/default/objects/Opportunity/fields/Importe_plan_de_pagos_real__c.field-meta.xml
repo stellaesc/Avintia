@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Importe_plan_de_pagos_real__c</fullName>
+    <description>Cantidad real a pagar en cuotas, teniendo en cuenta los decimales</description>
+    <externalId>false</externalId>
+    <formula>(Numero_Cuotas_Extra__c * Importe_Cuota_Extra__c) + (N_Cuotas__c*Importe_de_Cuota__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Cantidad real a pagar en cuotas</inlineHelpText>
+    <label>Importe plan de pagos real</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

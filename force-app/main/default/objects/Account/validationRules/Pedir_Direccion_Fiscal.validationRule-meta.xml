@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedir_Direccion_Fiscal</fullName>
+    <active>true</active>
+    <description>Introduzca la dirección Fiscal: Tipo de vía, Nombre de vía, Nº de vía, Pais, Provincia, Localidad y Código Postal</description>
+    <errorConditionFormula>AND(  
+ RecordType.Name= &quot;Cliente Empresa&quot;, 
+ Copiar_direccion_2__c = FALSE, 
+OR(
+ Pais_FISCAL__r.Name = &quot;España&quot;, 
+ Pais_FISCAL__r.Name = &quot;&quot;),
+
+OR( 
+ISBLANK( TEXT( Tipo_de_via_FISCAL__c )), 
+ISBLANK(  Nombre_de_via_FISCAL__c ), 
+ISBLANK (  NumeroViaFiscalText__c ), 
+ISBLANK(  Pais_FISCAL__c ) , 
+ISBLANK(  Localidad_FISCAL__c ), 
+ISBLANK(  Codigo_postal_FISCAL__c ) 
+) 
+)</errorConditionFormula>
+    <errorMessage>Introduzca la dirección Fiscal: Tipo de vía, Nombre de vía, Nº de vía, Pais, Localidad y Código Postal</errorMessage>
+</ValidationRule>

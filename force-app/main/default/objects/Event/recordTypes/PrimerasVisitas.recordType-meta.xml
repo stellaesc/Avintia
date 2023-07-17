@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PrimerasVisitas</fullName>
+    <active>true</active>
+    <description>Record Type para registrar visitas comerciales</description>
+    <label>Visitas Comerciales</label>
+    <picklistValues>
+        <picklist>Estado_evento__c</picklist>
+        <values>
+            <fullName>Cancelado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Planificado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Realizado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Motivo_de_descarte__c</picklist>
+        <values>
+            <fullName>Otros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Precio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Promoción Vendida</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proyecto</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ubicación</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resultado__c</picklist>
+        <values>
+            <fullName>Atención a comprador</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Descarte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No es posible contactar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Próxima tarea o evento</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resultado_contacto__c</picklist>
+        <values>
+            <fullName>Completada su información</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No interesado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visita Fijada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volver a contactarle</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subject</picklist>
+        <values>
+            <fullName>Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Letter%2FQuote</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subtipo__c</picklist>
+        <values>
+            <fullName>Presencial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Videollamada</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TareaAutomatica__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>1Visita</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1VisitaAgendada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VisitaYSiguientes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

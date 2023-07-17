@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Composer_Generar_Contrato_Compraventa_Aso</fullName>
+    <availability>online</availability>
+    <description>Originally created by Conga Solution Manager. Date of last use of Update Button from Conga Solution record: https://grupoavintia--despro--apxtconga4.cs30.visual.force.com/a0zn0000003JvKnAAK
+10-Jun-2020 12:01:08 PM</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>false</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>660</height>
+    <isResizable>false</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>Generar Contrato Compraventa Aso</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>/apex/APXTConga4__Conga_Composer?SolMgr=1
+&amp;serverUrl={!API.Partner_Server_URL_370}
+&amp;Id={!Opportunity.Id}
+
+&amp;QueryId=[Promotora]a0tn0000002ESwY%3Fpv0%3D{!Opportunity.CONGA_Socio_Empresa_Promotora_Id__c},
+[Inmuebles]a0tn0000002ESwx%3Fpv0%3D{!Opportunity.Id},
+[Apoderado]a0tn0000002ESx2%3Fpv0%3D{!Opportunity.CONGA_Contact_id__c},
+[Promocion]a0tn0000002ESwi%3Fpv0%3D{!Opportunity.CONGA_Promocion_ID__c},
+[Participante]a0tn0000002ESvp%3Fpv0%3D{!Opportunity.Id},
+[Titulares]a0tn0000002ESyZ%3Fpv0%3D{!Opportunity.Id},
+[Representantes]a0tn0000002ESx7%3Fpv0%3D{!Opportunity.Id}
+
+&amp;TemplateId=a11n00000010ghk
+
+&amp;TemplateGroup=CCAsociado
+&amp;DS7=1
+&amp;DS7Preview=1
+&amp;DefaultPDF=1</url>
+    <width>900</width>
+</WebLink>

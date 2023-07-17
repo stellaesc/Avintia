@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RV_ValidarFlujoTareasPromocion</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(ISNULL(Promocion__c) == false &amp;&amp; ISPICKVAL(Status  , &apos;Completed&apos;) ,
+
+     IF(NOT(CONTAINS(Promocion__r.TAREASCOMPLETADASPRUEBA__c, &apos;Alta promoción&apos;)) &amp;&amp; ISPICKVAL(Promocion__r.Estado__c, &apos;Carga de tipo de inmuebles&apos;),
+
+     true,
+     IF(NOT(CONTAINS(Promocion__r.TAREASCOMPLETADASPRUEBA__c, &apos;Carga de tipo de inmuebles&apos;)) &amp;&amp; ISPICKVAL(Promocion__r.Estado__c, &apos;Carga de inmuebles&apos;),
+       true,
+       IF(NOT(CONTAINS(Promocion__r.TAREASCOMPLETADASPRUEBA__c, &apos;Carga de inmuebles&apos;)) &amp;&amp; ISPICKVAL(Promocion__r.Estado__c, &apos;Asociación inmuebles&apos;),
+       true,
+       IF(NOT(CONTAINS(Promocion__r.TAREASCOMPLETADASPRUEBA__c, &apos;Asociación inmuebles&apos;)) &amp;&amp; ISPICKVAL(Promocion__r.Estado__c, &apos;Ajuste del tarifario&apos;),
+       true,
+         IF(NOT(CONTAINS(Promocion__r.TAREASCOMPLETADASPRUEBA__c, &apos;Ajuste del tarifario&apos;)) &amp;&amp; ISPICKVAL(Promocion__r.Estado__c, &apos;Ajuste del ritmo de ventas&apos;),
+         true,
+            IF(NOT(CONTAINS(Promocion__r.TAREASCOMPLETADASPRUEBA__c, &apos;Ajuste del ritmo de ventas&apos;)) &amp;&amp; ISPICKVAL(Promocion__r.Estado__c, &apos;Carga de documentación de marketing&apos;),
+            true,
+            IF(NOT(CONTAINS(Promocion__r.TAREASCOMPLETADASPRUEBA__c, &apos;Carga de documentación de marketing&apos;)) &amp;&amp; ISPICKVAL(Promocion__r.Estado__c, &apos;Validación de documentación marketing&apos;),
+true,
+false
+
+
+)
+)
+)
+)
+)
+)
+)
+,
+false
+)</errorConditionFormula>
+    <errorMessage>Debe seguir el orden de las tareas</errorMessage>
+</ValidationRule>

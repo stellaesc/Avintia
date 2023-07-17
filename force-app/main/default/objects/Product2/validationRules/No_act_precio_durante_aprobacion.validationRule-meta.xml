@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_act_precio_durante_aprobacion</fullName>
+    <active>true</active>
+    <description>Regla de validación para que no se pueda actualizar el precio ni el precio propuesto cuando el tarifario de la promoción asociada está pendiente de aprobación</description>
+    <errorConditionFormula>AND(
+ISCHANGED(Precio_propuesto__c),  Promocion__r.Pendiente_de_aprobacion_de_tarifario__c
+)</errorConditionFormula>
+    <errorMessage>No se puede actualizar el precio propuesto para inmuebles que están pendientes de aprobación en la promoción.</errorMessage>
+</ValidationRule>

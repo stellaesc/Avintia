@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Medio_de_conocimiento__c</fullName>
+    <externalId>false</externalId>
+    <label>Origen de Lead</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>LeadSource</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Medio_de_conocimiento</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>INTERNET PROPIOS</controllingFieldValue>
+            <valueName>FACEBOOK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>INTERNET PROPIOS</controllingFieldValue>
+            <valueName>INSTAGRAM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>INTERNET PROPIOS</controllingFieldValue>
+            <valueName>LINKEDIN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>INTERNET PROPIOS</controllingFieldValue>
+            <valueName>WEB SOLDIT HOMES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>INTERNET PROPIOS</controllingFieldValue>
+            <valueName>WEBS GRUPO AVINTIA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ACCIONES ESPECIALES</controllingFieldValue>
+            <valueName>ACCIÓN CENTRO COMERCIAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ACCIONES ESPECIALES</controllingFieldValue>
+            <valueName>SIMA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ACCIONES ESPECIALES</controllingFieldValue>
+            <valueName>ACCIÓN EVENTO DEPORTIVO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ACCIONES ESPECIALES</controllingFieldValue>
+            <valueName>URBE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRENSA, REVISTAS</controllingFieldValue>
+            <valueName>DAILY BULLETIN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRENSA, REVISTAS</controllingFieldValue>
+            <valueName>PROPIEDADES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRENSA, REVISTAS</controllingFieldValue>
+            <valueName>MALLORCA MAGAZINE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRENSA, REVISTAS</controllingFieldValue>
+            <valueName>MALLORCA ZEITUNG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRENSA, REVISTAS</controllingFieldValue>
+            <valueName>PUBLIHABITAT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PUNTO DE VENTA</controllingFieldValue>
+            <valueName>WALK-IN CUSTOMER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>BALEARIC PROPERTIES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>CASA NOVA PROPERTIES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>CORAL CASAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>ENGEL MALLORCA INVEST</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>FIRST CLASS MALLORCA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>FIRST MALLORCA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>G.W. INVESTMENT - Rudy Allramsede</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>GUTBIER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>IMMO-EXPERTS GMBH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>IMPERIAL PROPERTIES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>OCEAN 7 - Peter Hanraths</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>PORTA MALLORQUINA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>REDHAWK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>SOLVIA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>SOTHEBY&apos;S</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>STRACHWITZ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>TONI DA SILVA PROPERTIES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>YES MALLORCA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>OLIVARES CONSULTORES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>CASAS NUEVAS IBIZA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>ENGEL &amp; VÖLKERS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API</controllingFieldValue>
+            <valueName>GRUPO PINEDA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RECOMENDACIÓN</controllingFieldValue>
+            <valueName>REFERIDO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RECOMENDACIÓN</controllingFieldValue>
+            <valueName>EMPLEADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RECOMENDACIÓN</controllingFieldValue>
+            <valueName>CLIENTE OTRA PROMOCIÓN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MARKETING DIRECTO</controllingFieldValue>
+            <valueName>BUZONEO / REPARTO EN MANO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PUBLICIDAD EXTERIOR</controllingFieldValue>
+            <valueName>MUPI / OPI / MARQUESINA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PUBLICIDAD EXTERIOR</controllingFieldValue>
+            <valueName>VALLA ENTORNO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PUBLICIDAD EXTERIOR</controllingFieldValue>
+            <valueName>MEDIOS DE TRANSPORTE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PUBLICIDAD EN SUELO</controllingFieldValue>
+            <valueName>VALLA EN SUELO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PORTALES VERTICALES</controllingFieldValue>
+            <valueName>FOTOCASA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PORTALES VERTICALES</controllingFieldValue>
+            <valueName>GLOBALIZA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PORTALES VERTICALES</controllingFieldValue>
+            <valueName>HABITACLIA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PORTALES VERTICALES</controllingFieldValue>
+            <valueName>IDEALISTA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PORTALES VERTICALES</controllingFieldValue>
+            <valueName>HOUSEAGE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PORTALES VERTICALES</controllingFieldValue>
+            <valueName>La madre de las cooperativas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PORTALES VERTICALES</controllingFieldValue>
+            <valueName>PISOS.COM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>INTERNET CAMPAÑAS</controllingFieldValue>
+            <valueName>DISPLAY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>INTERNET CAMPAÑAS</controllingFieldValue>
+            <valueName>GOOGLE ADS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>INTERNET CAMPAÑAS</controllingFieldValue>
+            <valueName>PROGRAMÁTICA</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>
