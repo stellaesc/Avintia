@@ -55,6 +55,10 @@
                 <behavior>Edit</behavior>
                 <field>VentaMasiva__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Campaign__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -72,6 +76,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Medio_de_procedencia__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Medio_de_conocimiento__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>

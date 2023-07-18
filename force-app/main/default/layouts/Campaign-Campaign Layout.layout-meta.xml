@@ -24,6 +24,10 @@
                 <behavior>Edit</behavior>
                 <field>Type</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Promocion__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -298,6 +302,7 @@
         <fields>CAMPAIGN.NAME</fields>
         <fields>CAMPAIGN.TOT_NUM_RESPONSES</fields>
         <fields>CAMPAIGN.TOTAL_NUM_LEADS</fields>
+        <fields>CAMPAIGN.TOT_CONTACTS</fields>
         <fields>TOT_AMOUNT_ALL</fields>
         <fields>CAMPAIGN.TOT_OPPORTUNITIES</fields>
         <fields>TOT_AMOUNT_WON</fields>

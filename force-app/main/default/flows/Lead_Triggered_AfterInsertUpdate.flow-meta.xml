@@ -4,13 +4,14 @@
         <description>Enviar Email Alert de bienvenida al Lead.</description>
         <name>Action_EnviarEmailAlert</name>
         <label>Action_Enviar Email Alert</label>
-        <locationX>182</locationX>
-        <locationY>1127</locationY>
+        <locationX>512</locationX>
+        <locationY>1031</locationY>
         <actionName>Lead.Enviar_email_bienvenida</actionName>
         <actionType>emailAlert</actionType>
         <connector>
             <targetReference>Decision_PaisDistintoNuloEspanya</targetReference>
         </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>SObjectRowId</name>
             <value>
@@ -18,12 +19,13 @@
             </value>
         </inputParameters>
     </actionCalls>
+    <apiVersion>57.0</apiVersion>
     <decisions>
         <description>Comprobar si el candidato está asociado a una promoción.</description>
         <name>Decision_EsLeadAsociadoPromocion</name>
         <label>Decision_Es Lead asociado a promocion</label>
-        <locationX>314</locationX>
-        <locationY>1007</locationY>
+        <locationX>644</locationX>
+        <locationY>923</locationY>
         <defaultConnector>
             <targetReference>Decision_PaisDistintoNuloEspanya</targetReference>
         </defaultConnector>
@@ -55,8 +57,8 @@
         <description>Comprobar si el candidato está asociado a una promoción o si la promoción ha cambiado.</description>
         <name>Decision_EsLeadAsociadoPromocionOCambio</name>
         <label>Decision_Es Lead asociado a promocion o cambió?</label>
-        <locationX>314</locationX>
-        <locationY>671</locationY>
+        <locationX>644</locationX>
+        <locationY>623</locationY>
         <defaultConnector>
             <targetReference>Decision_EsLeadAsociadoPromocion</targetReference>
         </defaultConnector>
@@ -95,8 +97,8 @@
         <description>Comprobar si el candidato es de la promoción Web to Lead relleno y si es nuevo.</description>
         <name>Decision_EsWebToLeadNuevo</name>
         <label>Decision_Es Web to Lead y Nuevo?</label>
-        <locationX>314</locationX>
-        <locationY>335</locationY>
+        <locationX>644</locationX>
+        <locationY>323</locationY>
         <defaultConnector>
             <targetReference>Decision_EsLeadAsociadoPromocionOCambio</targetReference>
         </defaultConnector>
@@ -125,11 +127,134 @@
         </rules>
     </decisions>
     <decisions>
+        <description>Verificar si existe una campaña correspondiente al Lead.</description>
+        <name>Decision_ExisteCampaign</name>
+        <label>Decision_Existe Campaña</label>
+        <locationX>182</locationX>
+        <locationY>1739</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>ExisteCampaign_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Campaign</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_CampaignMember</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Verificar si existe la campaña nueva correspondiente al Lead.</description>
+        <name>Decision_ExisteCampaignNueva</name>
+        <label>Decision_Existe Campaña Nueva</label>
+        <locationX>710</locationX>
+        <locationY>2147</locationY>
+        <defaultConnector>
+            <targetReference>Update_Lead_BlanquearCampaign</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>ExisteCampaignNueva_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_CampaignNueva</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_CampaignMember_Nuevo</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si existe un miembro de campa antiguo al Lead.</description>
+        <name>Decision_ExisteMiembroCampaignAntiguo</name>
+        <label>Decision_ExisteMiembroCampañaAntiguo</label>
+        <locationX>710</locationX>
+        <locationY>1739</locationY>
+        <defaultConnector>
+            <targetReference>Get_CampaignNueva</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>ExisteMiembroCampaignAntiguo_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_OldCampaignMember</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delete_CampaignMember</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobar si el lead tiene Origen de Lead al crearse o ha sido cambiado en una modificación.</description>
+        <name>Decision_OrigenCambiadoOLeadNuevo</name>
+        <label>Decision_Origen cambiado O lead nuevo</label>
+        <locationX>644</locationX>
+        <locationY>1523</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OrigenCambiadoOLeadNuevo_Nuevo</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>For_EsNuevo</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Medio_de_conocimiento__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Campaign</targetReference>
+            </connector>
+            <label>Nuevo</label>
+        </rules>
+        <rules>
+            <name>OrigenCambiadoOLeadNuevo_OrigenCambiado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Medio_de_conocimiento__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_OldCampaignMember</targetReference>
+            </connector>
+            <label>Origen cambiado</label>
+        </rules>
+    </decisions>
+    <decisions>
         <description>Comprobar si el País es distinto de España y que no sea nulo.</description>
         <name>Decision_PaisDistintoNuloEspanya</name>
         <label>Decision_Pais distinto a nulo y España?</label>
-        <locationX>314</locationX>
-        <locationY>1343</locationY>
+        <locationX>644</locationX>
+        <locationY>1223</locationY>
+        <defaultConnector>
+            <targetReference>Decision_OrigenCambiadoOLeadNuevo</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
             <name>PaisDistintoNuloEspanya_Si</name>
@@ -190,7 +315,9 @@
             <label>España Sí</label>
         </rules>
     </decisions>
-    <description>Flujo del objeto Lead que se lanza al crear o actualizar un registro.</description>
+    <description>Flujo del objeto Lead que se lanza al crear o actualizar un registro.
+13/07 MSC: Añadir el proceso para incluir el Lead en una campaña.</description>
+    <environments>Default</environments>
     <formulas>
         <description>formula que devuelve Verdadero si el registro es nuevo.</description>
         <name>For_EsNuevo</name>
@@ -230,12 +357,161 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Crear un miembro de campaña incluyendo al Lead en la campa correspondiente.</description>
+        <name>Create_CampaignMember</name>
+        <label>Create_CampaignMember</label>
+        <locationX>50</locationX>
+        <locationY>1847</locationY>
+        <connector>
+            <targetReference>Update_Lead_Campaign</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>CampaignId</field>
+            <value>
+                <elementReference>Get_Campaign.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LeadId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>CampaignMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>Crear el miembro de campaña correspondiente a la nueva campaña.</description>
+        <name>Create_CampaignMember_Nuevo</name>
+        <label>Create_CampaignMember_Nuevo</label>
+        <locationX>578</locationX>
+        <locationY>2255</locationY>
+        <connector>
+            <targetReference>Update_Lead_NuevaCampaign</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>CampaignId</field>
+            <value>
+                <elementReference>Get_CampaignNueva.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LeadId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>CampaignMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordDeletes>
+        <description>Eliminar miembro de campaña antiguo..</description>
+        <name>Delete_CampaignMember</name>
+        <label>Delete_CampaignMember</label>
+        <locationX>578</locationX>
+        <locationY>1847</locationY>
+        <connector>
+            <targetReference>Get_CampaignNueva</targetReference>
+        </connector>
+        <inputReference>Get_OldCampaignMember</inputReference>
+    </recordDeletes>
+    <recordLookups>
+        <description>Obtener la campaña correspondiente al lead por promoción y origen.</description>
+        <name>Get_Campaign</name>
+        <label>Get_Campaign</label>
+        <locationX>182</locationX>
+        <locationY>1631</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_ExisteCampaign</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Promocion__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>$Record.Medio_de_conocimiento__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Campaign</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener la nueva campaña correspondiente al Lead.</description>
+        <name>Get_CampaignNueva</name>
+        <label>Get_Campaign</label>
+        <locationX>710</locationX>
+        <locationY>2039</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_ExisteCampaignNueva</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Promocion__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>$Record.Medio_de_conocimiento__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Campaign</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener el miembro de campaña antiguo del Lead.</description>
+        <name>Get_OldCampaignMember</name>
+        <label>Get_OldCampaignMember</label>
+        <locationX>710</locationX>
+        <locationY>1631</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_ExisteMiembroCampaignAntiguo</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>LeadId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>CampaignId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Campaign__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CampaignMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <description>Actualizar el Lead blanqueando el campo &apos;Dirección Extranjera&apos;.</description>
         <name>Update_Lead_BlanqueaDireccion</name>
         <label>Update_Lead_Blanquea dirección</label>
-        <locationX>314</locationX>
-        <locationY>1463</locationY>
+        <locationX>644</locationX>
+        <locationY>1331</locationY>
+        <connector>
+            <targetReference>Decision_OrigenCambiadoOLeadNuevo</targetReference>
+        </connector>
         <inputAssignments>
             <field>Direccion_Extranjera_lead__c</field>
             <value>
@@ -248,8 +524,11 @@
         <description>Actualizar el Lead blanqueando el campo &apos;Localidad&apos;.</description>
         <name>Update_Lead_BlanqueaLocalidad</name>
         <label>Update_Lead_Blanquea Localidad</label>
-        <locationX>50</locationX>
-        <locationY>1463</locationY>
+        <locationX>380</locationX>
+        <locationY>1331</locationY>
+        <connector>
+            <targetReference>Decision_OrigenCambiadoOLeadNuevo</targetReference>
+        </connector>
         <inputAssignments>
             <field>Localidad__c</field>
             <value>
@@ -259,11 +538,50 @@
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <recordUpdates>
+        <description>Actualizar el Lead blanqueando el campo Campaign al no encontrar campaña correspondiente.</description>
+        <name>Update_Lead_BlanquearCampaign</name>
+        <label>Update_Lead_BlanquearCampaign</label>
+        <locationX>842</locationX>
+        <locationY>2255</locationY>
+        <inputAssignments>
+            <field>Campaign__c</field>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el campo de campaña del Lead.</description>
+        <name>Update_Lead_Campaign</name>
+        <label>Update_Lead_Campaign</label>
+        <locationX>50</locationX>
+        <locationY>1955</locationY>
+        <inputAssignments>
+            <field>Campaign__c</field>
+            <value>
+                <elementReference>Get_Campaign.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el Lead modificando el campo de Campaign poniendo la nueva campaña.</description>
+        <name>Update_Lead_NuevaCampaign</name>
+        <label>Update_Lead_NuevaCampaign</label>
+        <locationX>578</locationX>
+        <locationY>2363</locationY>
+        <inputAssignments>
+            <field>Campaign__c</field>
+            <value>
+                <elementReference>Get_CampaignNueva.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
         <description>Actualizar el campo Promoción del candidato.</description>
         <name>Update_Lead_Promocion</name>
         <label>Update_Lead_Promocion</label>
-        <locationX>182</locationX>
-        <locationY>455</locationY>
+        <locationX>512</locationX>
+        <locationY>431</locationY>
         <connector>
             <targetReference>Decision_EsLeadAsociadoPromocionOCambio</targetReference>
         </connector>
@@ -275,14 +593,23 @@
         </inputAssignments>
         <inputReference>$Record</inputReference>
     </recordUpdates>
-    <startElementReference>Decision_EsWebToLeadNuevo</startElementReference>
+    <start>
+        <locationX>518</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_EsWebToLeadNuevo</targetReference>
+        </connector>
+        <object>Lead</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
     <status>Active</status>
     <subflows>
         <description>Inicia el sublujo &quot;Asignación Candidatos&quot;</description>
         <name>Subflow_AsignacionLeadsComercialesAPI</name>
         <label>Subflow_Asignación de Leads a comerciales API</label>
-        <locationX>182</locationX>
-        <locationY>791</locationY>
+        <locationX>512</locationX>
+        <locationY>731</locationY>
         <connector>
             <targetReference>Decision_EsLeadAsociadoPromocion</targetReference>
         </connector>
@@ -299,5 +626,6 @@
                 <elementReference>$Record.Promocion__c</elementReference>
             </value>
         </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </subflows>
 </Flow>

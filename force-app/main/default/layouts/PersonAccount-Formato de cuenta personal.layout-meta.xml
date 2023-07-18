@@ -61,6 +61,10 @@
                 <behavior>Edit</behavior>
                 <field>Estado_comercial__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Promocion__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -110,6 +114,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Fecha1Visita__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Campaign__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
