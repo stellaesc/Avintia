@@ -2,84 +2,41 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
    
     <types>
-        <members>Account</members>
-        <members>AccountContactRelation</members>
-        <members>ActiveScratchOrg</members>
-        <members>Activity</members>
-         <members>Asset</members>
-          <members>AssetRelationship</members>
-           <members>AssociatedLocation</members>
-            <members>AuthorizationForm</members>
-             <members>AuthorizationFormConsent</members>
-              <members>AuthorizationFormDataUse</members>
-               <members>AuthorizationFormText</members>
-                <members>BusinessBrand</members>
-                 <members>Campaign</members>
-                  <members>CampaignInfluence</members>
-                   <members>CampaignMember</members>
-                     <members>Case</members>
-                       <members>CommSubscription</members>
-                         <members>CommSubscriptionChannelType</members>
-                           <members>CommSubscriptionConsent</members>
-                             <members>CommSubscriptionTiming</members>
-                               <members>Contact</members>
-                               <members>ContactPointAddress</members>
-                               <members>ContactPointConsent</members>
-                               <members>ContactPointEmail</members>
-                               <members>ContactPointPhone</members>
-                               <members>ContactPointTypeConsent</members>
-                               <members>ContactRequest</members>
-                               <members>ContentVersion</members>
-                               <members>Contract</members>
-                               <members>Customer</members>
-                               <members>DataUseLegalBasis</members>
-                                <members>DataUsePurpose</members>
-                                 <members>DuplicateRecordItem</members>
-                                  <members>DuplicateRecordSet</members>
-                                   <members>EmailContent</members>
-                                    <members>EmailMessage</members>
-                                     <members>EngagementChannelType</members>
-                                      <members>Event</members>
-                                       <members>ForecastingCustomData</members>
-                                        <members>Image</members>
-                                         <members>Individual</members>
-                                          <members>LandingPage</members>
-                                           <members>Lead</members>
-                                            <members>ListEmail</members>
-                                             <members>Location</members>
-                                              <members>LocationTrustMeasure</members>
-                                               <members>Macro</members>
-                                                <members>MarketingForm</members>
-                                                 <members>MarketingLink</members>
-                                                  <members>Opportunity</members>
-                                                   <members>OpportunityContactRole</members>
-                                                    <members>OpportunityLineItem</members>
-                                                     <members>Order</members>
-                                                      <members>OrderItem</members>
-                                                       <members>PartyConsent</members>
-                                                        <members>PersonAccount</members>
-                                                         <members>Pricebook2</members>
-                                                          <members>PricebookEntry</members>
-                                                           <members>ProcessException</members>
-                                                            <members>Product2</members>
-                                                             <members>Product2</members>
-                                                              <members>Quote</members>
-                                                               <members>QuoteLineItem</members>
-                                                                <members>Recommendation</members>
-                                                                <members>Scorecard</members>
-                                                                <members>ScorecardAssociation</members>
-                                                                <members>ScorecardMetric</members>
-                                                                <members>ScratchOrgInfo</members>
-                                                                <members>Seller</members>
-                                                                <members>Snippet</members>
-                                                                <members>SocialPersona</members>
-                                                                   <members>SocialPost</members>
-                                                                      <members>Task</members>
-                                                                         <members>User</members>  
-                                                                          <members>UserProvisioningRequest</members>
-                                                                             <members>SurveySubject</members>
-<name>CustomObject</name>
+      <members>*</members>
+      <name>LeadConvertSettings</name>
     </types>
-    
-    <version>44.0</version>
+    <types>
+      <members>Cuenta_Triggered_AfetrInsertUpdate</members>
+        <members>Lead_Triggered_AfterInsertUpdate</members>
+          <members>Opportunity_Triggered_AfterInsertUpdate</members>
+      <name>flow</name>
+    </types>
+    <types>
+      <members>Cuenta_Triggered_AfetrInsertUpdate</members>
+        <members>Lead_Triggered_AfterInsertUpdate</members>
+          <members>Opportunity_Triggered_AfterInsertUpdate</members>
+      <name>flowDefinition</name>
+    </types>
+    <types>
+      <members>Campaign-Campaign Layout</members>
+       <members>Lead-Lead Layout Admin</members>
+        <members>Lead-Lead Layout</members>
+         <members>Opportunity-Facturación por separado layout</members>
+          <members>Opportunity-Opportunity Layout</members>
+           <members>PersonAccount-Formato de cuenta personal</members>
+      <name>Layout</name>
+    </types>
+    <types>
+      <members>Account.Campaign__c</members>
+       <members>Account.Promocion__c</members>
+       <members>Campaign.Promocion__c</members>
+        <members>Contact.Campaign__c</members>
+        <members>Contact.Promocion__c</members>
+       <members>Lead.Campaign__c</members>
+         <members>Opportunity.Campaign__c</members>
+           <members>Opportunity.Medio_de_conocimiento__c</members>
+             <members>Opportunity.Medio_de_procedencia__c</members>
+      <name>CustomField</name>
+    </types>
+    <version>57.0</version>
 </Package>
