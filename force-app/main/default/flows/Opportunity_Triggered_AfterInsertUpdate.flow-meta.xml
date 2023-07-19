@@ -11,6 +11,7 @@
         <connector>
             <targetReference>Update_Oportunidad_AuxEtapaContrato</targetReference>
         </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>SObjectRowId</name>
             <value>
@@ -29,6 +30,7 @@
         <connector>
             <targetReference>Update_Oportunidad_AUXEtapaReserva</targetReference>
         </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>SObjectRowId</name>
             <value>
@@ -36,6 +38,7 @@
             </value>
         </inputParameters>
     </actionCalls>
+    <apiVersion>58.0</apiVersion>
     <decisions>
         <description>Comprobar si la promoción de la oportunidad ha cambiado o si es nueva la oportunidad con promoción.</description>
         <name>Decision_CambiaPromocion</name>
@@ -266,6 +269,7 @@
             <connector>
                 <targetReference>EmailAlert_OportunidadEtapaContrato</targetReference>
             </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
             <label>Sí</label>
         </rules>
     </decisions>
@@ -299,6 +303,7 @@
             <connector>
                 <targetReference>EmailAlert_OportunidadEtapaReserva</targetReference>
             </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
             <label>Sí</label>
         </rules>
     </decisions>
@@ -333,7 +338,9 @@
         </rules>
     </decisions>
     <description>Flujo del Objeto &apos;Oportunidad&apos; que se lanza al crear o editar el registro.
-06/07 MSC: Partes del PBs &quot;PB_OportunidadCancelada&quot; y workflows.</description>
+06/07 MSC: Partes del PBs &quot;PB_OportunidadCancelada&quot; y workflows.
+13/07 MSC: Rellenar Campaign y Origen.</description>
+    <environments>Default</environments>
     <formulas>
         <description>Formula que devuelve verdadero si el campo Fecha Pre-Reserva de la oportunidad es blanco.</description>
         <name>For_IsBlankFechaPreReserva</name>
@@ -452,6 +459,12 @@
             <targetReference>Decision_RegimenSeparacionBienes</targetReference>
         </connector>
         <inputAssignments>
+            <field>Campaign__c</field>
+            <value>
+                <elementReference>$Record.Account.Campaign__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>Fecha_de_Escrituracion__c</field>
             <value>
                 <elementReference>$Record.Promocion__r.Inicio_de_escrituraciones__c</elementReference>
@@ -467,6 +480,12 @@
             <field>Importe_Cuota_Extra__c</field>
             <value>
                 <elementReference>$Record.Promocion__r.Importe_Cuota_Extra__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Medio_de_conocimiento__c</field>
+            <value>
+                <elementReference>$Record.Account.Medio_de_conocimiento__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -597,7 +616,16 @@
         </inputAssignments>
         <inputReference>$Record</inputReference>
     </recordUpdates>
-    <startElementReference>Decision_EstadoOportunidad</startElementReference>
+    <start>
+        <locationX>452</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_EstadoOportunidad</targetReference>
+        </connector>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
     <status>Active</status>
     <subflows>
         <description>Iniciar el flujo Cambio del Estado del inmueble pasando el estado Apalabrado.</description>

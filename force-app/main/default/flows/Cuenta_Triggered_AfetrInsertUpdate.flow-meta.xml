@@ -5,9 +5,13 @@
         <name>Action_EmailAlert</name>
         <label>Action_EmailAlert</label>
         <locationX>314</locationX>
-        <locationY>4271</locationY>
+        <locationY>3839</locationY>
         <actionName>Account.Aviso_alerta_de_riesgo_en_el_cliente</actionName>
         <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Decision_EsPersonOrigenCambiado</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>SObjectRowId</name>
             <value>
@@ -20,9 +24,13 @@
         <name>Action_EmailAlertContact</name>
         <label>Action_EmailAlert</label>
         <locationX>50</locationX>
-        <locationY>4271</locationY>
+        <locationY>3839</locationY>
         <actionName>Contact.Aviso_alerta_de_riesgo_en_el_cliente_Contacto</actionName>
         <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Decision_EsPersonOrigenCambiado</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>SObjectRowId</name>
             <value>
@@ -30,12 +38,13 @@
             </value>
         </inputParameters>
     </actionCalls>
+    <apiVersion>57.0</apiVersion>
     <assignments>
         <description>Actualizar la dirección extranjera PB con la dirección extranjera 2.</description>
         <name>Assign_Cuenta_ActualizaDireccionExtranjeraPB</name>
         <label>Assign_Cuenta_Actualiza dirección extranjera PB</label>
         <locationX>248</locationX>
-        <locationY>3143</locationY>
+        <locationY>2831</locationY>
         <assignmentItems>
             <assignToReference>AccountToUpdate.DireccionExtranjeraPB__c</assignToReference>
             <operator>Assign</operator>
@@ -59,7 +68,7 @@
         <name>Assign_Cuenta_ActualizaDireccionExtranjeraPB02</name>
         <label>Assign_Cuenta_Actualiza Dirección Extranjera PB</label>
         <locationX>116</locationX>
-        <locationY>3479</locationY>
+        <locationY>3131</locationY>
         <assignmentItems>
             <assignToReference>AccountToUpdate.DireccionExtranjeraPB__c</assignToReference>
             <operator>Assign</operator>
@@ -83,7 +92,7 @@
         <name>Assign_Cuenta_ActualizaDireccionExtranjeraPB03</name>
         <label>Assign_Cuenta_Actualiza Dirección Extranjera PB</label>
         <locationX>380</locationX>
-        <locationY>3479</locationY>
+        <locationY>3131</locationY>
         <assignmentItems>
             <assignToReference>AccountToUpdate.DireccionExtranjeraPB__c</assignToReference>
             <operator>Assign</operator>
@@ -107,7 +116,7 @@
         <name>Assign_Cuenta_BlanqueaDireccionExtranjera</name>
         <label>Assign_Cuenta_Blanquea dirección extranjera</label>
         <locationX>248</locationX>
-        <locationY>2135</locationY>
+        <locationY>1931</locationY>
         <assignmentItems>
             <assignToReference>AccountToUpdate.Localidad_Extranjera_P__c</assignToReference>
             <operator>Assign</operator>
@@ -138,7 +147,7 @@
         <name>Assign_Cuenta_BlanqueaDireccionExtranjera2</name>
         <label>Assign_Cuenta_Blanquea dirección extranjera 2</label>
         <locationX>248</locationX>
-        <locationY>2471</locationY>
+        <locationY>2231</locationY>
         <assignmentItems>
             <assignToReference>AccountToUpdate.Direccion_Extranjera_F__c</assignToReference>
             <operator>Assign</operator>
@@ -169,7 +178,7 @@
         <name>Assign_Cuenta_BlanqueaDireccionExtranjera3</name>
         <label>Assign_Cuenta_Blanquea dirección extranjera 3</label>
         <locationX>248</locationX>
-        <locationY>2807</locationY>
+        <locationY>2531</locationY>
         <assignmentItems>
             <assignToReference>AccountToUpdate.Direccion_Extranjera_FISCAL__c</assignToReference>
             <operator>Assign</operator>
@@ -200,7 +209,7 @@
         <name>Assign_Cuenta_BlanqueaLocalidadFacturacion</name>
         <label>Assign_Cuenta_Blanquea localidad facturación</label>
         <locationX>248</locationX>
-        <locationY>1463</locationY>
+        <locationY>1331</locationY>
         <assignmentItems>
             <assignToReference>AccountToUpdate.DF_Localidad__c</assignToReference>
             <operator>Assign</operator>
@@ -224,7 +233,7 @@
         <name>Assign_Cuenta_BlanqueaLocalidadFiscal</name>
         <label>Assign_Cuenta_Blanquea localidad fiscal</label>
         <locationX>248</locationX>
-        <locationY>1127</locationY>
+        <locationY>1031</locationY>
         <assignmentItems>
             <assignToReference>AccountToUpdate.Localidad_FISCAL__c</assignToReference>
             <operator>Assign</operator>
@@ -248,7 +257,7 @@
         <name>Assign_Cuenta_BlanqueaLocalidadPersonasocial</name>
         <label>Assign_Cuenta_Blanquea localidad persona/social</label>
         <locationX>248</locationX>
-        <locationY>1799</locationY>
+        <locationY>1631</locationY>
         <assignmentItems>
             <assignToReference>AccountToUpdate.DP_Localidad__c</assignToReference>
             <operator>Assign</operator>
@@ -280,7 +289,7 @@
         <name>Decision_ActualizarCuenta</name>
         <label>Decision_Actualizar Cuenta?</label>
         <locationX>380</locationX>
-        <locationY>3695</locationY>
+        <locationY>3323</locationY>
         <defaultConnector>
             <targetReference>Decision_RespuestaAltaCambio</targetReference>
         </defaultConnector>
@@ -306,7 +315,7 @@
         <name>Decision_ActualizarExtranjeraPBPorEx1OIguales</name>
         <label>Decision_Actualizar Extranjera PB Por Ex 1 O Iguales</label>
         <locationX>380</locationX>
-        <locationY>3359</locationY>
+        <locationY>3023</locationY>
         <defaultConnector>
             <targetReference>Decision_ActualizarCuenta</targetReference>
         </defaultConnector>
@@ -361,7 +370,7 @@
         <name>Decision_CopiarDireccionFacturacion</name>
         <label>Decision_Copiar dirección facturación?</label>
         <locationX>380</locationX>
-        <locationY>335</locationY>
+        <locationY>323</locationY>
         <defaultConnector>
             <targetReference>Decision_CopiarDireccionFiscal</targetReference>
         </defaultConnector>
@@ -387,7 +396,7 @@
         <name>Decision_CopiarDireccionFiscal</name>
         <label>Decision_Copiar dirección fiscal?</label>
         <locationX>380</locationX>
-        <locationY>671</locationY>
+        <locationY>623</locationY>
         <defaultConnector>
             <targetReference>Decision_DomicilioFiscalNoEspanyol</targetReference>
         </defaultConnector>
@@ -420,7 +429,7 @@
         <name>Decision_DireccionExtranjeraFacturacionRellena</name>
         <label>Decision_Direccion Extranjera Facturación Rellena</label>
         <locationX>380</locationX>
-        <locationY>3023</locationY>
+        <locationY>2723</locationY>
         <defaultConnector>
             <targetReference>Decision_ActualizarExtranjeraPBPorEx1OIguales</targetReference>
         </defaultConnector>
@@ -446,7 +455,7 @@
         <name>Decision_DomicilioFacturacionNoEspanyol</name>
         <label>Decision_Domicilio Facturación no es español</label>
         <locationX>380</locationX>
-        <locationY>1343</locationY>
+        <locationY>1223</locationY>
         <defaultConnector>
             <targetReference>Decision_DomicilioPersonaSocialNoEspanyol</targetReference>
         </defaultConnector>
@@ -486,7 +495,7 @@
         <name>Decision_DomicilioFiscalNoEspanyol</name>
         <label>Decision_Domicilio Fiscal No Español</label>
         <locationX>380</locationX>
-        <locationY>1007</locationY>
+        <locationY>923</locationY>
         <defaultConnector>
             <targetReference>Decision_DomicilioFacturacionNoEspanyol</targetReference>
         </defaultConnector>
@@ -533,7 +542,7 @@
         <name>Decision_DomicilioPersonaSocialNoEspanyol</name>
         <label>Decision_Domicilio Persona/Social No Español</label>
         <locationX>380</locationX>
-        <locationY>1679</locationY>
+        <locationY>1523</locationY>
         <defaultConnector>
             <targetReference>Decision_PaisPersonaSocialEspanya</targetReference>
         </defaultConnector>
@@ -621,7 +630,7 @@
         <name>Decision_EsCuentaPersonal</name>
         <label>Decision_Es Cuenta Personal</label>
         <locationX>182</locationX>
-        <locationY>4151</locationY>
+        <locationY>3731</locationY>
         <defaultConnector>
             <targetReference>Action_EmailAlert</targetReference>
         </defaultConnector>
@@ -643,11 +652,93 @@
         </rules>
     </decisions>
     <decisions>
+        <description>Comprobar si la cuenta es personal y si el origen de cuenta ha cambiado.</description>
+        <name>Decision_EsPersonOrigenCambiado</name>
+        <label>Decision_Es Person Origen Cambiado</label>
+        <locationX>380</locationX>
+        <locationY>4115</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>EsPersonOrigenCambiado_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.IsPersonAccount</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Medio_de_conocimiento__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_CampaignMember_Antiguo</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Verificar si existe una campaña correspondiente.</description>
+        <name>Decision_ExisteCampaign</name>
+        <label>Decision_Existe Campaña</label>
+        <locationX>182</locationX>
+        <locationY>4739</locationY>
+        <defaultConnector>
+            <targetReference>Update_Account_BlanquearCampaign</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>ExisteCampaign_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Campaign</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_CampaignMember</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Verificar si existe un miembro de campaña antiguo.</description>
+        <name>Decision_ExisteMiembroCampaignAntiguo</name>
+        <label>Decision_ExisteMiembroCampañaAntiguo</label>
+        <locationX>182</locationX>
+        <locationY>4331</locationY>
+        <defaultConnector>
+            <targetReference>Get_Campaign</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>ExisteMiembroCampaignAntiguo_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_CampaignMember_Antiguo</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delete_CampaignMember_Antiguo</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
         <description>Comporbar si el País de la facturación es España</description>
         <name>Decision_PaisFacturacionEspanya</name>
         <label>Decision_Pais Facturación España</label>
         <locationX>380</locationX>
-        <locationY>2351</locationY>
+        <locationY>2123</locationY>
         <defaultConnector>
             <targetReference>Decision_PaisFiscalEspanya</targetReference>
         </defaultConnector>
@@ -687,7 +778,7 @@
         <name>Decision_PaisFiscalEspanya</name>
         <label>Decision_País Fiscal España</label>
         <locationX>380</locationX>
-        <locationY>2687</locationY>
+        <locationY>2423</locationY>
         <defaultConnector>
             <targetReference>Decision_DireccionExtranjeraFacturacionRellena</targetReference>
         </defaultConnector>
@@ -734,7 +825,7 @@
         <name>Decision_PaisPersonaSocialEspanya</name>
         <label>Decision_Pais Persona/Social España</label>
         <locationX>380</locationX>
-        <locationY>2015</locationY>
+        <locationY>1823</locationY>
         <defaultConnector>
             <targetReference>Decision_PaisFacturacionEspanya</targetReference>
         </defaultConnector>
@@ -774,7 +865,10 @@
         <name>Decision_RespuestaAltaCambio</name>
         <label>Decision_Respuesta alta cambió</label>
         <locationX>380</locationX>
-        <locationY>4031</locationY>
+        <locationY>3623</locationY>
+        <defaultConnector>
+            <targetReference>Decision_EsPersonOrigenCambiado</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>RespuestaAltaCambio_Si</name>
@@ -802,7 +896,9 @@
     <description>Flujo del Objeto &apos;Cuenta&apos; que se lanza al crear o editar el registro.
 17/04 MSC: WorkFlow &quot;Email alert comercial y usuarios PBC&quot;
 18/04 MSC: PBs &quot;PB_Account_Rellenar Dirección de Facturación y Fiscal&quot; y &quot;Blanquear campos si dirección no es española&quot;
-18/05 MSC: Rellenar campo Nº via 2</description>
+18/05 MSC: Rellenar campo Nº via 2
+13/07 MSC: Añadir proceso para añadir/quitar miembro de campaña.</description>
+    <environments>Default</environments>
     <formulas>
         <description>Convertir el valor del campo NumeroViaText__c en Número</description>
         <name>For_NumeroViaText</name>
@@ -837,12 +933,130 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Crear miembro de campaña correspondiente a la nueva campaña de la cuenta personal.</description>
+        <name>Create_CampaignMember</name>
+        <label>Create_CampaignMember</label>
+        <locationX>50</locationX>
+        <locationY>4847</locationY>
+        <connector>
+            <targetReference>Update_Account_Campaign</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>CampaignId</field>
+            <value>
+                <elementReference>Get_Campaign.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ContactId</field>
+            <value>
+                <elementReference>$Record.PersonContactId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>CampaignMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordDeletes>
+        <description>Eliminar miembro de campaña antiguo.</description>
+        <name>Delete_CampaignMember_Antiguo</name>
+        <label>Delete_CampaignMember_Antiguo</label>
+        <locationX>50</locationX>
+        <locationY>4439</locationY>
+        <connector>
+            <targetReference>Get_Campaign</targetReference>
+        </connector>
+        <inputReference>Get_CampaignMember_Antiguo</inputReference>
+    </recordDeletes>
+    <recordLookups>
+        <description>Obtener la nueva campaña correspondiente a la cuenta personal.</description>
+        <name>Get_Campaign</name>
+        <label>Get_Campaign</label>
+        <locationX>182</locationX>
+        <locationY>4631</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_ExisteCampaign</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Promocion__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>$Record.Medio_de_conocimiento__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Campaign</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtener el miembro de campaña antiguo de la cuenta personal.</description>
+        <name>Get_CampaignMember_Antiguo</name>
+        <label>Get_CampaignMember_Antiguo</label>
+        <locationX>182</locationX>
+        <locationY>4223</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_ExisteMiembroCampaignAntiguo</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CampaignId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Campaign__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>ContactId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.PersonContactId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CampaignMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Actualizar la cuenta blanqueando el campo de Campaign a no encontrar campaña correspondiente.</description>
+        <name>Update_Account_BlanquearCampaign</name>
+        <label>Update_Account_Blanquear Campaign</label>
+        <locationX>314</locationX>
+        <locationY>4847</locationY>
+        <inputAssignments>
+            <field>Campaign__c</field>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Actualizar el campo de campaña de la cuenta poniendo la nueva campaña.</description>
+        <name>Update_Account_Campaign</name>
+        <label>Update_Account_Campaign</label>
+        <locationX>50</locationX>
+        <locationY>4955</locationY>
+        <inputAssignments>
+            <field>Campaign__c</field>
+            <value>
+                <elementReference>Get_Campaign.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
     <recordUpdates>
         <description>Actualizar la cuenta.</description>
         <name>Update_Cuenta</name>
         <label>Update_Cuenta</label>
         <locationX>248</locationX>
-        <locationY>3815</locationY>
+        <locationY>3431</locationY>
         <connector>
             <targetReference>Decision_RespuestaAltaCambio</targetReference>
         </connector>
@@ -853,7 +1067,7 @@
         <name>Update_Cuenta_CopiarDireccionFacturacion</name>
         <label>Update_Cuenta_Copiar Direccion Facturación</label>
         <locationX>248</locationX>
-        <locationY>455</locationY>
+        <locationY>431</locationY>
         <connector>
             <targetReference>Decision_CopiarDireccionFiscal</targetReference>
         </connector>
@@ -935,7 +1149,7 @@
         <name>Update_Cuenta_CopiarDireccionFiscal</name>
         <label>Update_Cuenta_Copiar dirección fiscal</label>
         <locationX>248</locationX>
-        <locationY>791</locationY>
+        <locationY>731</locationY>
         <connector>
             <targetReference>Decision_DomicilioFiscalNoEspanyol</targetReference>
         </connector>
@@ -1007,7 +1221,16 @@
         </inputAssignments>
         <inputReference>$Record</inputReference>
     </recordUpdates>
-    <startElementReference>Decision_CopiarDireccionFacturacion</startElementReference>
+    <start>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_CopiarDireccionFacturacion</targetReference>
+        </connector>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
     <status>Active</status>
     <variables>
         <description>Registro que almacena los cambios para aplicar en la cuenta durante el flujo.</description>

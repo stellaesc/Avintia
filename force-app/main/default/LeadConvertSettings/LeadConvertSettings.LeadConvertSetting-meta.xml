@@ -12,6 +12,10 @@
             <outputField>Altura_vivienda_interes__c</outputField>
         </mappingFields>
         <mappingFields>
+            <inputField>Campaign__c</inputField>
+            <outputField>Campaign__c</outputField>
+        </mappingFields>
+        <mappingFields>
             <inputField>CNAE__c</inputField>
             <outputField>CNAE__c</outputField>
         </mappingFields>
@@ -74,6 +78,10 @@
         <mappingFields>
             <inputField>Numero_piso__c</inputField>
             <outputField>DP_N_piso__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Promocion__c</inputField>
+            <outputField>Promocion__c</outputField>
         </mappingFields>
         <mappingFields>
             <inputField>Puerta__c</inputField>
@@ -140,6 +148,10 @@
             <outputField>N_Piso__c</outputField>
         </mappingFields>
         <mappingFields>
+            <inputField>Promocion__c</inputField>
+            <outputField>Promocion__c</outputField>
+        </mappingFields>
+        <mappingFields>
             <inputField>Puerta__c</inputField>
             <outputField>Puerta__c</outputField>
         </mappingFields>
@@ -150,6 +162,10 @@
         <mappingFields>
             <inputField>Tipo_de_via__c</inputField>
             <outputField>Tipo_via__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Campaign__c</inputField>
+            <outputField>Campaign__c</outputField>
         </mappingFields>
         <mappingFields>
             <inputField>Codigo_postal__c</inputField>
@@ -171,6 +187,10 @@
     </objectMapping>
     <objectMapping>
         <inputObject>Lead</inputObject>
+        <mappingFields>
+            <inputField>Campaign__c</inputField>
+            <outputField>Campaign__c</outputField>
+        </mappingFields>
         <mappingFields>
             <inputField>Promocion__c</inputField>
             <outputField>Promocion__c</outputField>

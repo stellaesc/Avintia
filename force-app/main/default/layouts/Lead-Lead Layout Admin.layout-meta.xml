@@ -128,6 +128,10 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Campaign__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Maximo_precio_de_interes__c</field>
             </layoutItems>
             <layoutItems>
