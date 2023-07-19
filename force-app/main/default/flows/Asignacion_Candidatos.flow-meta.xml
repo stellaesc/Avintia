@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
     <decisions>
         <name>Hay_comerciales_API</name>
         <label>¿Hay comerciales API?</label>
-        <locationX>138</locationX>
-        <locationY>384</locationY>
+        <locationX>380</locationX>
+        <locationY>350</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Hay_comerciales</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>ComercialesAPI</leftValueReference>
+                <leftValueReference>Col_Output_ComercialesAPI</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
@@ -25,10 +26,10 @@
     <decisions>
         <name>numero_minimo_de_leads</name>
         <label>número minimo de leads</label>
-        <locationX>303</locationX>
-        <locationY>330</locationY>
+        <locationX>182</locationX>
+        <locationY>458</locationY>
         <defaultConnector>
-            <targetReference>Asignacion_candidatos_comercial_max_num_convertidos</targetReference>
+            <targetReference>LeadSubflowAsignacionCandidatosComercialMaxNum</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -42,22 +43,30 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Asignacion_candidatos_comercial_min_num</targetReference>
+                <targetReference>LeadSubflowAsignacionCandidatosComercialMinNum</targetReference>
             </connector>
             <label>Igualdad de candidatos Asignados</label>
         </rules>
     </decisions>
+    <description>Se desencadena a través de PB_Blanquear Campos Dirección cuando un lead se crea o se actualiza, asigna leads a los comerciales y crea registros en el objeto LeadPromocion</description>
+    <environments>Default</environments>
     <formulas>
         <name>DueDate</name>
         <dataType>Date</dataType>
         <expression>Today() + 3</expression>
     </formulas>
     <interviewLabel>Asignación Candidatos {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Asignación Candidatos</label>
+    <label>Lead_Triggered_AfterUpdateAsignacionCandidatos</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -70,21 +79,22 @@
     <recordLookups>
         <name>Comerciales_API_de_una_Promocion</name>
         <label>Comerciales API de una Promoción</label>
-        <locationX>22</locationX>
-        <locationY>325</locationY>
+        <locationX>380</locationX>
+        <locationY>242</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Hay_comerciales_API</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Promocion__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>IDPromocion</elementReference>
+                <elementReference>Var_Input_IDPromocion</elementReference>
             </value>
         </filters>
         <object>Promocion_Comercial_API__c</object>
-        <outputReference>ComercialesAPI</outputReference>
+        <outputReference>Col_Output_ComercialesAPI</outputReference>
         <queriedFields>Id</queriedFields>
         <queriedFields>Comercial_API__c</queriedFields>
         <queriedFields>Numero_de_Leads__c</queriedFields>
@@ -92,17 +102,18 @@
     <recordLookups>
         <name>Datos_en_Promocion</name>
         <label>Datos en Promoción</label>
-        <locationX>34</locationX>
-        <locationY>194</locationY>
+        <locationX>380</locationX>
+        <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Comerciales_API_de_una_Promocion</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>IDPromocion</elementReference>
+                <elementReference>Var_Input_IDPromocion</elementReference>
             </value>
         </filters>
         <object>Promocion__c</object>
@@ -110,61 +121,74 @@
             <assignToReference>CriterioAsignacion</assignToReference>
             <field>Criterio_Asignacion_Candidatos__c</field>
         </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Var_NamePromocion</assignToReference>
+            <field>Name</field>
+        </outputAssignments>
     </recordLookups>
-    <startElementReference>Datos_en_Promocion</startElementReference>
+    <start>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Datos_en_Promocion</targetReference>
+        </connector>
+    </start>
     <status>Active</status>
     <subflows>
-        <name>Asignacion_candidatos_comercial_max_num_convertidos</name>
-        <label>Asignacion candidatos comercial max num convertidos</label>
-        <locationX>307</locationX>
-        <locationY>561</locationY>
+        <description>Subflow en el flow - Lead_Triggered_BeforeOrAfterUpdateAsignacionCandidatos, que asigna leads al comercial con mayor número de leads convertidos</description>
+        <name>LeadSubflowAsignacionCandidatosComercialMaxNum</name>
+        <label>Lead_Subflow_AsignacionCandidatosComercialMaxNum</label>
+        <locationX>314</locationX>
+        <locationY>566</locationY>
         <flowName>Asignacion_candidatos_comercial_max_num_convertidos</flowName>
         <inputAssignments>
             <name>ComercialesAPI</name>
             <value>
-                <elementReference>ComercialesAPI</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>IdLead</name>
-            <value>
-                <elementReference>IdLead</elementReference>
+                <elementReference>Col_Output_ComercialesAPI</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <name>IDPromocion</name>
             <value>
-                <elementReference>IDPromocion</elementReference>
+                <elementReference>Var_Input_IDPromocion</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <name>Var_InputOutput_IdLead</name>
+            <value>
+                <elementReference>Var_Input_IdLead</elementReference>
+            </value>
+        </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </subflows>
     <subflows>
-        <name>Asignacion_candidatos_comercial_min_num</name>
-        <label>Asignacion candidatos comercial min num</label>
-        <locationX>631</locationX>
-        <locationY>322</locationY>
+        <name>LeadSubflowAsignacionCandidatosComercialMinNum</name>
+        <label>Lead_Subflow_AsignacionCandidatosComercialMinNum</label>
+        <locationX>50</locationX>
+        <locationY>566</locationY>
         <flowName>Asignacion_candidatos_comercial_min_num</flowName>
         <inputAssignments>
             <name>ComercialesAPI</name>
             <value>
-                <elementReference>ComercialesAPI</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>IdLead</name>
-            <value>
-                <elementReference>IdLead</elementReference>
+                <elementReference>Col_Output_ComercialesAPI</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <name>IDPromocion</name>
             <value>
-                <elementReference>IDPromocion</elementReference>
+                <elementReference>Var_Input_IDPromocion</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <name>Var_InputOutput_IdLead</name>
+            <value>
+                <elementReference>Var_Input_IdLead</elementReference>
+            </value>
+        </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </subflows>
     <variables>
-        <name>ComercialesAPI</name>
+        <name>Col_Output_ComercialesAPI</name>
         <dataType>SObject</dataType>
         <isCollection>true</isCollection>
         <isInput>false</isInput>
@@ -203,34 +227,6 @@
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>IDcomercialMASconvertidos</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>IDComercialMenosLeads</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>IdLead</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>true</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>IDPromocion</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>true</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
@@ -278,5 +274,44 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Promocion_Comercial_API__c</objectType>
+    </variables>
+    <variables>
+        <description>Variable que guarda el Id del comercial con mayor número de leads convertidos</description>
+        <name>Var_IDComercialMASLeads</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que guarda el Id del comercial con menor número de leads convertidos</description>
+        <name>Var_IDComercialMENOSLeads</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que guarda el id del lead que desencadena el flow principal</description>
+        <name>Var_Input_IdLead</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que contiene el Id de la Promoción por la que tiene interés el Lead</description>
+        <name>Var_Input_IDPromocion</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Var_NamePromocion</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
 </Flow>
