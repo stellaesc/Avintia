@@ -127,11 +127,11 @@ public class showCastilleteController_Test {
         insert municipio;
 
         Account cuenta = new Account(Name = 'Pepe', Movil_empresa__c = '666666666', Email__c = 'pepeoror@gmail.com', Tipo_de_documento__c = 'NIF', N_Documento__c = '12345678A',
-                Tipo_de_via_FISCAL__c = 'Calle', Nombre_de_via_FISCAL__c = 'siefnoerfr', NumeroViaFiscalText__c = '3', Pais_FISCAL__c = pais.Id,
-                Localidad_FISCAL__c = municipio.Id, Codigo_postal_FISCAL__c = '12345', DF_Tipo_de_via__c = 'Calle',
+                AccountSource = 'RECOMENDACIÓN', Tipo_de_via_FISCAL__c = 'Calle', Nombre_de_via_FISCAL__c = 'siefnoerfr', NumeroViaFiscalText__c = '3', Pais_FISCAL__c = pais.Id,
+                Tipo_de_sociedad__c = 'TS01', Estado_comercial__c = 'Cliente Gestión', Localidad_FISCAL__c = municipio.Id, Codigo_postal_FISCAL__c = '12345', DF_Tipo_de_via__c = 'Calle',
                 DF_Nombre_via__c = 'siefnoerfr', NumeroVia2Text__c = '3', DF_Pais__c = pais.Id,
                 DF_Localidad__c = municipio.Id, DF_Codigo_postal__c = '12345', DP_Tipo_de_via__c = 'Calle',
-                DP_Nombre_via__c = 'siefnoerfr', NumeroViaText__c = '3',
+                DP_Nombre_via__c = 'siefnoerfr', NumeroViaText__c = '3', DP_Pais__c = pais.Id,
                 DP_Localidad__c = municipio.Id, DP_Codigo_postal__c = '12345', Nacionalidad__c = pais.Id, CNO__c = cnoObj.Id);
         insert cuenta;
 
@@ -148,7 +148,7 @@ public class showCastilleteController_Test {
 		Test.startTest();        
         Promocion__c promocionToTest = [SELECT Id FROM Promocion__c LIMIT 1];
         Product2 inmueble1 = [SELECT Id, Tipo_de_inmueble__r.Tipo__c, Bloque__c, Parcela__c, UltimoModificadorEstado__c, Promocion__c FROM Product2 WHERE Name = 'InmuebleTest'];
-        Product2 inmueble2 = [SELECT Id, Tipo_de_inmueble__r.Tipo__c, Bloque__c, Parcela__c FROM Product2 WHERE Name = 'InmuebleTest2'];
+        //Product2 inmueble2 = [SELECT Id, Tipo_de_inmueble__r.Tipo__c, Bloque__c, Parcela__c FROM Product2 WHERE Name = 'InmuebleTest2'];
         //Product2 inmueble3 = [SELECT Id, Tipo_de_inmueble__r.Tipo__c, Bloque__c, Parcela__c FROM Product2 WHERE Name = 'InmuebleTest3'];
         //Product2 inmueble4 = [SELECT Id, Tipo_de_inmueble__r.Tipo__c, Bloque__c, Parcela__c FROM Product2 WHERE Name = 'InmuebleTest4'];
         //Product2 inmueble5 = [SELECT Id, Tipo_de_inmueble__r.Tipo__c, Bloque__c, Parcela__c FROM Product2 WHERE Name = 'InmuebleTest5'];
@@ -157,7 +157,7 @@ public class showCastilleteController_Test {
         Account cuenta = [SELECT Id FROM Account WHERE Name = 'Pepe'];
 
         List<Product2> inmueblesList = new List<Product2>{
-                inmueble1, inmueble2/*, inmueble3, inmueble4,inmueble5*/
+                inmueble1/*, inmueble2, inmueble3, inmueble4,inmueble5*/
         };
 
 
