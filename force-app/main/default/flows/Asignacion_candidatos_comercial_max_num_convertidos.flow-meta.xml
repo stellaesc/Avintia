@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
     <assignments>
         <name>Asignar_numero_de_leads_convertidos</name>
         <label>Asignar número de leads convertidos</label>
-        <locationX>704</locationX>
-        <locationY>223</locationY>
+        <locationX>264</locationX>
+        <locationY>878</locationY>
         <assignmentItems>
             <assignToReference>leadsconvertidosini</assignToReference>
             <operator>Assign</operator>
@@ -19,8 +20,8 @@
     <assignments>
         <name>contador_0</name>
         <label>contador 0</label>
-        <locationX>1026</locationX>
-        <locationY>759</locationY>
+        <locationX>396</locationX>
+        <locationY>638</locationY>
         <assignmentItems>
             <assignToReference>ComercialX.Numero_de_Leads_convertidos__c</assignToReference>
             <operator>Assign</operator>
@@ -42,8 +43,8 @@
     <assignments>
         <name>suma_leads_convertidos</name>
         <label>suma leads convertidos</label>
-        <locationX>301</locationX>
-        <locationY>721</locationY>
+        <locationX>396</locationX>
+        <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>ContadorLeads</assignToReference>
             <operator>AssignCount</operator>
@@ -58,8 +59,8 @@
     <decisions>
         <name>Numero_de_leads_convertidos_mayor</name>
         <label>¿Número de leads convertidos mayor?</label>
-        <locationX>1134</locationX>
-        <locationY>302</locationY>
+        <locationX>396</locationX>
+        <locationY>758</locationY>
         <defaultConnector>
             <targetReference>Recorrer_comerciales_2</targetReference>
         </defaultConnector>
@@ -80,18 +81,20 @@
             <label>ha convertido mas leads</label>
         </rules>
     </decisions>
+    <description>Subflow en el flow - Lead_Triggered_BeforeOrAfterUpdateAsignacionCandidatos, que asigna leads al comercial con mayor número de leads convertidos</description>
+    <environments>Default</environments>
     <formulas>
         <name>DueDate</name>
         <dataType>Date</dataType>
         <expression>Today() + 3</expression>
     </formulas>
     <interviewLabel>Asignacion candidatos comercial max num convertidos {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Asignacion candidatos comercial max num convertidos</label>
+    <label>Lead_Subflow_AfterInsertOrUpdateAsignacionCandidatosComercialMaxNum</label>
     <loops>
         <name>Recorrer_comerciales_2</name>
         <label>Recorrer comerciales</label>
-        <locationX>270</locationX>
-        <locationY>249</locationY>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
         <assignNextValueToReference>ComercialX</assignNextValueToReference>
         <collectionReference>ComercialesAPI</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -109,6 +112,12 @@
         </value>
     </processMetadataValues>
     <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
         <name>OriginBuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
@@ -118,8 +127,8 @@
     <recordCreates>
         <name>Crear_tarea_contactar_con_lead</name>
         <label>Crear tarea contactar con lead</label>
-        <locationX>50</locationX>
-        <locationY>698</locationY>
+        <locationX>176</locationX>
+        <locationY>1430</locationY>
         <inputAssignments>
             <field>ActivityDate</field>
             <value>
@@ -135,7 +144,7 @@
         <inputAssignments>
             <field>OwnerId</field>
             <value>
-                <elementReference>IDcomercialMASconvertidos</elementReference>
+                <elementReference>Var_Output_IDcomercialMASLeads</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -159,7 +168,7 @@
         <inputAssignments>
             <field>WhoId</field>
             <value>
-                <elementReference>IdLead</elementReference>
+                <elementReference>Var_InputOutput_IdLead</elementReference>
             </value>
         </inputAssignments>
         <object>Task</object>
@@ -167,12 +176,13 @@
     <recordLookups>
         <name>comercial_con_mas_convertidos</name>
         <label>comercial con más convertidos</label>
-        <locationX>55</locationX>
-        <locationY>256</locationY>
+        <locationX>176</locationX>
+        <locationY>1190</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>cambio_propietario_del_lead</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Numero_de_Leads_convertidos__c</field>
             <operator>EqualTo</operator>
@@ -189,19 +199,20 @@
         </filters>
         <object>Promocion_Comercial_API__c</object>
         <outputAssignments>
-            <assignToReference>IDcomercialMASconvertidos</assignToReference>
+            <assignToReference>Var_Output_IDcomercialMASLeads</assignToReference>
             <field>Comercial_API__c</field>
         </outputAssignments>
     </recordLookups>
     <recordLookups>
         <name>leads_comercial</name>
         <label>leads comercial</label>
-        <locationX>298</locationX>
-        <locationY>420</locationY>
+        <locationX>396</locationX>
+        <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>suma_leads_convertidos</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>ConvertedAccountId</field>
             <operator>IsNull</operator>
@@ -237,11 +248,12 @@
     <recordUpdates>
         <name>Actualiza_numero_leads_convertidos</name>
         <label>Actualiza número leads convertidos</label>
-        <locationX>598</locationX>
-        <locationY>752</locationY>
+        <locationX>396</locationX>
+        <locationY>518</locationY>
         <connector>
             <targetReference>contador_0</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Comercial_API__c</field>
             <operator>EqualTo</operator>
@@ -267,27 +279,34 @@
     <recordUpdates>
         <name>cambio_propietario_del_lead</name>
         <label>cambio propietario del lead</label>
-        <locationX>56</locationX>
-        <locationY>462</locationY>
+        <locationX>176</locationX>
+        <locationY>1310</locationY>
         <connector>
             <targetReference>Crear_tarea_contactar_con_lead</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>IdLead</elementReference>
+                <elementReference>Var_InputOutput_IdLead</elementReference>
             </value>
         </filters>
         <inputAssignments>
             <field>OwnerId</field>
             <value>
-                <elementReference>IDcomercialMASconvertidos</elementReference>
+                <elementReference>Var_Output_IDcomercialMASLeads</elementReference>
             </value>
         </inputAssignments>
         <object>Lead</object>
     </recordUpdates>
-    <startElementReference>Recorrer_comerciales_2</startElementReference>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Recorrer_comerciales_2</targetReference>
+        </connector>
+    </start>
     <status>Active</status>
     <variables>
         <name>ComercialesAPI</name>
@@ -332,24 +351,10 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>IDcomercialMASconvertidos</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
         <name>IDComercialMenosLeads</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>IdLead</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>true</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
@@ -404,5 +409,21 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Promocion_Comercial_API__c</objectType>
+    </variables>
+    <variables>
+        <description>Variable que guarda el id del lead que desencadena el flow principal</description>
+        <name>Var_InputOutput_IdLead</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Variable que guarda el Id del comercial con mayor número de leads convertidos</description>
+        <name>Var_Output_IDcomercialMASLeads</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
     </variables>
 </Flow>
