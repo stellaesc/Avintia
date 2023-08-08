@@ -3,10 +3,22 @@
     <fullName>ContactoPrincipal__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
-    <label>Contacto principal</label>
-    <referenceTo>Account</referenceTo>
+    <label>Contacto Principal</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Está intentado introducir un registro de tipo Person Account.
+Debe introducirse un registro de tipo Contacto.</errorMessage>
+        <filterItems>
+            <field>Contact.IsPersonAccount</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </filterItems>
+        <infoMessage>Seleccione un contacto vinculado a la empresa.</infoMessage>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Contact</referenceTo>
     <relationshipLabel>Accounts</relationshipLabel>
-    <relationshipName>Contactos</relationshipName>
+    <relationshipName>Contacto</relationshipName>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
