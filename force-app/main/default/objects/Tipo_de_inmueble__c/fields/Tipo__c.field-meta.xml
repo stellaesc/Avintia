@@ -47,9 +47,9 @@
                 <label>Descuento</label>
             </value>
             <value>
-                <fullName>Pack mobiliario</fullName>
+                <fullName>Mobiliario</fullName>
                 <default>false</default>
-                <label>Pack mobiliario</label>
+                <label>Mobiliario</label>
             </value>
         </valueSetDefinition>
     </valueSet>
