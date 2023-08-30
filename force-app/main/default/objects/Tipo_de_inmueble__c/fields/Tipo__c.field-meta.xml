@@ -46,6 +46,11 @@
                 <isActive>false</isActive>
                 <label>Descuento</label>
             </value>
+            <value>
+                <fullName>Pack mobiliario</fullName>
+                <default>false</default>
+                <label>Pack mobiliario</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
