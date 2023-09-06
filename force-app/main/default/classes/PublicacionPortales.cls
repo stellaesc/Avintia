@@ -188,7 +188,7 @@ public class PublicacionPortales{
                     if((parserNewJSON.getText() != parserPreviousJSON.getText()) ||
                     (parserNewJSON.getCurrentToken() != parserPreviousJSON.getCurrentToken())){
                         loadNewFile = true;
-                    },
+                    }
                 }
             }
         }
