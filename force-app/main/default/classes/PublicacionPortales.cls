@@ -188,7 +188,7 @@ public class PublicacionPortales{
                     if((parserNewJSON.getText() != parserPreviousJSON.getText()) ||
                     (parserNewJSON.getCurrentToken() != parserPreviousJSON.getCurrentToken())){
                         loadNewFile = true;
-                    }
+                    },
                 }
             }
         }
@@ -217,43 +217,21 @@ public class PublicacionPortales{
             );
             insert objCDL;
             */
+            Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();	
+            message.toAddresses = new String[] {'avintia@leadclic.com'};	
+            message.optOutPolicy = 'FILTER';	
+            message.subject = 'Nuevo Fichero Publicación Web IDEALISTA Generado';	
+            message.plainTextBody = jsonParsed;	
+            OrgWideEmailAddress[] owea = [select Id from OrgWideEmailAddress where Address = 'comercial@avintiainmobiliaria.com'];	
+            if ( owea.size() > 0 ) {	
+                message.setOrgWideEmailAddressId(owea.get(0).Id);	
+            }	
+            Messaging.SingleEmailMessage[] messages = new List<Messaging.SingleEmailMessage> {message};	
+    
+            Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
         }
 
         //send message	
-        Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();	
-        message.toAddresses = new String[] {'avintia@leadclic.com'};	
-        message.optOutPolicy = 'FILTER';	
-        if(esPrueba){
-            message.subject = 'Prueba Publicación Web IDEALISTA';	
-        }
-        else{
-            message.subject = 'Publicación Web IDEALISTA';	
-        }
-        message.plainTextBody = jsonParsed;	
-        OrgWideEmailAddress[] owea = [select Id from OrgWideEmailAddress where Address = 'comercial@avintiainmobiliaria.com'];	
-        if ( owea.size() > 0 ) {	
-            message.setOrgWideEmailAddressId(owea.get(0).Id);	
-        }	
-        Messaging.SingleEmailMessage[] messages = new List<Messaging.SingleEmailMessage> {message};	
-        
-        if(!cvExistentes.isEmpty()){
-            Messaging.SingleEmailMessage message2 = new Messaging.SingleEmailMessage();	
-            message2.toAddresses = new String[] {'avintia@leadclic.com'};	
-            message2.optOutPolicy = 'FILTER';	
-            if(esPrueba){
-                message2.subject = 'Prueba Publicación Web IDEALISTA ContentVersionPresente';	
-            }
-            else{
-                message2.subject = 'Publicación Web IDEALISTA ContentVersionPresente';	
-            }
-            message2.plainTextBody = cvExistentes[0].VersionData.toString();	
-            if ( owea.size() > 0 ) {	
-                message2.setOrgWideEmailAddressId(owea.get(0).Id);	
-            }	
-            messages.add(message2);	
-        }
-
-        Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
         return loadNewFile;
     }
 
