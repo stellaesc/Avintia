@@ -63,12 +63,19 @@ public class TestPublicacionPortalIdealista {
 
     @IsTest
     public static void test_GetPromotionsImgs() {
+        PropiedadesIntegracion__c propiedadesIntegracion = PropiedadesIntegracion__c.getInstance();	
+        String base64Content = EncodingUtil.Base64Encode( 
+                Blob.valueOf('Test') 
+        );
+        Blob blobContent = EncodingUtil.base64Decode( base64Content );
         List<Promocion__c> promos = PublicacionPortalIdealista.getPromotions();
+        System.debug('SIZE 19723: ' + promos.size());
         Set<Id> promosIds = new Set<Id>();
         for(Promocion__c promo : promos) promosIds.add(promo.Id);
 
         Test.startTest();
         Map<Id, List<ContentVersion>> imgsMap = PublicacionPortalIdealista.getPromotionsImgs(promosIds);
+        System.debug('SIZE: ' + imgsMap.size());
         System.assert(imgsMap.size() == 1);
         Test.stopTest();
     }
