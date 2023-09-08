@@ -21,7 +21,7 @@ public with sharing class PublicacionPortalIdealista {
                                     Letra_N_Puerta__c, Codigo_postal__c, Pais__c, Superficie_Construida_m2__c, Superficie_Util_m2__c, N_banos__c, N_habitaciones__c, 
                                     Certificado_de_eficiencia_energetica__c, Superficie_Jardines__c, Orientacion_Viv__c , Superficie_Util_Trastero_con_pasillos_m2__c, 
                                     Precio__c, Tipo_de_inmueble__c, Tipo_de_inmueble__r.Tipo__c, Superficie_Terrazas_Cubiertas__c, Superficie_Terrazas_descubiertas__c, 
-                                    Superficie_Construida_total_con_ZZCC_m2__c, Superficie_Util_Garaje_con_calles_m2__c, Description
+                                    Superficie_Construida_total_con_ZZCC_m2__c, Superficie_Util_Garaje_con_calles_m2__c, Description, Precio_con_anejos_incluidos__c, Bloque__c 
                                     FROM Product2 WHERE Promocion__c IN :promosIds AND Inmueble_asociado__c = null AND 
                                     Idealista__c = true AND Fotocasa__c = true AND WebAvinita__c = true];
 
@@ -39,7 +39,7 @@ public with sharing class PublicacionPortalIdealista {
     @TestVisible
     private static Map<Id, List<Product2>> getProductAnnexesByPromo(Set<Id> promosIds) {
         Map<Id, List<Product2>> productsAnnexesMap = new Map<Id, List<Product2>>();
-        List<Product2> annexes = [SELECT Id, Precio__c, Inmueble_asociado__c 
+        List<Product2> annexes = [SELECT Id, Precio__c, Inmueble_asociado__c, Precio_con_anejos_incluidos__c 
                                     FROM Product2 
                                     WHERE Promocion__c IN :promosIds AND Inmueble_asociado__c != null AND 
                                     Inmueble_asociado__r.Idealista__c = true];
@@ -76,12 +76,20 @@ public with sharing class PublicacionPortalIdealista {
         for(ContentDocumentLink doc : promosDocuments) {
             contentDocumentsIds.add(doc.ContentDocumentId);
             promosMap.put(doc.ContentDocumentId, doc.LinkedEntityId);
+            system.debug('GETPROMOTIONIMG : ' +  doc.LinkedEntityId + ' | ' + doc.ContentDocumentId);
         }
+        system.debug('QUERY : ' + [SELECT Id, FileType, Title, Promocion__c, Posicion__c, ContentDocumentId, URL__c
+                                         FROM ContentVersion
+                                         WHERE
+                                         IsLatest = true AND ContentDocumentId  IN :contentDocumentsIds]);
+        
+
 
         List<ContentVersion> contents = [SELECT Id, FileType, Title, Promocion__c, Posicion__c, ContentDocumentId, URL__c
                                          FROM ContentVersion
                                          WHERE (Tipo__c = 'Imagen_carrusel' OR Tipo__c = 'Memoria_calidades') AND
-                                         IsLatest = true AND ContentDocumentId  IN :contentDocumentsIds];
+                                         IsLatest = true AND ContentDocumentId  IN :contentDocumentsIds and FileType in ('JPG','PNG','JPEG')];
+        system.debug('GETPROMOTIONIMG 2: ' + contents.size());
         for(ContentVersion doc : contents) {
             List<ContentVersion> docsList = promosDocsMap.get(promosMap.get(doc.ContentDocumentId));
             if(docsList == null) docsList = new List<ContentVersion>();
@@ -96,7 +104,8 @@ public with sharing class PublicacionPortalIdealista {
     @TestVisible
     private static Map<Id, List<ContentDocumentLink>> getInmueblesImgs(Set<Id> tiposInmueblesIds, Map<Id, Product2> inmueblesMap) {
         // Planos de los tipos de inmuebles
-        List<ContentDocumentLink> typesDocsLinks = [SELECT Id, LinkedEntityId, 
+        List<ContentDocumentLink> typesDocsLinks =  tiposInmueblesIds.isEmpty()? new List<ContentDocumentLink>():
+                                                    [SELECT Id, LinkedEntityId, 
                                                     ContentDocument.LatestPublishedVersion.FileType, 
                                                     ContentDocument.LatestPublishedVersion.Title, 
                                                     ContentDocument.LatestPublishedVersion.Promocion__c, 
@@ -111,7 +120,8 @@ public with sharing class PublicacionPortalIdealista {
 
         // Imagenes y planos de los inmuebles
         Map<Id, List<ContentDocumentLink>> inmueblesDocsMap = new Map<Id, List<ContentDocumentLink>>();
-        List<ContentDocumentLink> productsContentsLinks = [SELECT Id, ContentDocumentId, LinkedEntityId, 
+        List<ContentDocumentLink> productsContentsLinks = inmueblesMap.isEmpty() ? new List<ContentDocumentLink>() :
+                                                          [SELECT Id, ContentDocumentId, LinkedEntityId, 
                                                            ContentDocument.LatestPublishedVersion.FileType, 
                                                            ContentDocument.LatestPublishedVersion.Title, 
                                                            ContentDocument.LatestPublishedVersion.Tipo__c, 
@@ -155,7 +165,7 @@ public with sharing class PublicacionPortalIdealista {
     }
 
     @TestVisible
-    private static String generarJson() {
+    public static String generarJson() {
         PropiedadesIntegracion__c propiedadesIntegracion = PropiedadesIntegracion__c.getInstance();        
         List<Promocion__c> promotions = getPromotions();
         prettyJSON = '';
@@ -186,13 +196,13 @@ public with sharing class PublicacionPortalIdealista {
             JSONGenerator gen = JSON.createGenerator(true);
             gen.writeStartObject();
                 gen.writeStringField('customerCountry', 'Spain');//Obligatorio
-                gen.writeStringField('customerCode', !Test.isRunningTest() ? propiedadesIntegracion.ILC_IDEALISTA__c : 'ilc1f58c0cc5ad3dd64528c6ae121a8de8a11a8a4f7');//Obligatorio*
+                gen.writeStringField('customerCode', !Test.isRunningTest() ? propiedadesIntegracion.CustomerCodeIdealista__c : 'ilc1f58c0cc5ad3dd64528c6ae121a8de8a11a8a4f7');//Obligatorio*
                 gen.writeStringField('customerReference', '260360319');//Obligatorio*
                 gen.writeStringField('customerSendDate', fecha); 
-                gen.writeStringField('CustomerName', 'GRUPO AVINTIA');
+                gen.writeStringField('CustomerName', 'Soldit Homes');
 
                 //Datos de contacto del Vendedor  
-                /*gen.writeFieldName('customerContact');
+                gen.writeFieldName('customerContact');
                 gen.writeStartObject();
                     gen.writeStringField('contactName', 'Avintia Inmobiliaria');
                     gen.writeStringField('contactEmail', 'xxx' );
@@ -200,8 +210,9 @@ public with sharing class PublicacionPortalIdealista {
                     gen.writeNumberField('contactPrimaryPhoneNumber',  680167485);
                     gen.writeNumberField('contactSecondaryPhonePrefix',  34);
                     gen.writeNumberField('contactSecondaryPhoneNumber', 0);
-                gen.writeEndObject();*/
+                gen.writeEndObject();
 
+                // Propiedades especificas
                 gen.writeFieldName('customerNewDevelopments');
                 gen.writeStartArray();
 
@@ -209,29 +220,31 @@ public with sharing class PublicacionPortalIdealista {
                     gen.writeStartObject();
                         gen.writeStringField('propertyCode', promotion.Id);//Obligatorio
                         gen.writeStringField('propertyReference', promotion.Id);
-                        //gen.writeStringField('propertyVisibility', 'private'); //Valores: Idealista, microsite, private
+                        gen.writeStringField('propertyVisibility', 'idealista'); //Valores: idealista, microsite, private //En el momento de pasar a producción esta propiedad debe pasar a publica
                         //Dirección de la promoción
                         gen.writeFieldName('propertyAddress');
                         gen.writeStartObject();
-                            gen.writeStringField('addressVisibility', 'hidden');
-                            //gen.writeStringField('addressVisibility', 'street'); //"full","street","hidden" // full address, street name or zone will be shown publicly
+                            gen.writeStringField('addressVisibility', 'full'); //"full","street","hidden" // full address, street name or zone will be shown publicly
                             if(promotion.Nombre_Via__c != null) gen.writeStringField('addressStreetName', promotion.Tipo_via__c + ' ' + promotion.Nombre_Via__c); //Obligatorio
                             if(promotion.N_Via__c != null) gen.writeStringField('addressStreetNumber', String.valueOf(promotion.N_Via__c));
 
-                            //no aplica     gen.writeStringField('addressBlock', 'xxx');
+                            // estos datos son propios de cada vivienda de la promocion
+                            //no aplica      gen.writeStringField('addressBlock', 'xxx');
                             //no aplica     gen.writeNumberField('addressFloor', mapPromocion.get(promo).Piso__c);
                             //no aplica     gen.writeStringField('addressStair', mapPromocion.get(promo).Escalera__c);
                             //no aplica     gen.writeStringField('addressDoor', mapPromocion.get(promo).Letra_N_Puerta__c);
                             //gen.writeStringField('addressUrbanization', 'xxx');
 
                             if(promotion.Codigo_postal__c != null) gen.writeStringField('addressPostalCode', promotion.Codigo_postal__c);
-                            //gen.writeNumberField('addressNsiCode', 0);
+                            /* SOLO DE ITALIA
+                            gen.writeNumberField('addressNsiCode', 0);
+                            */
                             if(promotion.Localidad__r.Name != null ) gen.writeStringField('addressTown', promotion.Localidad__r.Name);
                             if(promotion.Pais__r.Name == 'España'){
                                 gen.writeStringField('addressCountry', 'Spain'); //Obligatorio
                             }
-                            else if(promotion.Pais__r.Name == 'Italia'){
-                                gen.writeStringField('addressCountry', 'Italy'); //Obligatorio
+                            else if(promotion.Pais__r.Name == 'Andorra'){
+                                gen.writeStringField('addressCountry', 'Andorra'); //Obligatorio
                             }
                             else if(promotion.Pais__r.Name == 'Francia'){
                                 gen.writeStringField('addressCountry', 'France'); //Obligatorio
@@ -245,6 +258,9 @@ public with sharing class PublicacionPortalIdealista {
                             if(promotion.Coordenadas__c != null){
                                 gen.writeNumberField('addressCoordinatesLongitude', promotion.Coordenadas__c.getLongitude());//Obligatorio* (Si no se pone addressCountry y addressPostalCode)
                             }
+                            /* SOLO DE ITALIA
+                            "addressCasaZoneId"
+                            */
                         gen.writeEndObject();
 
                         //Datos del contacto        
@@ -311,7 +327,7 @@ public with sharing class PublicacionPortalIdealista {
                                 gen.writeStartObject();
                                     gen.writeNumberField('imageOrder', img.Posicion__c != null ? img.Posicion__c : i);
                                     //Falta    gen.writeStringField('imageLabel', ''); //"bathroom","bedroom","communalareas","corridor","details","energycertificate","facade","garage","garden","gateway","hall","kitchen","land","living","mates","plan","pool","reception","room","storage","terrace","unknown","views","waitingroom"
-                                    gen.writeStringField('imageUrl', PublicacionPortales.devolverURLDocumento(img.URL__c, img.Id, img.FileType)); //Obligatorio //Que url meter?
+                                    gen.writeStringField('imageUrl', PublicacionPortales.getPublicLinkCV(img)); //Obligatorio //Que url meter?
                                 gen.writeEndObject();
                                 i++;
                             }
@@ -328,7 +344,9 @@ public with sharing class PublicacionPortalIdealista {
                                     Boolean isGarage = inmueble.Tipo_de_inmueble__r.Tipo__c == 'Garaje';
                                     Boolean isStorage = inmueble.Tipo_de_inmueble__r.Tipo__c == 'Trastero';
                                     if(!isGarage && !isStorage) { // Sólo se van a publicar viviendas
-                                        Decimal totalPrice = getTotalPriceWithAnnexesIncluded(inmueble, productsAnnexesMap.get(inmueble.Id));
+                                        List<Product2> currProductAnnexes = productsAnnexesMap.get(inmueble.Id);
+                                        if(inmueble.Precio_con_anejos_incluidos__c == false)  currProductAnnexes = new List<Product2>();
+                                        Decimal totalPrice = getTotalPriceWithAnnexesIncluded(inmueble, currProductAnnexes);
 
                                         gen.writeStartObject();
                                             gen.writeStringField('propertyCode', inmueble.Id);
@@ -345,16 +363,14 @@ public with sharing class PublicacionPortalIdealista {
                                                 gen.writeStringField('addressVisibility', 'hidden'); //"full","street","hidden" // full address, street name or zone will be shown publicly
                                                 if(inmueble.Nombre_Via__c != null) gen.writeStringField('addressStreetName', inmueble.Tipo_de_via__c + ' ' +inmueble.Nombre_Via__c);
                                                 if(inmueble.N_Via__c != null) gen.writeStringField('addressStreetNumber', String.valueOf(inmueble.N_Via__c));
-                                                //if(inmueble.Bloque__c != null){
-                                                    //gen.writeStringField('addressBlock', String.valueOf(inmueble.Bloque__c));
-                                                //}
+                                                if(inmueble.Bloque__c != null) gen.writeStringField('addressBlock', String.valueOf(inmueble.Bloque__c));
                                                 String addressFloor = inmueble.Piso__c == 0 ? 'bj' : String.valueOf(inmueble.Piso__c);
                                                 if(inmueble.Piso__c != null) gen.writeStringField('addressFloor', addressFloor);
                                                 if(inmueble.Escalera__c != null) gen.writeStringField('addressStair', inmueble.Escalera__c);
                                                 if(inmueble.Letra_N_Puerta__c != null) gen.writeStringField('addressDoor', inmueble.Letra_N_Puerta__c);
                                                 //falta      gen.writeStringField('addressUrbanization', 'xxx');
                                                 if(inmueble.Codigo_postal__c != null) gen.writeStringField('addressPostalCode', inmueble.Codigo_postal__c);//Obligatorio
-                                                //falta      gen.writeNumberField('addressNsiCode', 0);
+                                                //falta      ITALIA SOLO gen.writeNumberField('addressNsiCode', 0);
                                                 if(promotion.Localidad__r.Name != null) gen.writeStringField('addressTown', promotion.Localidad__r.Name);
                                                 if(inmueble.Pais__c == 'España'){
                                                     gen.writeStringField('addressCountry', 'Spain'); //Obligatorio
@@ -387,7 +403,14 @@ public with sharing class PublicacionPortalIdealista {
                                                     //En este caso se indican los campos de HOMES.JSON al haber seleccionado un piso
                                                     //gen.writeNumberField('featuresAreaPlot', Integer.valueOf(mapInmueblesIdealista.get(inm).Superficie_Construida_total_con_ZZCC_m2__c);
                                                     gen.writeNumberField('featuresAreaUsable', Integer.valueOf(inmueble.Superficie_Util_m2__c));
-                                                    //Falta -> gen.writeBooleanField('featuresBalcony', '');
+                                                    Boolean hasBalcony = false;
+                                                    if(inmueble.Superficie_Terrazas_Cubiertas__c > 0 || inmueble.Superficie_Terrazas_Descubiertas__c > 0)
+                                                        hasBalcony = true;
+                                                    else
+                                                        hasBalcony = false;
+
+                                                    gen.writeBooleanField('featuresBalcony', hasBalcony);
+
                                                     if(inmueble.N_banos__c != null){
                                                         gen.writeNumberField('featuresBathroomNumber', inmueble.N_banos__c); //Obligatorio
                                                     }
@@ -396,48 +419,62 @@ public with sharing class PublicacionPortalIdealista {
                                                         gen.writeNumberField('featuresBedroomNumber', inmueble.N_habitaciones__c);
                                                     }
                                                     
-                                                    //Falta ->  gen.writeNumberField('featuresBuiltYear', '');
-                                                    //Falta ->  gen.writeBooleanField('featuresConditionedAir', '');
+                                                    //Falta ->  gen.writeNumberField('featuresBuiltYear', Promocion.BuiltYear);
+                                                    //Falta ->  gen.writeBooleanField('featuresConditionedAir', true/false);
                                                     gen.writeStringField('featuresConservation', 'new'); // new, good o toRestore
-                                                    //Falta ->  gen.writeBooleanField('featuresChimney', '');
-                                                    //Falta ->  gen.writeBooleanField('featuresDoorman', '');
-                                                    //Falta ->  gen.writeBooleanField('featuresDuplex', '');
-                                                    //Falta ->  gen.writeBooleanField('featuresEquippedKitchen', '');
-                                                    //Falta ->  gen.writeBooleanField('featuresEquippedWithFurniture', '');
-                                                    //Falta ->  gen.writeStringField('featuresEnergyCertificatePerformance', '');
-                                                    //Falta ->  gen.writeStringField('featuresEnergyCertificateLaw', '');
+                                                    //Falta ->  gen.writeBooleanField('featuresChimney', true/false);
+                                                    //Falta ->  gen.writeBooleanField('featuresDoorman', true/false);
+                                                    //Falta ->  gen.writeBooleanField('featuresDuplex', true/false);
+                                                    //Falta ->  gen.writeBooleanField('featuresEquippedKitchen', true/false);
+                                                    //Falta ->  gen.writeBooleanField('featuresEquippedWithFurniture', true/false);
+                                                    //Falta ->  gen.writeStringField('featuresEnergyCertificatePerformance', 0);
+                                                    //Falta ->  gen.writeStringField('featuresEnergyCertificateLaw', '');    "enum": [ "dl-192_2005","legge-90_2013"]
                                                     if(inmueble.Certificado_de_eficiencia_energetica__c != null){
                                                         gen.writeStringField('featuresEnergyCertificateRating', inmueble.Certificado_de_eficiencia_energetica__c);
                                                     }
-                                                    //Falta ->  gen.writeStringField('featuresEnergyCertificateType', '');
+                                                    //Falta ->  gen.writeStringField('featuresEnergyCertificateType', '');    "enum": ["project","completed"]
                                                     //Falta ->	gen.writeNumberField('featuresFloorsBuilding', 0);
                                                     //Falta ->  gen.writeNumberField('featuresFloorsInTop', '');
 
                                                     //Jardin
                                                     gen.writeBooleanField('featuresGarden', inmueble.Superficie_Jardines__c > 0);
                                                     
-                                                    //Falta ->  gen.writeBooleanField('featuresHandicapAdaptedAccess', '');
-                                                    //Falta ->  gen.writeBooleanField('featuresHandicapAdaptedUse', '');
-                                                    //Falta ->  gen.writeBooleanField('featuresLiftAvailable', '');
+                                                    //Falta ->  gen.writeBooleanField('featuresHandicapAdaptedAccess', true/false);
+                                                    //Falta ->  gen.writeBooleanField('featuresHandicapAdaptedUse', true/false);
+                                                    //Falta ->  gen.writeBooleanField('featuresLiftAvailable', true/false);
 
                                                     //Orientación
-                                                    gen.writeBooleanField('featuresOrientationNorth', inmueble.Orientacion_Viv__c == 'Norte');
-                                                    gen.writeBooleanField('featuresOrientationSouth', inmueble.Orientacion_Viv__c == 'Sur');
-                                                    gen.writeBooleanField('featuresOrientationEast', inmueble.Orientacion_Viv__c == 'Este');
-                                                    gen.writeBooleanField('featuresOrientationWest', inmueble.Orientacion_Viv__c == 'Oeste');
-                                                    if(inmueble.Orientacion_Viv__c == 'Noreste'){
-                                                        gen.writeBooleanField('featuresOrientationNorth', true);
-                                                        gen.writeBooleanField('featuresOrientationEast', true);
-                                                    } else if(inmueble.Orientacion_Viv__c == 'Noroeste'){
-                                                        gen.writeBooleanField('featuresOrientationNorth', true);
-                                                        gen.writeBooleanField('featuresOrientationWest', true);
-                                                    } else if(inmueble.Orientacion_Viv__c == 'Sureste'){
-                                                        gen.writeBooleanField('featuresOrientationSouth', true);
-                                                        gen.writeBooleanField('featuresOrientationEast', true);
-                                                    } else if(inmueble.Orientacion_Viv__c == 'Suroeste'){
-                                                        gen.writeBooleanField('featuresOrientationSouth', true);
-                                                        gen.writeBooleanField('featuresOrientationWest', true);
+                                                    switch on inmueble.Orientacion_Viv__c {
+                                                        when 'Norte' {
+                                                            gen.writeBooleanField('featuresOrientationNorth', true);
+                                                        }
+                                                        when 'Sur' {
+                                                            gen.writeBooleanField('featuresOrientationSouth', true);
+                                                        }
+                                                        when 'Este' {
+                                                            gen.writeBooleanField('featuresOrientationEast', true);
+                                                        }
+                                                        when 'Oeste' {
+                                                            gen.writeBooleanField('featuresOrientationWest', true);
+                                                        }
+                                                        when 'Noreste' {
+                                                            gen.writeBooleanField('featuresOrientationNorth', true);
+                                                            gen.writeBooleanField('featuresOrientationEast', true);
+                                                        }
+                                                        when 'Noroeste' {
+                                                            gen.writeBooleanField('featuresOrientationNorth', true);
+                                                            gen.writeBooleanField('featuresOrientationWest', true);
+                                                        }
+                                                        when 'Sureste' {
+                                                            gen.writeBooleanField('featuresOrientationSouth', true);
+                                                            gen.writeBooleanField('featuresOrientationEast', true);
+                                                        }
+                                                        when 'Suroeste' {
+                                                            gen.writeBooleanField('featuresOrientationSouth', true);
+                                                            gen.writeBooleanField('featuresOrientationWest', true);
+                                                        }
                                                     }
+           
                                                     //Falta ->  gen.writeBooleanField('featuresParkingAvailable', );
                                                     //Falta ->  gen.writeBooleanField('featuresPenthouse', );
                                                     //Falta ->  gen.writeBooleanField('featuresPetsAllowed', '');
@@ -453,7 +490,7 @@ public with sharing class PublicacionPortalIdealista {
                                                     //Falta ->  gen.writeStringField('featuresWindowsLocation', '');
                                                     //Falta ->  gen.writeStringField('featuresHeatingType', '');
                                             
-                                                } /*else if(inmueble.Tipo_de_inmueble__r.Tipo__c == 'Garaje'){
+                                                } else if(inmueble.Tipo_de_inmueble__r.Tipo__c == 'Garaje'){
                                                     gen.writeStringField('featuresType', 'garage');
                                                     gen.writeNumberField('featuresAreaConstructed', Integer.valueOf(inmueble.Superficie_Construida_total_con_ZZCC_m2__c));
                                                     gen.writeNumberField('featuresAreaUsable', Integer.valueOf(inmueble.Superficie_Util_m2__c));
@@ -461,7 +498,7 @@ public with sharing class PublicacionPortalIdealista {
                                                     gen.writeStringField('featuresType', 'storage');
                                                     gen.writeNumberField('featuresAreaConstructed', Integer.valueOf(inmueble.Superficie_Construida_total_con_ZZCC_m2__c));
                                                     gen.writeNumberField('featuresAreaUsable', Integer.valueOf(inmueble.Superficie_Util_m2__c));                                            
-                                                }*/ else if(inmueble.Tipo_de_inmueble__r.Tipo__c == 'Local'){
+                                                } else if(inmueble.Tipo_de_inmueble__r.Tipo__c == 'Local'){
                                                     gen.writeStringField('featuresType', 'offices');
                                                     gen.writeNumberField('featuresAreaConstructed', Integer.valueOf(inmueble.Superficie_Construida_total_con_ZZCC_m2__c));  
                                                     gen.writeNumberField('featuresAreaUsable', Integer.valueOf(inmueble.Superficie_Util_m2__c));
@@ -470,7 +507,7 @@ public with sharing class PublicacionPortalIdealista {
                                             gen.writeEndObject();
 
                                             //Descripciones de la propiedad                        	
-                                            gen.writeFieldName('propertyDescriptions');   
+                                            gen.writeFieldName('propertyDescriptions');    
                                             gen.writeStartArray();
                                                 gen.writeStartObject();
                                                     // TODO -> HACERLO EN DIVERSOS IDIOMAS?
@@ -505,7 +542,7 @@ public with sharing class PublicacionPortalIdealista {
                                 }
                             }
                         gen.writeEndArray();
-
+                        //end array inmuebles
                     gen.writeEndObject();
                 }
                 gen.writeEndArray();
@@ -564,25 +601,26 @@ public with sharing class PublicacionPortalIdealista {
             throw new PublicacionPortalIdealistaException('No se ha podido completar la publicación en Idealista, hay errores en los datos. Se ha enviado un correo con estos errores a revisar.');
         }
     }
+    
+    public static string devolverURLDocumento(string URL, string versionId,string tipo) {	
+        PropiedadesIntegracion__c propiedades =PropiedadesIntegracion__c.getInstance();	
+        String URLFinal='';	
+        if(URL!=null && String.isNotBlank(URL) && versionId!=null && String.isNotBlank(versionId))	
+        {	
+            URLFinal=propiedades.URLDocuemntos__c+ tipo + '&versionId='+versionId+'&operationContext=DELIVERY&page=0&oid='+UserInfo.getOrganizationId().substring(0,UserInfo.getOrganizationId().length()-3)+'&dpt=null&d='+ url.substring((url.indexOf(UserInfo.getOrganizationId().substring(3,UserInfo.getOrganizationId().length()-3))+UserInfo.getOrganizationId().length()-6),url.length()) +'&tipo='+tipo;	
+            //system.debug(URLFinal);	
+        }	
+        return URLFinal;	
+    }
 
-    public static HttpResponse publish() {
-        String jsonStr = generarJson();
-        if(jsonStr == null || jsonStr == '') throw new PublicacionPortalIdealistaException('Error al formar el JSON de las promociones y propiedades');
-        
-        // LLamamos al servicio de Logic Apps de Azure con la actividad que guarda el fichero en el FTP de Idealista
-        HttpRequest req = new HttpRequest();
-        PropiedadesIntegracion__c propiedadesIntegracion = PropiedadesIntegracion__c.getInstance();
-        String endpointUrl = !Test.isRunningTest() ? propiedadesIntegracion.URL_IDEALISTA__c : 'http://prueba.com/';
-        if(endpointUrl == null) endpointUrl = '';
-        req.setEndpoint(endpointUrl);
-        req.setMethod('POST');
-        req.setBody(jsonStr);
-        Http http = new Http();
-        HttpResponse res = http.send(req);
-        if(res.getStatusCode() != 202) {
-            throw new PublicacionPortalIdealistaException('Error en la llamada a Logic App de Azure -> Req: ' + req + '\nRes: ' + res.getBody());
+    public static string getPublicLinkCV(ContentVersion cv){
+        List<ContentDistribution> cdList = [SELECT DistributionPublicUrl from ContentDistribution where ContentVersionId = :cv.Id order by createdDate desc limit 1];
+        if(!cdList.isEmpty()){
+            return cdList[0].DistributionPublicUrl;
         }
-        return res;
+        else{
+			return '';
+        }
     }
 
     public class PublicacionPortalIdealistaException extends Exception {}

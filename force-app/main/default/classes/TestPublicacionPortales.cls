@@ -14,6 +14,7 @@ public class TestPublicacionPortales {
 
     }
 
+
     @IsTest
     static void testPublicacionPortalWebAvintia() {
         Date fechaInicioComercializacionPrevista = Date.newInstance(2018, 09, 20);
@@ -55,14 +56,28 @@ public class TestPublicacionPortales {
         TriggerHandler.clearAllBypasses();
         Test.startTest();
         TestUtil.testCrearAsociacionDocumentoslPromocion(promocion.ID);
-        PublicacionPortales.generarXmlFotocasa(promocion.ID);
+        PublicacionPortales.publicacionPortalesFotocasa(promocion.ID, true);
         Test.stopTest();
+    }
+    
+    @IsTest
+    public static void test_GenerarFotocasa(){
+        Date fechaInicioComercializacionPrevista = Date.newInstance(2018, 09, 20);
+        Date fechaFinComercializacionPrevista = Date.newInstance(2018, 10, 03);
+        Promocion__c promocion = TestUtil.getPromocion(fechaInicioComercializacionPrevista, fechaFinComercializacionPrevista);
+        PublicacionPortales.generarFotocasa(promocion.Id);
     }
 
     @IsTest
     public static void test_getProfileInfo() {
         System.assert(PublicacionPortales.getProfileInfo() != null);
     }
-
-
+    
+    @IsTest
+    public static void test_UpdateCurrFotoC() {
+        Date fechaInicioComercializacionPrevista = Date.newInstance(2018, 09, 20);
+        Date fechaFinComercializacionPrevista = Date.newInstance(2018, 10, 03);
+        Promocion__c promocion = TestUtil.getPromocion(fechaInicioComercializacionPrevista, fechaFinComercializacionPrevista);
+        PublicacionPortales.UpdateCurrFotoC(promocion);
+    }
 }
