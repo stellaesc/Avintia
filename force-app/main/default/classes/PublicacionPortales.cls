@@ -160,8 +160,9 @@ public class PublicacionPortales{
     }
 
 
-    private static boolean generateNewDoc(String jsonParsed, PropiedadesIntegracion__c propiedadesIntegracion, Boolean esPrueba){
-        String base64Content = EncodingUtil.Base64Encode( 
+    public static boolean generateNewDoc(String jsonParsed, PropiedadesIntegracion__c propiedadesIntegracion, Boolean esPrueba){
+        
+      String base64Content = EncodingUtil.Base64Encode( 
             Blob.valueOf(jsonParsed) 
         );
         System.debug( 'Base64 Content is ' + base64Content );
@@ -228,7 +229,8 @@ public class PublicacionPortales{
             }	
             Messaging.SingleEmailMessage[] messages = new List<Messaging.SingleEmailMessage> {message};	
     
-            Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
+            if(Test.isRunningTest() == false) Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
+
         }
 
         //send message	
@@ -285,7 +287,7 @@ public class PublicacionPortales{
             String endpointUrl = esPrueba ? propiedadesIntegracion.URL_WEBAVINTIA__c : propiedadesIntegracion.URL_WEBAVINTIA_PRO__c;
             
             system.debug(endpointUrl);
-            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba, WEB_FOTOCASA);	
+            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba);	
             System.debug('mensajeEnviar: ' + mensajeEnviar);	
             //System.debug('Realizamos el envio al WS');	
             System.debug (esPrueba);	
