@@ -88,7 +88,7 @@ public class PublicacionPortales{
             String endpointUrl = esPrueba ? propiedadesIntegracion.URL_WEBAVINTIA__c : propiedadesIntegracion.URL_WEBAVINTIA_PRO__c;
             
             system.debug(endpointUrl);
-            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba);	
+            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba, WEB_AVINTIA);	
             System.debug('mensajeEnviar: ' + mensajeEnviar);	
             //System.debug('Realizamos el envio al WS');	
             System.debug (esPrueba);	
@@ -161,7 +161,8 @@ public class PublicacionPortales{
 
 
     public static boolean generateNewDoc(String jsonParsed, PropiedadesIntegracion__c propiedadesIntegracion, Boolean esPrueba){
-        String base64Content = EncodingUtil.Base64Encode( 
+        
+      String base64Content = EncodingUtil.Base64Encode( 
             Blob.valueOf(jsonParsed) 
         );
         System.debug( 'Base64 Content is ' + base64Content );
@@ -229,6 +230,7 @@ public class PublicacionPortales{
             Messaging.SingleEmailMessage[] messages = new List<Messaging.SingleEmailMessage> {message};	
     
             if(Test.isRunningTest() == false) Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
+
         }
 
         //send message	
@@ -377,7 +379,7 @@ public class PublicacionPortales{
     
     //Metodo encargado de montar la URL de las imagenes para FOTOCASA	
     //Metodo encargado de generar el XML de la promocion de la Web de Avintia	
-    public static string generarXmlPublicacion(Id PromoId, Boolean esPrueba) {	
+    public static string generarXmlPublicacion(Id PromoId, Boolean esPrueba, Integer origen) {	
         //System.debug('Procedemos a generar el XML de envío');
                 
         System.debug(esPrueba);	
@@ -417,7 +419,7 @@ public class PublicacionPortales{
             List<Product2> viviendas = [SELECT Id, Promocion__c, Name, Precio__c, Estado__c, Tipologia_Vivienda_Garaje_Trastero_Local__c, Tipo_de_inmueble__c,
                                         N_habitaciones__c, N_banos__c, Superficie_Construida_m2__c, Superficie_Terrazas_Descubiertas__c,
                                         Superficie_Util_Garaje_con_calles_m2__c,Superficie_Util_m2__c,Superficie_Util_Trastero_con_pasillos_m2__c,Inmueble_asociado__c, Superficie_Terrazas_Cubiertas__c, Superficie_Jardines__c, 
-                                        Superficie_Construida_total_con_ZZCC_m2__c, SupConstTotal__c, Piso__c,WebAvinita__c, Tipologia_de_vivienda__c 
+                                        Superficie_Construida_total_con_ZZCC_m2__c, SupConstTotal__c, Piso__c,WebAvinita__c, Tipologia_de_vivienda__c, Precio_con_anejos_incluidos__c 
                                         FROM Product2 
                                         WHERE Promocion__c in :lIds AND WebAvinita__c = true AND Inmueble_asociado__c = null];
             for(Product2 vivTipologia : viviendas){
@@ -538,12 +540,12 @@ public class PublicacionPortales{
                             (promocion.Localidad__r.Name == null ? '' : promocion.Localidad__r.Name)+' '+
                             (promocion.Provincia__c == null ? '' : promocion.Provincia__c)+ ' ' +
                             (promocion.Codigo_postal__c == null ? '' : promocion.Codigo_postal__c));
-
-
+                    
                     if(promocion.PuntoVenta__c != null){
                         promo.addChildElement('punto_de_venta', null, null).
                             addTextNode(promocion.PuntoVenta__c);
                     }
+
                     //Cálculamos el precio minimo de las viviendas de la promocion y las habitaciones que hay minimas y maximas                    
                     for(Product2 vivienda : viviendas) {                
                         // Calculamos precio de la vivienda con el precio de sus anejos incluidos
@@ -569,7 +571,7 @@ public class PublicacionPortales{
                         
                     }
 
-	                    promo.addChildElement('precio', null, null).addTextNode(precio == null ? '' : precio.format());
+                    promo.addChildElement('precio', null, null).addTextNode(precio == null ? '' : precio.format());
                     Dom.XmlNode financiada = promo.addChildElement('financiado', null, null);
                     financiada.addChildElement('texto', null, null).addTextNode(promocion.Texto_financiacion__c == null ? '' : promocion.Texto_financiacion__c);
                     promo.addChildElement('material_comercial', null, null).addTextNode('Material Comercial');
@@ -598,13 +600,13 @@ public class PublicacionPortales{
                                     imagen.addChildElement('title', null, null).addTextNode(conVer.Url_Youtube__c);
                                     imagen.addChildElement('alt_imagen', null, null).addTextNode(altImg);
                                 }
-                                imagen.addChildElement('url_imagen', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));                                
+                                imagen.addChildElement('url_imagen', null, null).addTextNode(getPublicLinkCV(conVer));                                
                             } else if(conVer.Tipo__c == 'Video') {
                                 Dom.XmlNode imagen = imagenes.addChildElement('imagen', null, null);
-                                imagen.addChildElement('url_imagen', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
+                                imagen.addChildElement('url_imagen', null, null).addTextNode(getPublicLinkCV(conVer));
                                 imagen.addChildElement('alt_imagen', null, null).addTextNode(conVer.Title);
                             } else if(conVer.Tipo__c == 'Imagen_financiera') {
-                                financiada.addChildElement('icono', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
+                                financiada.addChildElement('icono', null, null).addTextNode(getPublicLinkCV(conVer));
                             } else if(conVer.Tipo__c == 'Folleto') {
                                 listaFolletos.add(conVer);
                             } else if(conVer.Tipo__c == 'Memoria_calidades') {
@@ -721,26 +723,26 @@ public class PublicacionPortales{
                             if(conVer.Tipo__c == 'Carrusel_lifestyle') {
                                 if(conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('1')) {
                                     Dom.XmlNode bloque1 = carruselLifestyle.addChildElement('bloque1', null, null);
-                                    bloque1.addChildElement('imagen', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
+                                    bloque1.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
                                     bloque1.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque1.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 } else if(conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('2')) {
                                     Dom.XmlNode bloque2 = carruselLifestyle.addChildElement('bloque2', null, null);
-                                    bloque2.addChildElement('imagen', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
+                                    bloque2.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
                                     bloque2.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque2.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 } else if (conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('3')) {
                                     Dom.XmlNode bloque3 = carruselLifestyle.addChildElement('bloque3', null, null);
-                                    bloque3.addChildElement('imagen', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
+                                    bloque3.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
                                     bloque3.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque3.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 }
                             } else if(conVer.Tipo__c == 'Carrusel_entorno') {
                                 Dom.XmlNode item = carruselEntono.addChildElement('item', null, null);
-                                item.addChildElement('imagen', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
+                                item.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
                                 item.addChildElement('texto_promocion', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                             } else if (conVer.Tipo__c == 'Pie_de_web') {
-                                promo.addChildElement('url_imagen_fondo_bloque_final', null, null).addTextNode(devolverURLDocumento(conVer.URL__c,conVer.Id,conVer.FileType));
+                                promo.addChildElement('url_imagen_fondo_bloque_final', null, null).addTextNode(getPublicLinkCV(conVer));
                             }
                         }
                     }
@@ -756,13 +758,14 @@ public class PublicacionPortales{
                         Boolean isGarage = vivienda.Tipologia_Vivienda_Garaje_Trastero_Local__c.equals('Garaje');
                         Boolean isStorage = vivienda.Tipologia_Vivienda_Garaje_Trastero_Local__c.equals('Trastero');
                         Boolean isLocal = vivienda.Tipologia_Vivienda_Garaje_Trastero_Local__c.equals('Local');
-
+                        Boolean isVivienda = vivienda.Tipologia_Vivienda_Garaje_Trastero_Local__c.equals('Vivienda');
                         
                         if(vivienda.Promocion__c == promocion.Id){
                             if(vivienda.Estado__c != 'Libre' && vivienda.WebAvinita__c) throw new GenerarXMLException('El inmueble ' + vivienda.Name + ' no está libre. No se puede realizar la publicación en la web de Avintia.');
-                            if(vivienda.Tipologia_Vivienda_Garaje_Trastero_Local__c == 'Vivienda' && vivienda.WebAvinita__c) {
+                            if(isVivienda && vivienda.WebAvinita__c) {
                                 List<Product2> currProductAnnexes = productsAnnexesMap.get(vivienda.Id);
-                                if(currProductAnnexes == null) currProductAnnexes = new List<Product2>();
+                                // Field added to include annexes in the price generated
+                                if(currProductAnnexes == null || vivienda.Precio_con_anejos_incluidos__c == false) currProductAnnexes = new List<Product2>();
                                 Decimal totalPrice = getTotalPriceWithAnnexesIncluded(vivienda, currProductAnnexes);
 
                                 Dom.XmlNode viviendaNodo = viviendasNodo.addChildElement('vivienda', null, null);
@@ -785,9 +788,6 @@ public class PublicacionPortales{
                                     ContentVersion cvPlanoPDF = null;
                                     ContentVersion cvPlano = null;
                                     for(ContentDocumentLink link: linkTipologia) {
-                                        if(vivienda.Promocion__C == 'a0F5w00000c2aglEAA'){
-                                            listStrings += 'Vivienda: ' + vivienda.name + ' | ' + vivienda.ID + ' | ' + vivienda.Tipo_de_inmueble__c + '-----' + 'ContentVersion: ' + link.LinkedEntityId;
-                                        }
                                         if(link.LinkedEntityId.equals(vivienda.id)) {
                                             for(ContentVersion contVers: contentVersionTipologia) {
                                                 if(cvPlanoPDF == null && contVers.Tipo__c=='Plano_PDF' && link.ContentDocumentId.equals(contVers.ContentDocumentId)&&contVers.URL__c!=null && String.isNotBlank(contVers.URL__c) && contVers.Id!=null && String.isNotBlank(contVers.Id)){
@@ -802,7 +802,7 @@ public class PublicacionPortales{
                                                     cvPlanoPDF = contVers;
                                                 }else if(cvPlanoPDF==null&&cvPlano==null&&contVers.Tipo__c=='Plano'&&link.ContentDocumentId.equals(contVers.ContentDocumentId)&&contVers.URL__c!=null && String.isNotBlank(contVers.URL__c) && contVers.Id!=null && String.isNotBlank(contVers.Id)) {
                                                     cvPlano = contVers;
-                                                }
+                                                } 
                                             }
                                         }  
                                     }
@@ -814,9 +814,9 @@ public class PublicacionPortales{
                                 } else viviendaNodo.addChildElement('url_plano', null, null).addTextNode('');
                             }else if(isGarage && vivienda.WebAvinita__c && vivienda.Inmueble_asociado__c== null) {
                                 List<Product2> currProductAnnexes = productsAnnexesMap.get(vivienda.Id);
-                                if(currProductAnnexes == null) currProductAnnexes = new List<Product2>();
+                                if(currProductAnnexes == null || (vivienda.Precio_con_anejos_incluidos__c == true && origen !=WEB_AVINTIA)) currProductAnnexes = new List<Product2>();
                                 Decimal totalPrice = getTotalPriceWithAnnexesIncluded(vivienda, currProductAnnexes); // DATOS ESPECÍFICOS DE LOS GARAJES
-                               
+
                                 Dom.XmlNode garaje = garajes.addChildElement('garaje', null, null);
                                 garaje.addChildElement('area', null, null).
                                 addTextNode(vivienda.Superficie_Construida_total_con_ZZCC_m2__c == null ? '' : String.valueOf(vivienda.Superficie_Construida_total_con_ZZCC_m2__c));
@@ -827,7 +827,7 @@ public class PublicacionPortales{
                                 garaje.addChildElement('precio_desde', null, null).
                                     addTextNode(totalPrice.format());
 
-	                            } else if(isStorage && vivienda.WebAvinita__c && vivienda.Inmueble_asociado__c== null) { 
+                            } else if(isStorage && vivienda.WebAvinita__c && vivienda.Inmueble_asociado__c== null) { 
                                 List<Product2> currProductAnnexes = productsAnnexesMap.get(vivienda.Id);
                                 if(currProductAnnexes == null) currProductAnnexes = new List<Product2>();
                                 Decimal totalPrice = getTotalPriceWithAnnexesIncluded(vivienda, currProductAnnexes);// DATOS ESPECÍFICOS DE LOS TRASTEROS
@@ -840,12 +840,13 @@ public class PublicacionPortales{
                                 addTextNode(vivienda.Superficie_Util_m2__c == null ? '' : String.valueOf(vivienda.Superficie_Util_m2__c));   
                                 trastero.addChildElement('precio_desde', null, null).
                                     addTextNode(totalPrice.format());   
-                            }else if(isLocal && vivienda.WebAvinita__c && vivienda.Inmueble_asociado__c== null) {
+                            }
+                            else if(isLocal && vivienda.WebAvinita__c && vivienda.Inmueble_asociado__c== null) {
                                 List<Product2> currProductAnnexes = productsAnnexesMap.get(vivienda.Id);
                                 Dom.XmlNode localNodo = locales.addChildElement('local', null, null);
                                 localNodo.addChildElement('planta', null, null).
                                     addTextNode(vivienda.Piso__c == null ? '0' : String.valueOf(vivienda.Piso__c));
-                                    localNodo.addChildElement('superficie_construida', null, null).
+                                localNodo.addChildElement('superficie_construida', null, null).
                                     addTextNode(vivienda.SupConstTotal__c == null ? '' : vivienda.SupConstTotal__c.format());
                                 
                                 if(currProductAnnexes == null) currProductAnnexes = new List<Product2>();
@@ -856,6 +857,7 @@ public class PublicacionPortales{
                                     ContentVersion cvPlanoPDF = null;
                                     ContentVersion cvPlano = null;
                                     for(ContentDocumentLink link: linkTipologia) {
+                                        system.debug(link.LinkedEntityId + '  |  ' + vivienda.id);
                                         if(link.LinkedEntityId.equals(vivienda.id)) {
                                             for(ContentVersion contVers: contentVersionTipologia) {
                                                 if(cvPlanoPDF == null && contVers.Tipo__c=='Plano_PDF' && link.ContentDocumentId.equals(contVers.ContentDocumentId)&&contVers.URL__c!=null && String.isNotBlank(contVers.URL__c) && contVers.Id!=null && String.isNotBlank(contVers.Id)){
@@ -880,9 +882,8 @@ public class PublicacionPortales{
                                         localNodo.addChildElement('url_plano', null, null).addTextNode(getPublicLinkCV(cvPlano));
                                     }
                                 } else localNodo.addChildElement('url_plano', null, null).addTextNode('');
-                            } 
-
-                        }
+                            }
+                        } 
                     }             
                     promo.addChildElement('url_imagen_fondo_descargas', null, null).addTextNode('');
 					//Mostramos las URL de los folletos
@@ -899,7 +900,7 @@ public class PublicacionPortales{
                     }
                     //Mostramos las URL de los Planos de las Zonas Comunes
                     if(!listaZonasComunes.isEmpty()) {
-                        promo.addChildElement('descargables_descargable_planos', null, null).addTextNode(devolverURLDocumento(listaZonasComunes.get(0).URL__c,listaZonasComunes.get(0).Id,listaZonasComunes.get(0).FileType));
+                        promo.addChildElement('descargables_descargable_planos', null, null).addTextNode(getPublicLinkCV(listaZonasComunes.get(0)));
                     } else {
                         promo.addChildElement('descargables_descargable_planos', null, null).addTextNode('');
                     }
@@ -918,7 +919,7 @@ public class PublicacionPortales{
                 mensaje = Utils.blobToString(blobMensaje,'UTF-8');	
             }	
         } catch( Exception ex ) {	
-            System.debug('Error al generar el XML de envio a la WEB de AVINTIA'+ ex);	
+            System.debug('Error al generar el XML de envio a la WEB de AVINTIA'+ ex + ex.getLineNumber());	
             mensaje='KO';	
             throw new GenerarXMLException(ex.getMessage());     	
         }

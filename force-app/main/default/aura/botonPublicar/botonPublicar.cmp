@@ -9,7 +9,7 @@
          	 <force:recordData aura:id="record"
              recordId="{!v.recordId}"
              targetFields="{!v.record}"
-             fields="Id,WebAvinita__c,PruebaPublicada__c,Fotocasa__c"
+             fields="Id,WebAvinita__c,PruebaPublicada__c,Fotocasa__c, Idealista__c"
              recordUpdated="{!c.doInit}" 
              />
     
