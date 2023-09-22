@@ -21,7 +21,10 @@ public class QuoteLineItemTriggerHandler {
             productIdList.add(quoteLineItem.Product2Id);
         }
         
-        List<Product2> product2List = [SELECT Precio__c FROM Product2 WHERE Id IN: productIdList];
+        List<Product2> product2List = [SELECT Precio__c 
+                                       FROM Product2 
+                                       WHERE Id IN: productIdList
+                                      ];
 
         List<Product2> productPrecioToUpdate = new List<Product2>();
         for(Product2 inmueble: product2List){
@@ -36,7 +39,10 @@ public class QuoteLineItemTriggerHandler {
         
         //Sacamos las entradas de la lista de precios estandar para los productos
         Id pricebookId = Utils.getStandarPriceBook();
-        List<PricebookEntry> pricebookEntryList = [SELECT Id, Product2Id, Pricebook2Id, UnitPrice FROM PricebookEntry WHERE Product2Id IN: productIdList AND Pricebook2Id =:pricebookId];
+        List<PricebookEntry> pricebookEntryList = [SELECT Id, Product2Id, Pricebook2Id, UnitPrice 
+                                                   FROM PricebookEntry 
+                                                   WHERE Product2Id IN: productIdList AND Pricebook2Id =:pricebookId
+                                                  ];
         system.debug('productPrecioToUpdate:::'+productPrecioToUpdate);
         
         //Asignamos el pricebook a cada quote line item
@@ -71,7 +77,10 @@ public class QuoteLineItemTriggerHandler {
         }
         
         //Recuperamos los productos que estan ya insertados en la quote    
-        List<QuoteLineItem> quoteLineItemsOld = [SELECT Id, Product2.Tipo_de_inmueble__r.Tipo__c FROM QuoteLineItem  WHERE QuoteId =: mapNewQuoteLineItem.keySet()];
+        List<QuoteLineItem> quoteLineItemsOld = [SELECT Id, Product2.Tipo_de_inmueble__r.Tipo__c 
+                                                 FROM QuoteLineItem  
+                                                 WHERE QuoteId =: mapNewQuoteLineItem.keySet()
+                                                ];
         system.debug('quoteLineItemsOld:::'+quoteLineItemsOld);
         
        //Recuperamos los Ids de los productos ya insertados para poder validar mas tarde que no se inserte 2 veces el mismo producto
@@ -100,7 +109,10 @@ public class QuoteLineItemTriggerHandler {
             productIdQuoteLineItemNew.add(quoteLineItemNew.Product2Id);
         }
         
-        List<Product2> productQuoteLineItemNew = [SELECT Id, Tipo_de_inmueble__r.Tipo__c FROM Product2 WHERE Id IN: productIdQuoteLineItemNew];
+        List<Product2> productQuoteLineItemNew = [SELECT Id, Tipo_de_inmueble__r.Tipo__c, Estado__c
+                                                  FROM Product2 
+                                                  WHERE Id IN: productIdQuoteLineItemNew
+                                                 ];
         
         //Productos que se van a insertar: contamos cuantos hay de cada tipo y hacemos la validacion de que no se incluya 2 veces el mismo  
         for(Product2 productQuoteLineItem : productQuoteLineItemNew){
@@ -118,6 +130,13 @@ public class QuoteLineItemTriggerHandler {
             	//ApexPages.addmessage(new ApexPages.message(ApexPages.severity.ERROR, mensaje));
                 Trigger.new[0].addError(mensaje);
                 return;
+            }
+
+            //-------------------------VALIDACION 2 -----------------------
+            if (productQuoteLineItem.Estado__c == 'BloqueoInterno'){
+                String mensaje  = 'No es posible incluir un inmueble bloqueado internamente.';
+                system.debug(mensaje);
+                Trigger.new[0].addError(mensaje);
             }
         } 
 		system.debug('mapTipoCantidad:::'+mapTipoCantidad);
@@ -144,13 +163,19 @@ public class QuoteLineItemTriggerHandler {
             sIdDescuentos.add(quoteLineItemNew.QuoteId); 
         }
         
-        List<Quote> lQuotes = [SELECT id, OpportunityId from Quote where id in: sIdDescuentos];
+        List<Quote> lQuotes = [SELECT id, OpportunityId 
+                               from Quote 
+                               where id in: sIdDescuentos
+                              ];
         Set<id> sIdOportunidades = new Set<id>();
         for(Quote quotes : lQuotes){
             sIdOportunidades.add(quotes.OpportunityId);
         }
         
-        List<Opportunity> lOportunidades = [SELECT id, VentaMasiva__c from Opportunity where id in:sIdOportunidades];
+        List<Opportunity> lOportunidades = [SELECT id, VentaMasiva__c 
+                                            from Opportunity 
+                                            where id in:sIdOportunidades
+                                           ];
         for(Opportunity oportunidades: lOportunidades){
             if(oportunidades.VentaMasiva__c == true) mensaje = '';
         }

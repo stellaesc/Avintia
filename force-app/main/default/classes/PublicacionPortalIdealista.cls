@@ -559,10 +559,6 @@ public with sharing class PublicacionPortalIdealista {
         String errors = '';
         for(Promocion__c promotion : promotions) {
 
-            if(promotion.Coordenadas__c == null && !Test.isRunningTest()) {
-                errors += 'La promoción ' + promotion.Nombre_Comercial_Avintia_Inmobiliaria__c + ' no tiene coordenadas, es obligatorio.\n\r';
-            }
-
             List<Product2> inmuebles = promosInmueblesMap.get(promotion.Id);
             if(inmuebles != null) {
                 for(Product2 inmueble : inmuebles) {
