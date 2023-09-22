@@ -109,7 +109,7 @@ public class QuoteLineItemTriggerHandler {
             productIdQuoteLineItemNew.add(quoteLineItemNew.Product2Id);
         }
         
-        List<Product2> productQuoteLineItemNew = [SELECT Id, Tipo_de_inmueble__r.Tipo__c 
+        List<Product2> productQuoteLineItemNew = [SELECT Id, Tipo_de_inmueble__r.Tipo__c, Estado__c
                                                   FROM Product2 
                                                   WHERE Id IN: productIdQuoteLineItemNew
                                                  ];
@@ -133,11 +133,7 @@ public class QuoteLineItemTriggerHandler {
             }
 
             //-------------------------VALIDACION 2 -----------------------
-            List<Product2> product2List = [SELECT Estado__c 
-                                            FROM Product2 
-                                            WHERE Id IN: productIdQuoteLineItemNew AND Estado__c = 'BloqueoInterno'
-                                        ];
-            if(product2List.size() > 0){
+            if (productQuoteLineItem.Estado__c == 'BloqueoInterno'){
                 String mensaje  = 'No es posible incluir un inmueble bloqueado internamente.';
                 system.debug(mensaje);
                 Trigger.new[0].addError(mensaje);
