@@ -87,11 +87,8 @@ public class PublicacionPortales{
             // Se llama al metodo de generacion del XML	
             String endpointUrl = esPrueba ? propiedadesIntegracion.URL_WEBAVINTIA__c : propiedadesIntegracion.URL_WEBAVINTIA_PRO__c;
             
-            system.debug(endpointUrl);
-            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba, WEB_AVINTIA);	
-            System.debug('mensajeEnviar: ' + mensajeEnviar);	
-            //System.debug('Realizamos el envio al WS');	
-            System.debug (esPrueba);	
+            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba);	
+            System.debug('mensajeEnviar: ' + resultado);		
             	
 
             //send message	
@@ -379,10 +376,8 @@ public class PublicacionPortales{
     
     //Metodo encargado de montar la URL de las imagenes para FOTOCASA	
     //Metodo encargado de generar el XML de la promocion de la Web de Avintia	
-    public static string generarXmlPublicacion(Id PromoId, Boolean esPrueba, Integer origen) {	
-        //System.debug('Procedemos a generar el XML de envío');
+    public static string generarXmlPublicacion(Id PromoId, Boolean esPrueba) {	
                 
-        System.debug(esPrueba);	
         string mensaje = '';	
         string debug = '';
         String listStrings = '';	
@@ -391,6 +386,8 @@ public class PublicacionPortales{
             Set<id> setContentDocument = new Set<id>();	
             Set<id> setContentDocumentTipologia = new Set<id>();	
             Set<id> setTipologias = new Set<id>();
+            Set<id> setContentVersionUrlsAux = new Set<id>();
+            Set<id> setContentVersion = new Set<id>();
             Map<id, List<ContentVersion>> promosMapped  = new Map<id, List<ContentVersion>>();	
             List<ContentVersion> contentVersion = null;	
             List<ContentDocumentLink> linkTipologia = null;	
@@ -450,9 +447,11 @@ public class PublicacionPortales{
                                 FROM ContentVersion
                                 WHERE ContentDocumentId IN :setContentDocument and IsLatest = true 
                                 ORDER BY Posicion__c ASC]);
+                for(ContentVersion cvAux : contentVersion)
+                    setContentVersionUrlsAux.add(cvAux.Id);
             }
             //Agrupamos en el mapa cada promocion y sus documentos
-            if(!contentVersion.isEmpty()){
+            if(contentVersion != null){
                 for(ContentDocumentLink lp : linkPromocion){
                     for(ContentVersion cv: contentVersion){
                         if(lp.ContentDocumentId == cv.ContentDocumentId){
@@ -494,7 +493,19 @@ public class PublicacionPortales{
                                             FROM ContentVersion
                                             WHERE  ContentDocumentId IN :setContentDocumentTipologia AND IsLatest = true AND 
                                             (Tipo__c = 'Plano' OR Tipo__c = 'Plano_PDF' OR Tipo__c = 'Video_Youtube')]);
+                if(!contentVersionTipologia.isEmpty()){
+                    for(ContentVersion cv : contentVersionTipologia)
+                        setContentVersion.add(cv.Id);
+                }
             }
+            Map<Id, String> publicLinksCV = new Map<Id, String>();
+            if(!setContentVersion.isEmpty()){
+                List<ContentDistribution> lCD = [SELECT DistributionPublicUrl, ContentVersionId from ContentDistribution where ContentVersionId in  :setContentVersion or ContentVersionId in :setContentVersionUrlsAux order by createdDate desc];
+                for(ContentDistribution cd : lCD){
+                    publicLinksCV.put(cd.ContentVersionId, cd.DistributionPublicUrl);
+                }
+            }
+            
             listStrings += 'CONTENTVERSIONTIPOLOGIAS\n';
 
             for(ContentVersion cvTest : contentVersionTipologia){
@@ -600,13 +611,13 @@ public class PublicacionPortales{
                                     imagen.addChildElement('title', null, null).addTextNode(conVer.Url_Youtube__c);
                                     imagen.addChildElement('alt_imagen', null, null).addTextNode(altImg);
                                 }
-                                imagen.addChildElement('url_imagen', null, null).addTextNode(getPublicLinkCV(conVer));                                
+                                imagen.addChildElement('url_imagen', null, null).addTextNode(publicLinksCV.get(conVer.Id));                                
                             } else if(conVer.Tipo__c == 'Video') {
                                 Dom.XmlNode imagen = imagenes.addChildElement('imagen', null, null);
-                                imagen.addChildElement('url_imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                imagen.addChildElement('url_imagen', null, null).addTextNode(publicLinksCV.get(conVer.Id));
                                 imagen.addChildElement('alt_imagen', null, null).addTextNode(conVer.Title);
                             } else if(conVer.Tipo__c == 'Imagen_financiera') {
-                                financiada.addChildElement('icono', null, null).addTextNode(getPublicLinkCV(conVer));
+                                financiada.addChildElement('icono', null, null).addTextNode(publicLinksCV.get(conVer.Id));
                             } else if(conVer.Tipo__c == 'Folleto') {
                                 listaFolletos.add(conVer);
                             } else if(conVer.Tipo__c == 'Memoria_calidades') {
@@ -723,26 +734,26 @@ public class PublicacionPortales{
                             if(conVer.Tipo__c == 'Carrusel_lifestyle') {
                                 if(conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('1')) {
                                     Dom.XmlNode bloque1 = carruselLifestyle.addChildElement('bloque1', null, null);
-                                    bloque1.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                    bloque1.addChildElement('imagen', null, null).addTextNode(publicLinksCV.get(conVer.Id));
                                     bloque1.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque1.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 } else if(conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('2')) {
                                     Dom.XmlNode bloque2 = carruselLifestyle.addChildElement('bloque2', null, null);
-                                    bloque2.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                    bloque2.addChildElement('imagen', null, null).addTextNode(publicLinksCV.get(conVer.Id));
                                     bloque2.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque2.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 } else if (conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('3')) {
                                     Dom.XmlNode bloque3 = carruselLifestyle.addChildElement('bloque3', null, null);
-                                    bloque3.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                    bloque3.addChildElement('imagen', null, null).addTextNode(publicLinksCV.get(conVer.Id));
                                     bloque3.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque3.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 }
                             } else if(conVer.Tipo__c == 'Carrusel_entorno') {
                                 Dom.XmlNode item = carruselEntono.addChildElement('item', null, null);
-                                item.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                item.addChildElement('imagen', null, null).addTextNode(publicLinksCV.get(conVer.Id));
                                 item.addChildElement('texto_promocion', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                             } else if (conVer.Tipo__c == 'Pie_de_web') {
-                                promo.addChildElement('url_imagen_fondo_bloque_final', null, null).addTextNode(getPublicLinkCV(conVer));
+                                promo.addChildElement('url_imagen_fondo_bloque_final', null, null).addTextNode(publicLinksCV.get(conVer.Id));
                             }
                         }
                     }
@@ -765,7 +776,7 @@ public class PublicacionPortales{
                             if(isVivienda && vivienda.WebAvinita__c) {
                                 List<Product2> currProductAnnexes = productsAnnexesMap.get(vivienda.Id);
                                 // Field added to include annexes in the price generated
-                                if(currProductAnnexes == null || vivienda.Precio_con_anejos_incluidos__c == false) currProductAnnexes = new List<Product2>();
+                                if(currProductAnnexes == null) currProductAnnexes = new List<Product2>();
                                 Decimal totalPrice = getTotalPriceWithAnnexesIncluded(vivienda, currProductAnnexes);
 
                                 Dom.XmlNode viviendaNodo = viviendasNodo.addChildElement('vivienda', null, null);
@@ -807,14 +818,14 @@ public class PublicacionPortales{
                                         }  
                                     }
                                     if(cvPlanoPDF != null) {                                                
-                                        viviendaNodo.addChildElement('url_plano', null, null).addTextNode(getPublicLinkCV(cvPlanoPDF));
+                                        viviendaNodo.addChildElement('url_plano', null, null).addTextNode(publicLinksCV.get(cvPlanoPDF.Id));
                                     } else if(cvPlano != null) {
-                                        viviendaNodo.addChildElement('url_plano', null, null).addTextNode(getPublicLinkCV(cvPlano));
+                                        viviendaNodo.addChildElement('url_plano', null, null).addTextNode(publicLinksCV.get(cvPlano.Id));
                                     }
                                 } else viviendaNodo.addChildElement('url_plano', null, null).addTextNode('');
                             }else if(isGarage && vivienda.WebAvinita__c && vivienda.Inmueble_asociado__c== null) {
                                 List<Product2> currProductAnnexes = productsAnnexesMap.get(vivienda.Id);
-                                if(currProductAnnexes == null || (vivienda.Precio_con_anejos_incluidos__c == true && origen !=WEB_AVINTIA)) currProductAnnexes = new List<Product2>();
+                                if(currProductAnnexes == null) currProductAnnexes = new List<Product2>();
                                 Decimal totalPrice = getTotalPriceWithAnnexesIncluded(vivienda, currProductAnnexes); // DATOS ESPECÍFICOS DE LOS GARAJES
 
                                 Dom.XmlNode garaje = garajes.addChildElement('garaje', null, null);
@@ -877,9 +888,9 @@ public class PublicacionPortales{
                                         }  
                                     }
                                     if(cvPlanoPDF != null) {                                                
-                                        localNodo.addChildElement('url_plano', null, null).addTextNode(getPublicLinkCV(cvPlanoPDF));
+                                        localNodo.addChildElement('url_plano', null, null).addTextNode(publicLinksCV.get(cvPlanoPDF.Id));
                                     } else if(cvPlano != null) {
-                                        localNodo.addChildElement('url_plano', null, null).addTextNode(getPublicLinkCV(cvPlano));
+                                        localNodo.addChildElement('url_plano', null, null).addTextNode(publicLinksCV.get(cvPlano.Id));
                                     }
                                 } else localNodo.addChildElement('url_plano', null, null).addTextNode('');
                             }
@@ -888,19 +899,19 @@ public class PublicacionPortales{
                     promo.addChildElement('url_imagen_fondo_descargas', null, null).addTextNode('');
 					//Mostramos las URL de los folletos
                     if(!listaFolletos.isEmpty()) {
-                        promo.addChildElement('descargables_descargable_folleto', null, null).addTextNode(getPublicLinkCV(listaFolletos.get(0)));
+                        promo.addChildElement('descargables_descargable_folleto', null, null).addTextNode(publicLinksCV.get(listaFolletos.get(0).Id));
                     } else {
                         promo.addChildElement('descargables_descargable_folleto', null, null).addTextNode('');
                     }
                     //Mostramos las URL de los Memoria de Calidades
                     if(!listaMemoriaCalidades.isEmpty()) { 
-                        promo.addChildElement('descargables_descargable_memoria', null, null).addTextNode(getPublicLinkCV(listaMemoriaCalidades.get(0)));
+                        promo.addChildElement('descargables_descargable_memoria', null, null).addTextNode(publicLinksCV.get(listaMemoriaCalidades.get(0).Id));
                     } else {
                         promo.addChildElement('descargables_descargable_memoria', null, null).addTextNode('');
                     }
                     //Mostramos las URL de los Planos de las Zonas Comunes
                     if(!listaZonasComunes.isEmpty()) {
-                        promo.addChildElement('descargables_descargable_planos', null, null).addTextNode(getPublicLinkCV(listaZonasComunes.get(0)));
+                        promo.addChildElement('descargables_descargable_planos', null, null).addTextNode(publicLinksCV.get(listaZonasComunes.get(0).Id));
                     } else {
                         promo.addChildElement('descargables_descargable_planos', null, null).addTextNode('');
                     }
