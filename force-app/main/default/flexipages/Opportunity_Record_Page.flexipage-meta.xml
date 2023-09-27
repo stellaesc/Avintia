@@ -1,264 +1,214 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>collapsed</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>enableActionsConfiguration</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>hideChatterActions</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentName>force:highlightsPanel</componentName>
-        </componentInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>collapsed</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>enableActionsConfiguration</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>hideChatterActions</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentName>force:highlightsPanel</componentName>
+                <identifier>force_highlightsPanel</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>header</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>hideUpdateButton</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
-        </componentInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>hideUpdateButton</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
+                <identifier>runtime_sales_pathassistant_pathAssistant</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>subheader</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentName>force:detailPanel</componentName>
-        </componentInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>force:detailPanel</componentName>
+                <identifier>force_detailPanel</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>Facet-c134ffd5-cbef-4837-aa8e-788b07044d19</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>showLegacyActivityComposer</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentName>runtime_sales_activities:activityPanel</componentName>
-        </componentInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>showLegacyActivityComposer</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentName>runtime_sales_activities:activityPanel</componentName>
+                <identifier>runtime_sales_activities_activityPanel</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>activityTabContent</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentName>forceChatter:recordFeedContainer</componentName>
-        </componentInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>forceChatter:recordFeedContainer</componentName>
+                <identifier>forceChatter_recordFeedContainer</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>feedTabContent</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentName>PantallaSubidaFicheros</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>height</name>
-                <value>300</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>pageName</name>
-                <value>SharePointFiles</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>showLabel</name>
-                <value>true</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:visualforcePage</componentName>
-        </componentInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>PantallaSubidaFicheros</componentName>
+                <identifier>PantallaSubidaFicheros</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>Facet-f587b622-ac98-4845-aa6d-954490a1c01c</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>defaultNumberofRecordsToDisplay</name>
-                <value>3</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>displayType</name>
-                <value>Tile 1</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>filter</name>
-                <value>Estado_plan_de_pagos__c != &apos;Inactivo&apos;</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>hideOnNoRecord</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>iconName</name>
-                <value>standard:drafts</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>layoutType</name>
-                <value>1 Column</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>maxNumberofRecordsToDisplay</name>
-                <value>50</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>newRecord</name>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>objectAPIName</name>
-                <value>Factura__c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>parentField</name>
-                <value>Oportunidad__c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>parentObjectIdField</name>
-                <value>Id</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>relatedListName</name>
-                <value>ListaRelFactura</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>showHeader</name>
-                <value>true</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>showMenuAction</name>
-                <value>true</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>showRefreshButton</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>sort</name>
-                <value>CreatedDate DESC</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Facturas activas</value>
-            </componentInstanceProperties>
-            <componentName>CMTD:EnhancedRelatedList</componentName>
-        </componentInstances>
-        <name>Facet-be041335-2ab7-4550-b98d-517f20d905ac</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>active</name>
-                <value>true</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>body</name>
-                <value>Facet-c134ffd5-cbef-4837-aa8e-788b07044d19</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Standard.Tab.detail</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tab</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>active</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>body</name>
-                <value>activityTabContent</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Standard.Tab.activity</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tab</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>body</name>
-                <value>feedTabContent</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Standard.Tab.collaborate</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tab</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>body</name>
-                <value>Facet-f587b622-ac98-4845-aa6d-954490a1c01c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Documentos</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tab</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>body</name>
-                <value>Facet-be041335-2ab7-4550-b98d-517f20d905ac</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Facturas Activas</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tab</componentName>
-        </componentInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>active</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-c134ffd5-cbef-4837-aa8e-788b07044d19</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Standard.Tab.detail</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>detailTab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>active</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>activityTabContent</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Standard.Tab.activity</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>activityTab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>feedTabContent</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Standard.Tab.collaborate</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>collaborateTab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-f587b622-ac98-4845-aa6d-954490a1c01c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Documentos</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>customTab</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>tabs</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>tabs</name>
-                <value>tabs</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tabset</componentName>
-        </componentInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>tabs</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentName>BotonEditarPlanPagos</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentName>BotonReserva</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>hideHeader</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentName>force:relatedListQuickLinksContainer</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>relatedListComponentOverride</name>
-                <value>NONE</value>
-            </componentInstanceProperties>
-            <componentName>force:relatedListContainer</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentName>dfsle:Status</componentName>
-        </componentInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>BotonEditarPlanPagos</componentName>
+                <identifier>BotonEditarPlanPagos</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>BotonReserva</componentName>
+                <identifier>BotonReserva</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>hideHeader</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListQuickLinksContainer</componentName>
+                <identifier>force_relatedListQuickLinksContainer</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>NONE</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListContainer</componentName>
+                <identifier>force_relatedListContainer</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>sidebar</name>
         <type>Region</type>
