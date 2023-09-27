@@ -51,10 +51,6 @@
                 <behavior>Edit</behavior>
                 <field>EsViviendaPiloto__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Precio_con_anejos_incluidos__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -71,7 +67,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Certificado_de_eficiencia_energetica__c</field>
+                <field>MotivosBloqueo__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -171,6 +167,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Orientacion_Viv__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Certificado_de_eficiencia_energetica__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

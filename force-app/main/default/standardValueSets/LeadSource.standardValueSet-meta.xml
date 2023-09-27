@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>PUNTO DE VENTA</fullName>
+        <default>false</default>
+        <label>PUNTO DE VENTA</label>
+    </standardValue>
+    <standardValue>
+        <fullName>API</fullName>
+        <default>false</default>
+        <label>API</label>
+    </standardValue>
+    <standardValue>
+        <fullName>PUBLICIDAD EXTERIOR</fullName>
+        <default>false</default>
+        <label>PUBLICIDAD EXTERIOR</label>
+    </standardValue>
+    <standardValue>
+        <fullName>PUBLICIDAD EN SUELO</fullName>
+        <default>false</default>
+        <label>PUBLICIDAD EN SUELO</label>
+    </standardValue>
+    <standardValue>
+        <fullName>PORTALES VERTICALES</fullName>
+        <default>false</default>
+        <label>PORTALES VERTICALES</label>
+    </standardValue>
+    <standardValue>
+        <fullName>INTERNET CAMPAÑAS</fullName>
+        <default>false</default>
+        <label>INTERNET CAMPAÑAS</label>
+    </standardValue>
+    <standardValue>
+        <fullName>INTERNET PROPIOS</fullName>
+        <default>false</default>
+        <label>INTERNET PROPIOS</label>
+    </standardValue>
+    <standardValue>
+        <fullName>ACCIONES ESPECIALES</fullName>
+        <default>false</default>
+        <label>ACCIONES ESPECIALES</label>
+    </standardValue>
+    <standardValue>
+        <fullName>PRENSA, REVISTAS</fullName>
+        <default>false</default>
+        <label>MEDIOS CONVENCIONALES</label>
+    </standardValue>
+    <standardValue>
+        <fullName>RECOMENDACIÓN</fullName>
+        <default>false</default>
+        <label>RECOMENDACIÓN</label>
+    </standardValue>
+    <standardValue>
+        <fullName>MARKETING DIRECTO</fullName>
+        <default>false</default>
+        <label>MARKETING DIRECTO</label>
+    </standardValue>
+    <standardValue>
+        <fullName>RADIO</fullName>
+        <default>false</default>
+        <label>RADIO</label>
+    </standardValue>
+</StandardValueSet>

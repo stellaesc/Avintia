@@ -66,6 +66,11 @@
                 <default>false</default>
                 <label>MARKETING DIRECTO</label>
             </value>
+            <value>
+                <fullName>RADIO</fullName>
+                <default>false</default>
+                <label>RADIO</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
