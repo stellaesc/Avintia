@@ -61,6 +61,11 @@
                 <label>Apartado</label>
             </value>
             <value>
+                <fullName>BloqueoInterno</fullName>
+                <default>false</default>
+                <label>Bloqueado</label>
+            </value>
+            <value>
                 <fullName>Asociado</fullName>
                 <default>false</default>
                 <isActive>false</isActive>
