@@ -60,7 +60,6 @@ public class PublicacionPortales{
 			Id UserId = UserInfo.getUserId();
             List<Promocion__c> promUpd = [SELECT Id, Ultima_Publicacion_Fotocasa__c, Ultimo_Publicante_Fotocasa__c	
                                          FROM Promocion__c WHERE WebAvinita__c = true AND Idealista__c = true AND Fotocasa__c = true];	
-            System.debug('Estoy aqui: ' + promUpd);	
             for(Promocion__c p: promUpd){	
                 p.Ultima_Publicacion_Fotocasa__c = currD;	
                 p.Ultimo_Publicante_Fotocasa__c = UserId;	
@@ -75,23 +74,17 @@ public class PublicacionPortales{
     	
     @AuraEnabled	
     public static string publicarWebAvintia(Id PromoId, Boolean esPrueba) {	
-        	
-        //System.debug('Metodo de publicación en la Web de Avintia');	
         PropiedadesIntegracion__c propiedadesIntegracion = PropiedadesIntegracion__c.getInstance();	
         String mensajeEnviar = '';	
         string resultado = 'OK';	
-        System.debug('mensajeEnviar: ' + resultado);	
 
         //Generamos el XML y lo enviamos al entorno.	
         try {	
             // Se llama al metodo de generacion del XML	
             String endpointUrl = esPrueba ? propiedadesIntegracion.URL_WEBAVINTIA__c : propiedadesIntegracion.URL_WEBAVINTIA_PRO__c;
             
-            system.debug(endpointUrl);
-            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba, WEB_AVINTIA);	
-            System.debug('mensajeEnviar: ' + mensajeEnviar);	
-            //System.debug('Realizamos el envio al WS');	
-            System.debug (esPrueba);	
+            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba);	
+            System.debug('mensajeEnviar: ' + resultado);		
             	
 
             //send message	
@@ -115,7 +108,6 @@ public class PublicacionPortales{
             HttpRequest req = new HttpRequest();	
             req.setMethod('POST');	
             req.setEndpoint(endpointUrl);	
-            System.debug('ENDPOINT: ' + req.getEndpoint());	
             req.setHeader('Content-Type','application/xml');	
             if(esPrueba){
                 String username = propiedadesIntegracion.usernamePruebas__c;
@@ -160,13 +152,12 @@ public class PublicacionPortales{
     }
 
 
-    private static boolean generateNewDoc(String jsonParsed, PropiedadesIntegracion__c propiedadesIntegracion, Boolean esPrueba){
+    public static boolean generateNewDoc(String jsonParsed, PropiedadesIntegracion__c propiedadesIntegracion, Boolean esPrueba){
+        
         String base64Content = EncodingUtil.Base64Encode( 
             Blob.valueOf(jsonParsed) 
         );
-        System.debug( 'Base64 Content is ' + base64Content );
         Blob blobContent = EncodingUtil.base64Decode( base64Content );
-        System.debug( 'Decoded Base64 value is ' + blobContent.toString() );
         // Antes de crear el nuevo fichero se comprueba si ha habido algún cambio
         List<ContentDocument> lCdsId = [Select Id from ContentDocument where Title = :propiedadesIntegracion.CustomerCodeIdealista__c];
         Set<Id> cdSet = new Set<Id>();
@@ -174,7 +165,6 @@ public class PublicacionPortales{
         List<ContentVersion> cvExistentes = !cdSet.isEmpty() ? [Select Id, VersionData, ContentDocumentId from ContentVersion where ContentDocumentId in :cdSet order by CreatedDate desc limit 1]: new List<ContentVersion>()  ;
 
         Boolean loadNewFile = false;
-        system.debug('EMPTY : ' + cvExistentes.isEmpty());
         if(!cvExistentes.isEmpty()){
             JSONParser parserNewJSON = JSON.createParser(jsonParsed);
 
@@ -183,7 +173,6 @@ public class PublicacionPortales{
             JSONParser parserPreviousJSON = JSON.createParser(previousVersionData);
             
             while(parserNewJSON.nextToken() != null && parserPreviousJSON.nextToken() != null && loadNewFile == false){
-                system.debug(parserNewJSON.getCurrentName() + ': ' + parserNewJSON.getText() + ' | ' + parserPreviousJSON.getCurrentName() + ': ' + parserPreviousJSON.getText());
                 if(parserNewJSON.getCurrentName() != 'customerSendDate' && parserPreviousJSON.getCurrentName() != 'customerSendDate'){
                     if((parserNewJSON.getText() != parserPreviousJSON.getText()) ||
                     (parserNewJSON.getCurrentToken() != parserPreviousJSON.getCurrentToken())){
@@ -228,7 +217,8 @@ public class PublicacionPortales{
             }	
             Messaging.SingleEmailMessage[] messages = new List<Messaging.SingleEmailMessage> {message};	
     
-            Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
+            if(Test.isRunningTest() == false) Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
+
         }
 
         //send message	
@@ -237,11 +227,9 @@ public class PublicacionPortales{
 
     @AuraEnabled	
     public static String publicacionPortalesIdealista(Id PromoId, Boolean esPrueba) {	
-        //System.debug('Metodo de publicación en la Web de Avintia');	
         PropiedadesIntegracion__c propiedadesIntegracion = PropiedadesIntegracion__c.getInstance();	
         String mensajeEnviar = '';	
         string resultado = 'OK';	
-        System.debug('mensajeEnviar: ' + resultado);	
         Boolean ret;
 
         //Generamos el XML y lo enviamos al entorno.	
@@ -252,13 +240,6 @@ public class PublicacionPortales{
             String jsonParsed = PublicacionPortalIdealista.generarJson();
             
             ret = generateNewDoc(jsonParsed, propiedadesIntegracion, esPrueba);
-
-            system.debug(endpointUrl);
-            //mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba, WEB_IDEALISTA);	
-
-            System.debug('mensajeEnviar: ' + mensajeEnviar);	
-            //System.debug('Realizamos el envio al WS');	
-            System.debug (esPrueba);	
 
         } catch(Exception e){	
             System.debug('Error al generar el JSON: '+ e + '\n\r' + e.getStackTraceString());	
@@ -277,20 +258,13 @@ public class PublicacionPortales{
         PropiedadesIntegracion__c propiedadesIntegracion = PropiedadesIntegracion__c.getInstance();	
         String mensajeEnviar = '';	
         string resultado = 'OK';	
-        System.debug('mensajeEnviar: ' + resultado);	
 
         //Generamos el XML y lo enviamos al entorno.	
         try {	
             // Se llama al metodo de generacion del XML	
             String endpointUrl = esPrueba ? propiedadesIntegracion.URL_WEBAVINTIA__c : propiedadesIntegracion.URL_WEBAVINTIA_PRO__c;
             
-            system.debug(endpointUrl);
-            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba, WEB_FOTOCASA);	
-            System.debug('mensajeEnviar: ' + mensajeEnviar);	
-            //System.debug('Realizamos el envio al WS');	
-            System.debug (esPrueba);	
-            	
-
+            mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba);	
             //send message	
             Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();	
 			message.toAddresses = new String[] {'avintia@leadclic.com'};	
@@ -312,7 +286,6 @@ public class PublicacionPortales{
             HttpRequest req = new HttpRequest();	
             req.setMethod('POST');	
             req.setEndpoint(endpointUrl);	
-            System.debug('ENDPOINT: ' + req.getEndpoint());	
             req.setHeader('Content-Type','application/xml');	
             if(esPrueba){
                 String username = propiedadesIntegracion.usernamePruebas__c;
@@ -361,7 +334,6 @@ public class PublicacionPortales{
         if(URL!=null && String.isNotBlank(URL) && versionId!=null && String.isNotBlank(versionId))	
         {	
             URLFinal=propiedades.URLDocuemntos__c+ tipo + '&versionId='+versionId+'&operationContext=DELIVERY&page=0&oid='+UserInfo.getOrganizationId().substring(0,UserInfo.getOrganizationId().length()-3)+'&dpt=null&d='+ url.substring((url.indexOf(UserInfo.getOrganizationId().substring(3,UserInfo.getOrganizationId().length()-3))+UserInfo.getOrganizationId().length()-6),url.length()) +'&tipo='+tipo;	
-            //system.debug(URLFinal);	
         }	
         return URLFinal;	
     }
@@ -377,18 +349,21 @@ public class PublicacionPortales{
     
     //Metodo encargado de montar la URL de las imagenes para FOTOCASA	
     //Metodo encargado de generar el XML de la promocion de la Web de Avintia	
-    public static string generarXmlPublicacion(Id PromoId, Boolean esPrueba, Integer origen) {	
-        //System.debug('Procedemos a generar el XML de envío');
+    public static string generarXmlPublicacion(Id PromoId, Boolean esPrueba) {	
                 
-        System.debug(esPrueba);	
         string mensaje = '';	
         string debug = '';
-        String listStrings = '';	
+        String listStrings = '';
+        boolean testRunning = false;
+        if(Test.isRunningTest())
+            testRunning = true;
         try {	
             DOM.Document doc = new DOM.Document();	
             Set<id> setContentDocument = new Set<id>();	
             Set<id> setContentDocumentTipologia = new Set<id>();	
             Set<id> setTipologias = new Set<id>();
+            Set<id> setContentVersionUrlsAux = new Set<id>();
+            Set<id> setContentVersion = new Set<id>();
             Map<id, List<ContentVersion>> promosMapped  = new Map<id, List<ContentVersion>>();	
             List<ContentVersion> contentVersion = null;	
             List<ContentDocumentLink> linkTipologia = null;	
@@ -448,14 +423,15 @@ public class PublicacionPortales{
                                 FROM ContentVersion
                                 WHERE ContentDocumentId IN :setContentDocument and IsLatest = true 
                                 ORDER BY Posicion__c ASC]);
+                for(ContentVersion cvAux : contentVersion)
+                    setContentVersionUrlsAux.add(cvAux.Id);
             }
             //Agrupamos en el mapa cada promocion y sus documentos
-            if(!contentVersion.isEmpty()){
+            if(contentVersion != null){
                 for(ContentDocumentLink lp : linkPromocion){
                     for(ContentVersion cv: contentVersion){
                         if(lp.ContentDocumentId == cv.ContentDocumentId){
                             List<ContentVersion> cvList;
-                            system.debug('CONDICION OK ' + lp.LinkedEntityId + ' | ' + cv);
                             debug += 'CONDICION OK ' + lp.LinkedEntityId + ' | ' + cv;
                             if(!promosMapped.keySet().contains(lp.LinkedEntityId)){
                                 cvList = new List<ContentVersion>();
@@ -492,7 +468,19 @@ public class PublicacionPortales{
                                             FROM ContentVersion
                                             WHERE  ContentDocumentId IN :setContentDocumentTipologia AND IsLatest = true AND 
                                             (Tipo__c = 'Plano' OR Tipo__c = 'Plano_PDF' OR Tipo__c = 'Video_Youtube')]);
+                if(!contentVersionTipologia.isEmpty()){
+                    for(ContentVersion cv : contentVersionTipologia)
+                        setContentVersion.add(cv.Id);
+                }
             }
+            Map<Id, String> publicLinksCV = new Map<Id, String>();
+            if(!setContentVersion.isEmpty()){
+                List<ContentDistribution> lCD = [SELECT DistributionPublicUrl, ContentVersionId from ContentDistribution where ContentVersionId in  :setContentVersion or ContentVersionId in :setContentVersionUrlsAux order by createdDate desc];
+                for(ContentDistribution cd : lCD){
+                    publicLinksCV.put(cd.ContentVersionId, cd.DistributionPublicUrl);
+                }
+            }
+            
             listStrings += 'CONTENTVERSIONTIPOLOGIAS\n';
 
             for(ContentVersion cvTest : contentVersionTipologia){
@@ -598,13 +586,13 @@ public class PublicacionPortales{
                                     imagen.addChildElement('title', null, null).addTextNode(conVer.Url_Youtube__c);
                                     imagen.addChildElement('alt_imagen', null, null).addTextNode(altImg);
                                 }
-                                imagen.addChildElement('url_imagen', null, null).addTextNode(getPublicLinkCV(conVer));                                
+                                imagen.addChildElement('url_imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));                                
                             } else if(conVer.Tipo__c == 'Video') {
                                 Dom.XmlNode imagen = imagenes.addChildElement('imagen', null, null);
-                                imagen.addChildElement('url_imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                imagen.addChildElement('url_imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
                                 imagen.addChildElement('alt_imagen', null, null).addTextNode(conVer.Title);
                             } else if(conVer.Tipo__c == 'Imagen_financiera') {
-                                financiada.addChildElement('icono', null, null).addTextNode(getPublicLinkCV(conVer));
+                                financiada.addChildElement('icono', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
                             } else if(conVer.Tipo__c == 'Folleto') {
                                 listaFolletos.add(conVer);
                             } else if(conVer.Tipo__c == 'Memoria_calidades') {
@@ -721,26 +709,26 @@ public class PublicacionPortales{
                             if(conVer.Tipo__c == 'Carrusel_lifestyle') {
                                 if(conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('1')) {
                                     Dom.XmlNode bloque1 = carruselLifestyle.addChildElement('bloque1', null, null);
-                                    bloque1.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                    bloque1.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
                                     bloque1.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque1.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 } else if(conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('2')) {
                                     Dom.XmlNode bloque2 = carruselLifestyle.addChildElement('bloque2', null, null);
-                                    bloque2.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                    bloque2.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
                                     bloque2.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque2.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 } else if (conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('3')) {
                                     Dom.XmlNode bloque3 = carruselLifestyle.addChildElement('bloque3', null, null);
-                                    bloque3.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                    bloque3.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
                                     bloque3.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque3.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 }
                             } else if(conVer.Tipo__c == 'Carrusel_entorno') {
                                 Dom.XmlNode item = carruselEntono.addChildElement('item', null, null);
-                                item.addChildElement('imagen', null, null).addTextNode(getPublicLinkCV(conVer));
+                                item.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
                                 item.addChildElement('texto_promocion', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                             } else if (conVer.Tipo__c == 'Pie_de_web') {
-                                promo.addChildElement('url_imagen_fondo_bloque_final', null, null).addTextNode(getPublicLinkCV(conVer));
+                                promo.addChildElement('url_imagen_fondo_bloque_final', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
                             }
                         }
                     }
@@ -763,7 +751,7 @@ public class PublicacionPortales{
                             if(isVivienda && vivienda.WebAvinita__c) {
                                 List<Product2> currProductAnnexes = productsAnnexesMap.get(vivienda.Id);
                                 // Field added to include annexes in the price generated
-                                if(currProductAnnexes == null || vivienda.Precio_con_anejos_incluidos__c == false) currProductAnnexes = new List<Product2>();
+                                if(currProductAnnexes == null) currProductAnnexes = new List<Product2>();
                                 Decimal totalPrice = getTotalPriceWithAnnexesIncluded(vivienda, currProductAnnexes);
 
                                 Dom.XmlNode viviendaNodo = viviendasNodo.addChildElement('vivienda', null, null);
@@ -805,14 +793,14 @@ public class PublicacionPortales{
                                         }  
                                     }
                                     if(cvPlanoPDF != null) {                                                
-                                        viviendaNodo.addChildElement('url_plano', null, null).addTextNode(getPublicLinkCV(cvPlanoPDF));
+                                        viviendaNodo.addChildElement('url_plano', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(cvPlanoPDF.Id));
                                     } else if(cvPlano != null) {
-                                        viviendaNodo.addChildElement('url_plano', null, null).addTextNode(getPublicLinkCV(cvPlano));
+                                        viviendaNodo.addChildElement('url_plano', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(cvPlano.Id));
                                     }
                                 } else viviendaNodo.addChildElement('url_plano', null, null).addTextNode('');
                             }else if(isGarage && vivienda.WebAvinita__c && vivienda.Inmueble_asociado__c== null) {
                                 List<Product2> currProductAnnexes = productsAnnexesMap.get(vivienda.Id);
-                                if(currProductAnnexes == null || (vivienda.Precio_con_anejos_incluidos__c == true && origen !=WEB_AVINTIA)) currProductAnnexes = new List<Product2>();
+                                if(currProductAnnexes == null) currProductAnnexes = new List<Product2>();
                                 Decimal totalPrice = getTotalPriceWithAnnexesIncluded(vivienda, currProductAnnexes); // DATOS ESPECÍFICOS DE LOS GARAJES
 
                                 Dom.XmlNode garaje = garajes.addChildElement('garaje', null, null);
@@ -855,7 +843,6 @@ public class PublicacionPortales{
                                     ContentVersion cvPlanoPDF = null;
                                     ContentVersion cvPlano = null;
                                     for(ContentDocumentLink link: linkTipologia) {
-                                        system.debug(link.LinkedEntityId + '  |  ' + vivienda.id);
                                         if(link.LinkedEntityId.equals(vivienda.id)) {
                                             for(ContentVersion contVers: contentVersionTipologia) {
                                                 if(cvPlanoPDF == null && contVers.Tipo__c=='Plano_PDF' && link.ContentDocumentId.equals(contVers.ContentDocumentId)&&contVers.URL__c!=null && String.isNotBlank(contVers.URL__c) && contVers.Id!=null && String.isNotBlank(contVers.Id)){
@@ -875,9 +862,9 @@ public class PublicacionPortales{
                                         }  
                                     }
                                     if(cvPlanoPDF != null) {                                                
-                                        localNodo.addChildElement('url_plano', null, null).addTextNode(getPublicLinkCV(cvPlanoPDF));
+                                        localNodo.addChildElement('url_plano', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(cvPlanoPDF.Id));
                                     } else if(cvPlano != null) {
-                                        localNodo.addChildElement('url_plano', null, null).addTextNode(getPublicLinkCV(cvPlano));
+                                        localNodo.addChildElement('url_plano', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(cvPlano.Id));
                                     }
                                 } else localNodo.addChildElement('url_plano', null, null).addTextNode('');
                             }
@@ -886,19 +873,19 @@ public class PublicacionPortales{
                     promo.addChildElement('url_imagen_fondo_descargas', null, null).addTextNode('');
 					//Mostramos las URL de los folletos
                     if(!listaFolletos.isEmpty()) {
-                        promo.addChildElement('descargables_descargable_folleto', null, null).addTextNode(getPublicLinkCV(listaFolletos.get(0)));
+                        promo.addChildElement('descargables_descargable_folleto', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(listaFolletos.get(0).Id));
                     } else {
                         promo.addChildElement('descargables_descargable_folleto', null, null).addTextNode('');
                     }
                     //Mostramos las URL de los Memoria de Calidades
                     if(!listaMemoriaCalidades.isEmpty()) { 
-                        promo.addChildElement('descargables_descargable_memoria', null, null).addTextNode(getPublicLinkCV(listaMemoriaCalidades.get(0)));
+                        promo.addChildElement('descargables_descargable_memoria', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(listaMemoriaCalidades.get(0).Id));
                     } else {
                         promo.addChildElement('descargables_descargable_memoria', null, null).addTextNode('');
                     }
                     //Mostramos las URL de los Planos de las Zonas Comunes
                     if(!listaZonasComunes.isEmpty()) {
-                        promo.addChildElement('descargables_descargable_planos', null, null).addTextNode(getPublicLinkCV(listaZonasComunes.get(0)));
+                        promo.addChildElement('descargables_descargable_planos', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(listaZonasComunes.get(0).Id));
                     } else {
                         promo.addChildElement('descargables_descargable_planos', null, null).addTextNode('');
                     }
@@ -933,7 +920,6 @@ public class PublicacionPortales{
         return URLFinal;	
     }*/	
      public static string  generarFotocasa(ID PromoId) {	
-        //System.debug ('Procedemos a generar el XML de envío de Fotocasa');	
         Set<id> setContentDocumentTipologia = new Set<id>();	
         List<ContentDocumentLink> linkTipologia = null;	
         List<ContentVersion> contentVersionTipologia = null;
