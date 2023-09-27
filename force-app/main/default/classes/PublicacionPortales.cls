@@ -586,13 +586,13 @@ public class PublicacionPortales{
                                     imagen.addChildElement('title', null, null).addTextNode(conVer.Url_Youtube__c);
                                     imagen.addChildElement('alt_imagen', null, null).addTextNode(altImg);
                                 }
-                                imagen.addChildElement('url_imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));                                
+                                imagen.addChildElement('url_imagen', null, null).addTextNode();                                
                             } else if(conVer.Tipo__c == 'Video') {
                                 Dom.XmlNode imagen = imagenes.addChildElement('imagen', null, null);
-                                imagen.addChildElement('url_imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
+                                imagen.addChildElement('url_imagen', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
                                 imagen.addChildElement('alt_imagen', null, null).addTextNode(conVer.Title);
                             } else if(conVer.Tipo__c == 'Imagen_financiera') {
-                                financiada.addChildElement('icono', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
+                                financiada.addChildElement('icono', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
                             } else if(conVer.Tipo__c == 'Folleto') {
                                 listaFolletos.add(conVer);
                             } else if(conVer.Tipo__c == 'Memoria_calidades') {
@@ -709,26 +709,26 @@ public class PublicacionPortales{
                             if(conVer.Tipo__c == 'Carrusel_lifestyle') {
                                 if(conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('1')) {
                                     Dom.XmlNode bloque1 = carruselLifestyle.addChildElement('bloque1', null, null);
-                                    bloque1.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
+                                    bloque1.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
                                     bloque1.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque1.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 } else if(conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('2')) {
                                     Dom.XmlNode bloque2 = carruselLifestyle.addChildElement('bloque2', null, null);
-                                    bloque2.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
+                                    bloque2.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
                                     bloque2.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque2.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 } else if (conVer.Posicion__c != null && String.valueOf(conVer.Posicion__c).equals('3')) {
                                     Dom.XmlNode bloque3 = carruselLifestyle.addChildElement('bloque3', null, null);
-                                    bloque3.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
+                                    bloque3.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
                                     bloque3.addChildElement('titulo', null, null).addTextNode(conVer.Title == null ? '' : conVer.Title);
                                     bloque3.addChildElement('cuerpo', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                                 }
                             } else if(conVer.Tipo__c == 'Carrusel_entorno') {
                                 Dom.XmlNode item = carruselEntono.addChildElement('item', null, null);
-                                item.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
+                                item.addChildElement('imagen', null, null).addTextNode(testRunning == true ? ' ' : devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
                                 item.addChildElement('texto_promocion', null, null).addTextNode(conVer.Description == null ? '' : conVer.Description);
                             } else if (conVer.Tipo__c == 'Pie_de_web') {
-                                promo.addChildElement('url_imagen_fondo_bloque_final', null, null).addTextNode(testRunning == true ? ' ' : publicLinksCV.get(conVer.Id));
+                                promo.addChildElement('url_imagen_fondo_bloque_final', null, null).addTextNode(testRunning == true ? ' ' : devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
                             }
                         }
                     }
