@@ -72,6 +72,10 @@
             <valueName>WALK-IN CUSTOMER</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>RADIO</controllingFieldValue>
+            <valueName>ONDA CERO</valueName>
+        </valueSettings>
+        <valueSettings>
             <controllingFieldValue>API</controllingFieldValue>
             <valueName>BALEARIC PROPERTIES</valueName>
         </valueSettings>
