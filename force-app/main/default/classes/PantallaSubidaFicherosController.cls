@@ -39,28 +39,12 @@ public with sharing class PantallaSubidaFicherosController {
     public static Id guardarArchivo(Id parentId, String nombreArchivo, String base64Data, String contentType, 
                                     String tipo, Integer posicion, String descripcion, List<DocumentCategoryOptWrapper> categories, String fileId,
                                     Boolean completed) {
-        // Obtenemos el nº de documento
-        String docNum = SharePointConnector.getNewDocumentNumber();
-        if(fileId == '') {            
-            nombreArchivo = docNum + '-' + nombreArchivo;
-
-            // SalesForce
-    	    fileId = guardarArchivoSalesForce(parentId, nombreArchivo, base64Data, contentType, tipo, posicion, descripcion);
-
-            // Actualizamos el contador de documentos
-            if(fileId != null) SharePointConnector.commitDocumentNumber();
-        } else {
-            Integer intDocNum = Integer.valueOf(docNum);
-            docNum = String.valueOf(intDocNum).leftPad(3, '0');
-            nombreArchivo = docNum + '-' + nombreArchivo;
-            ContentVersion file = anadirAArchivoSalesForce(fileId, base64Data, completed);
-            if(completed && file != null) {
-                // SharePoint
-                guardarArchivoSharePoint(parentId, nombreArchivo, EncodingUtil.urlEncode(EncodingUtil.base64Encode(file.VersionData), 'UTF-8'), 
-                                            contentType, tipo, descripcion, categories);
-            }
-        }
-        
+        // SalesForce
+        if(fileId == '')
+            fileId =  guardarArchivoSalesForce(parentId, nombreArchivo, base64Data, contentType, tipo, posicion, descripcion);
+        else
+            anadirAArchivoSalesForce(fileId, base64Data, completed);
+                     
         return fileId;
     }
     
@@ -68,6 +52,7 @@ public with sharing class PantallaSubidaFicherosController {
                                     String tipo, Integer posicion, String descripcion) {
         
     	base64Data = EncodingUtil.urlDecode(base64Data, 'UTF-8');
+        system.debug('TEST ' + base64Data);
         
         ContentVersion cv = new ContentVersion();
         //cv.parentId = promocionId;
