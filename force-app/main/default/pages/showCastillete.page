@@ -338,6 +338,8 @@ li.type-8 {background-color: {!$Setup.Colores_Estado_Castillete__c.Permuta__c}; 
 li.type-9 {background-color: {!$Setup.Colores_Estado_Castillete__c.Apartado__c}; color:black;}    
 li.type-10 {background-color: {!$Setup.Colores_Estado_Castillete__c.Bloqueado_Temporalmente__c} ; border:3px outset #202021; color:#e2e2e2;} 
 li.type-11 {background-color: {!$Setup.Colores_Estado_Castillete__c.Bloqueado_Temporalmente__c} ; border:3px outset #202021; color:#e2e2e2;}
+<!-- Bloqueado / Bloqueo Interno -->
+li.type-12 {background-color: {!$Setup.Colores_Estado_Castillete__c.Bloqueado__c}; color:black;}
 
     /*
 .main .pisos{
@@ -470,6 +472,7 @@ li.type-11 {background-color: {!$Setup.Colores_Estado_Castillete__c.Bloqueado_Te
                             <apex:variable var="claseEstado" value="type-8" rendered="{!IF(estadoley = 'Permuta' ,True, False)}"  /> 
                             <apex:variable var="claseEstado" value="type-9" rendered="{!IF(estadoley = 'Apartado' ,True, False)}"  /> 
                             <apex:variable var="claseEstado" value="type-10" rendered="{!IF(estadoley = 'Reserva en gestión' ,True, False)}"  /> 
+                            <apex:variable var="claseEstado" value="type-12" rendered="{!IF(estadoley = 'Bloqueado' ,True, False)}"  /> 
                               <li class="{!SUBSTITUTE(claseEstado, ' ', '')}" style="border-radius: 3px; display: inline-block; height: 12px;width: 12px; opacity: 1;"/>
                               <li style="display: inline-block;margin-left:0px; padding-left:5px;">{!estadoley} </li>                            
                         </apex:repeat>      
@@ -543,6 +546,7 @@ li.type-11 {background-color: {!$Setup.Colores_Estado_Castillete__c.Bloqueado_Te
                                      		<apex:variable var="claseEstado" value="type-9" rendered="{!IF(estado = 'Apartado' ,True, False)}"  />
                                      		<apex:variable var="claseEstado" value="type-10" rendered="{!AND(IF(estado = 'Bloqueado temporalmente',True, False),IF(CONTAINS(ultimoModificadorEstado, usuarioActual),True, False),IF(oportunidad = null, True, False))}"  />
                                             <apex:variable var="claseEstado" value="type-11" rendered="{!AND(IF(estado = 'Bloqueado temporalmente',True, False),IF(CONTAINS(ultimoModificadorEstado, usuarioActual),True, False),!IF(oportunidad = null, True, False))}"  />  
+                                            <apex:variable var="claseEstado" value="type-9" rendered="{!IF(estado = 'BloqueoInterno' ,True, False)}"  /> 
                                             <!--<apex:variable var="claseEstado" value="type-9" rendered="{!!IF(inmuebleAsociado = null ,True, False)}"  />-->
 											
                                             <!-- JNM 12/07/2019 Añadimos evento para los dispositivos móviles.
