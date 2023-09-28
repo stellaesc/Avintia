@@ -65,6 +65,16 @@
         <default>false</default>
         <label>Proyecto desestimado</label>
     </customValue>
+    <customValue>
+        <fullName>Cancelado</fullName>
+        <default>false</default>
+        <label>Cancelado</label>
+    </customValue>
+    <customValue>
+        <fullName>Últimas unidades</fullName>
+        <default>false</default>
+        <label>Últimas unidades</label>
+    </customValue>
     <masterLabel>Estados de promoción</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>
