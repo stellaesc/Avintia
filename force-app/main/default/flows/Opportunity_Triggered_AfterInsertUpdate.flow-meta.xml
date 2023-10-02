@@ -313,6 +313,9 @@
         <label>Decision_Régimen separación de bienes</label>
         <locationX>578</locationX>
         <locationY>2363</locationY>
+        <defaultConnector>
+            <targetReference>Subflow_ActualizarCampana</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>RegimenSeparacionBienes_Si</name>
@@ -339,7 +342,8 @@
     </decisions>
     <description>Flujo del Objeto &apos;Oportunidad&apos; que se lanza al crear o editar el registro.
 06/07 MSC: Partes del PBs &quot;PB_OportunidadCancelada&quot; y workflows.
-13/07 MSC: Rellenar Campaign y Origen.</description>
+13/07 MSC: Rellenar Campaign y Origen.
+28/09 MSC: Añadir el subflujo que actualiza la campaña de la oportunidad.</description>
     <environments>Default</environments>
     <formulas>
         <description>Formula que devuelve verdadero si el campo Fecha Pre-Reserva de la oportunidad es blanco.</description>
@@ -574,6 +578,9 @@
         <label>Update_Oportunidad_Facturacion por separado</label>
         <locationX>446</locationX>
         <locationY>2471</locationY>
+        <connector>
+            <targetReference>Subflow_ActualizarCampana</targetReference>
+        </connector>
         <inputAssignments>
             <field>Facturacion_por_separado__c</field>
             <value>
@@ -627,6 +634,32 @@
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <subflows>
+        <description>Lanzar el subflujo que actualiza la campaña de la oportunidad.</description>
+        <name>Subflow_ActualizarCampana</name>
+        <label>Subflow_ActualizarCampaña</label>
+        <locationX>578</locationX>
+        <locationY>2663</locationY>
+        <flowName>UpdateCampaign</flowName>
+        <inputAssignments>
+            <name>VarIn_OppOldFechaFirmaContratoReserva</name>
+            <value>
+                <elementReference>$Record__Prior.Fecha_firma_Contrato_Reserva__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>VarIn_OpportunityRecord</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>VarIn_OppOldStage</name>
+            <value>
+                <elementReference>$Record__Prior.StageName</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
     <subflows>
         <description>Iniciar el flujo Cambio del Estado del inmueble pasando el estado Apalabrado.</description>
         <name>Subflow_CambioEstadoInmuebleApalabrado</name>

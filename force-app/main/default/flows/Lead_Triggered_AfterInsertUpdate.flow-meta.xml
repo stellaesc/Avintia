@@ -132,6 +132,9 @@
         <label>Decision_Existe Campaña</label>
         <locationX>182</locationX>
         <locationY>1739</locationY>
+        <defaultConnector>
+            <targetReference>Subflow_ActualizarCampana</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>ExisteCampaign_Si</name>
@@ -207,6 +210,9 @@
         <label>Decision_Origen cambiado O lead nuevo</label>
         <locationX>600</locationX>
         <locationY>1523</locationY>
+        <defaultConnector>
+            <targetReference>Subflow_ActualizarCampana</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>OrigenCambiadoOLeadNuevo_Nuevo</name>
@@ -316,7 +322,8 @@
         </rules>
     </decisions>
     <description>Flujo del objeto Lead que se lanza al crear o actualizar un registro.
-13/07 MSC: Añadir el proceso para incluir el Lead en una campaña.</description>
+13/07 MSC: Añadir el proceso para incluir el Lead en una campaña.
+28/09 MSC: Añadir el subflujo de la actualización de la campaña.</description>
     <environments>Default</environments>
     <formulas>
         <description>formula que devuelve Verdadero si el registro es nuevo.</description>
@@ -543,6 +550,9 @@
         <label>Update_Lead_BlanquearCampaign</label>
         <locationX>754</locationX>
         <locationY>2255</locationY>
+        <connector>
+            <targetReference>Subflow_ActualizarCampana</targetReference>
+        </connector>
         <inputAssignments>
             <field>Campaign__c</field>
         </inputAssignments>
@@ -554,6 +564,9 @@
         <label>Update_Lead_Campaign</label>
         <locationX>50</locationX>
         <locationY>1955</locationY>
+        <connector>
+            <targetReference>Subflow_ActualizarCampana</targetReference>
+        </connector>
         <inputAssignments>
             <field>Campaign__c</field>
             <value>
@@ -568,6 +581,9 @@
         <label>Update_Lead_NuevaCampaign</label>
         <locationX>490</locationX>
         <locationY>2363</locationY>
+        <connector>
+            <targetReference>Subflow_ActualizarCampana</targetReference>
+        </connector>
         <inputAssignments>
             <field>Campaign__c</field>
             <value>
@@ -604,6 +620,32 @@
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <subflows>
+        <description>Lanzar el subflujo que actualiza el miembro de campaña si se hace la primera visita.</description>
+        <name>Subflow_ActualizarCampana</name>
+        <label>Subflow_Actualizar Campaña</label>
+        <locationX>600</locationX>
+        <locationY>2639</locationY>
+        <flowName>UpdateCampaign</flowName>
+        <inputAssignments>
+            <name>VarIn_LeadOldCampaign</name>
+            <value>
+                <elementReference>$Record__Prior.Campaign__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>VarIn_LeadOldFecha1aVisita</name>
+            <value>
+                <elementReference>$Record__Prior.Fecha_Visita__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>VarIn_LeadRecord</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
     <subflows>
         <description>Inicia el sublujo &quot;Asignación Candidatos&quot;</description>
         <name>Subflow_AsignacionLeadsComercialesAPI</name>
