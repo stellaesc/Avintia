@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AverageForMaking1stVisit__c</fullName>
+    <externalId>false</externalId>
+    <formula>SumTimeToMakeFirstVisit__c /  NumberMembersWith1stVisit__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Tiempo promedio en días que tardan los candidatos de la campaña en realizar la primera visita.</inlineHelpText>
+    <label>Promedio en realizar la 1ª visita</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
