@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LeadPromocion__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Campo lookup para relacionar la actividad con un registro LeadPromocion</description>
+    <externalId>false</externalId>
+    <label>Lead - Promoción</label>
+    <referenceTo>LeadPromocion__c</referenceTo>
+    <relationshipLabel>Activities</relationshipLabel>
+    <relationshipName>Activities</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>
