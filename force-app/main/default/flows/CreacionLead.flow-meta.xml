@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
     <decisions>
         <name>TelefonoEmail</name>
         <label>Teléfono o email?</label>
-        <locationX>167</locationX>
+        <locationX>224</locationX>
         <locationY>510</locationY>
         <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
         <rules>
@@ -58,7 +59,12 @@
             <label>Email</label>
         </rules>
     </decisions>
-    <description>Modificados los valores del Agregador del origen del lead en las condiciones</description>
+    <description>Modificados los valores del Agregador del origen del lead en las condiciones
+--
+V9: Inclusión campo y asignación LeadPromocion
+--
+V10: Definición orden de ejecución (2)</description>
+    <environments>Default</environments>
     <formulas>
         <name>AsuntoTareaEmail</name>
         <dataType>String</dataType>
@@ -98,7 +104,7 @@
     <recordCreates>
         <name>Llamada</name>
         <label>Llamada</label>
-        <locationX>172</locationX>
+        <locationX>229</locationX>
         <locationY>820</locationY>
         <inputAssignments>
             <field>ActivityDate</field>
@@ -110,6 +116,12 @@
             <field>IsReminderSet</field>
             <value>
                 <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LeadPromocion__c</field>
+            <value>
+                <elementReference>GetLeadPromocion.Id</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -173,11 +185,12 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <name>TareaEmail</name>
         <label>Email</label>
-        <locationX>497</locationX>
+        <locationX>554</locationX>
         <locationY>507</locationY>
         <inputAssignments>
             <field>ActivityDate</field>
@@ -189,6 +202,12 @@
             <field>IsReminderSet</field>
             <value>
                 <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LeadPromocion__c</field>
+            <value>
+                <elementReference>GetLeadPromocion.Id</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -246,16 +265,18 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
         <name>EmailRecordType</name>
         <label>Email RecordType</label>
-        <locationX>338</locationX>
+        <locationX>395</locationX>
         <locationY>508</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>TareaEmail</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>DeveloperName</field>
             <operator>EqualTo</operator>
@@ -263,17 +284,20 @@
                 <stringValue>EmailTarea</stringValue>
             </value>
         </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>RecordTypes__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
         <name>GetLead</name>
         <label>Get Lead</label>
-        <locationX>176</locationX>
+        <locationX>233</locationX>
         <locationY>354</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>TelefonoEmail</targetReference>
+            <targetReference>GetLeadPromocion</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -281,19 +305,51 @@
                 <elementReference>$Record.Id</elementReference>
             </value>
         </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Lead</object>
         <queriedFields>Id</queriedFields>
         <queriedFields>Name</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtenemos el registro LeadPromocion para relacionar con la tarea</description>
+        <name>GetLeadPromocion</name>
+        <label>GetLeadPromocion</label>
+        <locationX>50</locationX>
+        <locationY>443</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>TelefonoEmail</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Candidato__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Promocion__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>LeadPromocion__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
         <name>LlamadaRecordType</name>
         <label>Llamada RecordType</label>
-        <locationX>174</locationX>
+        <locationX>231</locationX>
         <locationY>683</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Llamada</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>DeveloperName</field>
             <operator>EqualTo</operator>
@@ -301,10 +357,44 @@
                 <stringValue>LlamadaTarea</stringValue>
             </value>
         </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>RecordTypes__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <startElementReference>GetLead</startElementReference>
+    <start>
+        <locationX>107</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>GetLead</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>LeadSource</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>INTERNET CAMPAÑAS</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>LeadSource</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>INTERNET PROPIOS</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>LeadSource</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>PORTALES VERTICALES</stringValue>
+            </value>
+        </filters>
+        <object>Lead</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
     <status>Active</status>
+    <triggerOrder>2</triggerOrder>
     <variables>
         <name>LeadName1</name>
         <dataType>String</dataType>
