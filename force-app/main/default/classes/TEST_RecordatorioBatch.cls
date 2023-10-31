@@ -3,7 +3,7 @@ public class TEST_RecordatorioBatch {
 
     @testSetup
     static void setup(){
-        User us = [SELECT Id FROM User LIMIT 1];
+        User us = [SELECT Id FROM User WHERE isActive = true AND UserType = 'Standard' LIMIT 1];
         
         Date fechaInicioComercializacionPrevista = Date.newInstance(2018, 09, 20);
         Date fechaFinComercializacionPrevista = Date.newInstance(2018, 10, 03);
