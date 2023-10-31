@@ -578,15 +578,18 @@ public class PublicacionPortales{
                     //Recorremos las imagenes asociadas a la promocion
                     contentVersionsPromo = promosMapped.get(promocion.Id);
                     if(contentVersionsPromo != null) {
+                        Integer lastPosAssigned = 0;
                         for(ContentVersion conVer: contentVersionsPromo) {
                             if(conVer.Tipo__c == 'Imagen_carrusel' || conVer.Tipo__c == 'Video_Youtube') {
                                 Dom.XmlNode imagen = imagenes.addChildElement('imagen', null, null);
                                 String altImg = conVer.Tipo__c == 'Video_Youtube' ? conVer.Url_Youtube__c : conVer.Title;
+                                imagen.addChildElement('posicion', null, null).addTextNode(String.valueOf(lastPosAssigned));
                                 if(conVer.Tipo__c == 'Video_Youtube') {
                                     imagen.addChildElement('title', null, null).addTextNode(conVer.Url_Youtube__c);
                                     imagen.addChildElement('alt_imagen', null, null).addTextNode(altImg);
                                 }
-                                imagen.addChildElement('url_imagen', null, null).addTextNode();                                
+                                imagen.addChildElement('url_imagen', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));                                
+                                lastPosAssigned++;
                             } else if(conVer.Tipo__c == 'Video') {
                                 Dom.XmlNode imagen = imagenes.addChildElement('imagen', null, null);
                                 imagen.addChildElement('url_imagen', null, null).addTextNode(devolverURLDocumento(conVer.URL__c, conVer.Id, conVer.FileType));
