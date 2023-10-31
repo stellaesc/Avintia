@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
     <constants>
         <name>TareaInicial</name>
         <dataType>String</dataType>
@@ -38,7 +39,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>TareaSegundoIntento</targetReference>
+                <targetReference>GetLeadPromocion</targetReference>
             </connector>
             <label>Sí</label>
         </rules>
@@ -74,7 +75,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>TareaTercerIntento</targetReference>
+                <targetReference>GetLeadPromocion2</targetReference>
             </connector>
             <label>Sí</label>
         </rules>
@@ -116,6 +117,9 @@
             <label>Tercer intento</label>
         </rules>
     </decisions>
+    <description>V17: Inclusión campo y asignación LeadPromocion
+V18: Definición orden de ejecución (3)</description>
+    <environments>Default</environments>
     <formulas>
         <name>AsuntoSegundoIntento</name>
         <dataType>String</dataType>
@@ -155,8 +159,8 @@
     <recordCreates>
         <name>TareaSegundoIntento</name>
         <label>Tarea Segundo Intento</label>
-        <locationX>273</locationX>
-        <locationY>713</locationY>
+        <locationX>493</locationX>
+        <locationY>706</locationY>
         <inputAssignments>
             <field>ActivityDate</field>
             <value>
@@ -230,12 +234,13 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <name>TareaTercerIntento</name>
         <label>Tarea Tercer Intento</label>
-        <locationX>701</locationX>
-        <locationY>376</locationY>
+        <locationX>972</locationX>
+        <locationY>382</locationY>
         <inputAssignments>
             <field>ActivityDate</field>
             <value>
@@ -303,7 +308,66 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <recordLookups>
+        <description>Obtenemos el registro LeadPromocion para relacionar con la tarea</description>
+        <name>GetLeadPromocion</name>
+        <label>GetLeadPromocion</label>
+        <locationX>312</locationX>
+        <locationY>706</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>TareaSegundoIntento</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Candidato__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ObtenerLeadTarea.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Promocion__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ObtenerLeadTarea.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>LeadPromocion__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtenemos el registro LeadPromocion para relacionar con la tarea</description>
+        <name>GetLeadPromocion2</name>
+        <label>GetLeadPromocion</label>
+        <locationX>766</locationX>
+        <locationY>377</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>TareaTercerIntento</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Candidato__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ObtenerLeadTarea2.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Promocion__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ObtenerLeadTarea2.Promocion__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>LeadPromocion__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordLookups>
         <name>ObtenerLeadTarea</name>
         <label>Obtener Lead Tarea</label>
@@ -313,6 +377,7 @@
         <connector>
             <targetReference>CrearTarea</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -320,17 +385,20 @@
                 <elementReference>$Record.WhoId</elementReference>
             </value>
         </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
         <name>ObtenerLeadTarea2</name>
         <label>Obtener Lead Tarea</label>
-        <locationX>356</locationX>
-        <locationY>374</locationY>
+        <locationX>353</locationX>
+        <locationY>376</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>CrearTarea2</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -338,7 +406,56 @@
                 <elementReference>$Record.WhoId</elementReference>
             </value>
         </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <start>
+        <locationX>49</locationX>
+        <locationY>50</locationY>
+        <filterLogic>1 AND 2 AND (3 OR 4)</filterLogic>
+        <filters>
+            <field>Subtipo__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Primer contacto</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Llamada del comercial</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TareaAutomatica__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>1</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TareaAutomatica__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>2</stringValue>
+            </value>
+        </filters>
+        <object>Task</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <scheduledPaths>
+            <name>UnDiaDespues</name>
+            <connector>
+                <targetReference>SegundoTercerIntento</targetReference>
+            </connector>
+            <label>1 día después</label>
+            <offsetNumber>1</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <timeSource>RecordTriggerEvent</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
     <status>Active</status>
+    <triggerOrder>3</triggerOrder>
 </Flow>
