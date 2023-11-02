@@ -3,17 +3,17 @@
     <fullName>CONGATextTitularesPersonaJuridica__c</fullName>
     <description>Campo que se introduce en las plantillas (CONGA COMPOSER) cuando la compra la está haciendo una persona jurídica. Este campo devuelve los datos de la persona representante de la empresa, indicada por el campo &apos;Contacto principal&apos; en el objeto Account.</description>
     <externalId>false</externalId>
-    <formula>&apos;estado civil&apos;+ &apos; &apos; + 
-Text(Cliente__r.ContactoPrincipal__r.Estado_Civil__c) + &apos; &apos; + &apos;y domicilio en&apos; + &apos; &apos; + 
-Text(Cliente__r.ContactoPrincipal__r.Tipo_via__c)+ &apos; &apos; + 
-(Cliente__r.ContactoPrincipal__r.Nombre_via__c) + &apos; &apos; + 
-Text(Cliente__r.ContactoPrincipal__r.Numero_via__c)+ &apos;,&apos; + &apos; &apos; + &apos;escalera &apos;+
-(Cliente__r.ContactoPrincipal__r.Escalera__c)+ &apos; &apos; + &apos;piso&apos; + &apos; &apos; + 
-Text(Cliente__r.ContactoPrincipal__r.N_Piso__c) + &apos; &apos; + &apos;puerta&apos; + &apos; &apos; + 
-(Cliente__r.ContactoPrincipal__r.Puerta__c) + &apos;,&apos; + &apos; &apos; + &apos;CP;&apos; + &apos; &apos; + 
-(Cliente__r.ContactoPrincipal__r.Codigo_postal__c)+ &apos;,&apos; + &apos; &apos; + 
-(Cliente__r.ContactoPrincipal__r.Localidad__r.Name)+ &apos; provincia de&apos; + &apos; &apos; + 
-(Cliente__r.ContactoPrincipal__r.Localidad__r.Provincia__r.Name)+ &apos;,&apos; + &apos; &apos; + 
+    <formula>&apos;estado civil&apos;+ &apos; &apos; +
+Text(Cliente__r.ContactoPrincipal__r.Estado_Civil__c) + &apos; &apos; + &apos;y domicilio en&apos; + &apos; &apos; +
+Text(Cliente__r.ContactoPrincipal__r.Tipo_via__c)+ &apos; &apos; +
+(Cliente__r.ContactoPrincipal__r.Nombre_via__c) + &apos; &apos; +
+Text(Cliente__r.ContactoPrincipal__r.Numero_via__c)+ &apos;,&apos; + &apos; &apos; + IF(ISBLANK((Cliente__r.ContactoPrincipal__r.Escalera__c)),&apos;&apos;, &apos;escalera &apos;+
+(Cliente__r.ContactoPrincipal__r.Escalera__c)+ &apos;,&apos; + &apos; &apos;) + IF(ISBLANK(Text(Cliente__r.ContactoPrincipal__r.N_Piso__c)),&apos;&apos;, &apos;piso&apos; + &apos; &apos; +
+Text(Cliente__r.ContactoPrincipal__r.N_Piso__c)+&apos;,&apos; + &apos; &apos;) +IF(ISBLANK((Cliente__r.ContactoPrincipal__r.Puerta__c)),&apos;&apos;, &apos;puerta&apos; + &apos; &apos; +
+(Cliente__r.ContactoPrincipal__r.Puerta__c)+&apos;,&apos; + &apos; &apos;) + &apos;CP;&apos; + &apos; &apos; +
+(Cliente__r.ContactoPrincipal__r.Codigo_postal__c)+ &apos;,&apos; + &apos; &apos; +
+(Cliente__r.ContactoPrincipal__r.Localidad__r.Name)+ &apos; provincia de&apos; + &apos; &apos; +
+(Cliente__r.ContactoPrincipal__r.Localidad__r.Provincia__r.Name)+ &apos;,&apos; + &apos; &apos; +
 (Cliente__r.ContactoPrincipal__r.Pais__r.Name)+ &apos; &apos; +&apos;y correo electrónico&apos; + &apos; &apos; +
 (Cliente__r.ContactoPrincipal__r.Email)</formula>
     <label>CONGA Text Titulares Persona Jurídica</label>
