@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DatosEmpresa__c</fullName>
+    <externalId>false</externalId>
+    <formula>&apos;en nombre y representación de la sociedad&apos;+ &apos; &apos; + 
+Name + &apos;,&apos; + &apos; &apos; + &apos;con documento de identificación&apos; + &apos; &apos; +  N_Documento__c + &apos;,&apos; + &apos; &apos; + 
+&apos;domiciliada en&apos; + &apos; &apos; +  Text(DF_Tipo_de_via__c) + &apos; &apos; + DF_Nombre_via__c + &apos; &apos; + &apos;número&apos; + &apos; &apos; + Text(DF_N_via__c) +&apos;,&apos; + &apos; &apos; 
++ IF(ISBLANK(DF_Escalera__c),&apos;&apos;,&apos;escalera&apos; + &apos; &apos; + DF_Escalera__c + &apos;,&apos; + &apos; &apos;)  
++ IF(ISBLANK(DF_N_piso__c),&apos;&apos;,&apos;piso&apos; + &apos; &apos; + TEXT(DF_N_piso__c) + &apos;,&apos; + &apos; &apos;)
++ IF(ISBLANK(DF_Puerta__c),&apos;&apos;,&apos;puerta&apos; + DF_Puerta__c + &apos;,&apos; + &apos; &apos;)
++ &apos;CP;&apos; + &apos; &apos; + DF_Codigo_postal__c + &apos; &apos; + &apos; &apos; + DF_Localidad__r.Name + &apos;,&apos; + &apos; &apos; + DF_Provincia__c + &apos;,&apos; + &apos; &apos; 
++  DF_Pais__r.Name  + &apos;,&apos; + &apos; &apos; + &apos;constituida mediante escritura otorgada ante el notario de Gijón,&apos; + &apos; &apos; 
++ Nombre_del_notario__c +  &apos;con fecha&apos; + &apos; &apos; + TEXT(Fecha_de_Escritura__c) + &apos;,&apos; + &apos; &apos; + &apos;bajo el número&apos; + &apos; &apos; + TEXT(Numero_de_protocolo__c) + &apos; &apos; + &apos;de protocolo e inscrita en el Registro Mercantil de&apos; + &apos; &apos; + Lugar_del_registro__c + &apos;,&apos; + &apos; &apos; + &apos;al tomo&apos; + &apos; &apos; + 
+Tomo__c + &apos;,&apos; + &apos; &apos; + &apos;folio&apos; + Folio__c + &apos;,&apos; + &apos; &apos; + &apos;hoja&apos; + &apos; &apos; + N_Hoja__c + &apos;,&apos; + &apos; &apos; + &apos;inscripción&apos; + &apos; &apos; + NInscripcion__c + &apos;.&apos;</formula>
+    <label>Datos Empresa</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
