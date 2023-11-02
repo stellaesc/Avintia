@@ -154,7 +154,9 @@ public class PublicacionPortales{
 
     public static boolean generateNewDoc(String jsonParsed, PropiedadesIntegracion__c propiedadesIntegracion, Boolean esPrueba){
         
+
         String base64Content = EncodingUtil.Base64Encode( 
+
             Blob.valueOf(jsonParsed) 
         );
         Blob blobContent = EncodingUtil.base64Decode( base64Content );
