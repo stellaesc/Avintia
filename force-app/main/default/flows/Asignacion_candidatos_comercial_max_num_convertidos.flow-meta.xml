@@ -82,7 +82,9 @@
         </rules>
     </decisions>
     <description>Subflow en el flow - Lead_Triggered_BeforeOrAfterUpdateAsignacionCandidatos, que asigna leads al comercial con mayor número de leads convertidos
-MSC 01/09: Eliminar componente &quot;Crear tarea contactar con lead&quot;</description>
+MSC 01/09: Eliminar componente &quot;Crear tarea contactar con lead&quot;
+--
+V14: Inclusión Subflow Creación LeadShare Comerciales</description>
     <environments>Default</environments>
     <formulas>
         <name>DueDate</name>
@@ -233,6 +235,9 @@ MSC 01/09: Eliminar componente &quot;Crear tarea contactar con lead&quot;</descr
         <label>cambio propietario del lead</label>
         <locationX>176</locationX>
         <locationY>1166</locationY>
+        <connector>
+            <targetReference>CreacionLeadShareComerciales</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -257,6 +262,26 @@ MSC 01/09: Eliminar componente &quot;Crear tarea contactar con lead&quot;</descr
         </connector>
     </start>
     <status>Active</status>
+    <subflows>
+        <description>Creación de registros LeadShare para los comerciales vinculados al lead pasado por parámetro mediante sus registros de LeadPromocion</description>
+        <name>CreacionLeadShareComerciales</name>
+        <label>Creación LeadShare Comerciales</label>
+        <locationX>176</locationX>
+        <locationY>1274</locationY>
+        <flowName>CreacionLeadShareComerciales</flowName>
+        <inputAssignments>
+            <name>Var_Input_IDComercialOwner</name>
+            <value>
+                <elementReference>Var_Output_IDcomercialMASLeads</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>Var_Input_IdLead</name>
+            <value>
+                <elementReference>Var_InputOutput_IdLead</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
     <variables>
         <name>ComercialesAPI</name>
         <dataType>SObject</dataType>

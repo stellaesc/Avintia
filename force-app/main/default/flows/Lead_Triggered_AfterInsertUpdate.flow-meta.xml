@@ -323,7 +323,9 @@
     </decisions>
     <description>Flujo del objeto Lead que se lanza al crear o actualizar un registro.
 13/07 MSC: Añadir el proceso para incluir el Lead en una campaña.
-28/09 MSC: Añadir el subflujo de la actualización de la campaña.</description>
+28/09 MSC: Añadir el subflujo de la actualización de la campaña.
+--
+V5: Definición orden de ejecución (1)</description>
     <environments>Default</environments>
     <formulas>
         <description>formula que devuelve Verdadero si el registro es nuevo.</description>
@@ -670,4 +672,5 @@
         </inputAssignments>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </subflows>
+    <triggerOrder>1</triggerOrder>
 </Flow>
