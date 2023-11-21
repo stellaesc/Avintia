@@ -302,6 +302,14 @@
                 <behavior>Edit</behavior>
                 <field>MetodoDeCobro__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>FechaFirmaPersonalizacion__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ExisteFacturaMejoras__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
