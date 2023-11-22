@@ -755,9 +755,31 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Loop_Participantes_01</targetReference>
+            <targetReference>Loop_FacturasCreadasFactSeparada</targetReference>
         </connector>
     </assignments>
+    <collectionProcessors>
+        <description>Filtrar las facturas creadas por el cliente del participante actual del Loop.</description>
+        <name>Filter_FacturasCreadasFactSeparada</name>
+        <elementSubtype>FilterCollectionProcessor</elementSubtype>
+        <label>Filter_FacturasCreadasFactSeparada</label>
+        <locationX>402</locationX>
+        <locationY>2906</locationY>
+        <assignNextValueToReference>currentItem_Filter_ParticipantesFactSeparada</assignNextValueToReference>
+        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
+        <collectionReference>Var_FacturasToInsert</collectionReference>
+        <conditionLogic>and</conditionLogic>
+        <conditions>
+            <leftValueReference>currentItem_Filter_ParticipantesFactSeparada.Cliente__c</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <elementReference>Loop_Participantes_02.Cliente__c</elementReference>
+            </rightValue>
+        </conditions>
+        <connector>
+            <targetReference>Loop_FacturasCreadasFactSeparada</targetReference>
+        </connector>
+    </collectionProcessors>
     <collectionProcessors>
         <description>Filtrar las mejoras de oportunidad por IVA actual del loop</description>
         <name>Filter_MejorasFactSeparada_01</name>
@@ -787,12 +809,12 @@
         <label>Filter_MejorasFactSeparada_02</label>
         <locationX>578</locationX>
         <locationY>3122</locationY>
-        <assignNextValueToReference>currentItem_Filter_MejorasFactUnica_02</assignNextValueToReference>
+        <assignNextValueToReference>currentItem_Filter_MejorasFactSeparada_02_0</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_MejorasOportunidad</collectionReference>
         <conditionLogic>and</conditionLogic>
         <conditions>
-            <leftValueReference>currentItem_Filter_MejorasFactUnica_02.IVANumero__c</leftValueReference>
+            <leftValueReference>currentItem_Filter_MejorasFactSeparada_02_0.IVANumero__c</leftValueReference>
             <operator>EqualTo</operator>
             <rightValue>
                 <elementReference>Loop_FacturasCreadasFactSeparada.Codigo_Impuesto__c</elementReference>
@@ -831,12 +853,12 @@
         <label>Filter_MejorasFactUnica_02</label>
         <locationX>1106</locationX>
         <locationY>2498</locationY>
-        <assignNextValueToReference>currentItem_Filter_MejorasFactUnica_02</assignNextValueToReference>
+        <assignNextValueToReference>currentItem_Filter_MejorasFactSeparada_02_0</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_MejorasOportunidad</collectionReference>
         <conditionLogic>and</conditionLogic>
         <conditions>
-            <leftValueReference>currentItem_Filter_MejorasFactUnica_02.IVANumero__c</leftValueReference>
+            <leftValueReference>currentItem_Filter_MejorasFactSeparada_02_0.IVANumero__c</leftValueReference>
             <operator>EqualTo</operator>
             <rightValue>
                 <elementReference>Loop_FacturasCreadasFactUnica.Codigo_Impuesto__c</elementReference>
@@ -844,28 +866,6 @@
         </conditions>
         <connector>
             <targetReference>Loop_MejorasFactUnica_02</targetReference>
-        </connector>
-    </collectionProcessors>
-    <collectionProcessors>
-        <description>Filtrar los participantes por el cliente de la factura actual del Loop.</description>
-        <name>Filter_ParticipantesFactSeparada</name>
-        <elementSubtype>FilterCollectionProcessor</elementSubtype>
-        <label>Filter_ParticipantesFactSeparada</label>
-        <locationX>402</locationX>
-        <locationY>2906</locationY>
-        <assignNextValueToReference>currentItem_Filter_ParticipantesFactSeparada</assignNextValueToReference>
-        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
-        <collectionReference>Get_Participantes</collectionReference>
-        <conditionLogic>and</conditionLogic>
-        <conditions>
-            <leftValueReference>currentItem_Filter_ParticipantesFactSeparada.Cliente__c</leftValueReference>
-            <operator>EqualTo</operator>
-            <rightValue>
-                <elementReference>Loop_FacturasCreadasFactSeparada.Cliente__c</elementReference>
-            </rightValue>
-        </conditions>
-        <connector>
-            <targetReference>Loop_Participantes_01</targetReference>
         </connector>
     </collectionProcessors>
     <decisions>
@@ -1022,7 +1022,6 @@
         </rules>
     </decisions>
     <description>Subflujo para crear facturas de mejoras de la oportunidad.</description>
-    <environments>Default</environments>
     <formulas>
         <description>Formula que devuelve la fecha de hoy más los meses puestos en la promoción.</description>
         <name>For_FechaSegundaFactura</name>
@@ -1047,8 +1046,8 @@
         <description>Formula que devuelve el importe de la factura en función de la participación del participante.</description>
         <name>For_PrecioLineaFactSeparada</name>
         <dataType>Currency</dataType>
-        <expression>IF({!Var_TotalPrice} &gt; {!Get_Opportunity.Promocion__r.LimiteImporteMejoras__c}, {!Loop_MejorasFactSeparada_02.PrecioTotal__c} * ({!Loop_Participantes_01.Porcentaje_de_participacion__c} / 100) * 0.5 ,
-{!Loop_MejorasFactSeparada_02.PrecioTotal__c} * ({!Loop_Participantes_01.Porcentaje_de_participacion__c} / 100) )</expression>
+        <expression>IF({!Var_TotalPrice} &gt; {!Get_Opportunity.Promocion__r.LimiteImporteMejoras__c}, {!Loop_MejorasFactSeparada_02.PrecioTotal__c} * ({!Loop_Participantes_02.Porcentaje_de_participacion__c} / 100) * 0.5 ,
+{!Loop_MejorasFactSeparada_02.PrecioTotal__c} * ({!Loop_Participantes_02.Porcentaje_de_participacion__c} / 100) )</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
@@ -1069,18 +1068,18 @@
     <interviewLabel>Crear Facturas de mejora {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Opportunity_Crear Facturas de mejoras</label>
     <loops>
-        <description>Iterar las facturas creadas para crear sus líneas.</description>
+        <description>Iterar las facturas para crear las lineas de facturas por participante.</description>
         <name>Loop_FacturasCreadasFactSeparada</name>
         <label>Loop_FacturasCreadasFactSeparada</label>
-        <locationX>50</locationX>
-        <locationY>2798</locationY>
-        <collectionReference>Var_FacturasToInsert</collectionReference>
+        <locationX>402</locationX>
+        <locationY>3014</locationY>
+        <collectionReference>Filter_FacturasCreadasFactSeparada</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
-            <targetReference>Filter_ParticipantesFactSeparada</targetReference>
+            <targetReference>Filter_MejorasFactSeparada_02</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Create_LineasFactura</targetReference>
+            <targetReference>Loop_Participantes_02</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
@@ -1218,18 +1217,18 @@
         </noMoreValuesConnector>
     </loops>
     <loops>
-        <description>Iterar los participantes para crear las lineas de facturas por participante.</description>
-        <name>Loop_Participantes_01</name>
-        <label>Loop_Participantes_01</label>
-        <locationX>402</locationX>
-        <locationY>3014</locationY>
-        <collectionReference>Filter_ParticipantesFactSeparada</collectionReference>
+        <description>Iterar los participantes para crear las líneas de sus facturas.</description>
+        <name>Loop_Participantes_02</name>
+        <label>Loop_Participantes_02</label>
+        <locationX>50</locationX>
+        <locationY>2798</locationY>
+        <collectionReference>Get_Participantes</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
-            <targetReference>Filter_MejorasFactSeparada_02</targetReference>
+            <targetReference>Filter_FacturasCreadasFactSeparada</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Loop_FacturasCreadasFactSeparada</targetReference>
+            <targetReference>Create_LineasFactura</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -1258,7 +1257,7 @@
         <locationX>50</locationX>
         <locationY>2690</locationY>
         <connector>
-            <targetReference>Loop_FacturasCreadasFactSeparada</targetReference>
+            <targetReference>Loop_Participantes_02</targetReference>
         </connector>
         <inputReference>Var_FacturasToInsert</inputReference>
     </recordCreates>
@@ -1389,7 +1388,7 @@
         <objectType>MejoraOportunidad__c</objectType>
     </variables>
     <variables>
-        <name>currentItem_Filter_MejorasFactUnica_02</name>
+        <name>currentItem_Filter_MejorasFactSeparada_02_0</name>
         <dataType>SObject</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
@@ -1402,7 +1401,7 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
-        <objectType>Participante__c</objectType>
+        <objectType>Factura__c</objectType>
     </variables>
     <variables>
         <description>Variable auxiliar para la creación de facturas.</description>
