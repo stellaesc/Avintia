@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
     <decisions>
         <description>Comprobar si la tarea de Alta promoción se ha completado.</description>
         <name>Decision_AltaPromocionCompletada</name>
@@ -458,6 +459,13 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_Promocion_TareasCompletadas</targetReference>
             </connector>
@@ -465,7 +473,8 @@
         </rules>
     </decisions>
     <description>Flujo del Objeto &apos;Tarea&apos; que se lanza al crear o editar el registro.
-19/06 MSC: PBs &quot;PB_PromocionCambiarEstados&quot; y &quot;PB_PromocionTareasCompletadas&quot;</description>
+19/06 MSC: PBs &quot;PB_PromocionCambiarEstados&quot; y &quot;PB_PromocionTareasCompletadas&quot;
+16/11 MSC: Actualizar promociones cuyas tareas no tengan el tipo asignado.</description>
     <formulas>
         <description>Formula que contiene un espacio</description>
         <name>For_CadenaVaciaEspacio</name>
@@ -505,6 +514,7 @@
         <label>Update_Promocion_Aprobar comercialización</label>
         <locationX>446</locationX>
         <locationY>1931</locationY>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -535,6 +545,7 @@
         <connector>
             <targetReference>Decision_ConfiguracionComercialCompletada</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -565,6 +576,7 @@
         <connector>
             <targetReference>Decision_ConfiguracionTecnicaCompletada</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -595,6 +607,7 @@
         <connector>
             <targetReference>Decision_DocumentacionMarketingCompletada</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -625,6 +638,7 @@
         <connector>
             <targetReference>Decision_EstadoResultadoTarea</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -649,6 +663,7 @@
         <connector>
             <targetReference>Decision_AltaPromocionCompletada</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -673,6 +688,7 @@
         <connector>
             <targetReference>Decision_AltaPromocionCompletada</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -694,7 +710,16 @@
         </inputAssignments>
         <object>Lead</object>
     </recordUpdates>
-    <startElementReference>Decision_TareaCompletada</startElementReference>
+    <start>
+        <locationX>452</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_TareaCompletada</targetReference>
+        </connector>
+        <object>Task</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
     <status>Active</status>
     <subflows>
         <description>Iniciar el subflujo &quot;Contar y crear tarea para fijar visita&quot; para crear nueva tarea Visita.</description>
