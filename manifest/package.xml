@@ -1,29 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>TEST_RecordatorioBatch</members>
-		<name>ApexClass</name>
-	</types>
-	<types>
-		<members>Account.Campaign__c</members>
-		<members>Account.Promocion__c</members>
-		<members>Campaign.Promocion__c</members>
-		<members>Contact.Campaign__c</members>
-		<members>Contact.Promocion__c</members>
-		<members>Lead.Campaign__c</members>
-		<members>Opportunity.Campaign__c</members>
-		<members>Opportunity.Medio_de_conocimiento__c</members>
-		<members>Opportunity.Medio_de_procedencia__c</members>
+		<members>Account.NacionalidadFormula__c</members>
+		<members>Account.LocalidadFormula__c</members>
 		<name>CustomField</name>
-	</types>
-	<types>
-		<members>Campaign-Campaign Layout</members>
-		<members>Lead-Lead Layout</members>
-		<members>Lead-Lead Layout Admin</members>
-		<members>Opportunity-Facturación por separado layout</members>
-		<members>Opportunity-Opportunity Layout</members>
-		<members>PersonAccount-Formato de cuenta personal</members>
-		<name>Layout</name>
 	</types>
 	<version>58.0</version>
 </Package>
