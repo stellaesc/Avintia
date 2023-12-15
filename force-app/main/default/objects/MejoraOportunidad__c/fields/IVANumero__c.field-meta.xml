@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IVANumero__c</fullName>
+    <description>Campo formula que convierte el IVA de mejora de la picklist en numero para usarlo en los diferentes procesos.</description>
+    <externalId>false</externalId>
+    <formula>VALUE(LEFT(TEXT(Mejora__r.IVA__c) ,Find(&quot;%&quot;, TEXT(Mejora__r.IVA__c) )-1))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>IVA Número</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
