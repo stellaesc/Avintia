@@ -45,6 +45,21 @@
         </criteriaItems>
         <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>NOVAMAYOR</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Compartir las promociones de NOVAMAYOR al grupo de promotores</description>
+        <label>NOVAMAYOR</label>
+        <sharedTo>
+            <group>ReadOnlyPromotor</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Name</field>
+            <operation>equals</operation>
+            <value>NOVAMAYOR</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
     <sharingOwnerRules>
         <fullName>Permisos_lectura_promociones_director</fullName>
         <accessLevel>Read</accessLevel>
