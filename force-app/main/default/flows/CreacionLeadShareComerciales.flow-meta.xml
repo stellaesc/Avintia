@@ -22,7 +22,7 @@
         <description>Añadimos el comercial a la colección final</description>
         <name>AsignarComercialColeccionFinal</name>
         <label>Asignar Comercial a Colección Final</label>
-        <locationX>704</locationX>
+        <locationX>660</locationX>
         <locationY>1274</locationY>
         <assignmentItems>
             <assignToReference>ColeccionFinalComerciales</assignToReference>
@@ -39,7 +39,7 @@
         <description>Asignamos el comercial iterado a la variable auxiliar</description>
         <name>AsignarComercialVariableAuxiliar</name>
         <label>Asignar Comercial a Variable Auxiliar</label>
-        <locationX>616</locationX>
+        <locationX>572</locationX>
         <locationY>1466</locationY>
         <assignmentItems>
             <assignToReference>ComercialAux</assignToReference>
@@ -56,7 +56,7 @@
         <description>Se asignan los valores de los campos al registro que se va a crear en LeadShare</description>
         <name>AsignarLeadShareComercial</name>
         <label>Asignar Lead Share Comercial</label>
-        <locationX>528</locationX>
+        <locationX>484</locationX>
         <locationY>1766</locationY>
         <assignmentItems>
             <assignToReference>LeadShareAux.LeadAccessLevel</assignToReference>
@@ -98,10 +98,55 @@
         </connector>
     </assignments>
     <assignments>
+        <description>Se asignan los valores de los campos al registro que se va a crear en LeadShare</description>
+        <name>AsignarLeadShareNOVAMAYOR</name>
+        <label>Asignar Lead Share NOVAMAYOR</label>
+        <locationX>264</locationX>
+        <locationY>2582</locationY>
+        <assignmentItems>
+            <assignToReference>LeadShareAux.LeadAccessLevel</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Read</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>LeadShareAux.LeadId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Var_Input_IdLead</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>LeadShareAux.UserOrGroupId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>GetPublicGroupReadOnlyPromotor.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>LeadShareAux.RowCause</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Manual</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ColeccionLeadShare</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>LeadShareAux</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>LeadShareIsNull</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <description>Reseteamos los valores de la variable auxiliar LeadShareAux</description>
         <name>ResetLeadShareAux</name>
         <label>ResetLeadShareAux</label>
-        <locationX>528</locationX>
+        <locationX>484</locationX>
         <locationY>1874</locationY>
         <assignmentItems>
             <assignToReference>LeadShareAux.LeadAccessLevel</assignToReference>
@@ -128,7 +173,7 @@
         <name>OrdenarColeccion</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>OrdenarColeccion</label>
-        <locationX>440</locationX>
+        <locationX>396</locationX>
         <locationY>950</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>ColeccionComerciales</collectionReference>
@@ -161,6 +206,9 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>GetPromocionNOVAMAYOR</targetReference>
+            </connector>
             <label>Vacía</label>
         </rules>
     </decisions>
@@ -191,10 +239,58 @@
         </rules>
     </decisions>
     <decisions>
+        <name>LeadPromocionNOVAMAYOR</name>
+        <label>LeadPromocion NOVAMAYOR Is Empty?</label>
+        <locationX>176</locationX>
+        <locationY>2366</locationY>
+        <defaultConnector>
+            <targetReference>GetPublicGroupReadOnlyPromotor</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>GetLeadPromocionNOVAMAYOR</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>LeadShareIsNull</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Comprobamos si tenemos que realizar la actualización</description>
+        <name>LeadShareIsNull</name>
+        <label>Lead Share Is Null?</label>
+        <locationX>176</locationX>
+        <locationY>2774</locationY>
+        <defaultConnector>
+            <targetReference>CreateLeadShare</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>False</defaultConnectorLabel>
+        <rules>
+            <name>True</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ColeccionLeadShare</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>True</label>
+        </rules>
+    </decisions>
+    <decisions>
         <description>Nodo de decisión para saber si el comercial es el mismo que ha pasado previamente</description>
         <name>MismoComercial</name>
         <label>¿Mismo Comercial?</label>
-        <locationX>616</locationX>
+        <locationX>572</locationX>
         <locationY>1166</locationY>
         <defaultConnector>
             <targetReference>AsignarComercialColeccionFinal</targetReference>
@@ -216,7 +312,9 @@
             <label>Si</label>
         </rules>
     </decisions>
-    <description>Creación de registros LeadShare para los comerciales vinculados al lead pasado por parámetro mediante sus registros de LeadPromocion</description>
+    <description>V2: Se ha añadido el proceso necesario para compartir leads que tienen un LeadPromocion de NOVAMAYOR para poder compartirlos con los promotores, agentes externos.
+-----------------------------------------------------------------------------------------------------------
+Creación de registros LeadShare para los comerciales vinculados al lead pasado por parámetro mediante sus registros de LeadPromocion</description>
     <environments>Default</environments>
     <interviewLabel>Creación LeadShare Comerciales {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Creación LeadShare Comerciales</label>
@@ -224,7 +322,7 @@
         <description>Iteramos por la colección ordenada de comerciales</description>
         <name>IterarColeccion</name>
         <label>IterarColección</label>
-        <locationX>440</locationX>
+        <locationX>396</locationX>
         <locationY>1058</locationY>
         <collectionReference>ColeccionComerciales</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -239,7 +337,7 @@
         <description>Iteramos la colección final de comerciales</description>
         <name>IterarColeccionFinal</name>
         <label>IterarColecciónFinal</label>
-        <locationX>440</locationX>
+        <locationX>396</locationX>
         <locationY>1658</locationY>
         <collectionReference>ColeccionFinalComerciales</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -247,7 +345,7 @@
             <targetReference>AsignarLeadShareComercial</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>CreateLeadShare</targetReference>
+            <targetReference>GetPromocionNOVAMAYOR</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
@@ -288,8 +386,8 @@
         <description>Creación de registros del objeto LeadShare</description>
         <name>CreateLeadShare</name>
         <label>CreateLeadShare</label>
-        <locationX>440</locationX>
-        <locationY>2066</locationY>
+        <locationX>308</locationX>
+        <locationY>2882</locationY>
         <inputReference>ColeccionLeadShare</inputReference>
     </recordCreates>
     <recordLookups>
@@ -341,6 +439,79 @@
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
         <object>LeadPromocion__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtenemos los registros LeadPromociones del Lead pasado por parámetro para la promoción de NOVAMAYOR</description>
+        <name>GetLeadPromocionNOVAMAYOR</name>
+        <label>GetLeadPromocion NOVAMAYOR</label>
+        <locationX>176</locationX>
+        <locationY>2258</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>LeadPromocionNOVAMAYOR</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Candidato__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Var_Input_IdLead</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Promocion__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>PromocionNOVAMAYOR.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>LeadPromocion__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtenemos la promoción de NOVAMAYOR</description>
+        <name>GetPromocionNOVAMAYOR</name>
+        <label>Get Promocion NOVAMAYOR</label>
+        <locationX>176</locationX>
+        <locationY>2150</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>GetLeadPromocionNOVAMAYOR</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NOVAMAYOR</stringValue>
+            </value>
+        </filters>
+        <object>Promocion__c</object>
+        <outputReference>PromocionNOVAMAYOR</outputReference>
+        <queriedFields>Id</queriedFields>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtenemos el grupo público Read Only promotor</description>
+        <name>GetPublicGroupReadOnlyPromotor</name>
+        <label>Get Public Group Read Only - Promotor</label>
+        <locationX>264</locationX>
+        <locationY>2474</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>AsignarLeadShareNOVAMAYOR</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>ReadOnlyPromotor</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
@@ -403,6 +574,14 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>LeadShare</objectType>
+    </variables>
+    <variables>
+        <name>PromocionNOVAMAYOR</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Promocion__c</objectType>
     </variables>
     <variables>
         <description>Variable que guarda el Id del comercial propietario del lead</description>
