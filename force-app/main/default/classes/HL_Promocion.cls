@@ -370,9 +370,11 @@ public class HL_Promocion {
                 mapOldUserNewUser.put(promocionOld[i].Director_Promociones__c, promocionNew[i].Director_Promociones__c);
                 promocionIdList.add(promocionOld[i].Id);
             }
-            if(promocionOld[i].Tecnico__c != promocionNew[i].Tecnico__c){
-                mapOldUserNewUser.put(promocionOld[i].Tecnico__c, promocionNew[i].Tecnico__c);
-                promocionIdList.add(promocionOld[i].Id);
+            if(!String.isBlank(promocionOld[i].Tecnico__c) && !String.isBlank(promocionNew[i].Tecnico__c)){
+                if(promocionOld[i].Tecnico__c != promocionNew[i].Tecnico__c){
+                    mapOldUserNewUser.put(promocionOld[i].Tecnico__c, promocionNew[i].Tecnico__c);
+                    promocionIdList.add(promocionOld[i].Id);
+                }
             }
             if(promocionOld[i].Responsable_Comercial__c != promocionNew[i].Responsable_Comercial__c){
                 mapOldUserNewUser.put(promocionOld[i].Responsable_Comercial__c, promocionNew[i].Responsable_Comercial__c);
