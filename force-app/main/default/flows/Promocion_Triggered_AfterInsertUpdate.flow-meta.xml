@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
     <decisions>
         <description>Comprobar si hace hay que actualizar la tarifa o no.</description>
         <name>Decision_ActualizarTarifa</name>
         <label>Decision_Actualizar tarifa</label>
-        <locationX>710</locationX>
+        <locationX>974</locationX>
         <locationY>1439</locationY>
         <defaultConnector>
             <targetReference>Decision_CertificacionEnergeticaSeRelleno</targetReference>
@@ -37,7 +38,7 @@
         <description>Comprobar si se ha rellenado el campo &quot;Certificacion energetica&quot;</description>
         <name>Decision_CertificacionEnergeticaSeRelleno</name>
         <label>Decision_Certificacion energetica se relleno</label>
-        <locationX>710</locationX>
+        <locationX>974</locationX>
         <locationY>1739</locationY>
         <defaultConnector>
             <targetReference>Decision_EstadoPromocion</targetReference>
@@ -70,7 +71,7 @@
         <description>Comprobar el estado de la promoción.</description>
         <name>Decision_EstadoPromocion</name>
         <label>Decision_Estado promocion</label>
-        <locationX>710</locationX>
+        <locationX>974</locationX>
         <locationY>2039</locationY>
         <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
         <rules>
@@ -91,7 +92,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Create_Tarea_AltaPromocion</targetReference>
+                <targetReference>PromocionDirectorTecnicoEstaVacio</targetReference>
             </connector>
             <label>Nueva</label>
         </rules>
@@ -120,7 +121,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Create_Tarea_CargaTipoInmuebles</targetReference>
+                <targetReference>PromocionDirectorTecnicoEstaVacio2</targetReference>
             </connector>
             <label>Configuración técnica</label>
         </rules>
@@ -237,7 +238,7 @@
         <description>Comprobar si la promoción esta pendiente de aprobación tarifario</description>
         <name>Decision_PendienteAprobacionTarifario</name>
         <label>Decision_Pendiente Aprobacion Tarifario</label>
-        <locationX>710</locationX>
+        <locationX>974</locationX>
         <locationY>1139</locationY>
         <defaultConnector>
             <targetReference>Decision_ActualizarTarifa</targetReference>
@@ -263,7 +264,7 @@
         <description>comprobar si el Tarifario ha sido aprobado</description>
         <name>Decision_TarifarioAprobado</name>
         <label>Decision_Tarifario Aprobado</label>
-        <locationX>710</locationX>
+        <locationX>974</locationX>
         <locationY>731</locationY>
         <defaultConnector>
             <targetReference>Decision_PendienteAprobacionTarifario</targetReference>
@@ -296,7 +297,7 @@
         <description>Comprobar si el Técnico Aprobador ha cambiado</description>
         <name>Decision_TecnicoAprobadorCambia</name>
         <label>Decision_Técnico Aprobador cambia</label>
-        <locationX>710</locationX>
+        <locationX>974</locationX>
         <locationY>323</locationY>
         <defaultConnector>
             <targetReference>Decision_TarifarioAprobado</targetReference>
@@ -325,8 +326,78 @@
             <label>Sí</label>
         </rules>
     </decisions>
+    <decisions>
+        <name>PromocionDirectorTecnicoEstaVacio</name>
+        <label>Promoción Director Técnico esta vacio</label>
+        <locationX>50</locationX>
+        <locationY>2147</locationY>
+        <defaultConnector>
+            <targetReference>Create_Tarea_AltaPromocion</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Tecnico__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Promocion_EstadoAltaPromocion</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>PromocionDirectorTecnicoEstaVacio2</name>
+        <label>Promoción Director Técnico esta vacio</label>
+        <locationX>490</locationX>
+        <locationY>2147</locationY>
+        <defaultConnector>
+            <targetReference>Create_Tarea_CargaTipoInmuebles</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Si2</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Tecnico__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>PromocionDirectorTecnicoEstaVacio3</name>
+        <label>Promoción Director Técnico esta vacio</label>
+        <locationX>1238</locationX>
+        <locationY>2255</locationY>
+        <defaultConnector>
+            <targetReference>Create_Tarea_ValidacionDocumentacionMarketing</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Si3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Tecnico__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Sí</label>
+        </rules>
+    </decisions>
     <description>Flujo del Objeto &apos;Promocion&apos; que se lanza al crear o editar el registro.
 15/06 MSC: PBs &quot;PB_PromocionTareasPorEstados&quot; y &quot;aprobar tarifario&quot;</description>
+    <environments>Default</environments>
     <formulas>
         <description>Formula que devuelve verdadero si la promoción es nueva</description>
         <name>For_IsNew</name>
@@ -358,7 +429,7 @@
         <description>Crear tarea &apos;Ajuste del ritmo de ventas&apos;</description>
         <name>Create_Tarea_AjusteRitmoVentas</name>
         <label>Create_Tarea_Ajuste ritmo ventas</label>
-        <locationX>578</locationX>
+        <locationX>842</locationX>
         <locationY>2255</locationY>
         <inputAssignments>
             <field>OwnerId</field>
@@ -397,12 +468,13 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <description>Crear tarea &apos;Ajuste del tarifario&apos;</description>
         <name>Create_Tarea_AjusteTarifario</name>
         <label>Create_Tarea_Ajuste tarifario</label>
-        <locationX>578</locationX>
+        <locationX>842</locationX>
         <locationY>2147</locationY>
         <connector>
             <targetReference>Create_Tarea_AjusteRitmoVentas</targetReference>
@@ -444,13 +516,14 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <description>Crear tarea &apos;Alta promoción&apos;</description>
         <name>Create_Tarea_AltaPromocion</name>
         <label>Create_Tarea_Alta promoción</label>
-        <locationX>50</locationX>
-        <locationY>2147</locationY>
+        <locationX>138</locationX>
+        <locationY>2255</locationY>
         <connector>
             <targetReference>Update_Promocion_EstadoAltaPromocion</targetReference>
         </connector>
@@ -491,13 +564,14 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <description>Crear tarea &apos;Asociación inmuebles&apos;</description>
         <name>Create_Tarea_AsociacionInmuebles</name>
         <label>Create_Tarea_Asociación inmuebles</label>
-        <locationX>314</locationX>
-        <locationY>2363</locationY>
+        <locationX>578</locationX>
+        <locationY>2471</locationY>
         <inputAssignments>
             <field>OwnerId</field>
             <value>
@@ -535,15 +609,16 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <description>Crear tarea &apos;Carga de documentación marketing&apos;</description>
         <name>Create_Tarea_CargaDocumentacionMarketing</name>
         <label>Create_Tarea_Carga documentación marketing</label>
-        <locationX>842</locationX>
+        <locationX>1238</locationX>
         <locationY>2147</locationY>
         <connector>
-            <targetReference>Create_Tarea_ValidacionDocumentacionMarketing</targetReference>
+            <targetReference>PromocionDirectorTecnicoEstaVacio3</targetReference>
         </connector>
         <inputAssignments>
             <field>OwnerId</field>
@@ -582,13 +657,14 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <description>Crear tarea &apos;Carga de los hitos&apos;.</description>
         <name>Create_Tarea_CargaHitos</name>
         <label>Create_Tarea_Carga hitos</label>
         <locationX>50</locationX>
-        <locationY>2363</locationY>
+        <locationY>2555</locationY>
         <inputAssignments>
             <field>OwnerId</field>
             <value>
@@ -626,13 +702,14 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <description>Crear tarea &apos;Carga de inmuebles&apos;</description>
         <name>Create_Tarea_CargaInmuebles</name>
         <label>Create_Tarea_Carga inmuebles</label>
-        <locationX>314</locationX>
-        <locationY>2255</locationY>
+        <locationX>578</locationX>
+        <locationY>2363</locationY>
         <connector>
             <targetReference>Create_Tarea_AsociacionInmuebles</targetReference>
         </connector>
@@ -673,13 +750,14 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <description>Crear tarea &apos;Carga de tipo de inmuebles&apos;</description>
         <name>Create_Tarea_CargaTipoInmuebles</name>
         <label>Create_Tarea_Carga tipo inmuebles</label>
-        <locationX>314</locationX>
-        <locationY>2147</locationY>
+        <locationX>578</locationX>
+        <locationY>2255</locationY>
         <connector>
             <targetReference>Create_Tarea_CargaInmuebles</targetReference>
         </connector>
@@ -720,13 +798,14 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <description>Crear tarea &apos;Validación de documentación marketing&apos;</description>
         <name>Create_Tarea_ValidacionDocumentacionMarketing</name>
         <label>Create_Tarea_Validación documentación marketing</label>
-        <locationX>842</locationX>
-        <locationY>2255</locationY>
+        <locationX>1370</locationX>
+        <locationY>2363</locationY>
         <inputAssignments>
             <field>OwnerId</field>
             <value>
@@ -764,16 +843,18 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordUpdates>
         <description>Actualizar Certif. Energ en los Inmuebles.</description>
         <name>Update_CertifEnergInmuebles</name>
         <label>Update_Certif. Energ en los Inmuebles</label>
-        <locationX>578</locationX>
+        <locationX>842</locationX>
         <locationY>1847</locationY>
         <connector>
             <targetReference>Decision_EstadoPromocion</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Certificado_de_eficiencia_energetica__c</field>
             <operator>IsNull</operator>
@@ -793,7 +874,7 @@
         <description>Actualizar técnico aprobador.</description>
         <name>Update_DocumentVersionsHistory_Tecnico</name>
         <label>Update_DocumentVersionsHistory_Tecnico</label>
-        <locationX>578</locationX>
+        <locationX>842</locationX>
         <locationY>539</locationY>
         <connector>
             <targetReference>Decision_TarifarioAprobado</targetReference>
@@ -810,7 +891,7 @@
         <description>Actualizar la promoción borrando el campo auxiliar.</description>
         <name>Update_Promocion_BorrarCampoAuxiliar</name>
         <label>Update_Promocion_Borrar Campo Auxiliar</label>
-        <locationX>1106</locationX>
+        <locationX>1634</locationX>
         <locationY>2147</locationY>
         <inputAssignments>
             <field>TAREASCOMPLETADASPRUEBA__c</field>
@@ -825,7 +906,7 @@
         <name>Update_Promocion_EstadoAltaPromocion</name>
         <label>Update_Promocion_Estado Alta promocion</label>
         <locationX>50</locationX>
-        <locationY>2255</locationY>
+        <locationY>2447</locationY>
         <connector>
             <targetReference>Create_Tarea_CargaHitos</targetReference>
         </connector>
@@ -843,13 +924,22 @@
         </inputAssignments>
         <inputReference>$Record</inputReference>
     </recordUpdates>
-    <startElementReference>Decision_TecnicoAprobadorCambia</startElementReference>
+    <start>
+        <locationX>848</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_TecnicoAprobadorCambia</targetReference>
+        </connector>
+        <object>Promocion__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
     <status>Active</status>
     <subflows>
         <description>Iniciar el subflujo &quot;Actualizar submitter approval process promocion&quot;.</description>
         <name>Subflow_ActualizarSubmitter</name>
         <label>Subflow_Actualizar submitter</label>
-        <locationX>578</locationX>
+        <locationX>842</locationX>
         <locationY>1247</locationY>
         <connector>
             <targetReference>Decision_ActualizarTarifa</targetReference>
@@ -866,7 +956,7 @@
         <description>Ejecutar el subflujo &quot;Actualiza Tarifa&quot;.</description>
         <name>SubFlow_ActualizaTarifa</name>
         <label>SubFlow_Actualiza Tarifa</label>
-        <locationX>578</locationX>
+        <locationX>842</locationX>
         <locationY>1547</locationY>
         <connector>
             <targetReference>Decision_CertificacionEnergeticaSeRelleno</targetReference>
@@ -883,7 +973,7 @@
         <description>Iniciar el subflujo &quot;aprobar precio propuesto&quot;.</description>
         <name>Subflow_AprobarPrecioPropuesto</name>
         <label>Subflow_aprobar precio propuesto</label>
-        <locationX>578</locationX>
+        <locationX>842</locationX>
         <locationY>839</locationY>
         <connector>
             <targetReference>Subflow_CreacionAvisoTarifarioAprobado</targetReference>
@@ -900,7 +990,7 @@
         <description>Iniciar el subflujo &quot;Creacion Aviso Tarifario Aprobado&quot;.</description>
         <name>Subflow_CreacionAvisoTarifarioAprobado</name>
         <label>Subflow_Creacion Aviso Tarifario Aprobado</label>
-        <locationX>578</locationX>
+        <locationX>842</locationX>
         <locationY>947</locationY>
         <connector>
             <targetReference>Decision_PendienteAprobacionTarifario</targetReference>
@@ -929,7 +1019,7 @@
         <description>Iniciar el flujo &quot;Crea Permisos Flex&quot;.</description>
         <name>Subflow_CreaPermisos</name>
         <label>Subflow_Crea Permisos</label>
-        <locationX>578</locationX>
+        <locationX>842</locationX>
         <locationY>431</locationY>
         <connector>
             <targetReference>Update_DocumentVersionsHistory_Tecnico</targetReference>

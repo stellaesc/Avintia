@@ -51,7 +51,7 @@
                 <behavior>Edit</behavior>
                 <field>Descripcion_Suelo__c</field>
             </layoutItems>
-            <layoutItems>
+<layoutItems>
                 <behavior>Edit</behavior>
                 <field>PromocionSinInfomar__c</field>
             </layoutItems>
@@ -92,7 +92,7 @@
                 <behavior>Edit</behavior>
                 <field>Delegacion_comercial__c</field>
             </layoutItems>
-            <layoutItems>
+<layoutItems>
                 <behavior>Edit</behavior>
                 <field>PuntoVenta__c</field>
             </layoutItems>
@@ -210,7 +210,7 @@
                 <behavior>Edit</behavior>
                 <field>PromocionFinalizada__c</field>
             </layoutItems>
-            <layoutItems>
+<layoutItems>
                 <behavior>Edit</behavior>
                 <field>V1Inicial__c</field>
             </layoutItems>
@@ -336,7 +336,7 @@
                 <behavior>Edit</behavior>
                 <field>Objetivo_de_ventas__c</field>
             </layoutItems>
-            <layoutItems>
+<layoutItems>
                 <behavior>Edit</behavior>
                 <field>FechaCreditoPromotor__c</field>
             </layoutItems>
@@ -372,7 +372,7 @@
         <label>Responsables de promoción</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Edit</behavior>
                 <field>Tecnico__c</field>
             </layoutItems>
             <layoutItems>
@@ -578,7 +578,7 @@
                 <behavior>Edit</behavior>
                 <field>ImporteAportacionCapital__c</field>
             </layoutItems>
-        </layoutColumns>
+                    </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -608,7 +608,7 @@
                 <behavior>Edit</behavior>
                 <field>Importe_Cuota_Extra__c</field>
             </layoutItems>
-        </layoutColumns>
+                    </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
@@ -1537,7 +1537,7 @@
     <relatedLists>
         <relatedList>RelatedNoteList</relatedList>
     </relatedLists>
-    <relatedLists>
+<relatedLists>
         <fields>NAME</fields>
         <fields>HelloSign__Document_Name__c</fields>
         <fields>HelloSign__Template__c</fields>
