@@ -16,9 +16,9 @@ public class HL_ContentVersionTrigger extends TriggerHandler {
         if(!cvIds.isEmpty() && !System.isFuture()) HL_ContentVersionTrigger.createDocumentVersionHistoryRecord(((Map<Id, ContentVersion>) Trigger.newMap).keySet());
         
         addURLPublica((Map<Id, ContentVersion>) Trigger.NewMap);
-    }
+            }
     
-    public void addURLPublica(Map<Id, ContentVersion> newMap){
+        public void addURLPublica(Map<Id, ContentVersion> newMap){
         Map<Id,ContentDistribution> mapCD = new Map<Id,ContentDistribution>();
         Set<Id> setCv = new Set<id>();
         
@@ -172,7 +172,11 @@ public class HL_ContentVersionTrigger extends TriggerHandler {
                 documentVersionHistory.VersionNumber__c = versions.get(contentVersionFiltered.Id);
                 documentVersionHistory.Tecnico__c = Test.isRunningTest() ? UserInfo.getUserId() : promos.get(documentVersionHistory.Promocion__c).Tecnico_Aprobador__c; 
                 documentVersionHistory.Responsable_Comercial__c = Test.isRunningTest() ? UserInfo.getUserId() : promos.get(documentVersionHistory.Promocion__c).Responsable_Comercial__c;
-                documentVersionHistory.Director_Tecnico__c = Test.isRunningTest() ? UserInfo.getUserId() : promos.get(documentVersionHistory.Promocion__c).Tecnico__c;
+                if(Test.isRunningTest() || !String.isBlank(promos.get(documentVersionHistory.Promocion__c).Tecnico__c) ){
+                    documentVersionHistory.Director_Tecnico__c = Test.isRunningTest() ? UserInfo.getUserId() : promos.get(documentVersionHistory.Promocion__c).Tecnico__c;
+                }else{
+                    documentVersionHistory.Director_Tecnico__c = '';
+                }
                 documentVersionHistory.Director_Promociones__c = Test.isRunningTest() ? UserInfo.getUserId() : promos.get(documentVersionHistory.Promocion__c).Director_Promociones__c;
                 documentVersionHistory.Director_de_Negocio__c = Test.isRunningTest() ? UserInfo.getUserId() : promos.get(documentVersionHistory.Promocion__c).Director_Negocio__c;
                 documentVersionHistory.Director_Comercial__c = Test.isRunningTest() ? UserInfo.getUserId() : promos.get(documentVersionHistory.Promocion__c).Director_Comercial__c;
@@ -180,7 +184,7 @@ public class HL_ContentVersionTrigger extends TriggerHandler {
                 
                  if(versions.get(contentVersionFiltered.Id) == 1){
                     Map<Id, ContentDocumentLink> toAdd = new Map<Id, ContentDocumentLink>();
-                    if(!linkedEntities.get(contentVersionFiltered.ContentDocumentId).contains(documentVersionHistory.Tecnico__c)){
+                    if(!String.isBlank(documentVersionHistory.Director_Tecnico__c) && !linkedEntities.get(contentVersionFiltered.ContentDocumentId).contains(documentVersionHistory.Tecnico__c)){
                         ContentDocumentLink cdlTecnico = new ContentDocumentLink(LinkedEntityId = documentVersionHistory.Tecnico__c, ContentDocumentId = contentVersionFiltered.ContentDocumentId, ShareType = 'C');
                         if(!toAdd.containsKey(cdlTecnico.LinkedEntityId)) toAdd.put(cdlTecnico.LinkedEntityId, cdlTecnico);
                     }
@@ -188,7 +192,7 @@ public class HL_ContentVersionTrigger extends TriggerHandler {
                         ContentDocumentLink cdlRespComercial = new ContentDocumentLink(LinkedEntityId = documentVersionHistory.Responsable_Comercial__c, ContentDocumentId = contentVersionFiltered.ContentDocumentId, ShareType = 'C');
                        	if(!toAdd.containsKey(cdlRespComercial.LinkedEntityId)) toAdd.put(cdlRespComercial.LinkedEntityId, cdlRespComercial);
                     }
-                    if(!linkedEntities.get(contentVersionFiltered.ContentDocumentId).contains(documentVersionHistory.Director_Tecnico__c)){
+                    if(!String.isBlank(documentVersionHistory.Director_Tecnico__c) && !linkedEntities.get(contentVersionFiltered.ContentDocumentId).contains(documentVersionHistory.Director_Tecnico__c)){
                         ContentDocumentLink cdlDirectorTecnico = new ContentDocumentLink(LinkedEntityId = documentVersionHistory.Director_Tecnico__c, ContentDocumentId = contentVersionFiltered.ContentDocumentId, ShareType = 'C');
                         if(!toAdd.containsKey(cdlDirectorTecnico.LinkedEntityId)) toAdd.put(cdlDirectorTecnico.LinkedEntityId, cdlDirectorTecnico);
                     }
@@ -233,7 +237,7 @@ public class HL_ContentVersionTrigger extends TriggerHandler {
             
             List<ContentVersion> otherCVs = [SELECT Id, Title, ContentDocumentId, Tipo__c, Activo__c, PathOnClient, VersionData FROM ContentVersion WHERE ContentDocumentId = :cdIds AND Activo__c = true ORDER BY CreatedDate DESC LIMIT 1];
             List<ContentVersion> toCreate = new List<ContentVersion>();
-            for(ContentVersion cv : otherCVs){
+            for(ContentVersion cv : otherCVs){ 
                 ContentVersion ncv = new ContentVersion();
                 ncv.title = cv.title;
                 ncv.ContentDocumentId = cv.ContentDocumentId;
