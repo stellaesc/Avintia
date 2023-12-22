@@ -14,4 +14,19 @@
         </criteriaItems>
         <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>OpportunityNovamayor</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Para compartir las oportunidades de NOVAMAYOR</description>
+        <label>Opportunity Novamayor</label>
+        <sharedTo>
+            <group>ReadOnlyPromotor</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Name</field>
+            <operation>contains</operation>
+            <value>NOVAMAYOR</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
 </SharingRules>
