@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
     <decisions>
         <name>Decision</name>
         <label>Decision</label>
         <locationX>380</locationX>
-        <locationY>323</locationY>
+        <locationY>623</locationY>
         <defaultConnector>
             <targetReference>Decision_MarcarCheckPBC</targetReference>
         </defaultConnector>
@@ -44,7 +45,7 @@
         <name>Decision_CanceladaOContratoReservaFirmado</name>
         <label>Decision_Cancelada O Contrato Reserva Firmado</label>
         <locationX>380</locationX>
-        <locationY>1031</locationY>
+        <locationY>1331</locationY>
         <defaultConnector>
             <targetReference>Decision_FechaEscrituracionCambia</targetReference>
         </defaultConnector>
@@ -91,7 +92,7 @@
         <name>Decision_ContratoReservaFirmado</name>
         <label>Decision_Contrato Reserva Firmado</label>
         <locationX>710</locationX>
-        <locationY>2639</locationY>
+        <locationY>2939</locationY>
         <defaultConnector>
             <targetReference>Decision_EstadoContrato</targetReference>
         </defaultConnector>
@@ -159,7 +160,7 @@
         <name>Decision_EstadoContrato</name>
         <label>Decision_Estado Contrato</label>
         <locationX>710</locationX>
-        <locationY>3047</locationY>
+        <locationY>3347</locationY>
         <defaultConnector>
             <targetReference>Decision_EstadoOportunidad</targetReference>
         </defaultConnector>
@@ -192,7 +193,7 @@
         <name>Decision_EstadoOportunidad</name>
         <label>Decision_EstadoOportunidad</label>
         <locationX>710</locationX>
-        <locationY>3347</locationY>
+        <locationY>3647</locationY>
         <defaultConnector>
             <targetReference>Decision_SeCancelaEra</targetReference>
         </defaultConnector>
@@ -304,7 +305,7 @@
         <name>Decision_EstadoPdteCobro</name>
         <label>Decision_Estado Pdte de Cobro</label>
         <locationX>380</locationX>
-        <locationY>2231</locationY>
+        <locationY>2531</locationY>
         <defaultConnector>
             <targetReference>Decision_EstadoReserva</targetReference>
         </defaultConnector>
@@ -344,7 +345,7 @@
         <name>Decision_EstadoReserva</name>
         <label>Decision_Estado Reserva</label>
         <locationX>710</locationX>
-        <locationY>2339</locationY>
+        <locationY>2639</locationY>
         <defaultConnector>
             <targetReference>Decision_ContratoReservaFirmado</targetReference>
         </defaultConnector>
@@ -377,7 +378,7 @@
         <name>Decision_FechaEscrituracionCambia</name>
         <label>Decision_Fecha Escrituración se cambia</label>
         <locationX>380</locationX>
-        <locationY>1331</locationY>
+        <locationY>1631</locationY>
         <defaultConnector>
             <targetReference>Decision_FechasCuota1EscriturasRellenas</targetReference>
         </defaultConnector>
@@ -403,7 +404,7 @@
         <name>Decision_FechasCuota1EscriturasRellenas</name>
         <label>Decision_Fechas Cuota1 y escrituras rellenas</label>
         <locationX>380</locationX>
-        <locationY>1631</locationY>
+        <locationY>1931</locationY>
         <defaultConnector>
             <targetReference>Decision_IBANCambia</targetReference>
         </defaultConnector>
@@ -523,11 +524,58 @@
         </rules>
     </decisions>
     <decisions>
+        <description>Comprobar si el campo se ha rellenado para generar facturas de mejora.</description>
+        <name>Decision_GenerarFacturaMejoras</name>
+        <label>Decision_Generar Factura Mejoras</label>
+        <locationX>380</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>Decision</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>GenerarFacturaMejoras_Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.FechaFirmaPersonalizacion__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.FechaFirmaPersonalizacion__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.ExisteFacturaMejoras__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Generar_Facturas_de_Clientes__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SubFlow_CrearFacturasMejoras</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <decisions>
         <description>Comprobar si la Cuenta Bancaria de mandato (IBAN) ha cambiado.</description>
         <name>Decision_IBANCambia</name>
         <label>Decision_IBAN se cambia</label>
         <locationX>380</locationX>
-        <locationY>1931</locationY>
+        <locationY>2231</locationY>
         <defaultConnector>
             <targetReference>Decision_EstadoPdteCobro</targetReference>
         </defaultConnector>
@@ -553,7 +601,7 @@
         <name>Decision_MarcarCheckPBC</name>
         <label>Decision_Marcar Check PBC</label>
         <locationX>380</locationX>
-        <locationY>623</locationY>
+        <locationY>923</locationY>
         <defaultConnector>
             <targetReference>Subflow_NotificarMarcadoDesmarcadoPBC</targetReference>
         </defaultConnector>
@@ -600,7 +648,7 @@
         <name>Decision_SeCancelaContratoFirmadoEra</name>
         <label>Decision_Se Cancela con Contrato firmado y era</label>
         <locationX>710</locationX>
-        <locationY>4379</locationY>
+        <locationY>4679</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>SeCancelaContratoFirmadoEra_reserva</name>
@@ -680,7 +728,7 @@
         <name>Decision_SeCancelaEra</name>
         <label>Decision_Se Cancela y era</label>
         <locationX>710</locationX>
-        <locationY>3971</locationY>
+        <locationY>4271</locationY>
         <defaultConnector>
             <targetReference>Decision_SeCancelaContratoFirmadoEra</targetReference>
         </defaultConnector>
@@ -745,7 +793,9 @@
         </rules>
     </decisions>
     <description>Tiene una decisión (condiciones de entrada) para identificar si el campo Entrega Aportación capital cambia de false a true. En este caso, lanzará el subflow de creación de factura
-27/06 MSC: Partes del PBs &quot;PB_OportunidadCancelada&quot;, &quot;PB_OportunidadReservada&quot; y workflows</description>
+27/06 MSC: Partes del PBs &quot;PB_OportunidadCancelada&quot;, &quot;PB_OportunidadReservada&quot; y workflows
+16/11 MSC: Añadir proceso para generar facturas de mejora</description>
+    <environments>Default</environments>
     <formulas>
         <description>Formula que devuelve el código de sociedad de Socio/Empresa Promotora si está existe en la promoción.</description>
         <name>For_CodigoSociedad</name>
@@ -803,7 +853,7 @@
         <name>Create_Tarea_GestionarCancelacion</name>
         <label>Create_Tarea_Gestionar la cancelación</label>
         <locationX>446</locationX>
-        <locationY>4079</locationY>
+        <locationY>4379</locationY>
         <connector>
             <targetReference>Subflow_FacturaRectificativaLineas</targetReference>
         </connector>
@@ -850,13 +900,14 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <description>Crear Tarea de gestionar la cancelación.</description>
         <name>Create_TareaGestionarCancelacionContrato</name>
         <label>Create_Tarea_Gestionar la cancelación</label>
         <locationX>710</locationX>
-        <locationY>4079</locationY>
+        <locationY>4379</locationY>
         <connector>
             <targetReference>Subflow_FacturaRectificativaLineasContrato</targetReference>
         </connector>
@@ -903,16 +954,18 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordUpdates>
         <description>Actualizar el estado comercial de la cuenta relacionada a la oportunidad a Comprador.</description>
         <name>Update_Account_EstadoComercial</name>
         <label>Update_Account_Estado comercial</label>
         <locationX>578</locationX>
-        <locationY>2747</locationY>
+        <locationY>3047</locationY>
         <connector>
             <targetReference>Subflow_FacturaEntrada</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -933,10 +986,11 @@
         <name>Update_Facturas_PdteEnvioOracleOProforma</name>
         <label>Update_Facturas_Pdte Envió a Oracle O  Proforma</label>
         <locationX>842</locationX>
-        <locationY>3455</locationY>
+        <locationY>3755</locationY>
         <connector>
             <targetReference>Subflow_CambioEstadoInmuebleLibre</targetReference>
         </connector>
+        <filterLogic>or</filterLogic>
         <filters>
             <field>Estado_de_la_factura__c</field>
             <operator>EqualTo</operator>
@@ -964,10 +1018,11 @@
         <name>Update_Facturas_SecuencialNumeroFactura</name>
         <label>Update_Facturas_Secuencial Numero Factura</label>
         <locationX>248</locationX>
-        <locationY>1439</locationY>
+        <locationY>1739</locationY>
         <connector>
             <targetReference>Decision_FechasCuota1EscriturasRellenas</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Fecha_de_emision__c</field>
             <operator>GreaterThanOrEqualTo</operator>
@@ -995,7 +1050,7 @@
         <name>Update_Oportunidad_Cancelaciones</name>
         <label>Update_Oportunidad_Cancelaciones</label>
         <locationX>842</locationX>
-        <locationY>3779</locationY>
+        <locationY>4079</locationY>
         <connector>
             <targetReference>Decision_SeCancelaEra</targetReference>
         </connector>
@@ -1018,7 +1073,7 @@
         <name>Update_Oportunidad_MarcarPBC</name>
         <label>Update_Oportunidad_Marcar PBC</label>
         <locationX>248</locationX>
-        <locationY>731</locationY>
+        <locationY>1031</locationY>
         <connector>
             <targetReference>Subflow_NotificarMarcadoDesmarcadoPBC</targetReference>
         </connector>
@@ -1035,7 +1090,7 @@
         <name>Update_Oportunidad_MostrarResolucionCompraventa</name>
         <label>Update_Oportunidad_Mostrar Resolución Compraventa</label>
         <locationX>710</locationX>
-        <locationY>4487</locationY>
+        <locationY>4787</locationY>
         <inputAssignments>
             <field>Mostrar_Resolucion_Compraventa__c</field>
             <value>
@@ -1049,7 +1104,7 @@
         <name>Update_Oportunidad_MostrarResolucionReserva</name>
         <label>Update_Oportunidad_Mostrar Resolución Reserva</label>
         <locationX>446</locationX>
-        <locationY>4487</locationY>
+        <locationY>4787</locationY>
         <inputAssignments>
             <field>Mostrar_Resolucion_Reserva__c</field>
             <value>
@@ -1063,7 +1118,7 @@
         <name>Update_oportunidad_SecuencialCuentaBancaria</name>
         <label>Update_oportunidad_Secuencial Cuenta Bancaria</label>
         <locationX>248</locationX>
-        <locationY>2039</locationY>
+        <locationY>2339</locationY>
         <connector>
             <targetReference>Decision_EstadoPdteCobro</targetReference>
         </connector>
@@ -1080,7 +1135,7 @@
         <name>Update_Productos_LimpiarOportunidad</name>
         <label>Update_Productos_Limpiar Oportunidad</label>
         <locationX>842</locationX>
-        <locationY>3671</locationY>
+        <locationY>3971</locationY>
         <connector>
             <targetReference>Update_Oportunidad_Cancelaciones</targetReference>
         </connector>
@@ -1092,13 +1147,22 @@
         </inputAssignments>
         <inputReference>$Record.Products__r</inputReference>
     </recordUpdates>
-    <startElementReference>Decision</startElementReference>
+    <start>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_GenerarFacturaMejoras</targetReference>
+        </connector>
+        <object>Opportunity</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
     <status>Active</status>
     <subflows>
         <name>LanzarSubFlow</name>
         <label>Lanzar Sub Flow</label>
         <locationX>248</locationX>
-        <locationY>431</locationY>
+        <locationY>731</locationY>
         <connector>
             <targetReference>Decision_MarcarCheckPBC</targetReference>
         </connector>
@@ -1127,7 +1191,7 @@
         <name>Subflow_CalculoCuotas</name>
         <label>Subflow_Calculo nº cuotas</label>
         <locationX>248</locationX>
-        <locationY>1739</locationY>
+        <locationY>2039</locationY>
         <connector>
             <targetReference>Decision_IBANCambia</targetReference>
         </connector>
@@ -1174,13 +1238,14 @@
                 <elementReference>$Record.Pago_Contrato__c</elementReference>
             </value>
         </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </subflows>
     <subflows>
         <description>Iniciar el flujo Cambio del Estado del inmueble para actualizar el estado del inmueble &quot;Reserva&quot;.</description>
         <name>Subflow_CambioEstadoInmueble</name>
         <label>Subflow_Cambio del Estado del inmueble</label>
         <locationX>50</locationX>
-        <locationY>2447</locationY>
+        <locationY>2747</locationY>
         <flowName>Cambio_del_Estado_del_inmueble</flowName>
         <inputAssignments>
             <name>EstadoInmueble</name>
@@ -1200,7 +1265,7 @@
         <name>Subflow_CambioEstadoInmuebleBloqueado</name>
         <label>Subflow_Cambio del Estado del inmueble</label>
         <locationX>578</locationX>
-        <locationY>2447</locationY>
+        <locationY>2747</locationY>
         <connector>
             <targetReference>Decision_ContratoReservaFirmado</targetReference>
         </connector>
@@ -1223,7 +1288,7 @@
         <name>Subflow_CambioEstadoInmuebleContrato</name>
         <label>Subflow_Cambio del Estado del inmueble</label>
         <locationX>578</locationX>
-        <locationY>3155</locationY>
+        <locationY>3455</locationY>
         <connector>
             <targetReference>Decision_EstadoOportunidad</targetReference>
         </connector>
@@ -1246,7 +1311,7 @@
         <name>Subflow_CambioEstadoInmuebleEscriturado</name>
         <label>Subflow_Cambio del Estado del inmueble</label>
         <locationX>578</locationX>
-        <locationY>3563</locationY>
+        <locationY>3863</locationY>
         <flowName>Cambio_del_Estado_del_inmueble</flowName>
         <inputAssignments>
             <name>EstadoInmueble</name>
@@ -1266,7 +1331,7 @@
         <name>Subflow_CambioEstadoInmuebleLibre</name>
         <label>Subflow_Cambio del Estado del inmueble</label>
         <locationX>842</locationX>
-        <locationY>3563</locationY>
+        <locationY>3863</locationY>
         <connector>
             <targetReference>Update_Productos_LimpiarOportunidad</targetReference>
         </connector>
@@ -1289,7 +1354,7 @@
         <name>Subflow_CreacionFacturaEscrituraSusLineas</name>
         <label>Subflow_Creación Factura Escritura y sus lineas</label>
         <locationX>578</locationX>
-        <locationY>3455</locationY>
+        <locationY>3755</locationY>
         <connector>
             <targetReference>Subflow_CambioEstadoInmuebleEscriturado</targetReference>
         </connector>
@@ -1318,7 +1383,7 @@
         <name>Subflow_CreacionPlanFacturas</name>
         <label>Subflow_Creación Plan de facturas</label>
         <locationX>314</locationX>
-        <locationY>3455</locationY>
+        <locationY>3755</locationY>
         <flowName>Creacion_Plan_de_facturas</flowName>
         <inputAssignments>
             <name>Descrip</name>
@@ -1394,11 +1459,28 @@
         </inputAssignments>
     </subflows>
     <subflows>
+        <description>Lanzar el Subflujo &quot;Opportunity_Crear Facturas de mejoras&quot; para la creación de las facturas de mejoras de la oportunidad.</description>
+        <name>SubFlow_CrearFacturasMejoras</name>
+        <label>SubFlow_Crear Facturas de mejoras</label>
+        <locationX>248</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>Decision</targetReference>
+        </connector>
+        <flowName>Opportunity_CrearFacturasMejoras</flowName>
+        <inputAssignments>
+            <name>VarIn_OpportunityId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
         <description>Iniciar el flujo Factura de Entrada para la creación de Factura de entrada.</description>
         <name>Subflow_FacturaEntrada</name>
         <label>Subflow_Factura de Entrada</label>
         <locationX>578</locationX>
-        <locationY>2855</locationY>
+        <locationY>3155</locationY>
         <connector>
             <targetReference>Decision_EstadoContrato</targetReference>
         </connector>
@@ -1427,7 +1509,7 @@
         <name>Subflow_FacturaRectificativaLineas</name>
         <label>Subflow_Factura Rectificativa y lineas</label>
         <locationX>446</locationX>
-        <locationY>4187</locationY>
+        <locationY>4487</locationY>
         <connector>
             <targetReference>Decision_SeCancelaContratoFirmadoEra</targetReference>
         </connector>
@@ -1462,7 +1544,7 @@
         <name>Subflow_FacturaRectificativaLineasContrato</name>
         <label>Subflow_Factura Rectificativa y lineas</label>
         <locationX>710</locationX>
-        <locationY>4187</locationY>
+        <locationY>4487</locationY>
         <connector>
             <targetReference>Decision_SeCancelaContratoFirmadoEra</targetReference>
         </connector>
@@ -1497,7 +1579,7 @@
         <name>Subflow_FacturaReserva</name>
         <label>Subflow_Factura Reserva</label>
         <locationX>50</locationX>
-        <locationY>2339</locationY>
+        <locationY>2639</locationY>
         <connector>
             <targetReference>Subflow_CambioEstadoInmueble</targetReference>
         </connector>
@@ -1532,7 +1614,7 @@
         <name>Subflow_NotificarMarcadoDesmarcadoPBC</name>
         <label>Subflow_Notificar Marcado/Desmarcado PBC</label>
         <locationX>380</locationX>
-        <locationY>923</locationY>
+        <locationY>1223</locationY>
         <connector>
             <targetReference>Decision_CanceladaOContratoReservaFirmado</targetReference>
         </connector>
@@ -1573,7 +1655,7 @@
         <name>Subflow_UpdateRitmoVentas</name>
         <label>Subflow_UpdateRitmoVentas</label>
         <locationX>248</locationX>
-        <locationY>1139</locationY>
+        <locationY>1439</locationY>
         <connector>
             <targetReference>Decision_FechaEscrituracionCambia</targetReference>
         </connector>
