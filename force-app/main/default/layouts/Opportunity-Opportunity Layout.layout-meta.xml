@@ -48,6 +48,10 @@
                 <field>ImporteMejorasAutomatico__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ImporteMejoras__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Obra__c</field>
             </layoutItems>
@@ -550,11 +554,6 @@
             <sortOrder>1</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
-            <actionName>Conga_Composer_Composer_SP_Proposal</actionName>
-            <actionType>CustomButton</actionType>
-            <sortOrder>0</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
             <actionName>NewEvent</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>2</sortOrder>
@@ -590,9 +589,9 @@
             <sortOrder>8</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
-            <actionName>PDFGeneradorMejoras</actionName>
+            <actionName>Conga_Composer_Composer_SP_Proposal</actionName>
             <actionType>CustomButton</actionType>
-            <sortOrder>9</sortOrder>
+            <sortOrder>0</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <quickActionList>
@@ -645,10 +644,8 @@
         <relatedList>RelatedLineItemList</relatedList>
     </relatedLists>
     <relatedLists>
-        <excludeButtons>MassChangeOwner</excludeButtons>
-        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
-        <fields>Precio__c</fields>
+        <fields>PrecioMejora__c</fields>
         <fields>Descripcion__c</fields>
         <relatedList>MejoraOportunidad__c.Opportunity__c</relatedList>
     </relatedLists>
