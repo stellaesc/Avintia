@@ -281,6 +281,23 @@
         <label>ONDA CERO</label>
     </customValue>
     <customValue>
+        <fullName>WEB PROMOCIÓN</fullName>
+        <default>false</default>
+        <label>WEB PROMOCIÓN</label>
+    </customValue>
+    <customValue>
+        <fullName>PLANTA DIGITAL</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>PLANTA DIGITAL</label>
+    </customValue>
+    <customValue>
+        <fullName>CLIENTE AVINTIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CLIENTE AVINTIA</label>
+    </customValue>
+    <customValue>
         <fullName>VALLA TORRE</fullName>
         <default>false</default>
         <isActive>false</isActive>
@@ -299,6 +316,12 @@
         <label>MUPPIN BELLA JULIETA</label>
     </customValue>
     <customValue>
+        <fullName>MUPPIN PZA DEL CARMEN</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>MUPPIN PZA DEL CARMEN</label>
+    </customValue>
+    <customValue>
         <fullName>MUPPIN PASEO MARITIMO</fullName>
         <default>false</default>
         <isActive>false</isActive>
@@ -315,12 +338,6 @@
         <default>false</default>
         <isActive>false</isActive>
         <label>MUPPIN ESTACION BUS</label>
-    </customValue>
-    <customValue>
-        <fullName>MUPPIN PZA DEL CARMEN</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>MUPPIN PZA DEL CARMEN</label>
     </customValue>
     <customValue>
         <fullName>SIMA OTOÑO 2018</fullName>
@@ -401,16 +418,184 @@
         <label>API</label>
     </customValue>
     <customValue>
-        <fullName>Portales Web</fullName>
+        <fullName>CALETA GREEN - PUNTO DE VENTA</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>Portales Web</label>
+        <label>CALETA GREEN - PUNTO DE VENTA</label>
     </customValue>
     <customValue>
-        <fullName>Redes Sociales</fullName>
+        <fullName>CALETA GREEN - VALLA EN SUELO</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>Redes Sociales</label>
+        <label>CALETA GREEN - VALLA EN SUELO</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - VALLA TORRE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - VALLA TORRE</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - VALLA ROTONDA TORRE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - VALLA ROTONDA TORRE</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - IDEALISTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - IDEALISTA</label>
+    </customValue>
+    <customValue>
+        <fullName>Offline</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Offline</label>
+    </customValue>
+    <customValue>
+        <fullName>Referenciado</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Referenciado</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - PUNTO DE VENTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - PUNTO DE VENTA</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - VALLA EN CARRETERA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - VALLA EN CARRETERA</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - WEB AVINTIA INMOBILIARIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - WEB AVINTIA INMOBILIARIA</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - FOTOCASA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - FOTOCASA</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - GLOBALIZA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - GLOBALIZA</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - HABITACLIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - HABITACLIA</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - HOUSAGE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - HOUSAGE</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - BANNER INTERNET</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - BANNER INTERNET</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - ENGEL &amp; VOLKERS</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - ENGEL &amp; VOLKERS</label>
+    </customValue>
+    <customValue>
+        <fullName>ISARD HOMES - REFERIDO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ISARD HOMES - REFERIDO</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - PUNTO DE VENTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - PUNTO DE VENTA</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - VALLA EN SUELO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - VALLA EN SUELO</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - WEB AVINTIA INMOBILIARIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - WEB AVINTIA INMOBILIARIA</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - IDEALISTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - IDEALISTA</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - FOTOCASA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - FOTOCASA</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - GLOBALIZA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - GLOBALIZA</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - HABITACLIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - HABITACLIA</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - HOUSAGE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - HOUSAGE</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - BANNER INTERNET</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - BANNER INTERNET</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - GRUPO PINEDA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - GRUPO PINEDA</label>
+    </customValue>
+    <customValue>
+        <fullName>Medios de comunicación</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Medios de comunicación</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - CORAL</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - CORAL</label>
+    </customValue>
+    <customValue>
+        <fullName>CANET - REFERIDO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CANET - REFERIDO</label>
     </customValue>
     <customValue>
         <fullName>Punto de venta</fullName>
@@ -431,12 +616,6 @@
         <label>Referencia</label>
     </customValue>
     <customValue>
-        <fullName>Medios de comunicación</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>Medios de comunicación</label>
-    </customValue>
-    <customValue>
         <fullName>Comercializadora</fullName>
         <default>false</default>
         <isActive>false</isActive>
@@ -455,22 +634,226 @@
         <label>Teléfono</label>
     </customValue>
     <customValue>
-        <fullName>Avintia Mare - First Mallorca.</fullName>
+        <fullName>Portales Web</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>Avintia Mare - First Mallorca.</label>
+        <label>Portales Web</label>
     </customValue>
     <customValue>
-        <fullName>AVINTIA MARE - Strachwitz</fullName>
+        <fullName>Redes Sociales</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>AVINTIA MARE - Strachwitz</label>
+        <label>Redes Sociales</label>
     </customValue>
     <customValue>
-        <fullName>AVINTIA MARE - Yes-mallorca</fullName>
+        <fullName>PLAYA CANELAS II - BANNER INTERNET</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>AVINTIA MARE - Yes-mallorca</label>
+        <label>PLAYA CANELAS II - BANNER INTERNET</label>
+    </customValue>
+    <customValue>
+        <fullName>PLAYA CANELAS II - GLOBALIZA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>PLAYA CANELAS II - GLOBALIZA</label>
+    </customValue>
+    <customValue>
+        <fullName>PLAYA CANELAS II - HABITACLIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>PLAYA CANELAS II - HABITACLIA</label>
+    </customValue>
+    <customValue>
+        <fullName>PLAYA CANELAS II - HOUSAGE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>PLAYA CANELAS II - HOUSAGE</label>
+    </customValue>
+    <customValue>
+        <fullName>PLAYA CANELAS II - REFERIDO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>PLAYA CANELAS II - REFERIDO</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - PUNTO DE VENTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - PUNTO DE VENTA</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - VALLA EN SUELO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - VALLA EN SUELO</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - SIMA PRIMAVERA 2019</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - SIMA PRIMAVERA 2019</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - WEB AVINTIA INMOBILIARIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - WEB AVINTIA INMOBILIARIA</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - IDEALISTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - IDEALISTA</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - FOTOCASA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - FOTOCASA</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - GLOBALIZA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - GLOBALIZA</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - HABITACLIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - HABITACLIA</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - HOUSAGE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - HOUSAGE</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - BANNER INTERNET</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - BANNER INTERNET</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - ALEX PIELLA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - ALEX PIELLA</label>
+    </customValue>
+    <customValue>
+        <fullName>SANTA EULALIA - REFERIDO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SANTA EULALIA - REFERIDO</label>
+    </customValue>
+    <customValue>
+        <fullName>CAN MISSES - PUNTO DE VENTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CAN MISSES - PUNTO DE VENTA</label>
+    </customValue>
+    <customValue>
+        <fullName>CAN MISSES - VALLA EN SUELO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CAN MISSES - VALLA EN SUELO</label>
+    </customValue>
+    <customValue>
+        <fullName>AUREA - FOTOCASA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AUREA - FOTOCASA</label>
+    </customValue>
+    <customValue>
+        <fullName>AUREA - SIMA PRIMAVERA 2019</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AUREA - SIMA PRIMAVERA 2019</label>
+    </customValue>
+    <customValue>
+        <fullName>AUREA - WEB AVINTIA INMOBILIARIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AUREA - WEB AVINTIA INMOBILIARIA</label>
+    </customValue>
+    <customValue>
+        <fullName>AUREA - IDEALISTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AUREA - IDEALISTA</label>
+    </customValue>
+    <customValue>
+        <fullName>AUREA - GLOBALIZA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AUREA - GLOBALIZA</label>
+    </customValue>
+    <customValue>
+        <fullName>AUREA - HABITACLIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AUREA - HABITACLIA</label>
+    </customValue>
+    <customValue>
+        <fullName>AUREA - HOUSAGE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AUREA - HOUSAGE</label>
+    </customValue>
+    <customValue>
+        <fullName>AUREA - BANNER INTERNET</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AUREA - BANNER INTERNET</label>
+    </customValue>
+    <customValue>
+        <fullName>AUREA - REFERIDO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AUREA - REFERIDO</label>
+    </customValue>
+    <customValue>
+        <fullName>NOVA - PUNTO DE VENTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>NOVA - PUNTO DE VENTA</label>
+    </customValue>
+    <customValue>
+        <fullName>NOVA - VALLA EN SUELO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>NOVA - VALLA EN SUELO</label>
+    </customValue>
+    <customValue>
+        <fullName>NOVA - SIMA PRIMAVERA 2019</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>NOVA - SIMA PRIMAVERA 2019</label>
+    </customValue>
+    <customValue>
+        <fullName>NOVA - WEB AVINTIA INMOBILIARIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>NOVA - WEB AVINTIA INMOBILIARIA</label>
+    </customValue>
+    <customValue>
+        <fullName>NOVA - IDEALISTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>NOVA - IDEALISTA</label>
+    </customValue>
+    <customValue>
+        <fullName>NOVA - FOTOCASA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>NOVA - FOTOCASA</label>
+    </customValue>
+    <customValue>
+        <fullName>NOVA - GLOBALIZA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>NOVA - GLOBALIZA</label>
     </customValue>
     <customValue>
         <fullName>NOVA - HABITACLIA</fullName>
@@ -575,40 +958,10 @@
         <label>AVINTIA MARE - PUNTO DE VENTA</label>
     </customValue>
     <customValue>
-        <fullName>AVINTIA MARE - VALLA EN SUELO</fullName>
+        <fullName>CAN MISSES - FOTOCASA</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>AVINTIA MARE - VALLA EN SUELO</label>
-    </customValue>
-    <customValue>
-        <fullName>AVINTIA MARE - SIMA PRIMAVERA 2019</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AVINTIA MARE - SIMA PRIMAVERA 2019</label>
-    </customValue>
-    <customValue>
-        <fullName>AVINTIA MARE - WEB AVINTIA INMOBILIARIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AVINTIA MARE - WEB AVINTIA INMOBILIARIA</label>
-    </customValue>
-    <customValue>
-        <fullName>AVINTIA MARE - IDEALISTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AVINTIA MARE - IDEALISTA</label>
-    </customValue>
-    <customValue>
-        <fullName>CAN MISSES - PUNTO DE VENTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CAN MISSES - PUNTO DE VENTA</label>
-    </customValue>
-    <customValue>
-        <fullName>CAN MISSES - VALLA EN SUELO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CAN MISSES - VALLA EN SUELO</label>
+        <label>CAN MISSES - FOTOCASA</label>
     </customValue>
     <customValue>
         <fullName>CAN MISSES - SIMA PRIMAVERA 2019</fullName>
@@ -627,12 +980,6 @@
         <default>false</default>
         <isActive>false</isActive>
         <label>CAN MISSES - IDEALISTA</label>
-    </customValue>
-    <customValue>
-        <fullName>CAN MISSES - FOTOCASA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CAN MISSES - FOTOCASA</label>
     </customValue>
     <customValue>
         <fullName>CAN MISSES - GLOBALIZA</fullName>
@@ -671,88 +1018,52 @@
         <label>CAN MISSES - REFERIDO</label>
     </customValue>
     <customValue>
-        <fullName>ISARD HOMES - PUNTO DE VENTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - PUNTO DE VENTA</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - VALLA EN CARRETERA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - VALLA EN CARRETERA</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - WEB AVINTIA INMOBILIARIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - WEB AVINTIA INMOBILIARIA</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - IDEALISTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - IDEALISTA</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - FOTOCASA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - FOTOCASA</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - GLOBALIZA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - GLOBALIZA</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - HABITACLIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - HABITACLIA</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - HOUSAGE</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - HOUSAGE</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - BANNER INTERNET</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - BANNER INTERNET</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - ENGEL &amp; VOLKERS</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - ENGEL &amp; VOLKERS</label>
-    </customValue>
-    <customValue>
-        <fullName>ISARD HOMES - REFERIDO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>ISARD HOMES - REFERIDO</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - PUNTO DE VENTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - PUNTO DE VENTA</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - VALLA EN SUELO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - VALLA EN SUELO</label>
-    </customValue>
-    <customValue>
         <fullName>AVINTIA MARE - FOTOCASA</fullName>
         <default>false</default>
         <isActive>false</isActive>
         <label>AVINTIA MARE - FOTOCASA</label>
+    </customValue>
+    <customValue>
+        <fullName>AVINTIA MARE - Redhawk</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AVINTIA MARE - Redhawk</label>
+    </customValue>
+    <customValue>
+        <fullName>AVINTIA MARE - Strachwitz</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AVINTIA MARE - Strachwitz</label>
+    </customValue>
+    <customValue>
+        <fullName>AVINTIA MARE - Yes-mallorca</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AVINTIA MARE - Yes-mallorca</label>
+    </customValue>
+    <customValue>
+        <fullName>AVINTIA MARE - VALLA EN SUELO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AVINTIA MARE - VALLA EN SUELO</label>
+    </customValue>
+    <customValue>
+        <fullName>AVINTIA MARE - SIMA PRIMAVERA 2019</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AVINTIA MARE - SIMA PRIMAVERA 2019</label>
+    </customValue>
+    <customValue>
+        <fullName>AVINTIA MARE - WEB AVINTIA INMOBILIARIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AVINTIA MARE - WEB AVINTIA INMOBILIARIA</label>
+    </customValue>
+    <customValue>
+        <fullName>AVINTIA MARE - IDEALISTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AVINTIA MARE - IDEALISTA</label>
     </customValue>
     <customValue>
         <fullName>AVINTIA MARE - GLOBALIZA</fullName>
@@ -801,66 +1112,6 @@
         <default>false</default>
         <isActive>false</isActive>
         <label>AVINTIA MARE - PRENSA - DAILY BULLETIN</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - WEB AVINTIA INMOBILIARIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - WEB AVINTIA INMOBILIARIA</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - IDEALISTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - IDEALISTA</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - FOTOCASA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - FOTOCASA</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - GLOBALIZA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - GLOBALIZA</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - HABITACLIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - HABITACLIA</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - HOUSAGE</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - HOUSAGE</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - BANNER INTERNET</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - BANNER INTERNET</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - GRUPO PINEDA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - GRUPO PINEDA</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - CORAL</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - CORAL</label>
-    </customValue>
-    <customValue>
-        <fullName>CANET - REFERIDO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CANET - REFERIDO</label>
     </customValue>
     <customValue>
         <fullName>AVINTIA MARE - PRENSA - PROPIEDADES</fullName>
@@ -935,6 +1186,66 @@
         <label>AVINTIA MARE - API 7 Toni Da Silva Exclusive Mallorca Properties S.L.</label>
     </customValue>
     <customValue>
+        <fullName>CALETA GREEN - MUPPIN MERCADONA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - MUPPIN MERCADONA</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - TORNEOS GOLF 2018</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - TORNEOS GOLF 2018</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - MUPPIN BELLA JULIETA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - MUPPIN BELLA JULIETA</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - MUPPIN PASEO MARITIMO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - MUPPIN PASEO MARITIMO</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - MUPPIN ESTACION BUS</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - MUPPIN ESTACION BUS</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - MUPPIN PZA DEL CARMEN</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - MUPPIN PZA DEL CARMEN</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - ACCIÓN CENTRO COMERCIAL</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - ACCIÓN CENTRO COMERCIAL</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - SIMA OTOÑO 2018</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - SIMA OTOÑO 2018</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - SIMA PRIMAVERA 2019</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - SIMA PRIMAVERA 2019</label>
+    </customValue>
+    <customValue>
+        <fullName>PLAYA CANELAS I - VALLA EN SUELO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>PLAYA CANELAS I - VALLA EN SUELO</label>
+    </customValue>
+    <customValue>
         <fullName>AVINTIA MARE - API 8 G.W. Investment Management SLU, Rudy Allramseder</fullName>
         <default>false</default>
         <isActive>false</isActive>
@@ -963,12 +1274,6 @@
         <default>false</default>
         <isActive>false</isActive>
         <label>PLAYA CANELAS I - PUNTO DE VENTA</label>
-    </customValue>
-    <customValue>
-        <fullName>PLAYA CANELAS I - VALLA EN SUELO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>PLAYA CANELAS I - VALLA EN SUELO</label>
     </customValue>
     <customValue>
         <fullName>PLAYA CANELAS I - VINILO PUERTO</fullName>
@@ -1005,174 +1310,6 @@
         <default>false</default>
         <isActive>false</isActive>
         <label>PLAYA CANELAS I - FOTOCASA</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - PUNTO DE VENTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - PUNTO DE VENTA</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - VALLA EN SUELO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - VALLA EN SUELO</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - VALLA TORRE</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - VALLA TORRE</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - VALLA ROTONDA TORRE</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - VALLA ROTONDA TORRE</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - MUPPIN BELLA JULIETA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - MUPPIN BELLA JULIETA</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - MUPPIN PASEO MARITIMO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - MUPPIN PASEO MARITIMO</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - MUPPIN MERCADONA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - MUPPIN MERCADONA</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - MUPPIN ESTACION BUS</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - MUPPIN ESTACION BUS</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - MUPPIN PZA DEL CARMEN</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - MUPPIN PZA DEL CARMEN</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - ACCIÓN CENTRO COMERCIAL</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - ACCIÓN CENTRO COMERCIAL</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - SIMA OTOÑO 2018</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - SIMA OTOÑO 2018</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - SIMA PRIMAVERA 2019</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - SIMA PRIMAVERA 2019</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - TORNEOS GOLF 2018</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - TORNEOS GOLF 2018</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - TORNEOS GOLF 2019</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - TORNEOS GOLF 2019</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - TARJETAS GOLF</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - TARJETAS GOLF</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - VALLA CAMPO GOLF</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - VALLA CAMPO GOLF</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - FLYERS</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - FLYERS</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - REFERENCIADO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - REFERENCIADO</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - WEB AAMM</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - WEB AAMM</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - INSTAGRAM AAMM</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - INSTAGRAM AAMM</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - FACEBOOK AAMM</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - FACEBOOK AAMM</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - WEB AVINTIA INMOBILIARIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - WEB AVINTIA INMOBILIARIA</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - IDEALISTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - IDEALISTA</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - FOTOCASA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - FOTOCASA</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - GLOBALIZA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - GLOBALIZA</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - HABITACLIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - HABITACLIA</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - HOUSAGE</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - HOUSAGE</label>
-    </customValue>
-    <customValue>
-        <fullName>CALETA GREEN - API</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CALETA GREEN - API</label>
     </customValue>
     <customValue>
         <fullName>PLAYA CANELAS I - GLOBALIZA</fullName>
@@ -1265,46 +1402,94 @@
         <label>PLAYA CANELAS II - FOTOCASA</label>
     </customValue>
     <customValue>
-        <fullName>PLAYA CANELAS II - GLOBALIZA</fullName>
+        <fullName>CALETA GREEN - FLYERS</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>PLAYA CANELAS II - GLOBALIZA</label>
+        <label>CALETA GREEN - FLYERS</label>
     </customValue>
     <customValue>
-        <fullName>PLAYA CANELAS II - HABITACLIA</fullName>
+        <fullName>CALETA GREEN - TORNEOS GOLF 2019</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>PLAYA CANELAS II - HABITACLIA</label>
+        <label>CALETA GREEN - TORNEOS GOLF 2019</label>
     </customValue>
     <customValue>
-        <fullName>PLAYA CANELAS II - HOUSAGE</fullName>
+        <fullName>CALETA GREEN - TARJETAS GOLF</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>PLAYA CANELAS II - HOUSAGE</label>
+        <label>CALETA GREEN - TARJETAS GOLF</label>
     </customValue>
     <customValue>
-        <fullName>PLAYA CANELAS II - BANNER INTERNET</fullName>
+        <fullName>CALETA GREEN - VALLA CAMPO GOLF</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>PLAYA CANELAS II - BANNER INTERNET</label>
+        <label>CALETA GREEN - VALLA CAMPO GOLF</label>
     </customValue>
     <customValue>
-        <fullName>PLAYA CANELAS II - REFERIDO</fullName>
+        <fullName>CALETA GREEN - REFERENCIADO</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>PLAYA CANELAS II - REFERIDO</label>
+        <label>CALETA GREEN - REFERENCIADO</label>
     </customValue>
     <customValue>
-        <fullName>SANTA EULALIA - PUNTO DE VENTA</fullName>
+        <fullName>CALETA GREEN - WEB AAMM</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>SANTA EULALIA - PUNTO DE VENTA</label>
+        <label>CALETA GREEN - WEB AAMM</label>
     </customValue>
     <customValue>
-        <fullName>SANTA EULALIA - VALLA EN SUELO</fullName>
+        <fullName>CALETA GREEN - INSTAGRAM AAMM</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>SANTA EULALIA - VALLA EN SUELO</label>
+        <label>CALETA GREEN - INSTAGRAM AAMM</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - FACEBOOK AAMM</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - FACEBOOK AAMM</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - WEB AVINTIA INMOBILIARIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - WEB AVINTIA INMOBILIARIA</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - IDEALISTA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - IDEALISTA</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - FOTOCASA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - FOTOCASA</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - GLOBALIZA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - GLOBALIZA</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - HABITACLIA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - HABITACLIA</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - HOUSAGE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - HOUSAGE</label>
+    </customValue>
+    <customValue>
+        <fullName>CALETA GREEN - API</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CALETA GREEN - API</label>
     </customValue>
     <customValue>
         <fullName>CALETA GREEN - BANNER INTERNET</fullName>
@@ -1397,160 +1582,10 @@
         <label>AUREA - VALLA EN SUELO</label>
     </customValue>
     <customValue>
-        <fullName>AUREA - SIMA PRIMAVERA 2019</fullName>
+        <fullName>AVINTIA MARE - Sotheby’s</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>AUREA - SIMA PRIMAVERA 2019</label>
-    </customValue>
-    <customValue>
-        <fullName>AUREA - WEB AVINTIA INMOBILIARIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AUREA - WEB AVINTIA INMOBILIARIA</label>
-    </customValue>
-    <customValue>
-        <fullName>AUREA - IDEALISTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AUREA - IDEALISTA</label>
-    </customValue>
-    <customValue>
-        <fullName>AUREA - FOTOCASA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AUREA - FOTOCASA</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - SIMA PRIMAVERA 2019</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - SIMA PRIMAVERA 2019</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - WEB AVINTIA INMOBILIARIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - WEB AVINTIA INMOBILIARIA</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - IDEALISTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - IDEALISTA</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - FOTOCASA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - FOTOCASA</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - GLOBALIZA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - GLOBALIZA</label>
-    </customValue>
-    <customValue>
-        <fullName>AUREA - GLOBALIZA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AUREA - GLOBALIZA</label>
-    </customValue>
-    <customValue>
-        <fullName>AUREA - HABITACLIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AUREA - HABITACLIA</label>
-    </customValue>
-    <customValue>
-        <fullName>AUREA - HOUSAGE</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AUREA - HOUSAGE</label>
-    </customValue>
-    <customValue>
-        <fullName>AUREA - BANNER INTERNET</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AUREA - BANNER INTERNET</label>
-    </customValue>
-    <customValue>
-        <fullName>AUREA - REFERIDO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AUREA - REFERIDO</label>
-    </customValue>
-    <customValue>
-        <fullName>NOVA - PUNTO DE VENTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>NOVA - PUNTO DE VENTA</label>
-    </customValue>
-    <customValue>
-        <fullName>NOVA - VALLA EN SUELO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>NOVA - VALLA EN SUELO</label>
-    </customValue>
-    <customValue>
-        <fullName>NOVA - SIMA PRIMAVERA 2019</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>NOVA - SIMA PRIMAVERA 2019</label>
-    </customValue>
-    <customValue>
-        <fullName>NOVA - WEB AVINTIA INMOBILIARIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>NOVA - WEB AVINTIA INMOBILIARIA</label>
-    </customValue>
-    <customValue>
-        <fullName>NOVA - IDEALISTA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>NOVA - IDEALISTA</label>
-    </customValue>
-    <customValue>
-        <fullName>NOVA - FOTOCASA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>NOVA - FOTOCASA</label>
-    </customValue>
-    <customValue>
-        <fullName>NOVA - GLOBALIZA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>NOVA - GLOBALIZA</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - HABITACLIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - HABITACLIA</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - HOUSAGE</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - HOUSAGE</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - BANNER INTERNET</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - BANNER INTERNET</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - ALEX PIELLA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - ALEX PIELLA</label>
-    </customValue>
-    <customValue>
-        <fullName>SANTA EULALIA - REFERIDO</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>SANTA EULALIA - REFERIDO</label>
+        <label>AVINTIA MARE - Sotheby’s</label>
     </customValue>
     <customValue>
         <fullName>AVINTIA MARE - Porta Mallorquina</fullName>
@@ -1569,42 +1604,6 @@
         <default>false</default>
         <isActive>false</isActive>
         <label>AVINTIA MARE - First Mallorca</label>
-    </customValue>
-    <customValue>
-        <fullName>AVINTIA MARE - Sotheby’s</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AVINTIA MARE - Sotheby’s</label>
-    </customValue>
-    <customValue>
-        <fullName>AVINTIA MARE - Redhawk</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>AVINTIA MARE - Redhawk</label>
-    </customValue>
-    <customValue>
-        <fullName>CLIENTE AVINTIA</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>CLIENTE AVINTIA</label>
-    </customValue>
-    <customValue>
-        <fullName>PLANTA DIGITAL</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>PLANTA DIGITAL</label>
-    </customValue>
-    <customValue>
-        <fullName>Offline</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>Offline</label>
-    </customValue>
-    <customValue>
-        <fullName>Referenciado</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>Referenciado</label>
     </customValue>
     <masterLabel>Medio de conocimiento</masterLabel>
     <sorted>false</sorted>
