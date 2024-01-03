@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
     <decisions>
         <description>Decisión para realizar acciones dependiendo del típo de registro.</description>
         <name>Dec_RecordTypeVisitasComerciales</name>
         <label>Dec_RecordTypeVisitasComerciales</label>
         <locationX>380</locationX>
-        <locationY>455</locationY>
+        <locationY>431</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>EsVisitaComercial</name>
@@ -28,7 +29,7 @@
         <name>Decision_FechaPrimeraVisitaField</name>
         <label>Decision_FechaPrimeraVisitaField</label>
         <locationX>182</locationX>
-        <locationY>695</locationY>
+        <locationY>647</locationY>
         <defaultConnectorLabel>No rellenar campo</defaultConnectorLabel>
         <rules>
             <name>RellenarFechaPrimeraVisita</name>
@@ -46,8 +47,9 @@
             <label>Rellenar Fecha 1ª Visita</label>
         </rules>
     </decisions>
-    <description>Cuando es la primera vista del Lead y se crea el evento con unos campos concretos.
+    <description>Cuando es la primera vista del Lead y se crea o se modifica el evento con el estado &apos;Realizado&apos; con unos campos concretos.
 09/03/2023 (JaimeR): Se incluye decisión que mira si el campo &quot;Fecha 1ª Visita&quot; está informado. Si no lo está se actualizará con la fecha incluida en el evento que se crea.</description>
+    <environments>Default</environments>
     <formulas>
         <description>Los primeros caracteres de StartDate para no recoger el tiempo.</description>
         <name>form_JustStartDate</name>
@@ -80,11 +82,12 @@
         <name>Get_LeadRecord</name>
         <label>Get_LeadRecord</label>
         <locationX>182</locationX>
-        <locationY>575</locationY>
+        <locationY>539</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Decision_FechaPrimeraVisitaField</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -92,18 +95,21 @@
                 <elementReference>$Record.WhoId</elementReference>
             </value>
         </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
         <description>Obtenemos el tipo de registro de evento</description>
         <name>Get_RecordTypeName</name>
         <label>Get_RecordTypeName</label>
         <locationX>380</locationX>
-        <locationY>335</locationY>
+        <locationY>323</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_RecordTypeVisitasComerciales</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -111,16 +117,19 @@
                 <elementReference>$Record.Id</elementReference>
             </value>
         </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Event</object>
         <queriedFields>Id</queriedFields>
         <queriedFields>RecordTypeId</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
         <description>Traemos el campo start date del evento al campo Fecha 1ª visita.</description>
         <name>Update_1VisitaLeadField</name>
         <label>Update_1VisitaLeadField</label>
         <locationX>50</locationX>
-        <locationY>815</locationY>
+        <locationY>755</locationY>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -136,6 +145,44 @@
         </inputAssignments>
         <object>Lead</object>
     </recordUpdates>
-    <startElementReference>Get_RecordTypeName</startElementReference>
+    <start>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_RecordTypeName</targetReference>
+        </connector>
+        <filterLogic>(1 OR 3) AND 2 AND 4</filterLogic>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>1VisitaAgendada</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>WhoId</field>
+            <operator>StartsWith</operator>
+            <value>
+                <stringValue>00Q</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>1Visita</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Estado_evento__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Realizado</stringValue>
+            </value>
+        </filters>
+        <object>Event</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
     <status>Active</status>
 </Flow>
