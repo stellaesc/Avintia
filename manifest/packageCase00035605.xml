@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<types>
+		<members>Account.Medio_de_conocimiento__c</members>
+		<members>Lead.Medio_de_conocimiento__c</members>
+		<members>Opportunity.Medio_de_conocimiento__c</members>
+		<name>CustomField</name>
+	</types>
+	<types>
+		<members>Medio_de_conocimiento</members>
+		<name>GlobalValueSet</name>
+	</types>
+	<version>58.0</version>
+</Package>
