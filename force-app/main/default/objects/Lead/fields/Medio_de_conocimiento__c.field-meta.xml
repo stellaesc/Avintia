@@ -32,6 +32,10 @@
             <valueName>WEBS GRUPO AVINTIA</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>INTERNET PROPIOS</controllingFieldValue>
+            <valueName>WEB PROMOCIÓN</valueName>
+        </valueSettings>
+        <valueSettings>
             <controllingFieldValue>ACCIONES ESPECIALES</controllingFieldValue>
             <valueName>ACCIÓN CENTRO COMERCIAL</valueName>
         </valueSettings>
