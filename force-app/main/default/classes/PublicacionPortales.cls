@@ -395,7 +395,7 @@ public class PublicacionPortales{
         return URLFinal;	
     }
     /**
-     * @description 
+     * @description devuelve url del contentVersion
      * @param cv 
      * @return  `string`
      */
