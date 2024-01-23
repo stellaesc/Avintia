@@ -30,17 +30,20 @@
         component.set('v.isCargando',true);
         if(component.get("v.record.WebAvinita__c"))
         {
-            
             var action= component.get("c.publicarWebAvintia");
         	action.setParams({PromoId:component.get("v.recordId"),esPrueba:"true"});
             
             var action1 = component.get("c.UpdateCurrWeb");
        		action1.setParams({Prom:component.get("v.record")});
-        	            
+            
            var self = this; 
     		action.setCallback(this, function(actionResult) {
+                var state = actionResult.getState();
         	var resultado= actionResult.getReturnValue();
-            if(resultado=='OK'){
+                var arrayDeCadenas = resultado.split("|");
+                console.log(arrayDeCadenas[0]);
+                console.log(arrayDeCadenas[1]); 
+            if(arrayDeCadenas[0]=='OK'){
                 let button = component.find('disablebuttonid');
     			button.set('v.disabled',false);
                 component.set('v.isCargando',false);
@@ -51,8 +54,6 @@
                 "title": "",
                 "message": "La promoción se ha publicado correctamente en el entorno",
             	}); 
-                
-                
             }
             else
             {
@@ -70,8 +71,7 @@
                 "message": errMessage,
             	}); 
             }
-                
-           
+                //$A.enqueueAction(action); 
         });
             $A.enqueueAction(action); 
         }
@@ -86,7 +86,6 @@
             }); 
         }
         action1.setCallback(this, function(actionResult) {
-            var state = response.getState();
             var result = actionResult.getReturnValue();
           	if(result === "OK"){
                 component.set('v.isCargando', false);

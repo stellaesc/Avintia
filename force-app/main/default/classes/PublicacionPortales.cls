@@ -1,10 +1,21 @@
+/**
+ * Controlador BotonPublicar
+ * FECHA            AUTOR           DESCRIPCION
+ * 23/01/2024       LCS             Modified. Modifica salida publicarWebAvintia para devoler también el xml generado.
+ * @author Leadclic Solutions S.L.
+ * @date 23/01/2024
+ */
 public class PublicacionPortales{	
 
     public static Integer WEB_AVINTIA = 0;
     public static Integer WEB_IDEALISTA = 1;
     public static Integer WEB_FOTOCASA = 2;
 
-    	
+    /**
+     * 
+     * @return  `Profile`
+     * @exception 
+     */	
     @AuraEnabled	
     public static Profile getProfileInfo(){	
           try{	
@@ -13,7 +24,11 @@ public class PublicacionPortales{
             	throw new AuraHandledException(e.getMessage()); 	
           }	
     }	
-    	
+    /**
+     * @description update promociones de idealista
+     * @param Prom 
+     * @return  `String`
+     */	
     @AuraEnabled	
     public static String UpdateCurrIdea(Promocion__c Prom){	
         String result;	
@@ -33,8 +48,13 @@ public class PublicacionPortales{
             result = 'ERROR ///';	
         }	
         return result;	
-    }	
-    	
+    }
+    
+    /**
+     * @description update promociones de avintia
+     * @param Prom Promocion
+     * @return  `String`
+     */
 	@AuraEnabled	
     public static String UpdateCurrWeb(Promocion__c Prom){	
         
@@ -51,7 +71,11 @@ public class PublicacionPortales{
         }	
         return result;
     }	
-    	
+    /**
+     * @description update promociones de fotocasa
+     * @param Prom Proomcion
+     * @return  `String`
+     */
     @AuraEnabled	
     public static String UpdateCurrFotoC(Promocion__c Prom){	
         String result;	
@@ -70,7 +94,14 @@ public class PublicacionPortales{
             result = 'ERROR ///';	
         }	
         return result;	
-    }  	
+    }
+
+    /**
+     * @description Genera un xml con los datos de la promocion y lo publica en la web de avintia
+     * @param PromoId Id de la promomocion
+     * @param esPrueba Booleano para saber donde publicar
+     * @return String
+     */
     	
     @AuraEnabled	
     public static string publicarWebAvintia(Id PromoId, Boolean esPrueba) {	
@@ -84,8 +115,6 @@ public class PublicacionPortales{
             String endpointUrl = esPrueba ? propiedadesIntegracion.URL_WEBAVINTIA__c : propiedadesIntegracion.URL_WEBAVINTIA_PRO__c;
             
             mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba);	
-            System.debug('mensajeEnviar: ' + resultado);		
-            	
 
             //send message	
             Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();	
@@ -148,10 +177,16 @@ public class PublicacionPortales{
             throw new GenerarXMLException(e.getMessage());	
         }	
         	
-        return resultado;	
+        return resultado+'|'+mensajeEnviar;	
     }
 
-
+    /**
+     * @description genera/inseta un contentVersion con las propiedades y envia mail a avintia
+     * @param jsonParsed 
+     * @param propiedadesIntegracion 
+     * @param esPrueba 
+     * @return  `boolean`
+     */
     public static boolean generateNewDoc(String jsonParsed, PropiedadesIntegracion__c propiedadesIntegracion, Boolean esPrueba){
         
 
@@ -226,7 +261,13 @@ public class PublicacionPortales{
         //send message	
         return loadNewFile;
     }
-
+    /**
+     * @description genera XML
+     * @param PromoId 
+     * @param esPrueba 
+     * @return  `String`
+     * @exception 
+     */
     @AuraEnabled	
     public static String publicacionPortalesIdealista(Id PromoId, Boolean esPrueba) {	
         PropiedadesIntegracion__c propiedadesIntegracion = PropiedadesIntegracion__c.getInstance();	
@@ -255,6 +296,13 @@ public class PublicacionPortales{
         return resultado;	
     }		
 
+    /**
+     * @description publicar promocion fotocasa
+     * @param PromoId 
+     * @param esPrueba 
+     * @return  `string`
+     * @exception 
+     */
     @AuraEnabled	
     public static string publicacionPortalesFotocasa(Id PromoId, Boolean esPrueba) {	
         PropiedadesIntegracion__c propiedadesIntegracion = PropiedadesIntegracion__c.getInstance();	
@@ -328,8 +376,15 @@ public class PublicacionPortales{
             throw new GenerarXMLException(e.getMessage());	
         }	
         return resultado;	
-    }	
-    //Metodo encargado de montar la URL de las imagenes	
+    }
+
+    /**
+     * @description Metodo encargado de montar la URL de las imagenes	
+     * @param URL 
+     * @param versionId 
+     * @param tipo 
+     * @return  `string`
+     */
     public static string devolverURLDocumento(string URL, string versionId,string tipo) {	
         PropiedadesIntegracion__c propiedades =PropiedadesIntegracion__c.getInstance();	
         String URLFinal='';	
@@ -339,6 +394,11 @@ public class PublicacionPortales{
         }	
         return URLFinal;	
     }
+    /**
+     * @description devuelve url del contentVersion
+     * @param cv 
+     * @return  `string`
+     */
     public static string getPublicLinkCV(ContentVersion cv){
         List<ContentDistribution> cdList = [SELECT DistributionPublicUrl from ContentDistribution where ContentVersionId = :cv.Id order by createdDate desc limit 1];
         if(!cdList.isEmpty()){
@@ -348,9 +408,14 @@ public class PublicacionPortales{
 			return '';
         }
     }
-    
-    //Metodo encargado de montar la URL de las imagenes para FOTOCASA	
-    //Metodo encargado de generar el XML de la promocion de la Web de Avintia	
+    //Metodo encargado de montar la URL de las imagenes para FOTOCASA
+    /**
+     * @description Metodo encargado de generar el XML de la promocion de la Web de Avintia	
+     * @param PromoId 
+     * @param esPrueba 
+     * @return  `string`
+     * @exception 
+     */
     public static string generarXmlPublicacion(Id PromoId, Boolean esPrueba) {	
                 
         string mensaje = '';	
@@ -904,7 +969,6 @@ public class PublicacionPortales{
                     promo.addChildElement('slogan_bloque_final', null, null).addTextNode(promocion.Slogan_Final_Web__c==null? '':promocion.Slogan_Final_Web__c );
                     promo.addChildElement('entradilla_web', null, null).addTextNode(promocion.Descripcion_final_Web__c==null? '':promocion.Descripcion_final_Web__c );
                 }
-				System.debug(doc.toXmlString());
                 Blob blobMensaje = Blob.valueOf(doc.toXmlString());	
                 mensaje = Utils.blobToString(blobMensaje,'UTF-8');	
             }	
@@ -924,6 +988,12 @@ public class PublicacionPortales{
         }	
         return URLFinal;	
     }*/	
+    /**
+     * @description generar xml para publicacion fotocasa
+     * @param PromoId 
+     * @return  `string`
+     * @exception 
+     */
      public static string  generarFotocasa(ID PromoId) {	
         Set<id> setContentDocumentTipologia = new Set<id>();	
         List<ContentDocumentLink> linkTipologia = null;	
