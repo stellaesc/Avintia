@@ -480,7 +480,8 @@ public class PublicacionPortales{
             //Obtener la id de los archivos (Imagenes) que están relacionados con las promociones
             List<ContentDocumentLink> linkPromocion = [SELECT Id, ContentDocumentId, LinkedEntityId  
                                                        FROM ContentDocumentLink
-                                                       WHERE LinkedEntityId in :lIds];
+                                                       WHERE LinkedEntityId in :lIds
+                                                       ORDER BY ContentDocument.LatestPublishedVersion.Posicion__c ASC];
             for(ContentDocumentLink cdl : linkPromocion){ 
                 setContentDocument.add(cdl.contentDocumentId);
             }
