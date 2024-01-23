@@ -84,8 +84,8 @@ public class PublicacionPortales{
             String endpointUrl = esPrueba ? propiedadesIntegracion.URL_WEBAVINTIA__c : propiedadesIntegracion.URL_WEBAVINTIA_PRO__c;
             
             mensajeEnviar = generarXmlPublicacion(PromoId, esPrueba);	
-            System.debug('mensajeEnviar: ' + resultado);		
-            	
+            System.debug('mensajeEnviar: ' + resultado);
+            System.debug('mensajeEnviar: ' + mensajeEnviar);		
 
             //send message	
             Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();	
@@ -148,7 +148,7 @@ public class PublicacionPortales{
             throw new GenerarXMLException(e.getMessage());	
         }	
         	
-        return resultado;	
+        return resultado+'|'+mensajeEnviar;	
     }
 
 
@@ -904,7 +904,7 @@ public class PublicacionPortales{
                     promo.addChildElement('slogan_bloque_final', null, null).addTextNode(promocion.Slogan_Final_Web__c==null? '':promocion.Slogan_Final_Web__c );
                     promo.addChildElement('entradilla_web', null, null).addTextNode(promocion.Descripcion_final_Web__c==null? '':promocion.Descripcion_final_Web__c );
                 }
-				System.debug(doc.toXmlString());
+				System.debug('doc.toXmlString() :: '+doc.toXmlString());
                 Blob blobMensaje = Blob.valueOf(doc.toXmlString());	
                 mensaje = Utils.blobToString(blobMensaje,'UTF-8');	
             }	
