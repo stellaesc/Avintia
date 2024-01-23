@@ -51,7 +51,7 @@ public class PublicacionPortales{
     }
     
     /**
-     * 
+     * @description update promociones de avintia
      * @param Prom Promocion
      * @return  `String`
      */
@@ -72,7 +72,7 @@ public class PublicacionPortales{
         return result;
     }	
     /**
-     * 
+     * @description update promociones de fotocasa
      * @param Prom Proomcion
      * @return  `String`
      */
@@ -181,7 +181,7 @@ public class PublicacionPortales{
     }
 
     /**
-     * @description 
+     * @description genera/inseta un contentVersion con las propiedades y envia mail a avintia
      * @param jsonParsed 
      * @param propiedadesIntegracion 
      * @param esPrueba 
@@ -262,7 +262,7 @@ public class PublicacionPortales{
         return loadNewFile;
     }
     /**
-     * 
+     * @description genera XML
      * @param PromoId 
      * @param esPrueba 
      * @return  `String`
@@ -297,7 +297,7 @@ public class PublicacionPortales{
     }		
 
     /**
-     * 
+     * @description publicar promocion fotocasa
      * @param PromoId 
      * @param esPrueba 
      * @return  `string`
@@ -988,6 +988,12 @@ public class PublicacionPortales{
         }	
         return URLFinal;	
     }*/	
+    /**
+     * @description generar xml para publicacion fotocasa
+     * @param PromoId 
+     * @return  `string`
+     * @exception 
+     */
      public static string  generarFotocasa(ID PromoId) {	
         Set<id> setContentDocumentTipologia = new Set<id>();	
         List<ContentDocumentLink> linkTipologia = null;	
