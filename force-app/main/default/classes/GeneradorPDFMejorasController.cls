@@ -25,13 +25,11 @@ public with sharing class GeneradorPDFMejorasController {
         this.opp = [Select Id, Promocion__c, FormaPagoMejoras__c from Opportunity where Id = :oppAux limit 1];
         this.FormaPagoMejoras = this.opp.FormaPagoMejoras__c;
         this.lstOppLI = [SELECT Product2.Tipo_de_inmueble__c FROM OpportunityLineItem where OpportunityId = :this.opp.Id AND Product2.Tipologia_Vivienda_Garaje_Trastero_Local__c = 'Vivienda'];
-        System.debug('setTipoInmueble :: '+this.lstOppLI);
         Set<Id> setTipoInmueble = new Set<Id>();
         for(OpportunityLineItem o: this.lstOppLI){
             setTipoInmueble.add(o.Product2.Tipo_de_inmueble__c);
         }
         this.lImpTipoInmueble = [SELECT Id, MejoraPadre__c, Precio__c, DescripcionMejora__c, Name FROM Mejora__c WHERE ID IN(Select Mejora__c from MejorasTiposInmueble__c where TipoInmueble__c IN :setTipoInmueble AND Mejora__r.FechaLimiteContratacion__c > TODAY AND Mejora__r.Activa__c=TRUE)];
-        System.debug('query lImpTipoInmueble :: '+This.lImpTipoInmueble);
         List<String> lstIdPadre = new List<String>();
         List<String> lstImpVivienda = new List<String>();
         for(Mejora__c mi: this.lImpTipoInmueble){
@@ -40,33 +38,25 @@ public with sharing class GeneradorPDFMejorasController {
         }
         
         this.lImpVivienda = [SELECT Mejora__r.Id, Mejora__r.MejoraPadre__c, Precio__c, Mejora__r.DescripcionMejora__c, Mejora__r.Name from MejorasViviendas__c where Vivienda__c IN (SELECT Product2Id FROM OpportunityLineItem where OpportunityId = :this.opp.Id AND Product2.Tipologia_Vivienda_Garaje_Trastero_Local__c = 'Vivienda')AND Mejora__r.FechaLimiteContratacion__c > TODAY AND Mejora__r.Activa__c=TRUE];
-        System.debug('query lImpVivienda :: '+this.lImpVivienda);
         for(MejorasViviendas__c mi: this.lImpVivienda){
             lstIdPadre.add(mi.Mejora__r.MejoraPadre__c);
             lstImpVivienda.add(mi.Mejora__c);
         }
         
-        System.debug('lstImpVivienda : '+lstImpVivienda);
         this.lImp = [SELECT Id, MejoraPadre__c, Precio__c, DescripcionMejora__c, Name from Mejora__c where Promocion__c = :this.opp.Promocion__c AND ((MejoraPadre__c=NULL AND Id IN :lstIdPadre) OR Id IN :lstImpVivienda)];        
         for(Mejora__c m: this.lImp){
             for(MejorasViviendas__c mi: this.lImpVivienda){
                 if(m.Id == mi.Mejora__c){
-                    system.debug('precio :: '+mi.Precio__c);
                     m.Precio__c = mi.Precio__c;
                 }
             }
         }
-        system.debug('TEST CONTENT MAP 1 : ' + this.lImp);
         Promocion__c promo = [SELECT Tipo_via__c, Nombre_via__c, Id, Name, Provincia__c, Localidad__r.Name, N_Via__c, Comercializa__c FROM Promocion__c WHERE Id = :this.opp.Promocion__c LIMIT 1];
-        System.debug('lImpTipoInmueble : '+lImpTipoInmueble);
-        system.debug('promo ' + promo);
         List<MejorasTiposInmueble__c> auxLstTipoInmueble = [Select Precio__c, Mejora__c from MejorasTiposInmueble__c where Mejora__c IN :lImpTipoInmueble]; 
         this.promocion = promo;
-        system.debug('auxLstTipoInmueble :: '+auxLstTipoInmueble);
         for(Mejora__c m: this.lImpTipoInmueble){
             for(MejorasTiposInmueble__c mi: auxLstTipoInmueble){
                 if(m.Id == mi.Mejora__c){
-                    system.debug('precio :: '+mi.Precio__c);
                     m.Precio__c = mi.Precio__c;
                 }
             }
@@ -88,10 +78,6 @@ public with sharing class GeneradorPDFMejorasController {
             this.enterRecIterate2(mapImpIds.get(key).Id);
         }
         
-        for(Id key :mejorasMappedByMejoraHoja2.keySet()){
-            system.debug('TEST CONTENT MAP 3 : ' + key + ' - ' + mejorasMappedByMejoraHoja2.get(key));
-        }
-        System.debug('test : '+test);
         for(Id key: mejorasMappedByMejoraHoja2.keySet()){
             for(WrapperMejorasElement2 t: mejorasMappedByMejoraHoja2.get(key)){
                 for(Id key2: mejorasMappedByMejoraHoja2.keySet()){
@@ -102,13 +88,8 @@ public with sharing class GeneradorPDFMejorasController {
                     && mejorasMappedByMejoraHoja2.get(key)!= null
                     && mejorasMappedByMejoraHoja2.get(key).size()==1 
                     ){
-                    
-                        System.debug('test.get(key) : '+test.get(key2));
-                        System.debug('entra t : '+t);
                         List<String> padreId = getKey(test, key).split('-');
                         t.nivel=2;
-                        System.debug('posicion hijo : '+padreId[1]);
-                        System.debug(mejorasMappedByMejoraHoja2.get(key2).size());
                         if(Integer.valueOf(padreId[1])!=mejorasMappedByMejoraHoja2.get(key2).size()-1){
                             mejorasMappedByMejoraHoja2.get(key2).add(Integer.valueOf(padreId[1])+1, t);
                         }else{
@@ -125,7 +106,6 @@ public with sharing class GeneradorPDFMejorasController {
         List<List<WrapperMejorasElement2>> lstLstMejoras2 = new List<List<WrapperMejorasElement2>>();
         Integer contadorFamilia = 1;
         for(Id key :mejorasMappedByMejoraHoja2.keySet()){
-            system.debug('TEST CONTENT MAP 4 : ' + key + ' - ' + mejorasMappedByMejoraHoja2.get(key));
             lstLstMejoras2.add(mejorasMappedByMejoraHoja2.get(key));
             Double contador = 0;
             for(WrapperMejorasElement2 e: mejorasMappedByMejoraHoja2.get(key)){
@@ -185,7 +165,6 @@ public with sharing class GeneradorPDFMejorasController {
         WrapperMejorasElement2 mejoraElementWrapped = new WrapperMejorasElement2();
         
         mejoraElementWrapped.DescripcionMejora = imp.DescripcionMejora__c!=NULL?imp.Name+' - '+ imp.DescripcionMejora__c:imp.Name;
-        system.debug('imp : '+imp);
         mejoraElementWrapped.Precio = imp.Precio__c;
         mejoraElementWrapped.Name = imp.Name;
         mejoraElementWrapped.Id = imp.Id;
