@@ -1,13 +1,14 @@
+/**
+ ** Controlador GeneradorPDFMejoras
+ ** FECHA            AUTOR           DESCRIPCION
+ ** 26/10/2023       LCS             Created.
+ ** 30/01/2024       LCS             Modified. Modifica salida GeneradorPDFMejoras lista de wrappers.
+ ** @author Leadclic Solutions S.L.
+ */
 @IsTest
 public class GeneradorPDFMejorasControllerTest {
     @TestSetup
     public static void makeData(){
-        /*CNO__c cnoObj = new CNO__c(
-                Codigo__c = '1212',
-                Name = 'CNO TEST',
-                FullName__c = 'CNO TEST'
-        );
-        insert cnoObj;*/
         Profile pf1 = [SELECT Id FROM Profile WHERE Name='Standard User' LIMIT 1]; 
         String orgId=UserInfo.getOrganizationId(); 
         String dateString=String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','') ;
@@ -23,13 +24,7 @@ public class GeneradorPDFMejorasControllerTest {
                          LocaleSidKey = 'en_US', 
                          LanguageLocaleKey = 'en_US', 
                          ProfileId = pf1.Id
-                        ); 
-        /*Pais__c pais = new Pais__c(Name = 'España', Codigo_ISO2__c = 'ES', Codigo_ISO3__c = 'ESP', OLDID__c = '170', Codigo_ISO3_num__c = 123);
-        insert pais;
-        Account a = new Account(Name = 'Test', Tipo_de_documento__c = 'NIF', N_Documento__c = '12345678P', 
-        AccountSource='PUNTO DE VENTA', Estado_comercial__c='Cliente Gestión', Nacionalidad__c=pais.Id, 
-         Tipo_de_sociedad__c='TS01', DP_Pais__c=pais.Id, Tipo_de_via_FISCAL__c='Calle', 
-         Nombre_de_via_FISCAL__c='TEST ', N_via_FISCAL__c=1, localidad);*/
+                        );
 
          Pais__c pais = new Pais__c(Name = 'España', Codigo_ISO3__c = 'ESP');
         insert pais;
@@ -74,7 +69,6 @@ public class GeneradorPDFMejorasControllerTest {
         p.Precio__c = 45000;
         p.Promocion__c = promocion2.Id;
         p.Oportunidad__c = o.Id;
-        //p.Tipologia_Vivienda_Garaje_Trastero_Local__c = 'Vivienda';
         insert p;  
 
         PriceBookEntry pbe = new PriceBookEntry();

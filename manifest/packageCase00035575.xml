@@ -18,6 +18,10 @@
 		<name>Flow</name>
 	</types>
 	<types>
+		<members>Vivienda</members>
+		<name>CustomLabel</name>
+	</types>
+	<types>
 		<members>OpportunitySeleccionarMejora</members>
 		<members>Opportunity_CrearFacturasMejoras</members>
 		<members>Opportunity_Triggered_After_Insert</members>

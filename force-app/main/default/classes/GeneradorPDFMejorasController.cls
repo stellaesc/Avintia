@@ -1,30 +1,41 @@
+/**
+ ** Controlador GeneradorPDFMejoras
+ ** FECHA            AUTOR           DESCRIPCION
+ ** 26/10/2023       LCS             Created.
+ ** 30/01/2024       LCS             Modified. Modifica salida GeneradorPDFMejoras lista de wrappers.
+ ** @author Leadclic Solutions S.L.
+ */
 public with sharing class GeneradorPDFMejorasController {
 
+    // Related Improvement Records
     private final Opportunity opp;
     public static List<WrapperMejorasElement2> lWrapperMejorasNivel = new List<WrapperMejorasElement2>();
-    // Related Improvement Records
     private final List<MejoraOportunidad__c> lImpOpp;
     private final List<Mejora__c> lImpTipoInmueble;
     private final List<OpportunityLineItem> lstOppLI;
     private final List<MejorasViviendas__c> lImpVivienda;
     private final List<Mejora__c> lImp;
-    private final List<WrapperMejorasElement> lMejorasParsed = new List<WrapperMejorasElement>();
     public Id oppAux{get; set;}
-    private Map<Id,List<WrapperMejorasElement>> mejorasMappedByMejoraHoja = new Map<Id,List<WrapperMejorasElement>>();
     public Map<Id,List<WrapperMejorasElement2>> mejorasMappedByMejoraHoja2;
     public static List<List<WrapperMejorasElement2>> lstLstMejoras{GET;SET;}
     public Promocion__c promocion{get;set;}
     public String FormaPagoMejoras{get;set;}
     public StaticResource sr {get;set;}
     private Map<Id, Mejora__c> mapImpIds;
+    private String vivienda;
+
+    /**
+     * @description constructor de la clase 
+     */
     public GeneradorPDFMejorasController(){
         
         mejorasMappedByMejoraHoja2 = new Map<Id,List<WrapperMejorasElement2>>();
-        //Opportunity oppAux = (Opportunity)stdController.getRecord();
+        vivienda = System.Label.Vivienda;
+        System.debug('vivienda : '+vivienda);
         oppAux= ApexPages.CurrentPage().getParameters().get('id');
-        this.opp = [Select Id, Promocion__c, FormaPagoMejoras__c from Opportunity where Id = :oppAux limit 1];
+        this.opp = [Select Id, Promocion__c, FormaPagoMejoras__c from Opportunity where Id = :oppAux LIMIT 1];
         this.FormaPagoMejoras = this.opp.FormaPagoMejoras__c;
-        this.lstOppLI = [SELECT Product2.Tipo_de_inmueble__c FROM OpportunityLineItem where OpportunityId = :this.opp.Id AND Product2.Tipologia_Vivienda_Garaje_Trastero_Local__c = 'Vivienda'];
+        this.lstOppLI = [SELECT Product2.Tipo_de_inmueble__c FROM OpportunityLineItem where OpportunityId = :this.opp.Id AND Product2.Tipologia_Vivienda_Garaje_Trastero_Local__c = :vivienda];
         Set<Id> setTipoInmueble = new Set<Id>();
         for(OpportunityLineItem o: this.lstOppLI){
             setTipoInmueble.add(o.Product2.Tipo_de_inmueble__c);
@@ -37,7 +48,7 @@ public with sharing class GeneradorPDFMejorasController {
             
         }
         
-        this.lImpVivienda = [SELECT Mejora__r.Id, Mejora__r.MejoraPadre__c, Precio__c, Mejora__r.DescripcionMejora__c, Mejora__r.Name from MejorasViviendas__c where Vivienda__c IN (SELECT Product2Id FROM OpportunityLineItem where OpportunityId = :this.opp.Id AND Product2.Tipologia_Vivienda_Garaje_Trastero_Local__c = 'Vivienda')AND Mejora__r.FechaLimiteContratacion__c > TODAY AND Mejora__r.Activa__c=TRUE];
+        this.lImpVivienda = [SELECT Mejora__r.Id, Mejora__r.MejoraPadre__c, Precio__c, Mejora__r.DescripcionMejora__c, Mejora__r.Name from MejorasViviendas__c where Vivienda__c IN (SELECT Product2Id FROM OpportunityLineItem where OpportunityId = :this.opp.Id AND Product2.Tipologia_Vivienda_Garaje_Trastero_Local__c = :vivienda)AND Mejora__r.FechaLimiteContratacion__c > TODAY AND Mejora__r.Activa__c=TRUE];
         for(MejorasViviendas__c mi: this.lImpVivienda){
             lstIdPadre.add(mi.Mejora__r.MejoraPadre__c);
             lstImpVivienda.add(mi.Mejora__c);
@@ -71,9 +82,13 @@ public with sharing class GeneradorPDFMejorasController {
         }catch(Exception e){
             system.debug('error : '+e.getMessage());
         }
-            
-            
-        mapImpIds = new Map<Id, Mejora__c>(this.lImp);
+        
+        mapImpIds = new Map<Id, Mejora__c>();
+        for(Mejora__c mejora : this.lImp){
+            if(!mapImpIds.containsKey(mejora.Id)){
+                mapImpIds.put(mejora.Id, mejora);
+            }
+        }
         for(Id key: mapImpIds.keySet()){
             this.enterRecIterate2(mapImpIds.get(key).Id);
         }
@@ -83,19 +98,19 @@ public with sharing class GeneradorPDFMejorasController {
                 for(Id key2: mejorasMappedByMejoraHoja2.keySet()){
                     
                     if(t.IdPadre!=null 
-                    && test.get(key2) != null
-                    && test.get(key2).contains(t.IdPadre) 
+                    && mMejoras.get(key2) != null
+                    && mMejoras.get(key2).contains(t.IdPadre) 
                     && mejorasMappedByMejoraHoja2.get(key)!= null
                     && mejorasMappedByMejoraHoja2.get(key).size()==1 
                     ){
-                        List<String> padreId = getKey(test, key).split('-');
+                        List<String> padreId = getKey(mMejoras, key).split('-');
                         t.nivel=2;
                         if(Integer.valueOf(padreId[1])!=mejorasMappedByMejoraHoja2.get(key2).size()-1){
                             mejorasMappedByMejoraHoja2.get(key2).add(Integer.valueOf(padreId[1])+1, t);
                         }else{
                             mejorasMappedByMejoraHoja2.get(key2).add(t);
                         }
-                        test.remove(t.IdPadre);
+                        mMejoras.remove(t.IdPadre);
                         mejorasMappedByMejoraHoja2.remove(t.IdPadre);
                     } 
                 }
@@ -129,23 +144,17 @@ public with sharing class GeneradorPDFMejorasController {
         return (new Set<Object>(source)).contains(target);
     }
 
-    private static String getKey(Map<Id, List<String>> test, String id){
-        for(Id key: test.keySet()){
-            if(test.get(key).contains(id) && key != id){
-                return key+'-'+test.get(key).indexOf(id);
+    private static String getKey(Map<Id, List<String>> mMejoras, String id){
+        for(Id key: mMejoras.keySet()){
+            if(mMejoras.get(key).contains(id) && key != id){
+                return key+'-'+mMejoras.get(key).indexOf(id);
             }
         }
         return null;
     }
- 
-    public class WrapperMejorasElement{
-        String DescripcionMejora;
-        Decimal Precio;
-        String Name;
-        Integer Nivel;
-        Boolean Tabulacion;
-        Boolean NodoOrigen;
-    }
+    /**
+     * @description wrapper que se devuelve a la vf
+     */
     public class WrapperMejorasElement2{
         public Id Id {get;set;}
         public Id IdPadre {get;set;}
@@ -157,9 +166,13 @@ public with sharing class GeneradorPDFMejorasController {
         public String contadorFamilia{get;set;}
     }
     
-    Map<Id, List<String>> test = new Map<Id, List<String>>();
-    List<String> test2 = new List<String>();
+    Map<Id, List<String>> mMejoras = new Map<Id, List<String>>();
+    List<String> lIdMejoras = new List<String>();
 
+    /**
+     * @description metodo encargado de estructurar la lista que devolvemos
+     * @param impId 
+     */
     private void enterRecIterate2(Id impId){
         Mejora__c imp = mapImpIds.get(impId);
         WrapperMejorasElement2 mejoraElementWrapped = new WrapperMejorasElement2();
@@ -172,33 +185,33 @@ public with sharing class GeneradorPDFMejorasController {
         if(imp.MejoraPadre__c == null){
             mejoraElementWrapped.nivel=0;
             List<WrapperMejorasElement2> lWrapperMejorasNivel = mejorasMappedByMejoraHoja2.get(imp.Id);
-            List<String> test2 = test.get(imp.Id);
-            if(lWrapperMejorasNivel != null && test2 != null){
+            List<String> lIdMejoras = mMejoras.get(imp.Id);
+            if(lWrapperMejorasNivel != null && lIdMejoras != null){
                 lWrapperMejorasNivel.add(mejoraElementWrapped);
-                test2.add(imp.Id);
+                lIdMejoras.add(imp.Id);
             }
             else{
                 lWrapperMejorasNivel = new List<WrapperMejorasElement2>{mejoraElementWrapped};
-                test2 = new List<String>{imp.Id};
+                lIdMejoras = new List<String>{imp.Id};
             }
             mejorasMappedByMejoraHoja2.put(imp.Id, lWrapperMejorasNivel);
-            test.put(imp.Id, test2);
+            mMejoras.put(imp.Id, lIdMejoras);
         }else{
             mejoraElementWrapped.IdPadre = imp.MejoraPadre__c;
             mejoraElementWrapped.nivel = 1;
             List<WrapperMejorasElement2> lWrapperMejorasNivel = mejorasMappedByMejoraHoja2.get(imp.MejoraPadre__c);
-            List<String> test2 = test.get(imp.MejoraPadre__c);
-            if(lWrapperMejorasNivel != null && test2 != null){
+            List<String> lIdMejoras = mMejoras.get(imp.MejoraPadre__c);
+            if(lWrapperMejorasNivel != null && lIdMejoras != null){
                 lWrapperMejorasNivel.add(mejoraElementWrapped);
-                test2.add(imp.Id);
+                lIdMejoras.add(imp.Id);
             }
             else{
                 lWrapperMejorasNivel = new List<WrapperMejorasElement2>{mejoraElementWrapped};
-                test2 = new List<String>{imp.Id};
+                lIdMejoras = new List<String>{imp.Id};
                 
             }
             mejorasMappedByMejoraHoja2.put(imp.MejoraPadre__c, lWrapperMejorasNivel);
-            test.put(imp.MejoraPadre__c, test2);
+            mMejoras.put(imp.MejoraPadre__c, lIdMejoras);
         }
         
         return;
