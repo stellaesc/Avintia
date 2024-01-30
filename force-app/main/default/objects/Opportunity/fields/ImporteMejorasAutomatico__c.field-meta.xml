@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ImporteMejorasAutomatico__c</fullName>
+    <description>Rollup summary sobre Mejoras Oportunidad</description>
+    <externalId>false</externalId>
+    <label>Importe mejoras automático</label>
+    <summarizedField>MejoraOportunidad__c.Precio_Total__c</summarizedField>
+    <summaryForeignKey>MejoraOportunidad__c.Opportunity__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

@@ -178,7 +178,7 @@
             <assignToReference>Var_TotalPrice</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>Loop_Mejoras.PrecioTotal__c</elementReference>
+                <elementReference>Loop_Mejoras.Precio_Total__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -787,12 +787,12 @@
         <label>Filter_MejorasFactSeparada_01</label>
         <locationX>710</locationX>
         <locationY>1490</locationY>
-        <assignNextValueToReference>currentItem_Filter_MejorasFactSeparada_01</assignNextValueToReference>
+        <assignNextValueToReference>currentItem_Filter_MejorasFactSeparada_01_0</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_MejorasOportunidad</collectionReference>
         <conditionLogic>and</conditionLogic>
         <conditions>
-            <leftValueReference>currentItem_Filter_MejorasFactSeparada_01.IVANumero__c</leftValueReference>
+            <leftValueReference>currentItem_Filter_MejorasFactSeparada_01_0.IVANumero__c</leftValueReference>
             <operator>EqualTo</operator>
             <rightValue>
                 <elementReference>Loop_IVAFactSeparada</elementReference>
@@ -831,12 +831,12 @@
         <label>Filter_MejorasFactUnica_01</label>
         <locationX>1150</locationX>
         <locationY>1166</locationY>
-        <assignNextValueToReference>currentItem_Filter_MejorasFactSeparada_01</assignNextValueToReference>
+        <assignNextValueToReference>currentItem_Filter_MejorasFactSeparada_01_0</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_MejorasOportunidad</collectionReference>
         <conditionLogic>and</conditionLogic>
         <conditions>
-            <leftValueReference>currentItem_Filter_MejorasFactSeparada_01.IVANumero__c</leftValueReference>
+            <leftValueReference>currentItem_Filter_MejorasFactSeparada_01_0.IVANumero__c</leftValueReference>
             <operator>EqualTo</operator>
             <rightValue>
                 <elementReference>Loop_IVAFactUnica</elementReference>
@@ -1021,7 +1021,10 @@
             <label>Sí</label>
         </rules>
     </decisions>
-    <description>Subflujo para crear facturas de mejoras de la oportunidad.</description>
+    <description>Subflujo para crear facturas de mejoras de la oportunidad.
+--
+V4: Sustitución campo PrecioTotal__c por Precio_Total__c</description>
+    <environments>Default</environments>
     <formulas>
         <description>Formula que devuelve la fecha de hoy más los meses puestos en la promoción.</description>
         <name>For_FechaSegundaFactura</name>
@@ -1046,23 +1049,23 @@
         <description>Formula que devuelve el importe de la factura en función de la participación del participante.</description>
         <name>For_PrecioLineaFactSeparada</name>
         <dataType>Currency</dataType>
-        <expression>IF({!Var_TotalPrice} &gt; {!Get_Opportunity.Promocion__r.LimiteImporteMejoras__c}, {!Loop_MejorasFactSeparada_02.PrecioTotal__c} * ({!Loop_Participantes_02.Porcentaje_de_participacion__c} / 100) * 0.5 ,
-{!Loop_MejorasFactSeparada_02.PrecioTotal__c} * ({!Loop_Participantes_02.Porcentaje_de_participacion__c} / 100) )</expression>
+        <expression>IF({!Var_TotalPrice} &gt; {!Get_Opportunity.Promocion__r.LimiteImporteMejoras__c}, {!Loop_MejorasFactSeparada_02.Precio_Total__c} * ({!Loop_Participantes_02.Porcentaje_de_participacion__c} / 100) * 0.5 ,
+{!Loop_MejorasFactSeparada_02.Precio_Total__c} * ({!Loop_Participantes_02.Porcentaje_de_participacion__c} / 100) )</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
         <description>Formula que devuelve el precio de la linea de la factura en función de si supera el limite el precio total o no.</description>
         <name>For_PrecioLineaFactUnica</name>
         <dataType>Currency</dataType>
-        <expression>IF({!Var_TotalPrice} &gt; {!Get_Opportunity.Promocion__r.LimiteImporteMejoras__c}, {!Loop_MejorasFactUnica_02.PrecioTotal__c} * 0.5 ,
- {!Loop_MejorasFactUnica_02.PrecioTotal__c} )</expression>
+        <expression>IF({!Var_TotalPrice} &gt; {!Get_Opportunity.Promocion__r.LimiteImporteMejoras__c}, {!Loop_MejorasFactUnica_02.Precio_Total__c} * 0.5 ,
+ {!Loop_MejorasFactUnica_02.Precio_Total__c} )</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
         <description>Formula que devuelve el precio total de la mejora actual por participante.</description>
         <name>For_PrecioMejoraActualPorParticipante</name>
         <dataType>Currency</dataType>
-        <expression>{!Loop_MejorasFactSeparada_01.PrecioTotal__c} * ({!Loop_Participantes.Porcentaje_de_participacion__c} / 100)</expression>
+        <expression>{!Loop_MejorasFactSeparada_01.Precio_Total__c} * ({!Loop_Participantes.Porcentaje_de_participacion__c} / 100)</expression>
         <scale>2</scale>
     </formulas>
     <interviewLabel>Crear Facturas de mejora {!$Flow.CurrentDateTime}</interviewLabel>
@@ -1378,9 +1381,9 @@
             <targetReference>Get_Opportunity</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
-        <name>currentItem_Filter_MejorasFactSeparada_01</name>
+        <name>currentItem_Filter_MejorasFactSeparada_01_0</name>
         <dataType>SObject</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
