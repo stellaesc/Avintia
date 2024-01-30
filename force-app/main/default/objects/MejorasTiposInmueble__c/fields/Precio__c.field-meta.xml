@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Precio__c</fullName>
+    <description>Precio de la Mejora Tipo de Inmueble</description>
     <externalId>false</externalId>
     <label>Precio</label>
     <precision>18</precision>
