@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-<types>
+	<types>
 		<members>MejoraOportunidad__c.PrecioMejora__c</members>
 		<members>MejoraOportunidad__c.PrecioTotal__c</members>
 		<members>MejoraOportunidad__c.Precio_Total__c</members>
@@ -48,6 +48,10 @@
 	<types>
 		<members>Opportunity.PDFGeneradorMejoras</members>
 		<name>WebLink</name>
+	</types>
+	<types>
+		<members>LogoEjemploPromo</members>
+		<name>StaticResource</name>
 	</types>
 	<version>58.0</version>
 </Package>
