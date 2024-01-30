@@ -1,16 +1,10 @@
 <!--/**
-@description 
-<pre>
-Visual force to create the PDF Opportunity Customer Request Form - PDF_CustomerRequestFormController Clase controladora para sacar información para rellenar el PDF
-<br/>
-FECHA         AUTOR       DESCRIPCIÓN<br/>
-
-15/07/2020    LCS - GMC   Creada.
-
-</pre>
-@author Leadclic Solutions S.L. APS
-@Date 23/10/2023
-*/-->
+ ** Controlador GeneradorPDFMejoras
+ ** FECHA            AUTOR           DESCRIPCION
+ ** 26/10/2023       LCS             Created.
+ ** 30/01/2024       LCS             Modified. Modifica salida GeneradorPDFMejoras lista de wrappers.
+ ** @author Leadclic Solutions S.L.
+ */-->
 <apex:page controller="GeneradorPDFMejorasController" standardStylesheets="false" renderAs="pdf" applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false">
     <html>
         <head>

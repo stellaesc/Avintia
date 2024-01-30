@@ -31,10 +31,11 @@ public with sharing class GeneradorPDFMejorasController {
         
         mejorasMappedByMejoraHoja2 = new Map<Id,List<WrapperMejorasElement2>>();
         vivienda = System.Label.Vivienda;
-        System.debug('vivienda : '+vivienda);
         oppAux= ApexPages.CurrentPage().getParameters().get('id');
         this.opp = [Select Id, Promocion__c, FormaPagoMejoras__c from Opportunity where Id = :oppAux LIMIT 1];
         this.FormaPagoMejoras = this.opp.FormaPagoMejoras__c;
+
+        //Recogemos las mejoras de MejorasViviendas y MejorasInmueble
         this.lstOppLI = [SELECT Product2.Tipo_de_inmueble__c FROM OpportunityLineItem where OpportunityId = :this.opp.Id AND Product2.Tipologia_Vivienda_Garaje_Trastero_Local__c = :vivienda];
         Set<Id> setTipoInmueble = new Set<Id>();
         for(OpportunityLineItem o: this.lstOppLI){
@@ -77,22 +78,26 @@ public with sharing class GeneradorPDFMejorasController {
                 this.lImp.add(m);
             }
         }
+        //Intentamos encontrar la imagen relacionada a la promocion
         try{
             sr= [SELECT Id, Body FROM StaticResource WHERE Name = :promocion.Name.replace(' ','').replace(',','').replace('.','') LIMIT 1];
         }catch(Exception e){
             system.debug('error : '+e.getMessage());
         }
         
+        //Rellenamos el mapa con los mejoras que hemos obtenido
         mapImpIds = new Map<Id, Mejora__c>();
         for(Mejora__c mejora : this.lImp){
             if(!mapImpIds.containsKey(mejora.Id)){
                 mapImpIds.put(mejora.Id, mejora);
             }
         }
+        //Iteramos sobre el metodo encargado de ordenar por padres e hijos
         for(Id key: mapImpIds.keySet()){
             this.enterRecIterate2(mapImpIds.get(key).Id);
         }
         
+        //Reorganizamos el mapa para que incluya a los nietos
         for(Id key: mejorasMappedByMejoraHoja2.keySet()){
             for(WrapperMejorasElement2 t: mejorasMappedByMejoraHoja2.get(key)){
                 for(Id key2: mejorasMappedByMejoraHoja2.keySet()){

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FormaPagoMejoras__c</fullName>
+    <description>Campo auto rellenado en Opportunity_Triggered_After_Insert para ser mostrado en la VF GeneradorPDFMejoras</description>
     <externalId>false</externalId>
     <label>Forma de pago Mejoras</label>
     <required>false</required>

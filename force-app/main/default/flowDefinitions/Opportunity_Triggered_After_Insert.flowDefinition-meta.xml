@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
     <activeVersionNumber>3</activeVersionNumber>
+    <description>Triggered After insert de oportunidad: 
+30/01/24 - Update FormaPagoMejoras__c</description>
+    <masterLabel>Opportunity_Triggered_After Insert</masterLabel>
 </FlowDefinition>
