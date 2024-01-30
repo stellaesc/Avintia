@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+<types>
+		<members>MejoraOportunidad__c.PrecioMejora__c</members>
+		<members>MejoraOportunidad__c.PrecioTotal__c</members>
+		<members>MejoraOportunidad__c.Precio_Total__c</members>
+		<members>MejoraOportunidad__c.Precio__c</members>
+		<members>MejorasTiposInmueble__c.Precio__c</members>
+		<members>MejorasViviendas__c.Precio__c</members>
+		<members>Opportunity.ImporteMejorasAutomatico__c</members>
+		<members>Opportunity.FormaPagoMejoras__c</members>
+		<name>CustomField</name>
+	</types>
+	<types>
+		<members>OpportunitySeleccionarMejora</members>
+		<members>Opportunity_CrearFacturasMejoras</members>
+		<members>Opportunity_Triggered_After_Insert</members>
+		<name>Flow</name>
+	</types>
+	<types>
+		<members>OpportunitySeleccionarMejora</members>
+		<members>Opportunity_CrearFacturasMejoras</members>
+		<members>Opportunity_Triggered_After_Insert</members>
+		<name>FlowDefinition</name>
+	</types>
+	<types>
+		<members>MejoraOportunidad__c-MejorasPromocion Layout</members>
+		<members>Mejora__c-Mejora Layout</members>
+		<members>MejorasTiposInmueble__c-Mejoras-Tipos de inmueble Layout</members>
+		<members>MejorasViviendas__c-Mejoras-Viviendas Layout</members>
+		<members>Opportunity-Facturación por separado layout</members>
+		<members>Opportunity-Opportunity Layout</members>
+		<name>Layout</name>
+	</types>
+	<types>
+		<members>GeneradorPDFMejorasController</members>
+		<members>GeneradorPDFMejorasControllerTest</members>
+		<name>ApexClass</name>
+	</types>
+	<types>
+		<members>GeneradorPDFMejoras</members>
+		<name>ApexPage</name>
+	</types>
+	<types>
+		<members>Opportunity.PDFGeneradorMejoras</members>
+		<name>WebLink</name>
+	</types>
+	<version>58.0</version>
+</Package>
