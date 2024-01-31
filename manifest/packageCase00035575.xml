@@ -9,6 +9,7 @@
 		<members>MejorasViviendas__c.Precio__c</members>
 		<members>Opportunity.ImporteMejorasAutomatico__c</members>
 		<members>Opportunity.FormaPagoMejoras__c</members>
+		<members>MejorasViviendas__c.Precio__c</members>
 		<name>CustomField</name>
 	</types>
 	<types>
@@ -52,6 +53,15 @@
 	<types>
 		<members>LogoEjemploPromo</members>
 		<name>StaticResource</name>
+	</types>
+	<types>
+		<members>Comercial</members>
+		<members>Comercial API</members>
+		<members>Departamento Financiero</members>
+		<members>Departamento Técnico</members>
+		<members>Dirección</members>
+		<members>Director Promociones</members>
+		<name>Profile</name>
 	</types>
 	<version>58.0</version>
 </Package>
