@@ -1,0 +1,328 @@
+<!--/**
+ ** Controlador GeneradorPDFMejoras
+ ** FECHA            AUTOR           DESCRIPCION
+ ** 26/10/2023       LCS             Created.
+ ** 30/01/2024       LCS             Modified. Modifica salida GeneradorPDFMejoras lista de wrappers.
+ ** @author Leadclic Solutions S.L.
+ */-->
+<apex:page controller="GeneradorPDFMejorasController" standardStylesheets="false" renderAs="pdf" applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false">
+    <html>
+        <head>
+            <title>FICHA PERSONALIZACIÓN CON COSTE</title>
+                <style type="text/css"> 
+                    @page:first{
+                        padding:0px;
+                        @top-center{
+                            content: element(pdfTitle);
+                            width:120%;
+                        }
+                        @bottom-center {   
+                            content: element(footer);
+                        } 
+                    }
+                    .detailsPersonalizationHeader{
+                        margin-top: 10px;
+                    }
+                    div.headerFirst{
+                        margin-top : 10px;
+                        padding:0px;
+                        margin-bottom:25px;
+                        position : relative ;
+                        width: 100%;
+                    }
+                    div.HeaderClientData{
+                        position : running(HeaderClientData) ;
+                        width: 100%;
+                        margin-top: 3px;
+                        margin-left: 20px;
+                        margin-right: 20px;
+                    }
+                    .Icono{
+                        text-indent:-8pt;
+                     }
+                    .Icono2{
+                        text-indent:-8pt;
+                     }
+                     div.pdfTitle {
+                        text-align: center; /* Centra el título horizontalmente */
+                        z-index: 1; /* Asegura que el título esté encima de headerFirst */
+                    }
+                    table.tableDate{
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        width: 100%;
+                     }
+                    table.HeaderClientData{
+                        border: 1px solid black; !important
+                        boder-right: 1px;
+                        border-collapse: collapse;
+                        width: 100%;                        
+                     }
+                    table.Promociones{
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        width: 100%;                        
+                     }
+                     table.subTableViviendaData{
+                        border: 0.5px solid black;
+                        table-layout: fixed;
+                        border-collapse: collapse;                      
+                     }
+                     td.tableDateEntry{
+                        border-collapse: collapse;
+                     }
+                     td.tableClientHeaderEntryName{
+                        border: 0.5px solid black;
+                     }
+                     td.tableClientHeaderEntryNameFooter{
+                        border:1px solid black; 
+                        border-bottom: hidden;
+                        border-right: hidden; 
+                        border-left: hidden;
+                     }
+                     td.columnNameDesc{
+                        border: 0.5px solid black;
+                        border-collapse: collapse;                      
+                        text-align: left;
+                        width: 12%;
+                     }
+                     td.titleSubTableHeaderViviendaDataContent{
+                        border: 0.5px solid black;
+                        border-collapse: collapse;
+                        height: 40px;
+                        width: 100%;
+                    }
+                    td.subTableHeaderClientDataViviendaData{
+                        border: 1px solid black;
+                        width: 40%;
+                        height: 70px;
+                    }
+                    td.subTableFooterClientDataViviendaData{
+                        border: 1px solid black;
+                        height: 70px;
+                    }
+                    td.titleSubTableHeaderViviendaDataTitle, th.titleSubTableHeaderViviendaDataTitle{
+                        border: 0.5px solid black;
+                        width: 100%;
+                        height: 40px;
+                        text-align: center;                        
+                     }
+                     td.columnNameDescFooter{
+                        margin-left: 0px;
+                        border: 0.5px solid black;
+                        border-collapse: collapse;
+                    }
+                    td.labelCol{
+                    	width:0%;
+                    }
+                    table.detailList{
+                    	width:100%;
+                    }
+                    td.cabeceraTablasMejoras{
+                        text-align: center; 
+                        width: 7%; 
+                        background-color: #808080;
+                        color:white;
+                    }
+                    td.cabeceraTablasMejorasIntermedio{
+                        text-align: center; 
+                        width: 7%;
+                        background-color: #808080;
+                        color:white;
+                    }
+                    th.cabeceraTablasMejoras{
+                        border: 0.5px solid black;
+                        background-color: #808080; 
+                        color:white;
+                    }
+                    th.column{
+                        background-color: #808080; 
+                        color:white;
+                        border-bottom:none;
+                        width: 10%;
+                    }
+                    td.especialito{
+                        width: 65%;
+                        border: 0.5px solid black;
+                    }
+                    table.totalesContainer{
+                        width:98%;
+                        height:10%;
+                        margin-left:1%;
+                    }
+                    td.totales{
+                        border: 1px solid black;
+                        width: 90%;
+                        display: inline-block;
+                        height: 15px;
+                        margin-left: 5%;
+                    }
+                    td.enunciado{
+                        width: 57%;
+                        text-align: center;
+                    }
+                    table.tableMejoras{
+                        width:100%; 
+                        border-collapse: collapse; 
+                        margin-bottom:2%;
+                    }
+                </style>
+            </head>
+        <body>
+            <div class="pdfTitle">
+                <h2>FICHA PERSONALIZACIÓN CON COSTE</h2>
+            </div>
+            <div class="headerFirst">
+                <table style="text-align: center;" width="100%" >
+                    <tbody>
+                        <table width="100%" >
+                            <tr> 
+                                <td class="Icono" width="40%"><span class="Icono"><img  height="90%" width="60%" align="left" alt="image" src="{!IF(sr != NULL, URLFOR($Resource[promocion.Name]), URLFOR($Resource.LogoEjemploPromo))}"/></span></td>
+                                <td class="Icono" width="40%"><span class="Icono"><img height="90%" width="60%" alt="image" align="right" src="{!IF(promocion.Comercializa__c=='ADI',URLFOR($Resource.LogoAvintia), URLFOR($Resource.LogoAvintia))}"/></span></td>
+                            </tr>
+                        </table>
+                        <table width="100%">
+                            <tr> 
+                                <td width="40%"><span></span></td>
+                                <td width="40%">
+                                    <table class="tableDate" style="text-align: center;">
+                                        <td class="tableDateEntry" width="40%"><span>FECHA</span></td>
+                                        <td class="tableDateEntry" width="40%"><span>{!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}</span></td>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <table class="HeaderClientData" width="100%" >
+                    <tbody>
+                        <tr width="100%">
+                            <td style="border-left: hidden;border-top: hidden;border-bottom: hidden;" class="columnNameDesc">D/Dña.</td>
+                            <td class="tableClientHeaderEntryName" ></td>
+                        </tr>
+                        <tr width="100%">
+                            <td style="border-left: hidden;border-bottom: hidden;" class="columnNameDesc">Con D.N.I.</td>
+                            <td class="tableClientHeaderEntryName" ></td>
+                        </tr>
+                    </tbody>
+                </table>
+                    <table class="HeaderClientData" style="border: 1px solid black; border-top: hidden; border-bottom:hidden;" >
+                        <tbody>
+                            <tr>
+                                <td style="border-left: hidden" class="columnNameDesc"></td>
+                                <td class="subTableHeaderClientDataViviendaData" style="text-align: center">como adquiriente de la vivienda</td>
+                                <td>
+                                    <table class="subTableViviendaData">
+                                        <tbody>
+                                            <tr >
+                                                <th class="titleSubTableHeaderViviendaDataTitle" style="border-top: hidden; border-left:hidden; font-size: 12px; padding:4px;">BLOQUE</th>
+                                                <th class="titleSubTableHeaderViviendaDataTitle" style="border-top: hidden; font-size: 12px; padding:4px">PLANTA</th>
+                                                <th class="titleSubTableHeaderViviendaDataTitle" style="border-top: hidden; font-size: 12px;padding:4px">LETRA</th>
+                                            </tr>
+                                            <tr>
+                                                <td class="titleSubTableHeaderViviendaDataContent" style="border-bottom: hidden; border-left:hidden;"></td>
+                                                <td class="titleSubTableHeaderViviendaDataContent" style="border-bottom: hidden;"></td>
+                                                <td class="titleSubTableHeaderViviendaDataContent" style="border-bottom: hidden;"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="HeaderClientData" width="100%" style="border: none;">
+                        <tbody>
+                            <tr width="100%">
+                                <td class="columnNameDesc" style="border: hidden;"></td>
+                                <td style="border-top:1px solid black; " class="tableClientHeaderEntryNameFooter">en la promoción {!promocion.Name}, situada en el ámbito {!promocion.Tipo_via__c} {!promocion.Nombre_via__c} {!promocion.N_Via__c}, {!promocion.Provincia__c}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <div class="detailsPersonalizationHeader">
+                <p><strong>DECLARA</strong></p>
+            <p><span>Que con relación a los opcionales (*) ofrecidos por la Promotora, he seleccionado los siguientes:</span></p>
+            </div>
+            <div style="display: inline-block;justify-content: space-around;">
+                <h4 style="display: inline-block; margin-left:10%;">PERSONALIZACIÓN CON COSTE</h4>
+            	<h4 style="display: inline-block; margin-left:28%;">SELECCIONAR</h4>
+            </div>
+            
+            
+            <apex:outputPanel style="boder: solid;" layout="contents" >
+            
+                    <apex:variable value="{!1}" var="i"/>
+                        <apex:repeat value="{!lstLstMejoras}" var="lstRecords">
+                            <table class="tableMejoras">
+                                <apex:variable value="{!0}" var="cont"/>
+                                <tr>
+                                    <th class="column"></th>
+                                    <th class="cabeceraTablasMejoras">{!lstRecords[0].DescripcionMejora}</th> 
+                                    <th ></th> 
+                                    <th style="width: 3%;"></th> 
+                                    <th style="width: 6%;"></th> 
+                                </tr>
+                                
+                                <apex:repeat value="{!lstRecords}" var="record">
+                                <tr style="display: {!IF(record.Nivel==0, "none", "contents")};">
+                                    <td class="cabeceraTablasMejorasIntermedio" style="font-size: 12px;">{!IF(floor(lstRecords.size/2)==cont, record.contadorFamilia,"")}</td>
+                                    <td class="especialito" style="padding-left: {!IF(record.Nivel==2, "5%", "1%;")}">{!record.Indice}. {!record.DescripcionMejora}</td>
+                                    <td style="text-align: center;border: 0.5px solid;">{!IF(record.Precio == NULL || record.Precio == 0, "s/n", record.Precio)}</td>
+                                    <td style="width: 3%;"></td> 
+                                    <td style="width: 6%;border: 0.5px solid"></td> 
+                                    <apex:variable var="cont" value="{!(cont)+1}"/>
+                                    <apex:variable value="{!i+1}" var="i" />
+                                </tr>
+                                </apex:repeat>  
+                            </table>
+                        </apex:repeat>  
+                
+          	</apex:outputPanel>
+            
+            <div style="width: 100%;display: flow-root;">
+                <div style="width: 42%; float: right; margin-top:2%;margin-right:7%;">
+                    <table class="totalesContainer">
+                        <tr>
+                            <td class="enunciado">SUBTOTAL</td>
+                            <td class="totales"></td>
+                        </tr>
+                        <tr>
+                            <td class="enunciado">IVA (10%)</td>
+                            <td class="totales"></td>
+                        </tr>
+                        <tr>
+                            <td class="enunciado">TOTAL</td>
+                            <td class="totales"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div style="margin-top:18%">
+                <p>
+                    Y para que conste, firmo la presente declaración de .........................................................., el ............ de ........................................... de 2022
+                </p>
+            </div>
+            <div style="margin:5%;">
+                <p style="margin-left:5%; margin:10px;">
+                    Fdo:
+                </p>
+            </div>
+            <div>
+                <p>
+                    (*) En el caso de que el modelo elegido quede descatalogado durante el periodo de elección hasta instalación, la promotora se encargará de sustituir el material por la misma marca y modelo similar al elegido.
+                </p>
+                <p>
+                    {!FormaPagoMejoras}
+                </p>
+            </div>
+        </body>
+    </html>
+    <apex:facet name="header">
+        <div class="pdfTitle">
+            <h1>FICHA PERSONALIZACIÓN CON COSTE</h1>
+        </div>
+    </apex:facet>
+</apex:page>

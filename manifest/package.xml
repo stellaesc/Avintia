@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>Account.NacionalidadFormula__c</members>
-		<members>Account.LocalidadFormula__c</members>
+		<members>MejoraOportunidad__c.PrecioTotal__c</members>
+		<members>MejoraOportunidad__c.Precio_Total__c</members>
+		<members>MejoraOportunidad__c.Precio__c</members>
+		<members>MejorasTiposInmueble__c.Precio__c</members>
+		<members>MejorasViviendas__c.Precio__c</members>
 		<name>CustomField</name>
 	</types>
 	<version>58.0</version>

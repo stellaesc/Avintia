@@ -314,6 +314,10 @@
                 <behavior>Edit</behavior>
                 <field>ExisteFacturaMejoras__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>FormaPagoMejoras__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -549,6 +553,11 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
+            <actionName>Conga_Composer_Composer_SP_Proposal</actionName>
+            <actionType>CustomButton</actionType>
+            <sortOrder>0</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
             <actionName>NewTask</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>1</sortOrder>
@@ -589,9 +598,9 @@
             <sortOrder>8</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
-            <actionName>Conga_Composer_Composer_SP_Proposal</actionName>
+            <actionName>PDFGeneradorMejoras</actionName>
             <actionType>CustomButton</actionType>
-            <sortOrder>0</sortOrder>
+            <sortOrder>9</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <quickActionList>
@@ -644,9 +653,12 @@
         <relatedList>RelatedLineItemList</relatedList>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
-        <fields>PrecioMejora__c</fields>
-        <fields>Descripcion__c</fields>
+        <fields>Precio__c</fields>
+        <fields>Unidades__c</fields>
+        <fields>Precio_Total__c</fields>
         <relatedList>MejoraOportunidad__c.Opportunity__c</relatedList>
     </relatedLists>
     <relatedLists>
