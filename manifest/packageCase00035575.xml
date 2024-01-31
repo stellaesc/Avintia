@@ -9,6 +9,7 @@
 		<members>MejorasViviendas__c.Precio__c</members>
 		<members>Opportunity.ImporteMejorasAutomatico__c</members>
 		<members>Opportunity.FormaPagoMejoras__c</members>
+		<members>MejorasViviendas__c.Precio__c</members>
 		<name>CustomField</name>
 	</types>
 	<types>
