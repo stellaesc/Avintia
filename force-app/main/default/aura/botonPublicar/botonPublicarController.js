@@ -120,7 +120,7 @@
     		action.setCallback(this, function(actionResult) {
         	var resultado= actionResult.getReturnValue();
                 console.log("RESULTADO: " + resultado);
-            if(resultado=='OK'){
+            if(resultado.substring(0, 2)=='OK'){
                 component.set('v.isCargando',false);
                 component.find('notifLib').showToast({
                 "variant": "success",
