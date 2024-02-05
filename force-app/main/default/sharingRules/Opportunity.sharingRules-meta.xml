@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
     <sharingCriteriaRules>
-        <fullName>Oportunidades_Gijon100</fullName>
+        <fullName>Novamayor</fullName>
         <accessLevel>Edit</accessLevel>
-        <label>Oportunidades Gijon100</label>
+        <label>Novamayor</label>
         <sharedTo>
-            <group>Comerciales_API_Gijon100</group>
-        </sharedTo>
-        <criteriaItems>
-            <field>Name</field>
-            <operation>contains</operation>
-            <value>GIJON100</value>
-        </criteriaItems>
-        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
-    </sharingCriteriaRules>
-    <sharingCriteriaRules>
-        <fullName>OpportunityNovamayor</fullName>
-        <accessLevel>Read</accessLevel>
-        <description>Para compartir las oportunidades de NOVAMAYOR</description>
-        <label>Opportunity Novamayor</label>
-        <sharedTo>
-            <group>ReadOnlyPromotor</group>
+            <group>ComercialPromotorExternoNovamayor</group>
         </sharedTo>
         <criteriaItems>
             <field>Name</field>
