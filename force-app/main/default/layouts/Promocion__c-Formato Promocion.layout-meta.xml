@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customButtons>SendDocuSignPromocion</customButtons>
+    <customButtons>Use_HelloSign</customButtons>
     <layoutSections>
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
@@ -51,10 +51,6 @@
                 <behavior>Edit</behavior>
                 <field>Descripcion_Suelo__c</field>
             </layoutItems>
-<layoutItems>
-                <behavior>Edit</behavior>
-                <field>PromocionSinInfomar__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>
@@ -89,12 +85,8 @@
                 <field>Vistas__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Delegacion_comercial__c</field>
-            </layoutItems>
-<layoutItems>
-                <behavior>Edit</behavior>
-                <field>PuntoVenta__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -134,7 +126,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>V0Inicial__c</field>
+                <field>NoContinuarConElproceso__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -167,7 +159,7 @@
                 <field>Calidades__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Delegacion_administrativa__c</field>
             </layoutItems>
             <layoutItems>
@@ -210,9 +202,9 @@
                 <behavior>Edit</behavior>
                 <field>PromocionFinalizada__c</field>
             </layoutItems>
-<layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
-                <field>V1Inicial__c</field>
+                <field>PromocionSinInfomar__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -294,11 +286,11 @@
         <label>Ritmo de Ventas</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>N_Unidades_iniciales_ritmo_de_ventas__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Ritmo_de_ventas__c</field>
             </layoutItems>
             <layoutItems>
@@ -335,14 +327,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Objetivo_de_ventas__c</field>
-            </layoutItems>
-<layoutItems>
-                <behavior>Edit</behavior>
-                <field>FechaCreditoPromotor__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>DiasPosventa__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -526,7 +510,7 @@
                 <field>Cuenta_Activa_2__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Cuentas_Contables__c</field>
             </layoutItems>
             <layoutItems>
@@ -578,7 +562,11 @@
                 <behavior>Edit</behavior>
                 <field>ImporteAportacionCapital__c</field>
             </layoutItems>
-                    </layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>LimiteImporteMejoras__c</field>
+            </layoutItems>
+        </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -608,7 +596,11 @@
                 <behavior>Edit</behavior>
                 <field>Importe_Cuota_Extra__c</field>
             </layoutItems>
-                    </layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>MesesSegundaFacturaMejoras__c</field>
+            </layoutItems>
+        </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
@@ -877,7 +869,7 @@
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Precio Nº Dormitorios</label>
+        <label>Precios Nº Dormitorios</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -885,29 +877,29 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Precio_maximo_1_dormitorio__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Precio_minimo_2_dormitorios__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Precio_maximo_2_dormitorios__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Precio_minimo_3_dormitorios__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Precio_maximo_3_dormitorios__c</field>
+                <field>Precio_minimo_4_dormitorios__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Precio_maximo_1_dormitorio__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Precio_minimo_4_dormitorios__c</field>
+                <field>Precio_maximo_2_dormitorios__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Precio_maximo_3_dormitorios__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -1267,57 +1259,6 @@
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Plantillas Visualforce</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_de_pre_reserva__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_de_contrato_de_reserva__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_de_contrato_de_compraventa__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_de_contrato_de_compraventa_VPO__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_contrato_CV_No_Vivienda__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_de_escrituracion__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_cancelacion_reserva__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_cancelacion_compraventa__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_de_contrato_de_compraventa_VPT__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plantilla_de_adenda__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>true</customLabel>
-        <detailHeading>true</detailHeading>
-        <editHeading>true</editHeading>
         <label>Plantillas Conga</label>
         <layoutColumns>
             <layoutItems>
@@ -1422,34 +1363,44 @@
             <sortOrder>0</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
-            <actionName>Clone</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>2</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>SendDocuSignPromocion</actionName>
-            <actionType>CustomButton</actionType>
-            <sortOrder>4</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Promocion__c.Submit_for_Approval_Tarifario</actionName>
-            <actionType>QuickAction</actionType>
-            <sortOrder>6</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Promocion__c.Recalcular_superficies</actionName>
+            <actionName>APXTConga4__Conga_Composer_SF1_EU</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>1</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
+            <actionName>APXTConga4__Conga_Composer_Sf1</actionName>
+            <actionType>QuickAction</actionType>
+            <sortOrder>2</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Promocion__c.Recalcular_superficies</actionName>
+            <actionType>QuickAction</actionType>
+            <sortOrder>3</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Use_HelloSign</actionName>
+            <actionType>CustomButton</actionType>
+            <sortOrder>4</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Clone</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>5</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
             <actionName>Delete</actionName>
             <actionType>StandardButton</actionType>
-            <sortOrder>3</sortOrder>
+            <sortOrder>6</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>FeedItem.TextPost</actionName>
             <actionType>QuickAction</actionType>
-            <sortOrder>5</sortOrder>
+            <sortOrder>7</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Promocion__c.Submit_for_Approval_Tarifario</actionName>
+            <actionType>QuickAction</actionType>
+            <sortOrder>8</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <relatedContent>
@@ -1537,19 +1488,6 @@
     <relatedLists>
         <relatedList>RelatedNoteList</relatedList>
     </relatedLists>
-<relatedLists>
-        <fields>NAME</fields>
-        <fields>HelloSign__Document_Name__c</fields>
-        <fields>HelloSign__Template__c</fields>
-        <fields>HelloSign__Latest_Action__c</fields>
-        <fields>HelloSign__Total_Signers__c</fields>
-        <fields>HelloSign__Completed_Signers__c</fields>
-        <fields>HelloSign__Remaining_Signers__c</fields>
-        <fields>CREATEDBY_USER</fields>
-        <fields>CREATED_DATE</fields>
-        <fields>HelloSign__Message2__c</fields>
-        <relatedList>HelloSign__HelloSign_Signature_Request__c.Promocion__c</relatedList>
-    </relatedLists>
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
         <excludeButtons>New</excludeButtons>
@@ -1594,10 +1532,22 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Vendedor__c.NAME</fields>
-        <fields>Vendedor__c.Apellidos__c</fields>
-        <fields>Titular__c</fields>
-        <relatedList>RelacionVendedorPromocion__c.Promocion__c</relatedList>
+        <fields>HelloSign__Document_Name__c</fields>
+        <fields>HelloSign__Template__c</fields>
+        <fields>HelloSign__Latest_Action__c</fields>
+        <fields>HelloSign__Total_Signers__c</fields>
+        <fields>HelloSign__Completed_Signers__c</fields>
+        <fields>HelloSign__Remaining_Signers__c</fields>
+        <fields>CREATEDBY_USER</fields>
+        <fields>CREATED_DATE</fields>
+        <fields>HelloSign__Message2__c</fields>
+        <relatedList>HelloSign__HelloSign_Signature_Request__c.Promocion__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>CAMPAIGN.NAME</fields>
+        <fields>CAMPAIGN.STATUS</fields>
+        <fields>CAMPAIGN.START_DATE</fields>
+        <relatedList>Campaign.Promocion__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
