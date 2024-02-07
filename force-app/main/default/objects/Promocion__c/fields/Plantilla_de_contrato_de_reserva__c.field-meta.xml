@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Plantilla_de_contrato_de_reserva__c</fullName>
-    <defaultValue>&quot;VF_Documento_reserva&quot;</defaultValue>
+    <description>Antiguo Default Value: &quot;VF_Documento_reserva&quot;</description>
     <externalId>false</externalId>
     <label>Plantilla de contrato de reserva</label>
     <length>50</length>

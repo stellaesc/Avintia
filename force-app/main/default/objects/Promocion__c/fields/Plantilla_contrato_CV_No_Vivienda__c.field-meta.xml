@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Plantilla_contrato_CV_No_Vivienda__c</fullName>
-    <defaultValue>&quot;VF_Doc_contrato_compraventa_No_Asociado&quot;</defaultValue>
+    <description>Antiguo Default Value	&quot;VF_Doc_contrato_compraventa_No_Asociado&quot;</description>
     <externalId>false</externalId>
     <label>Plantilla contrato CV No Vivienda</label>
     <length>50</length>
