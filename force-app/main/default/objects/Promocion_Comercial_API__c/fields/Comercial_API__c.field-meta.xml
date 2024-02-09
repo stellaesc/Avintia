@@ -6,7 +6,7 @@
     <label>Comercial API</label>
     <lookupFilter>
         <active>true</active>
-        <booleanFilter>1 OR 2</booleanFilter>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
         <filterItems>
             <field>User.Profile.Name</field>
             <operation>equals</operation>
@@ -16,6 +16,11 @@
             <field>User.Profile.Name</field>
             <operation>equals</operation>
             <value>Comercial</value>
+        </filterItems>
+        <filterItems>
+            <field>User.Profile.Name</field>
+            <operation>equals</operation>
+            <value>Comercial Promotor Externo</value>
         </filterItems>
         <isOptional>false</isOptional>
     </lookupFilter>

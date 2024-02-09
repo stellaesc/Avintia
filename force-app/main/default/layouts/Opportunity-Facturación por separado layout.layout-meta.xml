@@ -44,8 +44,8 @@
                 <field>Amount</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>ImporteMejoras__c</field>
+                <behavior>Readonly</behavior>
+                <field>ImporteMejorasAutomatico__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -58,6 +58,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Campaign__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>NSocio__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -581,6 +585,11 @@
             <actionType>CustomButton</actionType>
             <sortOrder>8</sortOrder>
         </platformActionListItems>
+        <platformActionListItems>
+            <actionName>PDFGeneradorMejoras</actionName>
+            <actionType>CustomButton</actionType>
+            <sortOrder>9</sortOrder>
+        </platformActionListItems>
     </platformActionList>
     <quickActionList>
         <quickActionListItems>
@@ -704,7 +713,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0r000000Oa6z</masterLabel>
+        <masterLabel>00h5w00000U4Swu</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

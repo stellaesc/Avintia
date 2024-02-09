@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 <types>
-		<members>Promocion__c.Plantilla_cancelacion_compraventa__c</members>
-		<members>Promocion__c.Plantilla_cancelacion_reserva__c</members>
-		<members>Promocion__c.Plantilla_contrato_CV_No_Vivienda__c</members>
-		<members>Promocion__c.Plantilla_de_adenda__c</members>
-		<members>Promocion__c.Plantilla_de_contrato_de_compraventa__c</members>
-		<members>Promocion__c.Plantilla_de_contrato_de_compraventa_VPO__c</members>
-		<members>Promocion__c.Plantilla_de_contrato_de_compraventa_VPT__c</members>
-		<members>Promocion__c.Plantilla_de_contrato_de_reserva__c</members>
-		<members>Promocion__c.Plantilla_de_escrituracion__c</members>
-		<members>Promocion__c.Plantilla_de_pre_reserva__c</members>
+		<members>Opportunity.Nsocio__c</members>
+		<members>Promocion_Comercial_API__c.Comercial_API__c</members>
 		<name>customField</name>
 	</types>
 	<types>
-		<members>Promocion__c-Formato Promocion</members>
+		<members>Opportunity-Facturación por separado layout</members>
+		<members>Opportunity-Opportunity Layout</members>
 		<name>layout</name>
 	</types>
 	<version>58.0</version>
